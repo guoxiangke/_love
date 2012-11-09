@@ -1,0 +1,11 @@
+<?php
+/**
+ * hook_menu_alter
+ */
+function love_menu_alter(&$items) {
+  // Example - disable the page at node/add
+  $items['publish'] = $items['node/add/photo'];
+  $items['publish'] ['title'] = $user->name;
+  global $user;
+  $items['profile-main']['title'] = $user->name;
+}

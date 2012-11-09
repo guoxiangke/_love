@@ -1,0 +1,143 @@
+body {
+	font-family: "Microsoft Yahei";
+	
+	background: url(../images/dashboard_bg.png);
+}
+.container,.navbar-fixed-top .container {
+	width: 980px;
+}
+
+#row {
+	min-height: 600px;
+}
+.main_column {
+	width: 655px;
+	float: left;
+	border-right: 1px solid #EDEDED;
+	padding: 0px 30px 0 30px;
+}
+.right_column,.left_column{
+	width: 230px;
+	float: left;
+}
+.clearfix:after{
+ content:".";
+ display:block;
+ height:0;
+ line-height:0;
+ clear:both;
+ visibility:hidden;
+}
+.clearfix{display:inline-block;}
+/* Hide from IE Mac */
+.clearfix{display:block;}
+/* End hide from IE Mac */
+/* end of clearfix */
+.float-l{
+	float: left;
+}
+.float-r{
+	float: right;
+}
+#row {
+	background-color: #FAFAFA;
+	border: 1px solid #EDEDED;
+	margin: 30px auto;
+
+	-moz-border-radius: 5px;      /* Gecko browsers */
+	-webkit-border-radius: 5px;   /* Webkit browsers */
+	border-radius:6px;            /* W3C syntax */
+}
+
+#navbar {
+	background: url(../images/header_bg02.png);
+}
+nav {
+	position: relative;
+	margin-top: 10px;
+	margin-right: 10px;
+	font-size: 16px;
+}
+#navbar .nav a,#user-menu .nav a {
+	height: 33px;
+	line-height: 23px;
+	margin-left: 20px;
+	padding: 0 10px;
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	text-shadow: 0 0px 0 white;
+}
+#user-menu a {
+	margin-left: 10px;
+	color: #fefcfc;
+	text-decoration: none;
+}
+#user-menu a:hover {
+	color: #FFF;
+}
+#navbar .nav a.active{
+	background: url(../images/nav_bgn.png) no-repeat center 0;
+	_background: url(../images/nav_bgn.gif) no-repeat center 0;
+	color: #333;
+}
+#navbar .nav a:hover {
+	height: 33px;
+	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
+	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
+	color: #333;
+}
+
+#actions {
+	margin-top: 79px;
+}
+
+#actions .user-pic {
+	width: 90px;
+	height: 90px;
+	float: left;
+}
+#round100 {
+	width:100px; height:100px;
+	border: 5px solid #FFF;
+	-moz-border-radius: 100px;      /* Gecko browsers */
+	-webkit-border-radius: 100px;   /* Webkit browsers */
+	border-radius:100px;            /* W3C syntax */
+	overflow: hidden;
+}
+#actions ul {
+	height: 100px;
+	overflow: hidden;
+	position: relative;
+	z-index: 102;
+	background: white;
+	float: left;
+	margin-left: 10px;
+}
+#actions ul li {
+	float: left;
+	_display: inline;
+	width: 144px;
+	height: 100px;
+	border-right: 1px #EEE dotted;
+}
+
+#user-menu li{
+	float: left;
+	list-style: none;
+	font-size: 13px;
+}
+.view-index {
+	margin: 20px 0 30px;
+}
+
+.t-Con{
+	margin-left: 20px;
+}
+
+#admin-menu{
+	margin-top: 13px;
+}

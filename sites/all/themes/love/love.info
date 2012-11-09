@@ -1,0 +1,16 @@
+name = love
+description = twitter_bootstrap for love sub theme
+version = dev-1.x
+core = 7.x
+base theme  = twitter_bootstrap
+regions[header]         = 'Top Bar'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Primary'
+regions[sidebar_second] = 'Secondary'
+regions[footer]         = 'Footer'
+
+stylesheets[all][] = css/love.css
+settings[toggle_name] = 0
+settings[toggle_search] = 1
