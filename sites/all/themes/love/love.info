@@ -12,5 +12,7 @@ regions[sidebar_second] = 'Secondary'
 regions[footer]         = 'Footer'
 
 stylesheets[all][] = css/love.css
+scripts[] = js/main.js
+
 settings[toggle_name] = 0
 settings[toggle_search] = 1

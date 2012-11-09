@@ -6,7 +6,7 @@
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
           <!--img src="http://simg.sinajs.cn/xblogstyle/images/common/logo_act.png" alt=""-->
         </a>
-      <?php endif; ?>
+      <?php endif; drupal_set_message(t('message'), 'status', FALSE) ;?>
     </div>
     <nav role="navigation" class="pull-left">
       <?php if ($primary_nav): ?>
