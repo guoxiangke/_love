@@ -23,7 +23,7 @@ function love_theme($existing, $type, $theme, $path) {
   );
 }
 
-function love_init(){dpm('here123');
+function love_init(){
   drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');

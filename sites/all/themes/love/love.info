@@ -12,12 +12,7 @@ regions[sidebar_second] = 'Secondary'
 regions[footer]         = 'Footer'
 
 stylesheets[all][] = css/love.css
-;stylesheets[all][] = highslide/highslide.css
-
 scripts[] = js/main.js
-
-;scripts[] = highslide/highslide.js
-;scripts[] = highslide.cfg.js
 
 settings[toggle_name] = 0
 settings[toggle_search] = 1

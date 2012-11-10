@@ -9,7 +9,6 @@ Drupal.behaviors.statusInit = {
        $(this).addClass('highslide').attr("onclick","return hs.expand(this)");;
       }
     );
-   console.log('here1'); 
  }
 };
 

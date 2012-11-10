@@ -1,4 +1,4 @@
 (function ($) {
-	hs.graphicsDir = 'http://dev.sina.org/sites/all/themes/love/highslide/graphics/';
+	hs.graphicsDir = 'sites/all/modules/customs/love/highslide/graphics/';
 	hs.outlineType = 'outer-glow';
 })(jQuery);
