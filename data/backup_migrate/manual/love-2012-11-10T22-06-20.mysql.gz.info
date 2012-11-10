@@ -1,0 +1,8 @@
+filename = "love-2012-11-10T22-06-20"
+description = ""
+datestamp = "1352556382"
+generator = "Backup and Migrate (http://drupal.org/project/backup_migrate)"
+generatorversion = "7.x-2.x"
+sites[0][version] = "7.17"
+sites[0][name] = "love"
+sites[0][url] = "http://dev.sina.org/"
