@@ -7,3 +7,24 @@ function love_menu_alter(&$items) {
   $items['publish'] = $items['node/add/photo'];
   //TODO: Docy menu
 }
+
+/**
+ * Implements of hook_theme().
+ */
+function love_theme($existing, $type, $theme, $path) {
+  return array(
+    'love_profile_visits' => array(
+      'variables' => array(
+        'account'   => NULL,
+        'timestamp' => NULL,
+        'referer'   => NULL,
+      ),
+    ),
+  );
+}
+
+function love_init(){dpm('here123');
+  drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
+  drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
+  drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
+}

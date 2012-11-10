@@ -4,74 +4,55 @@
  *
  * @see page.tpl.php
  */
-function love_preprocess_page(&$variables) {
-  // Add information about the number of sidebars.
-  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
-    $variables['columns'] = 3;
-  }
-  elseif (!empty($variables['page']['sidebar_first'])) {
-    $variables['columns'] = 2;
-  }
-  elseif (!empty($variables['page']['sidebar_second'])) {
-    $variables['columns'] = 2;
-  }
-  else {
-    $variables['columns'] = 1;
-  }
-  
-  // Our custom search because its cool :)
-  $variables['search'] = FALSE;
-  if(theme_get_setting('toggle_search') && module_exists('search'))
-    $variables['search'] = drupal_get_form('_twitter_bootstrap_search_form');
+function love_preprocess_page(&$variables) {}
 
-  // Primary nav
-  $variables['primary_nav'] = FALSE;
-  if($variables['main_menu']) {
-    // Build links
-    $tree = menu_tree_page_data(variable_get('menu_main_links_source', 'main-menu'));
-    $variables['main_menu'] = twitter_bootstrap_menu_navigation_links($tree);
-    
-    // Build list
-    $variables['primary_nav'] = theme('twitter_bootstrap_links', array(
-      'links' => $variables['main_menu'],
-      'attributes' => array(
-        'id' => 'main-menu',
-        'class' => array('nav'),
-      ),
-      'heading' => array(
-        'text' => t('Main menu'),
-        'level' => 'h2',
-        'class' => array('element-invisible'),
-      ),
-    ));
+
+/**
+ * Process variables for user-picture.tpl.php.
+ *
+ * The $variables array contains the following arguments:
+ * - $account: A user, node or comment object with 'name', 'uid' and 'picture'
+ *   fields.
+ *
+ * @see user-picture.tpl.php
+ */
+function love_preprocess_user_picture(&$variables) {
+  $variables['user_picture'] = '';
+  if (variable_get('user_pictures', 0)) {
+    $account = $variables['account'];
+    if (!empty($account->picture)) {
+      // @TODO: Ideally this function would only be passed file objects, but
+      // since there's a lot of legacy code that JOINs the {users} table to
+      // {node} or {comments} and passes the results into this function if we
+      // a numeric value in the picture field we'll assume it's a file id
+      // and load it for them. Once we've got user_load_multiple() and
+      // comment_load_multiple() functions the user module will be able to load
+      // the picture files in mass during the object's load process.
+      if (is_numeric($account->picture)) {
+        $account->picture = file_load($account->picture);
+      }
+      if (!empty($account->picture->uri)) {
+        $filepath = $account->picture->uri;
+      }
+    }
+    elseif (variable_get('user_picture_default', '')) {
+      $filepath = variable_get('user_picture_default', '');
+    }
+    if (isset($filepath)) {
+      $alt = t("@user's picture", array('@user' => format_username($account)));
+      // If the image does not have a valid Drupal scheme (for eg. HTTP),
+      // don't load image styles.
+      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+        $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      else {
+        $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      if (!empty($account->uid) && user_access('access user profiles')) {
+        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+				//XXX dale user/uid =>profile-main/uid
+        $variables['user_picture'] = l($variables['user_picture'], "profile-main/$account->uid", $attributes);
+      }
+    }
   }
-  
-  // Secondary nav
-  $variables['secondary_nav'] = FALSE;
-  if($variables['secondary_menu']) {
-    $secondary_menu = menu_load(variable_get('menu_secondary_links_source', 'user-menu'));
-    
-    // Build links
-    $tree = menu_tree_page_data($secondary_menu['menu_name']);
-    $variables['secondary_menu'] = twitter_bootstrap_menu_navigation_links($tree);
-    
-    // Build list
-    $variables['secondary_nav'] = theme('twitter_bootstrap_links', array(
-      'links' => $variables['secondary_menu'],
-      'label' => $secondary_menu['title'],
-      'type' => 'success',
-      'attributes' => array(
-        'id' => 'user-menu',
-        'class' => array('pull-right'),
-      ),
-      'heading' => array(
-        'text' => t('Secondary menu'),
-        'level' => 'h2',
-        'class' => array('element-invisible'),
-      ),
-    ));
-  }
-  
-  // Replace tabs with dropw down version
-  $variables['tabs']['#primary'] = _twitter_bootstrap_local_tasks($variables['tabs']['#primary']);
 }

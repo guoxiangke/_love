@@ -47,14 +47,15 @@
 			$$id .= $field->separator;
 		}
 	}
+	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
 	$profile_link = $rendered_entity;
 	$vote = $value;
 ?>
-<div class="t-pic float-l"> <?php print $field_image; ?> </div>
+<div class="t-pic float-l"><div class="round120<?php print $field_sex?" boy":" girl" ?>"><?php print $picture; ?></div></div>
 <div class="t-Con float-l">
 	<div class="t-author clearfix">
-		<div class="t-name  float-l"> <?php print $profile_link ?> 上传了照片</div>
+		<div class="t-name  float-l"> <?php print l($profile_link,'profile-main/'.$profile_uid)?> 上传了照片</div>
 		
 	</div>
 	<!--div class="t-body"> <?php print $body; ?> </div-->
