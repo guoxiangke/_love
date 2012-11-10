@@ -113,7 +113,7 @@ function twitter_bootstrap_preprocess_page(&$variables) {
   if(theme_get_setting('toggle_search') && module_exists('search'))
     $variables['search'] = drupal_get_form('_twitter_bootstrap_search_form');
 
-  // Primary nav
+  /*/ Primary nav
   $variables['primary_nav'] = FALSE;
   if($variables['main_menu']) {
     // Build links
@@ -160,7 +160,7 @@ function twitter_bootstrap_preprocess_page(&$variables) {
       ),
     ));
   }
-  
+  */
   // Replace tabs with dropw down version
   $variables['tabs']['#primary'] = _twitter_bootstrap_local_tasks($variables['tabs']['#primary']);
 }

@@ -54,10 +54,9 @@ body {
 nav {
 	position: relative;
 	margin-top: 10px;
-	margin-right: 10px;
 	font-size: 16px;
 }
-#navbar .nav a,#user-menu .nav a {
+.main-menu  a,.secondary-menu a {
 	height: 33px;
 	line-height: 23px;
 	margin-left: 20px;
@@ -70,25 +69,39 @@ nav {
 	color: white;
 	text-shadow: 0 0px 0 white;
 }
-#user-menu a {
-	margin-left: 10px;
+
+.secondary-menu a {
+	margin-left: 0px;
 	color: #fefcfc;
 	text-decoration: none;
+	font-size: 13px;
 }
-#user-menu a:hover {
+
+.secondary-menu a:hover {
 	color: #FFF;
 }
-#navbar .nav a.active{
+
+.main-menu a.active{
 	background: url(../images/nav_bgn.png) no-repeat center 0;
 	_background: url(../images/nav_bgn.gif) no-repeat center 0;
 	color: #333;
 }
-#navbar .nav a:hover {
+.last a:hover,.secondary-menu a:hover {
 	height: 33px;
 	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
 	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
 	color: #333;
 }
+.main-menu .last a{font-size: 20px;width: 32px;}
+.main-menu li,.secondary-menu li{
+	float: left;
+	list-style: none;
+}
+secondary-menu li{
+	margin-left: 10px;
+}
+	
+
 
 #actions {
 	margin-top: 79px;
@@ -125,12 +138,6 @@ nav {
 	width: 144px;
 	height: 100px;
 	border-right: 1px #EEE dotted;
-}
-
-#user-menu li{
-	float: left;
-	list-style: none;
-	font-size: 13px;
 }
 .view-index {
 	margin: 0 0 30px;

@@ -8,14 +8,16 @@
         </a>
       <?php endif;?>
     </div>
-    <nav role="navigation" class="pull-left">
+    <nav role="navigation" class="clearfix">
       <?php if ($primary_nav): ?>
+      	<div class="pull-left">
           <?php print $primary_nav; ?>
+        </div>
       <?php endif; ?>
-   </nav>
-   <nav role="navigation">
-     <?php if ($secondary_nav): ?>
-        <?php print $secondary_nav; ?>
+     	<?php if ($secondary_nav): ?>
+     		<div class="pull-right">
+          <?php print $secondary_nav; ?>
+        </div>
       <?php endif; ?>
 
    </nav>

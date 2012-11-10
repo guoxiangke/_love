@@ -50,7 +50,7 @@
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
 	$profile_link = $rendered_entity;
-	$vote = $value;
+	//$vote = $value;
 ?>
 <div class="t-pic float-l"><div class="round120<?php print $field_sex?" boy":" girl" ?>"><?php print $picture; ?></div></div>
 <div class="t-Con float-l">
@@ -58,17 +58,20 @@
 		<div class="t-name  float-l"> <?php print l($profile_link,'profile-main/'.$profile_uid)?> 上传了照片</div>
 		
 	</div>
-	<!--div class="t-body"> <?php print $body; ?> </div-->
+	<?php if (isset($body)): ?><div class="t-body"> <?php print $body; ?> </div><?php endif; ?>
 	<div class="t-field_photo"> <?php print $field_photo; ?> </div>
 	<div class="t-footer clearfix">
 		<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
 		<div class="t-created  float-l"> <?php print $created; ?> </div>
 		<div class="t-links  float-r">
 			<?php global $user; if ($user->uid<>0): //TODO ?>
-			<span class="edit"> <?php print $edit_node; ?> </span>
-			<span class="del"> <?php print $delete_node; ?> </span>
+			<?php if (isset($edit_node)): ?><span class="edit"> <?php print $edit_node; ?> </span><?php endif; ?>
+			<?php if (isset($delete_node)): ?><span class="del"> <?php print $delete_node; ?> </span><?php endif; ?>
 		 	<?php endif; ?>
+
+		 	<?php if (isset($vote)): ?>
 		 	<div class="vote"> <?php print $vote; ?> </div>
+		 	<?php endif; ?>
 		</div>
 	</div>
 </div>

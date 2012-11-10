@@ -10,13 +10,13 @@ if (!hs) { var hs = {
 // Language strings
 lang : {
 	cssDirection: 'ltr',
-	loadingText : 'Loading...',
-	loadingTitle : 'Click to cancel',
+	loadingText : '加载中...',
+	loadingTitle : '取消',
 	focusTitle : 'Click to bring to front',
-	fullExpandTitle : 'Expand to actual size (f)',
-	creditsText : 'Powered by <i>Highslide JS</i>',
-	creditsTitle : 'Go to the Highslide JS homepage',
-	restoreTitle : 'Click to close image, click and drag to move. Use arrow keys for next and previous.'
+	fullExpandTitle : '查看原图',//Expand to actual size (f)
+	creditsText : '',//Powered by <i>Highslide JS</i>
+	creditsTitle : '',//Go to the Highslide JS homepage
+	restoreTitle : '点击关闭,点击+拖拽图片。Use arrow keys for next and previous.'
 },
 // See http://highslide.com/ref for examples of settings  
 graphicsDir : 'highslide/graphics/',
