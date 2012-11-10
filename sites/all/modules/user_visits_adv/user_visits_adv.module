@@ -172,7 +172,11 @@ function user_visits_adv_get($element, $uid) {
       $user_visits_adv_data[$uid] = array();
     }
   }
-  return $user_visits_adv_data[$uid][$element];
+  dpm($user_visits_adv_data[$uid]);
+  if(count($user_visits_adv_data[$uid])){
+
+    return $user_visits_adv_data[$uid][$element];
+  }
 }
 
 /**
@@ -279,7 +283,7 @@ function user_visits_adv_cron() {
  */
 function user_visits_adv_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_visits_settings') {
-    $form['user_visits	']['user_visits_advanced'] = array(
+    $form['user_visits']['user_visits_advanced'] = array(
       '#type' => 'fieldset',
       '#title' => t('Advanced'),
       '#weight' => 1,
