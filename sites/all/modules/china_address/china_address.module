@@ -137,6 +137,10 @@ function china_address_field_widget_form(&$form, &$form_state, $field, $instance
       else if (isset($form_state['values'][$field['field_name']][$lang ][0]['province'])) {
         // Ajax callback
         $province = $form_state['values'][$field['field_name']][$lang ][0]['province'];
+      }//XXX
+      else if (isset($form_state['values']['profile_main'])){
+        $province = $form_state['values']['profile_main'][$field['field_name']][$lang ][0]['province'];
+				dpm($province,'$provinceC');
       }
       else if (isset($items[$delta]['province'])){
         $province = $items[$delta]['province'];
@@ -293,6 +297,10 @@ function china_address_dropdown_callback($form, $form_state) {
   $lang = 'und';
   if ($form['#form_id'] == 'field_ui_field_edit_form') {
     return $form['instance']['default_value_widget'][$form['#field']['field_name']][$lang][0];
+  }
+  else if ($form['#form_id'] == 'user_register_form') {//XXX
+		array_shift($form_state['triggering_element']['#array_parents']);
+    return $form['profile_main'][$form_state['triggering_element']['#array_parents'][0]];//['default_value_widget'][$form['#field']['field_name']][$lang][0];
   }
   else {
     return $form[$form_state['triggering_element']['#parents'][0]][$lang][0];
