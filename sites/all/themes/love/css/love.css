@@ -90,9 +90,14 @@ nav {
 	height: 33px;
 	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
 	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
-	color: #333;
+	color: #F6C;
+
 }
-.main-menu .last a{font-size: 20px;width: 32px;}
+.main-menu .last a{
+	font-size: 20px;
+	width: 32px;
+	font-size: 16px  !important;
+}
 .main-menu li,.secondary-menu li{
 	float: left;
 	list-style: none;
