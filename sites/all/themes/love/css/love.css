@@ -86,18 +86,27 @@ nav {
 	_background: url(../images/nav_bgn.gif) no-repeat center 0;
 	color: #333;
 }
+.main-menu .first a.active{
+	background:none;
+	_background:none;
+	color: #333;
+}
 .last a:hover,.secondary-menu a:hover {
 	height: 33px;
 	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
 	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
-	color: #F6C;
+
 
 }
+	
 .main-menu .last a{
 	font-size: 20px;
 	width: 32px;
 	font-size: 16px  !important;
 }
+.main-menu .last a:hover {
+ 	color: #F6C;
+ }
 .main-menu li,.secondary-menu li{
 	float: left;
 	list-style: none;
