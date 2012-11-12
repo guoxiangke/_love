@@ -142,10 +142,14 @@ function china_address_field_widget_form(&$form, &$form_state, $field, $instance
         $province = $form_state['values']['profile_main'][$field['field_name']][$lang ][0]['province'];
 				//dpm($province,'$provinceC');
       }
+			else if (isset($form_state['values']['profile_believes'])){
+        $province = $form_state['values']['profile_believes'][$field['field_name']][$lang ][0]['province'];
+				//dpm($province,'$provinceC');
+      }
       else if (isset($items[$delta]['province'])){
         $province = $items[$delta]['province'];
       }
-      
+      //dpm($province,'$province');
       // city
       if (isset($form_state['values'][$field['field_name']][$lang ][0]['city'])) {
         // Ajax callback
@@ -189,6 +193,7 @@ function china_address_field_widget_form(&$form, &$form_state, $field, $instance
           ),
         ),
       );
+	
       $ajax = array(
         '#ajax' => array(
           'callback' => 'china_address_dropdown_callback',
@@ -298,22 +303,22 @@ function china_address_dropdown_callback($form, $form_state) {
   if ($form['#form_id'] == 'field_ui_field_edit_form') {
     return $form['instance']['default_value_widget'][$form['#field']['field_name']][$lang][0];
   }
+  else if ($form['#form_id'] == 'profile2_edit_believes_form') {
+  	//XXX fixed for love profile.
+		array_shift($form_state['triggering_element']['#parents']);
+    return $form['profile_believes'][$form_state['triggering_element']['#parents'][0]];
+  }
   else if ($form['#form_id'] == 'user_register_form' 
   || $form['#form_id'] == 'profile2_edit_main_form') {
+  	watchdog('$form_state', '<pre>'.print_r($form_state['triggering_element'],TRUE));
   	//XXX fixed for love profile.
-		array_shift($form_state['triggering_element']['#array_parents']);
-    return $form['profile_main'][$form_state['triggering_element']['#array_parents'][0]];
+  	
+		$profile_type = $form_state['triggering_element']['#parents'][0];
+		array_shift($form_state['triggering_element']['#parents']);
+    return $form[$profile_type][$form_state['triggering_element']['#parents'][0]];
     //['default_value_widget'][$form['#field']['field_name']][$lang][0];
   }
-  else if ($form['#form_id'] == 'user_register_form'
-	|| $form['#form_id'] == 'profile2-edit-believes-form') {
-  	//XXX fixed for love profile.
-  	dpm($form_state['triggering_element']);
-		dpm($form,'f');
-		array_shift($form_state['triggering_element']['#array_parents']);
-    return $form['profile_main'][$form_state['triggering_element']['#array_parents'][0]];
-    //['default_value_widget'][$form['#field']['field_name']][$lang][0];
-  }
+  
   else {
     return $form[$form_state['triggering_element']['#parents'][0]][$lang][0];
   }

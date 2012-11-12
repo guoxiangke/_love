@@ -1,5 +1,6 @@
 <header id="navbar" role="banner" class="navbar navbar-fixed-top">
-  <div class="container">
+  <div class="navbar-inner">
+	<div class="container">
     <div class="logo">
       <?php if ($logo): ?>
         <a class="brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
@@ -21,10 +22,10 @@
       <?php endif; ?>
 
    </nav>
-  </div>
+  </div></div>
 </header>
 
-<div class="main-container container clearfix">
+<div class="container">
 
   <header role="banner" id="page-header">
     <?php if ( $site_slogan ): ?>
@@ -34,20 +35,19 @@
     <?php print render($page['header']); ?>
   </header> <!-- /#header -->
   
-  <div id="row" class="clearfix">
+  <div class="row" id="row">
     
     <?php if ($page['sidebar_first']): ?>
-      <aside class="left_column" role="complementary">
+      <aside class="span3" role="complementary">
         <?php print render($page['sidebar_first']); ?>
       </aside>  <!-- /#sidebar-first -->
     <?php endif; ?>  
     
-    <section class="main_column <?php //print _twitter_bootstrap_content_span($columns); ?>">  
-
+    <section class="<?php print _twitter_bootstrap_content_span($columns); ?>">  
       <?php if ($page['highlighted']): ?>
         <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
       <?php endif; ?>
-      <?php //if ($breadcrumb): print $breadcrumb; endif;?>
+      <?php if ($breadcrumb): print $breadcrumb; endif;?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
@@ -68,13 +68,13 @@
     </section>
 
     <?php if ($page['sidebar_second']): ?>
-      <aside class="right_column" role="complementary">
+      <aside class="span3" role="complementary">
         <?php print render($page['sidebar_second']); ?>
       </aside>  <!-- /#sidebar-second -->
     <?php endif; ?>
 
   </div>
-  <footer class="footer container clearfix">
+  <footer class="footer container">
     <?php print render($page['footer']); ?>
   </footer>
 </div>
