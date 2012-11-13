@@ -79,6 +79,43 @@ function love_form_alter(&$form, &$from_state, $form_id) {
 	if($form_id == 'photo_node_form'){ //node/add/photo
 			//dpm($from_state);
 	}
- 
-}
 
+}
+/**
+ * if user visit love profile-main or profile-believes +1
+ * user_visits++
+ * Implements of hook_exit().
+ * @see user_visits_exit()
+ */
+function love_exit() {
+  global $user;
+  $referer = $_SERVER['HTTP_REFERER'];
+
+  // Don't count if user no has access to profile
+  if (!user_access('access user profiles')) {
+    return;
+  }
+
+  // Don't count anonymous-clicks.
+  if (!$user->uid) {
+    return;
+  }
+
+  // Don't count if role is hidden.
+  if (user_visits_is_hidden($user)) {
+    return;
+  }
+
+  // Try not to count clicks from the user's other profile pages.
+  if (strpos($_SERVER['HTTP_REFERER'], arg(0) . '/' . arg(1))) {
+    //return;//XXX why???
+  }
+  // Record visits on user profile pages.
+  //profile-*/1
+	if((strpos( arg(0),"profile-")==0) && is_numeric(arg(1)) && !arg(2)) {
+		if ($user->uid != arg(1)) {
+      // Count view.
+      user_visits_count($user->uid, arg(1));
+    }
+	}
+}

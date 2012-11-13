@@ -48,5 +48,5 @@ function user_visits_schema() {
  * Implements hook_uninstall().
  */
 function user_visits_uninstall() {
-  db_query("DELETE FROM {variables} WHERE name LIKE 'user_visits%%'");
+  db_query("DELETE FROM {variable} WHERE name LIKE 'user_visits%%'");
 }
