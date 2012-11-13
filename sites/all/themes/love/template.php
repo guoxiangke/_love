@@ -114,3 +114,20 @@ function love_preprocess_user_picture(&$variables) {
     }
   }
 }
+/**
+ * love_form_BASE_FORM_ID_alter
+ */
+ 
+function love_form_node_form_alter(&$form, &$from_state, $form_id) {
+	
+	if($form_id == 'photo_node_form'){ //node/add/photo
+			$form['author']['#access'] = FALSE;
+			$form['options']['#access'] = FALSE; 
+			$form['comment_settings']['#access'] = FALSE; 
+			
+		  $form['path']['#access'] = FALSE;
+			$form['revision_information']['#access'] = FALSE; 
+			$form['menu']['#access'] = FALSE; 
+	}
+ 
+}

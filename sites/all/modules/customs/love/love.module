@@ -28,3 +28,57 @@ function love_init(){
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
 }
+
+/**
+ *  Implements hook_field_widget_form_alter($element, $form_state, $context)
+ */
+function china_address_field_widget_form_alter(&$form, &$form_state) {
+	//TODO
+}
+
+//TODO 定制最近来访 主题9宫格
+/**
+ * Implements hook_block_view().
+ * @see user_visits_adv_block_view($delta = '')
+ */
+function hook_block_view_alter($data, $block) {
+  $limit = variable_get('user_visits_adv_block_items_' . $delta, 9);
+  switch ($delta) {
+    case 0:
+      $block = array(
+        'subject' => t('Latest visitors'),
+        'content' => love_user_visits_adv_visitors_block($limit),
+      );
+      break;
+
+  }
+  return $block;
+}
+/**
+ * Get latest visitors for block content.
+ * @see user_visits_adv_visitors_block()
+ */
+function love_user_visits_adv_visitors_block($limit = 9) {
+  global $user;
+  $output = '';
+
+  if ($user->uid) {
+    $visitors = user_visits_adv_get('visitors', $user->uid);
+    if (is_array($visitors)) {
+      $visitors = array_slice($visitors, 0, $limit, TRUE);
+      foreach ($visitors as $uid => $visit) {
+        $account = db_query('SELECT uid, name, picture FROM {users} WHERE uid = :uid', array(':uid' => $uid))->fetchObject();
+        $output .= theme('user_visits', array('account' => $account, 'visit' => $visit));
+      }
+    }
+  }
+  return $output;
+}
+
+function love_form_alter(&$form, &$from_state, $form_id) {
+	if($form_id == 'photo_node_form'){ //node/add/photo
+			//dpm($from_state);
+	}
+ 
+}
+
