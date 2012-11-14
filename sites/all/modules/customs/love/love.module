@@ -5,6 +5,9 @@
 function love_menu_alter(&$items) {
   // Example - disable the page at node/add
   $items['publish'] = $items['node/add/photo'];
+	$items['publish']['title'] = t('+Photo');
+	$items['publish']['menu_name'] = 'main-menu';
+	$items['publish']['weight'] = 100;
   //TODO: Docy menu
 }
 
@@ -24,11 +27,25 @@ function love_theme($existing, $type, $theme, $path) {
 }
 
 function love_init(){
+  //drupal_add_js(drupal_get_path('module', 'rate') .'/rate.js');
+
   drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
-}
 
+}
+/**
+ * Implements hook_js_alter().
+ * Rate JS Order fix...
+
+function love_js_alter(&$js) {dpm('er');
+  $rateModulePath = drupal_get_path('module', 'rate');
+  foreach($js as $file => $info) {
+    if (strpos($file, $rateModulePath) === 0) {
+      $js[$file]['scope'] = 'header';
+    }
+  }
+} */
 /**
  *  Implements hook_field_widget_form_alter($element, $form_state, $context)
  */

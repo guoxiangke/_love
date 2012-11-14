@@ -50,7 +50,7 @@
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
 	$profile_link = $rendered_entity;
-	//$vote = $value;
+	$vote = $value;
 ?>
 <div class="t-pic float-l"><div class="round120<?php print $field_sex?" boy":" girl" ?>"><?php print $picture; ?></div></div>
 <div class="t-Con float-l">
