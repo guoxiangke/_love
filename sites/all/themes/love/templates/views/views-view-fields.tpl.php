@@ -58,7 +58,7 @@
 		<div class="t-name  float-l"> <?php print l($profile_link,'profile-main/'.$profile_uid)?> 上传了照片</div>
 		
 	</div>
-	<?php if (isset($body)): ?><div class="t-body"> <?php print $body; ?> </div><?php endif; ?>
+	<?php if (isset($body)): ?><div class="t-body"> <?php //print $body; ?> </div><?php endif; ?>
 	<div class="t-field_photo"> <?php print $field_photo; ?> </div>
 	<div class="t-footer clearfix">
 		<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->

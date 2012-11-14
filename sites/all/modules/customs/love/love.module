@@ -8,9 +8,18 @@ function love_menu_alter(&$items) {
 	$items['publish']['title'] = t('+Photo');
 	$items['publish']['menu_name'] = 'main-menu';
 	$items['publish']['weight'] = 100;
-  //TODO: Docy menu
-}
 
+  //$items['user']['title callback'] = love_dynamic_menu_call();
+}
+/* TODO:XXX 
+function love_dynamic_menu_call(){
+  global $user;
+  if($user->uid) {
+    return $user->name;
+  }else{
+    return t('My account');
+  }
+}*/
 /**
  * Implements of hook_theme().
  */

@@ -1,4 +1,13 @@
 <?php
+
+/**
+* Implements hook_js_alter().
+*
+* This function swap out jQuery to use an updated version of the library.
+*/
+function love_js_alter(&$javascript) {
+  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'love').'/js/jquery.js';
+}
 /**
  * Preprocess variables for page.tpl.php
  *
@@ -28,7 +37,12 @@ function love_preprocess_page(&$vars) {
   else {
     $vars['primary_nav'] = FALSE;
   }
+   
   if (isset($vars['secondary_menu'])) {
+    //TODO: XXX Docy menu @see love_menu_alter() love_dynamic_menu_call()
+    //dynamic menu of userName in navbar.
+    global $user;if($user->uid)
+    $vars['secondary_menu']['menu-2']['title'] =  $user->name;
     $vars['secondary_nav'] = theme('links__system_secondary_menu', array(
       'links' => $vars['secondary_menu'],
       'attributes' => array(

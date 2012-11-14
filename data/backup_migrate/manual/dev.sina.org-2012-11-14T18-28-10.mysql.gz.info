@@ -1,0 +1,8 @@
+filename = "dev.sina.org-2012-11-14T18-28-10"
+description = ""
+datestamp = "1352888896"
+generator = "Backup and Migrate (http://drupal.org/project/backup_migrate)"
+generatorversion = "7.x-2.x"
+sites[0][version] = "7.17"
+sites[0][name] = "dev.sina.org"
+sites[0][url] = "http://dev.sina.org/en"
