@@ -44,7 +44,7 @@
           </aside>  <!-- /#sidebar-first -->
         <?php endif; ?>  
         
-        <section class="<?php print _twitter_bootstrap_content_span($columns); ?>">  
+        <section class="<?php print _twitter_bootstrap_content_span($columns); ?>" id="page-section">  
           <?php if ($page['highlighted']): ?>
             <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
           <?php endif; ?>
@@ -69,7 +69,60 @@
         </section>
 
         <?php if ($page['sidebar_second']): ?>
-          <aside class="span3" role="complementary">
+          <aside class="span3" role="complementary well">
+            <div class="aside">
+              <div class="info-box">
+                  <!-- 头像 -->
+                  <img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar">
+                  <!-- 博客描述 -->
+                  <div class="description description-with-follow"></div>
+                  <!-- 常用链接入口 -->
+                  <div class="links links-with-follow">
+                      <a href="http://feesx.diandian.com/submit">投稿</a> / 
+                      <a href="http://feesx.diandian.com/inbox">私信</a> / 
+                      <a href="http://feesx.diandian.com/archive">存档</a> /
+                      <a href="http://feesx.diandian.com/rss">RSS</a>
+                  </div>
+                  
+                  <div class="follow">
+                      <a class="follow-btn" href="http://www.diandian.com/follow/feesx">关&nbsp;注</a>
+                  </div>
+                  
+              </div>
+              <!-- 自定义页面 -->
+              
+              <div class="search-box">
+                  <form method="get" action="/">
+                      <input type="text" placeholder="搜索" name="tag" class="text">
+                      <input type="submit" value="搜索" class="submit">
+                  </form>
+              </div>
+
+              <div class="copyright">
+                  Powered by <a target="_blank" href="http://www.diandian.com">diandian</a>.
+              </div>
+          </div>
+          <div id="aside">
+            <ul class="sidemenu sidebox">
+              <li id="asideFollowing" class="first  aside-follow-content">
+               <a href="http://www.diandian.com/following">
+                <span class="aside-icon"></span>
+                我关注了2个博客
+                </a>
+              </li>
+              <li id="asideIlike" class="aside-i-like ">
+              <a href="http://www.diandian.com/fav">
+              <span class="aside-icon"></span>我喜欢了<span id="side-fav-count">1</span>篇文章
+              </a>
+              </li><li id="asideExplore" class="sub aside-explore-blog">
+              <a href="http://www.diandian.com/category/%E5%BB%BA%E7%AD%91">
+              <span class="aside-icon"></span>
+              发现更多好博客
+              </a>
+              </li>
+            </ul>
+          </div>
+
             <?php print render($page['sidebar_second']); ?>
           </aside>  <!-- /#sidebar-second -->
         <?php endif; ?>
