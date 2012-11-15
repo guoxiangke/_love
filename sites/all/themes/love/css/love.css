@@ -184,8 +184,9 @@ h1,h2{
     color: #9FB1BF;
     float: right;
     font-size: 12px;
-    width: 220px;
+    width: 260px;
     word-wrap: break-word;
+    margin-top: 1px;
 }
 .aside a {
     color: #9FB1BF;
@@ -361,9 +362,8 @@ h1,h2{
 
 
 /*****************/
-div#aside {
-width: 250px;
-float: right;
+#aside ul{
+	margin-left: 0;
 }
 #aside .sidebox {
 clear: both;
@@ -420,4 +420,15 @@ background-position: -58px 10px;
 }
 .sidemenu li.aside-explore-blog .aside-icon {
 background-position: -23px 5px;
+}
+
+
+.sidemenu li.aside-follow-content {
+  color: #848586;
+}
+.sidemenu li.aside-follow-content.active a{
+  color: #617C92;
+}
+.sidemenu li.aside-follow-content.active a:hover {
+  color: #fff;
 }
