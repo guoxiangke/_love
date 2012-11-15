@@ -77,7 +77,7 @@
                   <img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar">
                   <!-- 博客描述 -->
                   <div class="description description-with-follow">
-                    <?php print($user->signature)?>
+                    <?php print($user->signature?:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....")?>
 
                   </div>
                   <!-- 常用链接入口 -->
@@ -114,7 +114,7 @@
                   <li id="asideFollowing" class="first  aside-follow-content">
                    <a href="http://www.diandian.com/following">
                     <span class="aside-icon"></span>
-                    交友申请
+                    申请中...
                     </a>
                   </li>
                   <li id="asideFollowing" class="first  aside-follow-content">
@@ -142,7 +142,7 @@
           </div>
 
 
-            <?php //print render($page['sidebar_second']); ?>
+            <?php print render($page['sidebar_second']); ?>
           </aside>  <!-- /#sidebar-second -->
         <?php endif; ?>
       </div>

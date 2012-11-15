@@ -6,7 +6,7 @@
 * This function swap out jQuery to use an updated version of the library.
 */
 function love_js_alter(&$javascript) {
-  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'love').'/js/jquery.js';
+  //$javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'love').'/js/jquery.js';
 }
 /**
  * Preprocess variables for page.tpl.php
