@@ -8,3 +8,4 @@ sites/*/private
 temp
 .htaccess
 data/backup_migrate/scheduled/
+sites/default/files/languages/
