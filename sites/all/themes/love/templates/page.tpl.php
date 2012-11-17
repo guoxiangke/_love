@@ -77,7 +77,7 @@
                   <img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar">
                   <!-- 博客描述 -->
                   <div class="description description-with-follow">
-                    <?php print($user->signature?:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....")?>
+                    <?php if($user->uid)print($user->signature?:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....")?>
 
                   </div>
                   <!-- 常用链接入口 -->
@@ -108,19 +108,31 @@
                   <li id="asideFollowing" class="first  aside-follow-content">
                    <a href="http://www.diandian.com/following">
                     <span class="aside-icon"></span>
+                    谁看过我（谁正在看我）
+                    </a>
+                  </li>
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="http://www.diandian.com/following">
+                    <span class="aside-icon"></span>
+                    我看过谁
+                    </a>
+                  </li>
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="http://www.diandian.com/following">
+                    <span class="aside-icon"></span>
                     好友
                     </a>
                   </li>
                   <li id="asideFollowing" class="first  aside-follow-content">
                    <a href="http://www.diandian.com/following">
                     <span class="aside-icon"></span>
-                    申请中...
+                    Ta想认识你
                     </a>
                   </li>
                   <li id="asideFollowing" class="first  aside-follow-content">
                    <a href="http://www.diandian.com/following">
                     <span class="aside-icon"></span>
-                    Ta想认识你
+                    我想认识的
                     </a>
                   </li>
                   <li id="asideIlike" class="aside-i-like ">
@@ -130,7 +142,7 @@
                   </li><li id="asideExplore" class="sub aside-explore-blog">
                   <a href="http://www.diandian.com/category/%E5%BB%BA%E7%AD%91">
                   <span class="aside-icon"></span>
-                  发现更多好博客
+                  发现更多
                   </a>
                   </li>
                 </ul>

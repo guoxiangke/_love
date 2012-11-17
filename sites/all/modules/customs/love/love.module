@@ -103,9 +103,9 @@ function love_user_visits_adv_visitors_block($limit = 9) {
 
 function love_form_alter(&$form, &$from_state, $form_id) {
 	if($form_id == 'photo_node_form'){ //node/add/photo
-			//dpm($from_state);
+			//
 	}
-
+//dpm($form);
 }
 /**
  * if user visit love profile-main or profile-believes +1
