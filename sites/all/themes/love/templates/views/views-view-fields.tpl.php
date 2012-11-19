@@ -34,7 +34,7 @@
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; */?>
 
-<?php //dpm($fields);
+<?php
 /**
  * new fields:
  * $picture
@@ -50,28 +50,42 @@
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
 	$vote = $value;
+	$flag = $ops;
 	//dpm($field_name,$name);
 ?>
-<div class="t-pic float-l"><div class="round120<?php if(isset($fields['field_sex'])) print $field_sex?" boy":" girl" ?>"><?php print $picture; ?></div></div>
+<div class="t-pic float-l">
+	<div class="round120<?php if(isset($fields['field_sex'])) print $field_sex?" boy":" girl" ?>">
+		<?php print $picture; ?>
+	</div>
+	<div class="t-user-info">
+		<div>昵称／好友显示真名</div>
+		<div>性别图标</div>
+		<div>来自：北京海淀</div>
+		<div>Ta想认识你</div>
+		<div>你想认识Ta</div>
+		<div>你们是好友</div>
+		
+	</div>
+</div>
 <div class="t-Con float-l">
 	<div class="t-author clearfix">
 		<?php 
-			//delete when user has real name....
-			if(isset($fields['field_name'])){
+			//delete when user has real name...
 			if(is_null($fields['field_name']->content)){
 				$display_name = $name;
 			}else{
 				$display_name = $field_name;
-			}}else{
-				$display_name = $name;
 			}
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name  float-l"> <?php if(isset($fields['display_name'])) print l($display_name,'user/'.$profile_uid);?> 上传了照片</div>
+		<div class="t-name  float-l"> <?php if(isset($display_name)) print l($display_name,'user/'.$profile_uid);?> 上传了照片</div>
 		
 	</div>
 	<?php if (isset($body)): ?><div class="t-body"> <?php //print $body; ?> </div><?php endif; ?>
-	<div class="t-field_photo"> <?php print $field_photo; ?> </div>
+	<div class="t-field_photo">
+		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
+		<?php if (isset($flag)): ?><span class="flag"> <?php print $flag; ?> </span><?php endif; ?>
+	</div>
 	<div class="t-footer clearfix">
 		<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
 		<div class="t-created  float-l"> <?php print $created; ?> </div>

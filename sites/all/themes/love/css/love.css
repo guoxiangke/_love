@@ -135,6 +135,10 @@ secondary-menu li{
 	border-radius:120px;            /* W3C syntax */
 	overflow: hidden;
 }
+.t-user-info {
+    width:100px;
+    overflow: hidden;
+}
 .girl{
 	border-color:#F6C;
 }

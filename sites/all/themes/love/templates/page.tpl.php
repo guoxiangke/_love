@@ -118,7 +118,7 @@
                     </a>
                   </li>
                   <li id="asideFollowing" class="first  aside-follow-content">
-                   <a href="http://www.diandian.com/following">
+                   <a href="relationships">
                     <span class="aside-icon"></span>
                     好友
                     </a>
