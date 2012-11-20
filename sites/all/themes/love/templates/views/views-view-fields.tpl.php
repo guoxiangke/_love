@@ -52,33 +52,71 @@
 	$vote = $value;
 	$flag = $ops;
 	//dpm($field_name,$name);
+
+	  global $user;
+	  $ur_way = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid)),array('count'=>1));
+	  $friends = False;
+	  $acquaintance = False;
+	  $acquaintanced = False; 
+	  switch ($ur_way) {
+	    case '2':
+	      // two-way relationships.
+	      $friends = TRUE;
+	      break;
+	    case '0':
+	      // no-way relationships.
+	      break;
+	    default:
+	    	// one-way relationships.
+	      $acquaintance = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>1),array('count'=>1));
+        $acquaintanced = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>1),array('count'=>1));
+	      break;
+	  }
+	// 
+	$real_name = $name;
+	if(!is_null($fields['field_name']->content)){
+		$real_name = $field_name;
+	}
+	$display_name= $friends?$real_name:$name;
 ?>
 <div class="t-pic float-l">
 	<div class="round120<?php if(isset($fields['field_sex'])) print $field_sex?" boy":" girl" ?>">
-		<?php print $picture; ?>
+		<?php print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
 	</div>
+	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
-		<div>昵称／好友显示真名</div>
+		<div><?php print $display_name;?></div>
 		<div>性别图标</div>
-		<div>来自：北京海淀</div>
-		<div>Ta想认识你</div>
-		<div>你想认识Ta</div>
-		<div>你们是好友</div>
+		<div>Localed：北京海淀</div>
+		<?php 
+		
+			if($friends){
+				print '你们是好友';
+			}else{
+				if($acquaintanced){
+				 print 'Ta想认识你';
+				}
+				if($acquaintance){
+					 print '你想认识Ta';
+				}else{
+					 print '+认识Ta';
+				} 
+
+			}
+		 ?>
 		
 	</div>
+	<?PHP endif; ?>
 </div>
+
 <div class="t-Con float-l">
 	<div class="t-author clearfix">
 		<?php 
 			//delete when user has real name...
-			if(is_null($fields['field_name']->content)){
-				$display_name = $name;
-			}else{
-				$display_name = $field_name;
-			}
+			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name  float-l"> <?php if(isset($display_name)) print l($display_name,'user/'.$profile_uid);?> 上传了照片</div>
+		<div class="t-name  float-l"> <?php print l($display_name,'user/'.$profile_uid);?> 上传了照片</div>
 		
 	</div>
 	<?php if (isset($body)): ?><div class="t-body"> <?php //print $body; ?> </div><?php endif; ?>

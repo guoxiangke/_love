@@ -103,7 +103,23 @@ function love_user_visits_adv_visitors_block($limit = 9) {
 
 function love_form_alter(&$form, &$from_state, $form_id) {
 	if($form_id == 'photo_node_form'){ //node/add/photo
-			//
+			global $user;
+      $ur_way = user_relationships_load(array('rtid' => array(1),'between' => array(1,19)),array('count'=>1));
+      switch ($ur_way) {
+        case '2':
+          // two-way relationships.
+          $friends = TRUE;
+          break;
+        case '0':
+          // no-way relationships.
+          dvm('000');
+          break;
+        default:
+          $acquaintance = user_relationships_load(array('rtid' => array(1),'between' => array(1,19),'requester_id'=>1),array('count'=>1));
+          $acquaintanced = user_relationships_load(array('rtid' => array(1),'between' => array(1,19),'requester_id'=>1),array('count'=>19));
+          // one-way relationships.
+          break;
+      }
 	}
 //dpm($form);
 }
