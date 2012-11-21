@@ -73,8 +73,11 @@
             <div class="aside">
               <div class="info-box">
                   <!-- 头像 -->
-
-                  <img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar">
+                 
+                  <div class="avatar">
+                     <?php print love_user_picture($user); ?>
+                  </div>
+                  <!--img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar"-->
                   <!-- 博客描述 -->
                   <div class="description description-with-follow">
                     <?php if($user->uid)print($user->signature?:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....")?>

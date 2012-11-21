@@ -212,7 +212,7 @@ h1,h2{
 .aside .info-box a:hover {
     color: #FFFFFF;
 }
-.aside .info-box .avatar {
+.avatar img{
     box-shadow: 0 0 8px #0B1E30;
     margin: 10px;
     max-width: 200px;
