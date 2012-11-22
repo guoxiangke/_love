@@ -11,6 +11,15 @@
 class og_context_plugin_argument_default_group_context extends views_plugin_argument_default {
 
   /**
+   * Return the group context argument.
+   */
+  function get_argument() {
+    if ($group = og_context($this->options['group_type'])) {
+      return $group['gid'];
+    }
+  }
+
+  /**
    * Retrieve the options when this is a new access
    * control plugin
    */
@@ -32,15 +41,5 @@ class og_context_plugin_argument_default_group_context extends views_plugin_argu
       '#default_value' => $this->options['group_type'],
       '#description' => t('Determine what entity type that group should be of.')
     );
-  }
-
-  /**
-   * Return the group context argument.
-   */
-  function get_argument() {
-    if ($group = og_context($this->options['group_type'])) {
-      return $group['gid'];
-    }
-    return FALSE;
   }
 }

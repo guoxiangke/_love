@@ -55,21 +55,23 @@
 
 	  global $user;
 	  $ur_way = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid)),array('count'=>1));
-	  $friends = False;
-	  $acquaintance = False;
-	  $acquaintanced = False; 
+	  $friends = FALSE;
+	  $acquaintance = FALSE;
+	  $acquaintanced = FALSE; 
+	  $no_relationships = FALSE;
 	  switch ($ur_way) {
 	    case '2':
 	      // two-way relationships.
 	      $friends = TRUE;
 	      break;
 	    case '0':
+	    	$no_relationships = TRUE;
 	      // no-way relationships.
 	      break;
 	    default:
 	    	// one-way relationships.
-	      $acquaintance = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>1),array('count'=>1));
-        $acquaintanced = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>1),array('count'=>1));
+	      $acquaintance = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$user->uid),array('count'=>1));
+        $acquaintanced = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$profile_uid),array('count'=>1));
 	      break;
 	  }
 	// 
@@ -87,21 +89,18 @@
 	<div class="t-user-info">
 		<div><?php print $display_name;?></div>
 		<div>性别图标</div>
-		<div>Localed：北京海淀</div>
-		<?php 
-		
+		<div>位置：北京海淀</div>
+		<?php
 			if($friends){
-				print '你们是好友';
-			}else{
-				if($acquaintanced){
-				 print 'Ta想认识你';
-				}
-				if($acquaintance){
-					 print '你想认识Ta';
-				}else{
-					 print '+认识Ta';
-				} 
-
+				print '你们是好友<->';
+			}elseif($no_relationships){
+				print '+认识Ta';
+			}
+			if($acquaintanced){
+			 print 'Ta想认识你<-';
+			}
+			if($acquaintance){
+				 print '你想认识Ta->';
 			}
 		 ?>
 		

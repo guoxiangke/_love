@@ -26,6 +26,7 @@ class OgMigrateContent extends Migration {
 
     $query
       ->fields('oga')
+      ->condition('n.type', $bundle)
       ->orderBy('n.nid');
 
     $this->query = $query;
