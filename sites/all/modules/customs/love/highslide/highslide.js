@@ -10,10 +10,10 @@ if (!hs) { var hs = {
 // Language strings
 lang : {
 	cssDirection: 'ltr',
-	loadingText : '加载中...',
+	loadingText : '',//加载中...
 	loadingTitle : '取消',
 	focusTitle : 'Click to bring to front',
-	fullExpandTitle : '查看原图',//Expand to actual size (f)
+	fullExpandTitle : '查看da图',//Expand to actual size (f)
 	creditsText : '',//Powered by <i>Highslide JS</i>
 	creditsTitle : '',//Go to the Highslide JS homepage
 	restoreTitle : '点击关闭,点击+拖拽图片。Use arrow keys for next and previous.'
@@ -24,8 +24,8 @@ expandCursor : 'zoomin.cur', // null disables
 restoreCursor : 'zoomout.cur', // null disables
 expandDuration : 250, // milliseconds
 restoreDuration : 250,
-marginLeft : 15,
-marginRight : 15,
+marginLeft : 286,
+marginRight : 150,
 marginTop : 15,
 marginBottom : 15,
 zIndexCounter : 1001, // adjust to other absolutely positioned elements
@@ -37,7 +37,7 @@ outlineStartOffset : 3, // ends at 10
 padToMinWidth : false, // pad the popup width to make room for wide caption
 fullExpandPosition : 'bottom right',
 fullExpandOpacity : 1,
-showCredits : true, // you can set this to false if you want
+showCredits : false, // you can set this to false if you want
 creditsHref : 'http://highslide.com/',
 creditsTarget : '_self',
 enableKeyListener : true,
