@@ -87,23 +87,35 @@
 	</div>
 	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
-		<div><?php print $display_name;?></div>
-		<div>性别图标</div>
-		<div>位置：北京海淀</div>
+		<div>
+
+			<span><img src="<?php print drupal_get_path('theme','love'); print $field_sex?'/images/ic_sex_male.png':'/images/ic_sex_female.png';?>"></span>
+			<?php print $display_name;?>
+			<span><img src="<?php print drupal_get_path('theme','love'); print $field_sex?'/images/ic_user_male2.png':'/images/ic_user_famale2.png';?>"></span>
+		</div>
+		<div>
+			<span><img src="<?php print drupal_get_path('theme','love'); print '/images/sns_shoot_location_normal.png';?>"></span>
+			北京海淀</div>
 		<?php
-			if($friends){
-				print '你们是好友<->';
-			}elseif($no_relationships){
-				print '+认识Ta';
+			if($friends){ ?>
+				<span><img alt="你们是好友" src="<?php print drupal_get_path('theme','love'); print '/images/ic_userinfo_bothfollow.png';?>"></span>
+			<?php
+			}elseif($no_relationships){ ?>
+			
+			  <span><img alt="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/contact_list_add_friend.png';?>"></span>
+				<span><img alt="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/find_more_friend_addfriend_icon.png';?>"></span>
+			<?php }
+			if($acquaintanced){ ?>
+				<span><img alt="Ta想认识你" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
+			<?php 
 			}
-			if($acquaintanced){
-			 print 'Ta想认识你<-';
-			}
-			if($acquaintance){
-				 print '你想认识Ta->';
+			if($acquaintance){ ?>
+				<span><img alt="你想认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
+			<?php 
 			}
 		 ?>
 		
+		<span><img src="<?php print drupal_get_path('theme','love'); print '/images/net_setalias_icon.png';?>"></span>
 	</div>
 	<?PHP endif; ?>
 </div>
@@ -115,13 +127,22 @@
 			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name  float-l"> <?php print l($display_name,'user/'.$profile_uid);?> 上传了照片</div>
+		<div class="t-name float-l"> <?php print l($display_name,'user/'.$profile_uid,array('html'=>true));?> 上传了照片</div>
 		
 	</div>
 	<?php if (isset($body)): ?><div class="t-body"> <?php //print $body; ?> </div><?php endif; ?>
 	<div class="t-field_photo">
 		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
-		<?php if (isset($flag)): ?><span class="flag"> <?php print $flag; ?> </span><?php endif; ?>
+		<?php if (isset($flag)): ?>
+		<span class="flag"> <?php print $flag; ?> </span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_normal.png';?>"></span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_pressed.png';?>"></span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/friendactivity_likeicon.png';?>"></span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/zemoji_e335.png';?>"></span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/personactivity_cover_heart.png';?>"></span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_off.png';?>"></span>
+		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_on.png';?>"></span>
+	<?php endif; ?>
 	</div>
 	<div class="t-footer clearfix">
 		<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
@@ -133,7 +154,13 @@
 		 	<?php endif; ?>
 
 		 	<?php if (isset($vote)): ?>
-		 	<div class="vote"> <?php print $vote; ?> </div>
+		 	<div class="vote"> <?php print $vote; ?> 
+			 <span><img alt="赞" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_79.png';?>"></span>
+			 <span><img alt="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_80.png';?>"></span>
+
+			<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_66.png';?>"></span>
+		  <span><img alt="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_67.png';?>"></span>
+		 </div>
 		 	<?php endif; ?>
 		</div>
 	</div>

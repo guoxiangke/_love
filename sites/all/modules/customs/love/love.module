@@ -38,6 +38,7 @@ function love_theme($existing, $type, $theme, $path) {
 function love_init(){
   //drupal_add_js(drupal_get_path('module', 'rate') .'/rate.js');
 
+  //TODO:view process
   drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
   drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
@@ -111,7 +112,8 @@ function love_form_alter(&$form, &$from_state, $form_id) {
  * when add a new photo,set  group audience default love.
  */
 function love_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
-  $form['og_group_ref']['#access'] = FALSE;/*
+ // $form['og_group_ref']['#access'] = FALSE;
+  /*
   $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
   //2 is the love group gid.
   $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
@@ -120,6 +122,7 @@ function love_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
   $form['body']['#access'] = FALSE;
   $form['field_tags']['#access'] = FALSE;
 
+  drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
 }
 
 /**
@@ -142,13 +145,16 @@ function love_form_user_register_form_alter(&$form, &$form_state, $form_id) {/*
  */
 function love_user_insert(&$edit, $account, $category) {
   //2 is the love group gid.
-  $edit['og_group_ref'][LANGUAGE_NONE][0] = array('target_id'=>2);
+  //$edit['og_group_ref'][LANGUAGE_NONE][0] = array('target_id'=>2);
+  $account->og_group_ref[LANGUAGE_NONE][0] = array('target_id'=>2);
 }
+
 function love_node_insert($node) {
   if($node->type == 'photo') {
     $node->og_group_ref[LANGUAGE_NONE][0] = array('target_id'=>2);
   }
 }
+
 /**
  * if user visit love profile-main or profile-believes +1
  * user_visits++
