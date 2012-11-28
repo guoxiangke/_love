@@ -1,6 +1,9 @@
 body {
 	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-	background: url(../images/dashboard_bg.png);
+	/*background: url(../images/logo_bg.jpg);/* /dashboard_bg.png*/
+}
+body {
+background: url(http://img.kuai.xunlei.com/img/v2/log_bg.jpg) repeat;
 }
 .container,.navbar-fixed-top .container {
 	/*width: 980px;*/
@@ -436,3 +439,8 @@ background-position: -23px 5px;
 .sidemenu li.aside-follow-content.active a:hover {
   color: #fff;
 }
+
+
+
+/***/
+.recent-visit{float:left;width:33%; overflow:hidden;}

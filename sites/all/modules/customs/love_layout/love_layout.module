@@ -1,0 +1,280 @@
+<?php
+/**
+ * Implements hook_block_info().
+ */
+function love_layout_block_info() {
+  $blocks = array();
+  $blocks['love_user_block'] = array(
+    'info' => t('the user info display on proile page.'),
+    //'region' => 'sidebar_right',
+  );
+  return $blocks;
+}
+/**
+ * Implements hook_block_view().
+ */
+function love_layout_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'love_user_block':
+      $block['subject'] = t('User info');
+      $block['content'] = love_layout_user_block();
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Get relate user info , context will be  used.
+ */
+function love_layout_user_block() {
+  global $user;
+  //TODO: 
+  $picture = love_user_picture($user);
+  if($user->uid)
+  $signature = $user->signature?$user->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
+
+  $output = '
+  <div class="aside">
+              <div class="info-box">
+                  <!-- 头像 -->
+                 
+                  <div class="avatar">
+                     '.$picture.'
+                  </div>
+                  <!--img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar"-->
+                  <!-- 博客描述 -->
+                  <div class="description description-with-follow">
+                    '.$signature.'
+
+                  </div>
+                  <!-- 常用链接入口 -->
+                  <div class="links links-with-follow">
+                      <a href="http://feesx.diandian.com/submit">投稿</a> / 
+                      <a href="http://feesx.diandian.com/inbox">私信</a> / 
+                      <a href="http://feesx.diandian.com/archive">存档</a> /
+                      <a href="http://feesx.diandian.com/rss">RSS</a>
+                  </div>
+                  
+                  <div class="follow">
+                      <a class="follow-btn" href="http://www.diandian.com/follow/feesx">交友申请</a>
+                  </div>
+                  
+              </div>
+              <!-- 自定义页面 -->
+              
+              <div class="search-box">
+                  <form method="get" action="/search/node?">
+                      <input type="text" placeholder="搜索" name="search" class="text">
+                      <input type="submit" value="搜索" class="submit">
+                  </form>
+              </div>
+
+              <div id="aside">
+                <ul class="sidemenu sidebox">
+                  
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="http://www.diandian.com/following">
+                    <span class="aside-icon"></span>
+                    谁看过我（谁正在看我）
+                    </a>
+                  </li>
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="http://www.diandian.com/following">
+                    <span class="aside-icon"></span>
+                    我看过谁
+                    </a>
+                  </li>
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="relationships">
+                    <span class="aside-icon"></span>
+                    好友
+                    </a>
+                  </li>
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="http://www.diandian.com/following">
+                    <span class="aside-icon"></span>
+                    Ta想认识你
+                    </a>
+                  </li>
+                  <li id="asideFollowing" class="first  aside-follow-content">
+                   <a href="http://www.diandian.com/following">
+                    <span class="aside-icon"></span>
+                    我想认识的
+                    </a>
+                  </li>
+                  <li id="asideIlike" class="aside-i-like ">
+                  <a href="http://www.diandian.com/fav">
+                  <span class="aside-icon"></span>我喜欢了<span id="side-fav-count">1</span>张相片
+                  </a>
+                  </li><li id="asideExplore" class="sub aside-explore-blog">
+                  <a href="http://www.diandian.com/category/%E5%BB%BA%E7%AD%91">
+                  <span class="aside-icon"></span>
+                  发现更多
+                  </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="copyright">
+                  Powered by <a target="_blank" href="http://drupal.org">Drupal</a>.
+              </div>
+          </div>';
+  return $output;
+}
+
+
+//TODO 定制最近来访 主题9宫格
+/**
+ * Implements hook_block_view().
+ * @see user_visits_adv_block_view($delta = '')
+ */
+/**
+* Implementation of hook_block_view_MODULE_DELTA_alter
+*/
+function love_layout_block_view_alter(&$data, $block) {
+
+  if($block->delta == 'my_latest_visitors'){
+    global $user;
+    $limit = variable_get('user_visits_block_items_' . $block->delta, 9);
+    $data['content'] =  user_visits_display_block_4love($user->uid, $limit);
+  }
+
+  if( $block->delta == 'latest_visitors'){
+      //$block['subject'] = t('Latest visitors');
+      //$block['content'] = user_visits_display_block_1(NULL, $limit);
+      //dpm($block,'block');
+      //$data['content'] = 'nothings';
+      //dpm($data,'data'); 
+  }
+    
+  //return $block;
+}
+/**
+ * Get latest visitors for block content
+ */
+function user_visits_display_block_4love($uid = NULL, $limit = 5) {
+  $output = "";
+  if (!$uid && (arg(0) == 'user' && is_numeric(arg(1)))) {
+    $uid = arg(1);
+  }
+
+  if ($uid) {
+    $visitors = user_visits_latest($uid, $limit); 
+    $output .= '<div class="clearfix recent-visits">';
+    if (is_array($visitors)) {
+      foreach ($visitors as $visitor) {
+        $account = user_load($visitor->vuid);
+        $output .= theme('user_visits_4love', array('account' => $account, 'timestamp' => $visitor->visit));
+      }
+    }
+    $output = theme('user_visits_total', array('total' => user_visits_total($uid))).$output;
+  }
+  $output .= '</div>';
+  return $output;
+}
+/**
+ * Implements of hook_theme().
+ */
+function love_layout_theme($existing, $type, $theme, $path) {
+  return array(
+    'user_visits_4love' => array(
+      'variables' => array(
+        'account'   => NULL,
+        'timestamp' => NULL,
+        'referer'   => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Themeable function.
+ */
+function theme_user_visits_4love($account, $timestamp = NULL, $referer = NULL) {
+  $output  = '<div class="recent-visit">' . "\n";
+  //$output .= theme('user_picture', array($account));
+
+  $output .= love_layout_template_preprocess_user_picture($account);
+  $output .= ' <div class="name">' . theme('username', $account) . '</div>' . "\n";
+  /*if ($account['timestamp']) {
+    $output .= $account['timestamp'] ? ' <div class="visit">' . t('!time ago', array('!time' => format_interval(REQUEST_TIME - $account['timestamp']))) . '</div>' . "\n" : '';
+    $output .= $account['referer'] ? ' <div class="referer">' . t('Referer !link', array('!link' => l($account['referer'], $account['referer']))) . '</div>' . "\n" : '';
+  }*/
+  $output .= '</div>' . "\n";
+  return $output;
+}
+
+
+/**
+ * Process variables for user-picture.tpl.php.
+ *
+ * The $variables array contains the following arguments:
+ * - $account: A user, node or comment object with 'name', 'uid' and 'picture'
+ *   fields.
+ *
+ * @see user-picture.tpl.php
+ * @see template_preprocess_user_picture
+ */
+function love_layout_template_preprocess_user_picture($variables) {
+  $variables['user_picture'] = '';
+  if (variable_get('user_pictures', 0)) { 
+    $account = $variables['account'];
+    if (!empty($account->picture)) {
+      // @TODO: Ideally this function would only be passed file objects, but
+      // since there's a lot of legacy code that JOINs the {users} table to
+      // {node} or {comments} and passes the results into this function if we
+      // a numeric value in the picture field we'll assume it's a file id
+      // and load it for them. Once we've got user_load_multiple() and
+      // comment_load_multiple() functions the user module will be able to load
+      // the picture files in mass during the object's load process.
+      if (is_numeric($account->picture)) {
+        $account->picture = file_load($account->picture);
+      }
+      if (!empty($account->picture->uri)) {
+        $filepath = $account->picture->uri;
+      }
+    }
+    elseif (variable_get('user_picture_default', '')) {
+      $filepath = variable_get('user_picture_default', '');
+    }
+    if (isset($filepath)) {
+      //$alt = t("@user's picture", array('@user' => format_username($account)));
+      $alt = $variables['timestamp'] ?  t('!time ago', array('!time' => format_interval(REQUEST_TIME - $variables['timestamp']))) : '';
+      // If the image does not have a valid Drupal scheme (for eg. HTTP),
+      // don't load image styles.
+      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+        $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      else {
+        $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      if (!empty($account->uid) && user_access('access user profiles')) {
+        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
+      }
+    }
+    return $variables['user_picture'];
+  }
+}
+
+/**
+ * Get latest visitors for block content.
+ * @see user_visits_adv_visitors_block()
+ */
+function _love_user_visits_adv_visitors_block($limit = 9) {
+  global $user;
+  $output = '';
+
+  if ($user->uid) {
+    $visitors = user_visits_adv_get('visitors', $user->uid);
+    if (is_array($visitors)) {
+      $visitors = array_slice($visitors, 0, $limit, TRUE);
+      foreach ($visitors as $uid => $visit) {
+        $account = db_query('SELECT uid, name, picture FROM {users} WHERE uid = :uid', array(':uid' => $uid))->fetchObject();
+        $output .= theme('user_visits', array('account' => $account, 'visit' => $visit));
+      }
+    }
+  }
+  return $output;
+}
