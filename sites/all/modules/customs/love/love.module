@@ -39,67 +39,26 @@ function love_init(){
   //drupal_add_js(drupal_get_path('module', 'rate') .'/rate.js');
 
   //TODO:view process
-  drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
-  drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
-  drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
-
 }
 /**
- * Implements hook_js_alter().
- * Rate JS Order fix...
-
-function love_js_alter(&$js) {dpm('er');
-  $rateModulePath = drupal_get_path('module', 'rate');
-  foreach($js as $file => $info) {
-    if (strpos($file, $rateModulePath) === 0) {
-      $js[$file]['scope'] = 'header';
-    }
+ * Theme preprocess for views-view-index.tpl.php.
+ * prepare comments vars for qustion view page for both question and answers in module Level.
+ * TODO:we should check in theme level 
+ */
+function love_preprocess_views_view(&$vars) {
+  $view = $vars['view'];
+  if ($view->name == 'index') {//  && $view->current_display == 'photos_page_all'
+    //$vars['answer_node_form'] = druedu_node_add('answer');
+    drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
+    drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
+    drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
   }
-} */
+}
 /**
  *  Implements hook_field_widget_form_alter($element, $form_state, $context)
  */
 function china_address_field_widget_form_alter(&$form, &$form_state) {
 	//TODO
-}
-
-//TODO 定制最近来访 主题9宫格
-/**
- * Implements hook_block_view().
- * @see user_visits_adv_block_view($delta = '')
- */
-function hook_block_view_alter($data, $block) {
-  $limit = variable_get('user_visits_adv_block_items_' . $delta, 9);
-  switch ($delta) {
-    case 0:
-      $block = array(
-        'subject' => t('Latest visitors'),
-        'content' => love_user_visits_adv_visitors_block($limit),
-      );
-      break;
-
-  }
-  return $block;
-}
-/**
- * Get latest visitors for block content.
- * @see user_visits_adv_visitors_block()
- */
-function love_user_visits_adv_visitors_block($limit = 9) {
-  global $user;
-  $output = '';
-
-  if ($user->uid) {
-    $visitors = user_visits_adv_get('visitors', $user->uid);
-    if (is_array($visitors)) {
-      $visitors = array_slice($visitors, 0, $limit, TRUE);
-      foreach ($visitors as $uid => $visit) {
-        $account = db_query('SELECT uid, name, picture FROM {users} WHERE uid = :uid', array(':uid' => $uid))->fetchObject();
-        $output .= theme('user_visits', array('account' => $account, 'visit' => $visit));
-      }
-    }
-  }
-  return $output;
 }
 
 function love_form_alter(&$form, &$from_state, $form_id) {
