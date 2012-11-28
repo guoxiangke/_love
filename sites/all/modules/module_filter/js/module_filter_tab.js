@@ -39,6 +39,14 @@ Drupal.behaviors.moduleFilterTabs = {
                 summary += '<span>' + Drupal.t('No modules added within the last week.') + '</span>';
               }
               break;
+            case 'recent':
+              name = Drupal.t('Recent');
+              title = Drupal.t('Modules enabled/disabled within the last week.');
+              if (Drupal.settings.moduleFilter.enabledCounts['recent'].total == 0) {
+                tabClass += ' disabled';
+                summary += '<span>' + Drupal.t('No modules were enabled or disabled within the last week.') + '</span>';
+              }
+              break;
             default: 
               var $row = $('#' + id + '-package');
               name = $.trim($row.text());
@@ -58,7 +66,7 @@ Drupal.behaviors.moduleFilterTabs = {
           Drupal.ModuleFilter.tabs[id] = new Drupal.ModuleFilter.Tab($tab, id);
         });
 
-        $('#module-filter-modules tbody td.checkbox input').change(function() {
+        $('#module-filter-modules tbody td.checkbox input').click(function() {
           var $checkbox = $(this);
           var key = $checkbox.parents('tr').data('indexKey');
 
@@ -90,6 +98,7 @@ Drupal.behaviors.moduleFilterTabs = {
         moduleFilter.element.bind('moduleFilter:start', function() {
           moduleFilter.tabResults = {
             'all-tab': { items: {}, count: 0 },
+            'recent-tab': { items: {}, count: 0 },
             'new-tab': { items: {}, count: 0 }
           };
 
@@ -113,6 +122,11 @@ Drupal.behaviors.moduleFilterTabs = {
                 // All tab
                 moduleFilter.tabResults['all-tab'].count++;
 
+                // Recent tab
+                if (item.element.hasClass('recent-module')) {
+                  moduleFilter.tabResults['recent-tab'].count++;
+                }
+
                 // New tab
                 if (item.element.hasClass('new-module')) {
                   moduleFilter.tabResults['new-tab'].count++;
@@ -123,7 +137,7 @@ Drupal.behaviors.moduleFilterTabs = {
               }
 
               if (Drupal.ModuleFilter.activeTab != undefined && Drupal.ModuleFilter.activeTab.id != 'all-tab') {
-                if ((Drupal.ModuleFilter.activeTab.id == 'new-tab' && !item.element.hasClass('new-module')) || (Drupal.ModuleFilter.activeTab.id != 'new-tab' && id != Drupal.ModuleFilter.activeTab.id)) {
+                if ((Drupal.ModuleFilter.activeTab.id == 'recent-tab' && !item.element.hasClass('recent-module')) || (Drupal.ModuleFilter.activeTab.id == 'new-tab' && !item.element.hasClass('new-module')) || (Drupal.ModuleFilter.activeTab.id != 'recent-tab' && Drupal.ModuleFilter.activeTab.id != 'new-tab' && id != Drupal.ModuleFilter.activeTab.id)) {
                   // The item is not in the active tab, so hide it.
                   item.element.addClass('js-hide');
                 }
@@ -183,13 +197,14 @@ Drupal.behaviors.moduleFilterTabs = {
           $('td.checkbox div.form-item').hide();
           $('td.checkbox').each(function(i) {
             var $cell = $(this);
+            var $checkbox = $(':checkbox', $cell);
             var $switch = $('.toggle-enable', $cell);
             $switch.removeClass('js-hide').click(function() {
               if (!$(this).hasClass('disabled')) {
-                $(':checkbox', $cell).click().change();
+                $checkbox.click();
               }
             });
-            $(':checkbox', $cell).change(function() {
+            $checkbox.click(function() {
               if (!$switch.hasClass('disabled')) {
                 $switch.toggleClass('off');
               }
