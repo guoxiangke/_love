@@ -8,12 +8,11 @@ function love_layout_block_info() {
     'info' => t('the user info display on proile page.'),
     //'region' => 'sidebar_right',
   );
-  $blocks['acquaintances'] = array(
-    'info' => t('my/he acquaintances.'), //我认识的人／他认识的人
+  $blocks['menu_local_task'] = array(
+    'info' => t('Menu local tabs'),
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
   );
-  $blocks['acquaintances_of'] = array(
-    'info' => t('my/he acquaintances of.'), //认识我的人／认识他的人
-  );
+  
   return $blocks;
 }
 /**
@@ -26,14 +25,11 @@ function love_layout_block_view($delta = '') {
       $block['subject'] = t('User info');
       $block['content'] = love_layout_user_block();
       break;
-    case 'acquaintances':
-      $block['subject'] = t('我认识的人／他认识的人');
-      $block['content'] = love_layout_acquaintances_block();
-      break;
-    case 'acquaintances_of':
-      $block['subject'] = t('认识我的人／认识他的人');
-      $block['content'] = love_layout_acquaintances_block();
-      break;
+    case 'menu_local_task':
+      $block['title'] = NULL;
+        //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
+      $block['content'] = menu_local_tasks();
+    break;
   }
   return $block;
 }

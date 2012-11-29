@@ -495,3 +495,10 @@ margin-right: 5px;
     overflow:hidden;
     text-align:center;
 }
+.region-sidebar-second section{
+    clear:both;
+}
+.block-user-relationship-blocks ul li{
+    list-style:none;
+
+}
