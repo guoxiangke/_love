@@ -8,6 +8,12 @@ function love_layout_block_info() {
     'info' => t('the user info display on proile page.'),
     //'region' => 'sidebar_right',
   );
+  $blocks['acquaintances'] = array(
+    'info' => t('my/he acquaintances.'), //我认识的人／他认识的人
+  );
+  $blocks['acquaintances_of'] = array(
+    'info' => t('my/he acquaintances of.'), //认识我的人／认识他的人
+  );
   return $blocks;
 }
 /**
@@ -19,6 +25,14 @@ function love_layout_block_view($delta = '') {
     case 'love_user_block':
       $block['subject'] = t('User info');
       $block['content'] = love_layout_user_block();
+      break;
+    case 'acquaintances':
+      $block['subject'] = t('我认识的人／他认识的人');
+      $block['content'] = love_layout_acquaintances_block();
+      break;
+    case 'acquaintances_of':
+      $block['subject'] = t('认识我的人／认识他的人');
+      $block['content'] = love_layout_acquaintances_block();
       break;
   }
   return $block;

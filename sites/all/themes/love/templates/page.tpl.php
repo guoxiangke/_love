@@ -3,7 +3,7 @@
 <div id="wrapper" class="container-fluid">
   <div class="row-fluid">
       <div class="main-content" class="span12">
-        <center><img src="<?php print path_to_theme(); ?>/img/BCISLogo.png" class="logo" /></center>
+        <center><img src="<?php print path_to_theme(); ?>/Logo.png" class="logo" /></center>
         <?php print drupal_render(drupal_get_form('user_login')); ?>
       </div>
   </div>
@@ -12,7 +12,7 @@
 <?php else:?>
 
 <header id="navbar" role="banner" class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
+
 	<div class="container">
     <div class="logo">
       <?php if ($logo): ?>

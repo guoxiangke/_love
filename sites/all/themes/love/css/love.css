@@ -1,9 +1,46 @@
 body {
 	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-	/*background: url(../images/logo_bg.jpg);/* /dashboard_bg.png*/
+	background: url(../images/logo_bg.jpg) repeat;/* /dashboard_bg.png*/
 }
-body {
-background: url(http://img.kuai.xunlei.com/img/v2/log_bg.jpg) repeat;
+body.not-logged-in {
+    background: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
+}
+body.not-logged-in form {
+position: relative;
+padding: 20px 20px 20px;
+background: white;
+border-radius: 3px;
+-webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+border: 0;
+width: 350px;
+margin: 0 auto;
+}
+body.not-logged-in form input {
+width: 278px;
+}
+body.not-logged-in form::before {
+content: '';
+position: absolute;
+top: -8px;
+right: -8px;
+bottom: -8px;
+left: -8px;
+z-index: -1;
+background: rgba(0, 0, 0, 0.08);
+border-radius: 4px;
+}
+body.not-logged-in img.logo {
+margin-bottom: 30px;
+}
+center {
+display: block;
+text-align: -webkit-center;
+}
+.main-content{
+    padding:0 20px;
+    margin-top:20px;
+    margin-bottom:40px;
 }
 .container,.navbar-fixed-top .container {
 	/*width: 980px;*/
@@ -52,8 +89,9 @@ background: url(http://img.kuai.xunlei.com/img/v2/log_bg.jpg) repeat;
 	border-radius:6px;            /* W3C syntax */
 }
 
-#navbar .navbar-inner {
-	background: url(../images/header_bg02.png);
+#navbar  {
+	/*background: url(../images/header_bg02.png);*/
+    background-color:#2FADDF;
 }
 nav {
 	position: relative;
@@ -444,3 +482,16 @@ background-position: -23px 5px;
 
 /***/
 .recent-visit{float:left;width:33%; overflow:hidden;}
+.recent-visit a {display: block;
+margin-right: 5px;
+    -moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius:10px;            /* W3C syntax */
+    overflow: hidden;
+
+}
+.recent-visit .name a{
+    width:80px;
+    overflow:hidden;
+    text-align:center;
+}
