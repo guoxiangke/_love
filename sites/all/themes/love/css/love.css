@@ -267,9 +267,6 @@ h1,h2{
     border-bottom: medium none;
     padding: 0 10px 10px;
 }
-.aside .copyright {
-    padding: 10px 0;
-}
 .aside .links {
     border-top: 1px solid #114260;
     color: #0F3D5E;
@@ -300,69 +297,7 @@ h1,h2{
 .aside .links a {
     margin: 0 3px;
 }
-.aside .pages {
-    margin-top: 30px;
-    overflow: hidden;
-}
-.aside .pages li {
-    line-height: 0;
-}
-.aside .pages a {
-    color: #5E7D90;
-    display: block;
-    line-height: 30px;
-    padding: 0 10px;
-}
-.aside .pages a:hover {
-    color: #063C59;
-}
-.aside .pages li {
-    border-top: 1px solid #C8D0D7;
-    margin-top: -1px;
-}
-.aside .tags {
-    border-top: 1px solid #C8D0D7;
-    margin-top: 30px;
-    padding: 8px 0 8px 10px;
-}
-.aside .tags a {
-    line-height: 2em;
-    margin-right: 10px;
-}
-.aside .tags a:hover {
-    color: #063C59;
-}
-.aside .pages a.current, .aside .tags a.current {
-    font-weight: 700;
-}
-.aside .search-box {
-    margin-top: 20px;
-    position: relative;
-}
-.aside .search-box .text {
-    background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #C9CCD0;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 1px 1px #D0D3D7;
-    font-size: 14px;
-    height: 15px;
-    line-height: 14px;
-    outline: medium none;
-    padding: 11px 6px 11px 32px;
-    width: 180px;
-}
-.aside .search-box .submit {
-    background: url("http://x.libdd.com/farm1/6be030/77040c4b/2BE52.png") no-repeat scroll 0 0 transparent;
-    border: medium none;
-    height: 16px;
-    left: 12px;
-    outline: 0 none;
-    overflow: hidden;
-    position: absolute;
-    text-indent: -999px;
-    top: 12px;
-    width: 16px;
-}
+
 /**/
 .aside, .aside a, .aside .pages a, .post-box a {
     color: #587991;
@@ -501,4 +436,87 @@ margin-right: 5px;
 .block-user-relationship-blocks ul li{
     list-style:none;
 
+}
+.block-user-relationship-blocks ul {
+    margin-left:0px;
+}
+
+/*nav menu*/
+#block-system-navigation ul{
+  width:258px;
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: white;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  font-size: 14px;
+  /*position: fixed;
+  min-height:300px;*/
+}
+
+#block-system-navigation ul li{
+  line-height: 20px;
+  display: list-item;
+text-align: -webkit-match-parent;
+}
+#block-system-navigation ul > li:first-child > a {
+-webkit-border-radius: 6px 6px 0 0;
+-moz-border-radius: 6px 6px 0 0;
+border-radius: 6px 6px 0 0;
+
+}
+#block-system-navigation > li > a:hover {
+  background-color: #f5f5f5;/*EEE*/
+}
+#block-system-navigation ul li a{
+margin: 0 0 -1px;
+padding: 8px 14px;
+border: 1px solid #E5E5E5;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+color: #08C;
+text-decoration: none;
+}
+#block-system-navigation > .active-trail > a {
+position: relative;
+z-index: 2;
+padding: 9px 15px;
+border: 0;
+text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+-webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+-moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+#block-system-navigation ul > .active-trail > a, #block-system-navigation ul > .active-trail > a:hover {
+color: white;
+background-color: #08C;
+}
+
+/*search button*/
+#search-block-form input.form-text {
+background: none repeat scroll 0 0 white;
+border: 1px solid #C9CCD0;
+border-radius: 4px 4px 4px 4px;
+box-shadow: 0 1px 1px #D0D3D7;
+font-size: 14px;
+height: 15px;
+line-height: 14px;
+outline: medium none;
+padding: 11px 6px 11px 32px;
+width: 180px;
+}
+#search-block-form button.form-submit {
+background: url("http://x.libdd.com/farm1/6be030/77040c4b/2BE52.png") no-repeat scroll 0 0 transparent;
+border: medium none;
+
+left: 12px;
+outline: 0 none;
+overflow: hidden;
+position: absolute;
+text-indent: -999px;
+top: 12px;
+width: 16px;
 }

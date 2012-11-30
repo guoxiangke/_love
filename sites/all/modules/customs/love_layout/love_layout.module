@@ -8,10 +8,6 @@ function love_layout_block_info() {
     'info' => t('the user info display on proile page.'),
     //'region' => 'sidebar_right',
   );
-  $blocks['menu_local_task'] = array(
-    'info' => t('Menu local tabs'),
-    'cache' => DRUPAL_NO_CACHE, //to be confirmed
-  );
   
   return $blocks;
 }
@@ -25,11 +21,6 @@ function love_layout_block_view($delta = '') {
       $block['subject'] = t('User info');
       $block['content'] = love_layout_user_block();
       break;
-    case 'menu_local_task':
-      $block['title'] = NULL;
-        //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
-      $block['content'] = menu_local_tasks();
-    break;
   }
   return $block;
 }
@@ -70,64 +61,6 @@ function love_layout_user_block() {
                       <a class="follow-btn" href="http://www.diandian.com/follow/feesx">交友申请</a>
                   </div>
                   
-              </div>
-              <!-- 自定义页面 -->
-              
-              <div class="search-box">
-                  <form method="get" action="/search/node?">
-                      <input type="text" placeholder="搜索" name="search" class="text">
-                      <input type="submit" value="搜索" class="submit">
-                  </form>
-              </div>
-
-              <div id="aside">
-                <ul class="sidemenu sidebox">
-                  
-                  <li id="asideFollowing" class="first  aside-follow-content">
-                   <a href="http://www.diandian.com/following">
-                    <span class="aside-icon"></span>
-                    谁看过我（谁正在看我）
-                    </a>
-                  </li>
-                  <li id="asideFollowing" class="first  aside-follow-content">
-                   <a href="http://www.diandian.com/following">
-                    <span class="aside-icon"></span>
-                    我看过谁
-                    </a>
-                  </li>
-                  <li id="asideFollowing" class="first  aside-follow-content">
-                   <a href="relationships">
-                    <span class="aside-icon"></span>
-                    好友
-                    </a>
-                  </li>
-                  <li id="asideFollowing" class="first  aside-follow-content">
-                   <a href="http://www.diandian.com/following">
-                    <span class="aside-icon"></span>
-                    Ta想认识你
-                    </a>
-                  </li>
-                  <li id="asideFollowing" class="first  aside-follow-content">
-                   <a href="http://www.diandian.com/following">
-                    <span class="aside-icon"></span>
-                    我想认识的
-                    </a>
-                  </li>
-                  <li id="asideIlike" class="aside-i-like ">
-                  <a href="http://www.diandian.com/fav">
-                  <span class="aside-icon"></span>我喜欢了<span id="side-fav-count">1</span>张相片
-                  </a>
-                  </li><li id="asideExplore" class="sub aside-explore-blog">
-                  <a href="http://www.diandian.com/category/%E5%BB%BA%E7%AD%91">
-                  <span class="aside-icon"></span>
-                  发现更多
-                  </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="copyright">
-                  Powered by <a target="_blank" href="http://drupal.org">Drupal</a>.
               </div>
           </div>';
   return $output;

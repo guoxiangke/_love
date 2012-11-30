@@ -139,7 +139,7 @@
 		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_pressed.png';?>"></span>
 		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/friendactivity_likeicon.png';?>"></span>
 		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/zemoji_e335.png';?>"></span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/personactivity_cover_heart.png';?>"></span>
+		<span><img title="收藏" src="http://simg.sinajs.cn/xblogstyle/images/common/icon_like.png"></span>
 		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_off.png';?>"></span>
 		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_on.png';?>"></span>
 	<?php endif; ?>
