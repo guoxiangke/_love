@@ -229,9 +229,12 @@ h1,h2{
     color: #9FB1BF;
     float: right;
     font-size: 12px;
-    width: 260px;
+    width: 100%;
     word-wrap: break-word;
     margin-top: 1px;
+}
+.region-sidebar-second{
+  margin-right: 1px;
 }
 .aside a {
     color: #9FB1BF;
@@ -443,7 +446,7 @@ margin-right: 5px;
 
 /*nav menu*/
 #block-system-navigation ul{
-  width:258px;
+  /*width:258px;*/
   margin: 30px 0 0;
   padding: 0;
   background-color: white;
@@ -519,4 +522,22 @@ position: absolute;
 text-indent: -999px;
 top: 12px;
 width: 16px;
+}
+
+/*privatemsg-message-odd*/
+.privatemsg-message-odd .privatemsg-author-avatar{
+  float: right;
+}
+.privatemsg-message-odd div.privatemsg-message-information{
+  text-align: right;
+}
+.privatemsg-message-even .privatemsg-message-column{
+  float:left;
+}
+.privatemsg-message-column {
+  width:50%;
+  border:2px solid #666;
+}
+.privatemsg-message-odd .privatemsg-message-body{
+  text-align:right;
 }
