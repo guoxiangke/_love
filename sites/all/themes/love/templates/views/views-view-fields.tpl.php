@@ -98,19 +98,19 @@
 			北京海淀</div>
 		<?php
 			if($friends){ ?>
-				<span><img alt="你们是好友" src="<?php print drupal_get_path('theme','love'); print '/images/ic_userinfo_bothfollow.png';?>"></span>
+				<span><img title="你们是好友" src="<?php print drupal_get_path('theme','love'); print '/images/ic_userinfo_bothfollow.png';?>"></span>
 			<?php
 			}elseif($no_relationships){ ?>
 			
-			  <span><img alt="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/contact_list_add_friend.png';?>"></span>
-				<span><img alt="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/find_more_friend_addfriend_icon.png';?>"></span>
+			  <span><img title="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/contact_list_add_friend.png';?>"></span>
+				<span><img title="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/find_more_friend_addfriend_icon.png';?>"></span>
 			<?php }
 			if($acquaintanced){ ?>
-				<span><img alt="Ta想认识你" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
+				<span><img title="Ta想认识你" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
 			<?php 
 			}
 			if($acquaintance){ ?>
-				<span><img alt="你想认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
+				<span><img title="你想认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
 			<?php 
 			}
 		 ?>
@@ -135,13 +135,13 @@
 		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
 		<?php if (isset($flag)): ?>
 		<span class="flag"> <?php print $flag; ?> </span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_normal.png';?>"></span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_pressed.png';?>"></span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/friendactivity_likeicon.png';?>"></span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/zemoji_e335.png';?>"></span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/personactivity_cover_heart.png';?>"></span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_off.png';?>"></span>
-		<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_on.png';?>"></span>
+		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_normal.png';?>"></span>
+		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_pressed.png';?>"></span>
+		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/friendactivity_likeicon.png';?>"></span>
+		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/zemoji_e335.png';?>"></span>
+		<span><img title="收藏" src="http://simg.sinajs.cn/xblogstyle/images/common/icon_like.png"></span>
+		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_off.png';?>"></span>
+		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_on.png';?>"></span>
 	<?php endif; ?>
 	</div>
 	<div class="t-footer clearfix">
@@ -155,11 +155,11 @@
 
 		 	<?php if (isset($vote)): ?>
 		 	<div class="vote"> <?php print $vote; ?> 
-			 <span><img alt="赞" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_79.png';?>"></span>
-			 <span><img alt="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_80.png';?>"></span>
+			 <span><img title="赞" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_79.png';?>"></span>
+			 <span><img title="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_80.png';?>"></span>
 
-			<span><img alt="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_66.png';?>"></span>
-		  <span><img alt="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_67.png';?>"></span>
+			<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_66.png';?>"></span>
+		  <span><img title="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_67.png';?>"></span>
 		 </div>
 		 	<?php endif; ?>
 		</div>

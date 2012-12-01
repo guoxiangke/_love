@@ -1,6 +1,46 @@
 body {
 	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-	background: url(../images/dashboard_bg.png);
+	background: url(../images/logo_bg.jpg) repeat;/* /dashboard_bg.png*/
+}
+body.not-logged-in {
+    background: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
+}
+body.not-logged-in form {
+position: relative;
+padding: 20px 20px 20px;
+background: white;
+border-radius: 3px;
+-webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+border: 0;
+width: 350px;
+margin: 0 auto;
+}
+body.not-logged-in form input {
+width: 278px;
+}
+body.not-logged-in form::before {
+content: '';
+position: absolute;
+top: -8px;
+right: -8px;
+bottom: -8px;
+left: -8px;
+z-index: -1;
+background: rgba(0, 0, 0, 0.08);
+border-radius: 4px;
+}
+body.not-logged-in img.logo {
+margin-bottom: 30px;
+}
+center {
+display: block;
+text-align: -webkit-center;
+}
+.main-content{
+    padding:0 20px;
+    margin-top:20px;
+    margin-bottom:40px;
 }
 .container,.navbar-fixed-top .container {
 	/*width: 980px;*/
@@ -49,8 +89,9 @@ body {
 	border-radius:6px;            /* W3C syntax */
 }
 
-#navbar .navbar-inner {
-	background: url(../images/header_bg02.png);
+#navbar  {
+	/*background: url(../images/header_bg02.png);*/
+    background-color:#2FADDF;
 }
 nav {
 	position: relative;
@@ -188,9 +229,12 @@ h1,h2{
     color: #9FB1BF;
     float: right;
     font-size: 12px;
-    width: 260px;
+    width: 100%;
     word-wrap: break-word;
     margin-top: 1px;
+}
+.region-sidebar-second{
+  margin-right: 1px;
 }
 .aside a {
     color: #9FB1BF;
@@ -226,9 +270,6 @@ h1,h2{
     border-bottom: medium none;
     padding: 0 10px 10px;
 }
-.aside .copyright {
-    padding: 10px 0;
-}
 .aside .links {
     border-top: 1px solid #114260;
     color: #0F3D5E;
@@ -259,69 +300,7 @@ h1,h2{
 .aside .links a {
     margin: 0 3px;
 }
-.aside .pages {
-    margin-top: 30px;
-    overflow: hidden;
-}
-.aside .pages li {
-    line-height: 0;
-}
-.aside .pages a {
-    color: #5E7D90;
-    display: block;
-    line-height: 30px;
-    padding: 0 10px;
-}
-.aside .pages a:hover {
-    color: #063C59;
-}
-.aside .pages li {
-    border-top: 1px solid #C8D0D7;
-    margin-top: -1px;
-}
-.aside .tags {
-    border-top: 1px solid #C8D0D7;
-    margin-top: 30px;
-    padding: 8px 0 8px 10px;
-}
-.aside .tags a {
-    line-height: 2em;
-    margin-right: 10px;
-}
-.aside .tags a:hover {
-    color: #063C59;
-}
-.aside .pages a.current, .aside .tags a.current {
-    font-weight: 700;
-}
-.aside .search-box {
-    margin-top: 20px;
-    position: relative;
-}
-.aside .search-box .text {
-    background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #C9CCD0;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 1px 1px #D0D3D7;
-    font-size: 14px;
-    height: 15px;
-    line-height: 14px;
-    outline: medium none;
-    padding: 11px 6px 11px 32px;
-    width: 180px;
-}
-.aside .search-box .submit {
-    background: url("http://x.libdd.com/farm1/6be030/77040c4b/2BE52.png") no-repeat scroll 0 0 transparent;
-    border: medium none;
-    height: 16px;
-    left: 12px;
-    outline: 0 none;
-    overflow: hidden;
-    position: absolute;
-    text-indent: -999px;
-    top: 12px;
-    width: 16px;
-}
+
 /**/
 .aside, .aside a, .aside .pages a, .post-box a {
     color: #587991;
@@ -435,4 +414,130 @@ background-position: -23px 5px;
 }
 .sidemenu li.aside-follow-content.active a:hover {
   color: #fff;
+}
+
+
+
+/***/
+.recent-visit{float:left;width:33%; overflow:hidden;}
+.recent-visit a {display: block;
+margin-right: 5px;
+    -moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius:10px;            /* W3C syntax */
+    overflow: hidden;
+
+}
+.recent-visit .name a{
+    width:80px;
+    overflow:hidden;
+    text-align:center;
+}
+.region-sidebar-second section{
+    clear:both;
+}
+.block-user-relationship-blocks ul li{
+    list-style:none;
+
+}
+.block-user-relationship-blocks ul {
+    margin-left:0px;
+}
+
+/*nav menu*/
+#block-system-navigation ul{
+  /*width:258px;*/
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: white;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  font-size: 14px;
+  /*position: fixed;
+  min-height:300px;*/
+}
+
+#block-system-navigation ul li{
+  line-height: 20px;
+  display: list-item;
+text-align: -webkit-match-parent;
+}
+#block-system-navigation ul > li:first-child > a {
+-webkit-border-radius: 6px 6px 0 0;
+-moz-border-radius: 6px 6px 0 0;
+border-radius: 6px 6px 0 0;
+
+}
+#block-system-navigation > li > a:hover {
+  background-color: #f5f5f5;/*EEE*/
+}
+#block-system-navigation ul li a{
+margin: 0 0 -1px;
+padding: 8px 14px;
+border: 1px solid #E5E5E5;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+color: #08C;
+text-decoration: none;
+}
+#block-system-navigation > .active-trail > a {
+position: relative;
+z-index: 2;
+padding: 9px 15px;
+border: 0;
+text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+-webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+-moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+#block-system-navigation ul > .active-trail > a, #block-system-navigation ul > .active-trail > a:hover {
+color: white;
+background-color: #08C;
+}
+
+/*search button*/
+#search-block-form input.form-text {
+background: none repeat scroll 0 0 white;
+border: 1px solid #C9CCD0;
+border-radius: 4px 4px 4px 4px;
+box-shadow: 0 1px 1px #D0D3D7;
+font-size: 14px;
+height: 15px;
+line-height: 14px;
+outline: medium none;
+padding: 11px 6px 11px 32px;
+width: 180px;
+}
+#search-block-form button.form-submit {
+background: url("http://x.libdd.com/farm1/6be030/77040c4b/2BE52.png") no-repeat scroll 0 0 transparent;
+border: medium none;
+
+left: 12px;
+outline: 0 none;
+overflow: hidden;
+position: absolute;
+text-indent: -999px;
+top: 12px;
+width: 16px;
+}
+
+/*privatemsg-message-odd*/
+.privatemsg-message-odd .privatemsg-author-avatar{
+  float: right;
+}
+.privatemsg-message-odd div.privatemsg-message-information{
+  text-align: right;
+}
+.privatemsg-message-even .privatemsg-message-column{
+  float:left;
+}
+.privatemsg-message-column {
+  width:50%;
+  border:2px solid #666;
+}
+.privatemsg-message-odd .privatemsg-message-body{
+  text-align:right;
 }
