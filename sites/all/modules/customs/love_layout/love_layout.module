@@ -265,11 +265,13 @@ function love_layout_menu_alter(&$items) {
 
   $items['myspace'] = $items['user']; 
   $items['myspace']['menu_name'] = 'love';
+  $items['myspace']['access callback'] = 'user_is_logged_in';
 
   $items['publish/photo'] = $items['publish'];
-  $items['publish/photo']['title'] = t('Add Photo');
+  $items['publish/photo']['title'] = t('Add Photos');
   $items['publish/photo']['menu_name'] = 'love';
-  dpm( $items['publish/photo']);
+
+  $items['invite']['title'] = t('Invite a friend');
   $items['invite/others'] = $items['invite'];
   $items['invite/others']['menu_name'] = 'love';
   $items['relationships/my'] = $items['relationships'];
