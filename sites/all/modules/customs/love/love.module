@@ -7,7 +7,6 @@ function love_menu_alter(&$items) {
   $items['publish'] = $items['node/add/photo'];
 	$items['publish']['title'] = t('+Photo');
 	$items['publish']['menu_name'] = 'main-menu';
-	$items['publish']['weight'] = 100;
 
   //$items['user']['title callback'] = love_dynamic_menu_call();
 }

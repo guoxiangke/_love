@@ -18,7 +18,7 @@ function love_layout_block_view($delta = '') {
   $block = array();
   switch ($delta) {
     case 'love_user_block':
-      $block['subject'] = t('User info');
+      $block['subject'] = NULL;//t('User info')
       $block['content'] = love_layout_user_block();
       break;
   }
@@ -31,9 +31,11 @@ function love_layout_block_view($delta = '') {
 function love_layout_user_block() {
   global $user;
   //TODO: 
-  $picture = love_user_picture($user);
-  if($user->uid)
-  $signature = $user->signature?$user->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
+  $account = user_load(arg(1));
+  $account=$account?$account:$user;
+  $picture = love_user_picture($account);
+  if($account->uid)
+  $signature = $account->signature?$user->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
 
   $output = '
   <div class="aside">
@@ -220,4 +222,69 @@ function _love_user_visits_adv_visitors_block($limit = 9) {
     }
   }
   return $output;
+}
+
+/**
+ * Implements hook_modules_installed().
+ *
+ * @see devel_install()
+ */
+function love_layout_modules_installed($modules) {
+  if (in_array('menu', $modules)) {
+    $menu = array(
+      'menu_name' => 'love',
+      'title' => t('Love menu'),
+      'description' => t('Love Navigation Menu'),
+    );
+    menu_save($menu);
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function _love_layout_menu() {
+  $items['messages'] = array(
+    'title'            => t('My home space'),
+    'title callback'   => 'privatemsg_title_callback',
+    'page callback'    => 'privatemsg_list_page',
+    'page arguments'   => array('list'),
+    'file'             => 'privatemsg.pages.inc',
+    'access callback'  => 'privatemsg_user_access',
+    'type'             => MENU_NORMAL_ITEM,
+    'menu_name'        => 'user-menu',
+  );
+}
+function love_layout_menu_alter(&$items) {
+  // Example - disable the page at node/add
+  $items['messages']['title callback'] = 'privatemsg_title_callback_alter';
+  $items['messages/recent'] = $items['messages'];
+  $items['messages/recent']['menu_name'] = 'love';
+  $items['messages/recent']['title'] = t('Messages');
+  //$items['messages/recent']['title callback'] = 'privatemsg_title_callback_alter';
+
+  $items['myspace'] = $items['user']; 
+  $items['myspace']['menu_name'] = 'love';
+
+  $items['publish/photo'] = $items['publish'];
+  $items['publish/photo']['title'] = t('Add Photo');
+  $items['publish/photo']['menu_name'] = 'love';
+  dpm( $items['publish/photo']);
+  $items['invite/others'] = $items['invite'];
+  $items['invite/others']['menu_name'] = 'love';
+  $items['relationships/my'] = $items['relationships'];
+  $items['relationships/my']['menu_name'] = 'love';
+}
+/**
+ * multilanguage t() for message.
+ * @see privatemsg_title_callback()
+ */
+function privatemsg_title_callback_alter($title = NULL) {
+  $count = privatemsg_unread_count();
+
+  if ($count > 0) {
+    //return format_plural($count, 'Messages (1 new)', 'Messages (@count new)');
+    return format_plural($count, t('Messages (1 new)'), t('Messages (@count new)'));
+  }
+  return t('Messages');
 }

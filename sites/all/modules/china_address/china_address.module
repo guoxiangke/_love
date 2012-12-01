@@ -147,7 +147,7 @@ function china_address_field_widget_form(&$form, &$form_state, $field, $instance
       else if (isset($items[$delta]['province'])){
 
         $province = $items[$delta]['province'];
-      } dpm($form_state['values']);
+      }// dpm($form_state['values']);
       //dpm($province,'$province');
       // city
       if (isset($form_state['values'][$field['field_name']][$lang ][0]['city'])) {
