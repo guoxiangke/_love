@@ -137,34 +137,38 @@ function china_address_field_widget_form(&$form, &$form_state, $field, $instance
       else if (isset($form_state['values'][$field['field_name']][$lang ][0]['province'])) {
         // Ajax callback
         $province = $form_state['values'][$field['field_name']][$lang ][0]['province'];
-      }//XXX fixed for love profile. 
-      else if (isset($form_state['values']['profile_main'])){
-        $province = $form_state['values']['profile_main'][$field['field_name']][$lang ][0]['province'];
-				//dpm($province,'$provinceC');
       }
-			else if (isset($form_state['values']['profile_believes'])){
+      else if (isset($form_state['values']['profile_main'])){//XXX fixed for love profile. 
+        $province = $form_state['values']['profile_main'][$field['field_name']][$lang ][0]['province'];
+      }
+			else if (isset($form_state['values']['profile_believes'])){//XXX fixed for love profile. 
         $province = $form_state['values']['profile_believes'][$field['field_name']][$lang ][0]['province'];
-				//dpm($province,'$provinceC');
       }
       else if (isset($items[$delta]['province'])){
+
         $province = $items[$delta]['province'];
-      }
+      } dpm($form_state['values']);
       //dpm($province,'$province');
       // city
       if (isset($form_state['values'][$field['field_name']][$lang ][0]['city'])) {
         // Ajax callback
-        $city = $form_state['values'][$field['field_name']][$lang ][0]['city'];          
-        
+        $city = $form_state['values'][$field['field_name']][$lang ][0]['city'];
+      }else if (isset($form_state['values']['profile_main'])){//XXX fixed for love profile. 
+        $city = $form_state['values']['profile_main'][$field['field_name']][$lang ][0]['city'];
+      }else if (isset($form_state['values']['profile_believes'])){//XXX fixed for love profile. 
+        $city = $form_state['values']['profile_believes'][$field['field_name']][$lang ][0]['city'];
       }
       else if (isset($items[$delta]['city'])){
         $city = $items[$delta]['city'];
       }
+
       $cities = china_address_cities($province); 
       $city_keys = array_keys($cities);
+ 
       if (!in_array($city, $city_keys)) {
         $city = $city_keys[0];
       }
-      
+
       // county
       if (isset($form_state['values'][$field['field_name']][$lang ][0]['county'])) {
         // Ajax callback
@@ -308,17 +312,17 @@ function china_address_dropdown_callback($form, $form_state) {
 		array_shift($form_state['triggering_element']['#parents']);
     return $form['profile_believes'][$form_state['triggering_element']['#parents'][0]];
   }
-  else if ($form['#form_id'] == 'user_register_form' 
+  else if ($form['#form_id'] == 'user_register_form'
+  || $form['#form_id'] == 'user_profile_form' 
   || $form['#form_id'] == 'profile2_edit_main_form') {
-  	watchdog('$form_state', '<pre>'.print_r($form_state['triggering_element'],TRUE));
   	//XXX fixed for love profile.
   	
-		$profile_type = $form_state['triggering_element']['#parents'][0];
+		$profile_type = $form_state['triggering_element']['#parents'][0];//profile_main
 		array_shift($form_state['triggering_element']['#parents']);
+
     return $form[$profile_type][$form_state['triggering_element']['#parents'][0]];
     //['default_value_widget'][$form['#field']['field_name']][$lang][0];
   }
-  
   else {
     return $form[$form_state['triggering_element']['#parents'][0]][$lang][0];
   }
