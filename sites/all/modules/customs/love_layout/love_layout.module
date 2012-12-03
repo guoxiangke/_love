@@ -263,7 +263,8 @@ function love_layout_menu_alter(&$items) {
   $items['messages/recent']['title'] = t('Messages');
   //$items['messages/recent']['title callback'] = 'privatemsg_title_callback_alter';
 
-  $items['myspace'] = $items['user']; 
+  $items['myspace'] = $items['user'];
+  $items['myspace']['title'] = t('Myspace');
   $items['myspace']['menu_name'] = 'love';
   $items['myspace']['access callback'] = 'user_is_logged_in';
 
@@ -274,8 +275,24 @@ function love_layout_menu_alter(&$items) {
   $items['invite']['title'] = t('Invite a friend');
   $items['invite/others'] = $items['invite'];
   $items['invite/others']['menu_name'] = 'love';
+
   $items['relationships/my'] = $items['relationships'];
   $items['relationships/my']['menu_name'] = 'love';
+  $items['relationships/my']['title'] = t('My acquaintances');//熟人
+
+  $items['relationships/my'] = $items['relationships'];
+  $items['relationships/my']['menu_name'] = 'love';
+  $items['relationships/my']['title'] = t('My acquaintances');//我想认识的
+
+  $items['relationships/my'] = $items['relationships'];
+  $items['relationships/my']['menu_name'] = 'love';
+  $items['relationships/my']['title'] = t('I am a acquaintance of');//我想认识的
+//熟人申请 Sent requests
+//发出申请 Received requests
+//你们是熟人==
+  //加认识 男-女
+  //-认识
+  //互相认识 转角缘分 
 }
 /**
  * multilanguage t() for message.

@@ -2,13 +2,52 @@ body {
 	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
 	background: url(../images/logo_bg.jpg) repeat;/* /dashboard_bg.png*/
 }
+.bibles-say {
+  position: relative;
+  font-size: 22px;
+  font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+  color: white;
+  padding: 10px;
+  line-height: 30px;
+  letter-spacing: 4px;
+}
+.site-slogan{
+  color: #FFF;
+}
+.site-des{
+    color: #666;
+  max-width: 350px;
+    padding: 20px;
+}
+.help-block{
+  display: none;
+}
 body.not-logged-in {
-    background: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
+    padding-top: 15px;
+    background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
 }
+/*page-user-register**/
 body.page-user-register {
-    background: #FFF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
+    background: #FFF;/*
+  background: url(../family_2.png);
+  background-repeat: no-repeat;
+background-position: left 0;
+#0196BE http://m.xunlei.com/detail_kc_pc.html*/
 }
- 
+.page-user-register .control-group{
+  float: left;
+  width: 50%
+}
+.page-user-register .form-type-password-confirm{
+   width: 100%
+}
+.page-user-register .form-type-password{
+  float: left;
+  width: 50%
+}
+.china-address-dropdown-replace .control-group{
+  display: inline;
+}
 body.not-logged-in form#user-login {
 position: relative;
 padding: 20px 20px 20px;
@@ -19,6 +58,7 @@ box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
 border: 0;
 width: 350px;
 margin: 0 auto;
+float: right;
 }
 body.not-logged-in #user-login input {
 width: 278px;

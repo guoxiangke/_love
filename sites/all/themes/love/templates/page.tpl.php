@@ -1,10 +1,28 @@
 <?php if(user_is_anonymous() && arg(0)!=='user'): ?>
 
 <div id="wrapper" class="container-fluid">
-  <div class="row-fluid">
+  <div class="row-fluid clearfix">
+    <p class="bibles-say">“因此，人要离开父母与妻子联合，二人成为一体。”--创世纪 2:24</p>
+    <div id="falmily" class="float-l">
+      <img src="<?php print path_to_theme(); ?>/family_2.png" class="logo" />
+    </div
       <div class="main-content" class="span12">
-        <center><img src="<?php print path_to_theme(); ?>/Logo.png" class="logo" /></center>
-        <?php print drupal_render(drupal_get_form('user_login')); ?>
+        <center><img src="<?php print path_to_theme(); ?>/Logo.png" class="logo" />
+       
+        <p class="site-slogan">幸福家庭，从婚恋迈出第一步,</p>
+        <p class="site-slogan">响应呼召，组建家庭,让爱永不止息!</p>
+      </center>
+        
+        <?php $login_form = drupal_get_form('user_login');print drupal_render($login_form); ?>
+        <div class="site-des float-l">
+
+        <li>异象：爱是永不止息（参新约 哥林多前书13章），是互相激励成长，需要公众见证，公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀</li>
+        <li>【永不止息】只接受熟人邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</li>
+        <li>【永不止息】是@bluesky_still透过对当前教会单身肢体需求的看见，在婚恋社交网络切身体验基础上，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个XXX的平台。 实用，便捷，了解更多<a href="">成长历程</a></li>
+        <li>为<a href="">本站代祷</a> ，<a href="">支持奉献</a>，<a href="">意见建议</a></li>
+
+
+        </div>
       </div>
   </div>
 </div>
