@@ -154,7 +154,7 @@ function love_exit() {
 
 /**
  * @see template_preprocess_user_picture
- */
+
 function love_user_picture($account) {
   $variables['user_picture'] = '';
   if (variable_get('user_pictures', 0)) {
@@ -194,4 +194,4 @@ function love_user_picture($account) {
     }
   }
   return $variables['user_picture'];
-}
+} */
