@@ -1,5 +1,4 @@
-
-		 	(function($){
+(function($){
 /**
  * To make a form auto submit, all you have to do is 3 things:
  *

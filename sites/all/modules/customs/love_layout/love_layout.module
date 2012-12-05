@@ -243,18 +243,24 @@ function love_layout_modules_installed($modules) {
 /**
  * Implements hook_menu().
  */
-function _love_layout_menu() {
-  $items['messages'] = array(
-    'title'            => t('My home space'),
-    'title callback'   => 'privatemsg_title_callback',
-    'page callback'    => 'privatemsg_list_page',
-    'page arguments'   => array('list'),
-    'file'             => 'privatemsg.pages.inc',
-    'access callback'  => 'privatemsg_user_access',
-    'type'             => MENU_NORMAL_ITEM,
-    'menu_name'        => 'user-menu',
+function love_layout_menu() {
+  $items['user/%/statuses'] = array(
+    'title' => 'Statuses',
+    'page callback'    => '_statuses_page',
+    'page arguments'   => array(1),
+    /*'file'             => 'privatemsg.pages.inc',*/
+    'access callback' => 'statuses_user_access',
+    'access arguments' => array('add'),
+    'type' => MENU_LOCAL_TASK,
   );
 }
+function _statuses_page($account) {
+  $account = user_load($account);
+  $output = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
+  return $output;
+}
+
+//$value = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
 function love_layout_menu_alter(&$items) {
   // Example - disable the page at node/add
   $items['messages']['title callback'] = 'privatemsg_title_callback_alter';
@@ -306,4 +312,21 @@ function privatemsg_title_callback_alter($title = NULL) {
     return format_plural($count, t('Messages (1 new)'), t('Messages (@count new)'));
   }
   return t('Messages');
+}
+/**
+ * Implements hook_admin_path().
+ */
+function love_layout_admin_paths_alter(&$paths) {
+$paths['user/*/edit'] = FALSE;
+}
+
+
+
+/**
+ * Implements hook_user_view().
+ * @see statuses_user_view()
+ */
+function love_layout_user_view($account, $view_mode) {
+  dpm($account);
+
 }
