@@ -76,7 +76,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
     <?php print render($page['header']); ?>
   </header> <!-- /#header -->
-  <div class="container-fluid">
+  <div class="container-fluid" id="profile">
     <div class="row-fluid">
       <div class="row" id="page-wrapper">
         
@@ -99,7 +99,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
           <?php print render($title_suffix); ?>
           <?php print $messages; ?>
           <?php if ($tabs): ?>
-            <?php print render($tabs); ?>
+            <?php //print render($tabs); ?>
           <?php endif; ?>
           <?php if ($page['help']): ?> 
             <div class="well"><?php print render($page['help']); ?></div>

@@ -6,9 +6,21 @@ function love_layout_block_info() {
   $blocks = array();
   $blocks['love_user_block'] = array(
     'info' => t('the user info display on proile page.'),
-    //'region' => 'sidebar_right',
+    //'region' => 'sidebar_first',
   );
-  
+  // takes user pictures from user profile and put it in a block
+  $blocks['user_picture'] = array(
+    'info' => t('User picture'),
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
+  );
+  // takes the local tasks and put it in a block
+  $blocks['menu_local_task'] = array(
+    'info' => t('Menu local tabs'),
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
+    'region' => 'sidebar_first',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'user/*',
+  );
   return $blocks;
 }
 /**
@@ -21,6 +33,17 @@ function love_layout_block_view($delta = '') {
       $block['subject'] = NULL;//t('User info')
       $block['content'] = love_layout_user_block();
       break;
+    case 'user_picture':
+      $block['title'] = NULL;
+      global $user;
+      $variables['account'] = $user;
+      $block['content'] = love_layout_template_preprocess_user_picture($variables);
+      break;
+
+    case 'menu_local_task':
+      $block['title'] = NULL;
+        //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
+      $block['content'] = '';//menu_local_tasks();
   }
   return $block;
 }
@@ -33,25 +56,21 @@ function love_layout_user_block() {
   //TODO: 
   $account = user_load(arg(1));
   $account=$account?$account:$user;
-  $picture = love_user_picture($account);
+  $variables['account'] = $account;
+  $picture = love_layout_template_preprocess_user_picture($variables);
   if($account->uid)
   $signature = $account->signature?$user->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
 
   $output = '
   <div class="aside">
               <div class="info-box">
-                  <!-- 头像 -->
-                 
                   <div class="avatar">
                      '.$picture.'
                   </div>
-                  <!--img alt="xiangfei" src="http://m3.img.libdd.com/farm2/199/3BC902E9F4C46C50E55066F20B6ED4C7_100_100.JPEG" class="avatar"-->
-                  <!-- 博客描述 -->
                   <div class="description description-with-follow">
                     '.$signature.'
 
                   </div>
-                  <!-- 常用链接入口 -->
                   <div class="links links-with-follow">
                       <a href="http://feesx.diandian.com/submit">投稿</a> / 
                       <a href="http://feesx.diandian.com/inbox">私信</a> / 
@@ -65,7 +84,9 @@ function love_layout_user_block() {
                   
               </div>
           </div>';
-  return $output;
+          $variables['account'] = $account;
+          $output .= _love_user_relationships_link($variables);
+  return $output;//.drupal_render(menu_local_tasks());
 }
 
 
@@ -185,6 +206,8 @@ function love_layout_template_preprocess_user_picture($variables) {
     }
     if (isset($filepath)) {
       //$alt = t("@user's picture", array('@user' => format_username($account)));
+      $alt ='';
+      if(isset($variables['timestamp']))
       $alt = $variables['timestamp'] ?  t('!time ago', array('!time' => format_interval(REQUEST_TIME - $variables['timestamp']))) : '';
       // If the image does not have a valid Drupal scheme (for eg. HTTP),
       // don't load image styles.
@@ -317,16 +340,125 @@ function privatemsg_title_callback_alter($title = NULL) {
  * Implements hook_admin_path().
  */
 function love_layout_admin_paths_alter(&$paths) {
-$paths['user/*/edit'] = FALSE;
+  $paths['user/*/edit'] = FALSE;
 }
 
+function love_layout_preprocess_page(&$variables) {
+ /* $headers = drupal_get_http_header();
 
+  if (preg_match('@HTTP/1\.[01]\x20+403@', $headers)) {
+    $variables['body_classes'] .= 'error-403,';
+  }
+  elseif (preg_match('@HTTP/1\.[01]\x20+404@', $headers)) {
+    $variables['body_classes'] .= 'error-404,';
+  }  */
+}
+
+/*
+* Implements HOOK_form_user_profile_form_alter
+* @see druedu_layout_alter_form_user_profile_form_alter
+*/
+function love_layout_alter_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+
+  /*$form['accordions'] = array(
+    '#type' => 'fieldset',
+    '#weight' => 0,
+  );
+  $special_case = array('field_firstname', 'field_lastname');
+  foreach($form as $key => $field) {
+    if(is_array($field) && (strstr($key,'field_') || strstr($key, 'group_')) && !in_array($key , $special_case)) {
+      ($form[$key][$field['#language']]['#required']) ? $required = '  <span class="summary">('.t('Field required').')</span>' : $required = '';
+      $form[$key]['#type'] = 'fieldset';
+      $form[$key]['#title'] =  $form[$key][LANGUAGE_NONE]['#title']. $required;
+      $form[$key]['#collapsible'] = TRUE;
+      $form[$key]['#collapsed'] = TRUE;
+      $form[$key]['#group'] = 'accordions' ;
+    }
+  }*/
+}
 
 /**
  * Implements hook_user_view().
  * @see statuses_user_view()
  */
 function love_layout_user_view($account, $view_mode) {
-  dpm($account);
 
+  drupal_add_css(drupal_get_path('module', 'love_layout').'/css/profiles.css');
+
+}
+
+
+
+
+/**
+ * Implements hook_preprocess_author_pane().
+ * @see function user_relationships_preprocess_author_pane(&$variables) {
+ *  $variables['account']
+ */
+function _love_user_relationships_link($variables) {
+  // Check if this preprocess needs to be run given who's calling it.
+  $output = '';
+  global $user;
+  $account = $variables['account'];
+
+  // Anonymous users and users viewing their own account won't get a link.
+  if (!$user->uid || !$account->uid || $user->uid == $account->uid) {
+    return $output;
+  }
+  // Get a list of selected relationship types
+  $all_rtypes = user_relationships_types_load();
+dpm($all_rtypes);
+  foreach ($all_rtypes as $rtype) {
+    $relationships = user_relationships_load(array('requester_id' => $user->uid, 'requestee_id' => $account->uid, 'rtid' => $rtype->rtid));
+
+    if (count($relationships)) {
+      // Existing relationship; need remove icon/link. (Despite the foreach,
+      // there should only be one.)
+      foreach ($relationships as $relationship) {
+        $link_label = t('Remove @name from @rel_plural_name', array('@name' => format_username($account), '@rel_plural_name' => $relationship->plural_name));
+        $css_class = array(str_replace(' ', '-', $relationship->name), 'author-pane-link', 'user_relationships_popup_link', 'author-relationship-remove-icon');
+        //link to remove
+        if (!isset($variables['user_relationships'])) {
+          $variables['user_relationships'] = '';
+        }
+        $variables['user_relationships'] .= '<div class="author-pane-ur-link-item">';
+        $variables['user_relationships'] .=
+          l('<span>' . t('Remove @rel_name', array('@name' => format_username($account), '@rel_name' => ur_tt("user_relationships:rtid:$relationship->rtid:name", $relationship->name))) . '</span>',
+          "user/{$user->uid}/relationships/{$relationship->rid}/remove",
+          array(
+                'query' => drupal_get_destination(),
+                'html' => TRUE,
+                'attributes'  => array('title' => $link_label, 'class' => $css_class),
+          ));
+        $variables['user_relationships'] .= '</div>';
+      }
+    }
+    else {
+      //No existing relationship; need an add icon/link.
+      if (!user_relationships_can_request($user, $rtype) || !user_relationships_can_receive($account, $rtype)) {
+        continue;
+      }
+      $css_class = array(str_replace(' ', '-', $rtype->name), 'author-pane-link', 'user_relationships_popup_link', 'author-relationship-remove-icon');
+      //add link
+      if (!isset($variables['user_relationships'])) {
+        $variables['user_relationships'] = '';
+      }
+      $variables['user_relationships'] .= '<div class="author-pane-ur-link-item">';
+      $variables['user_relationships'] .=
+        l('<span>' . t('Add @rel_name', array('@name' => format_username($account), '@rel_name' => ur_tt("user_relationships:rtid:$rtype->rtid:name", $rtype->name))) . '</span>',
+          "relationship/{$account->uid}/request/{$rtype->rtid}",
+          array(
+            'query' => drupal_get_destination(),
+            'html' => TRUE,
+            'attributes'  => array(
+              'title' => t('Become @name\'s @rel_name', array('@name' => format_username($account), '@rel_name' => ur_tt("user_relationships:rtid:$rtype->rtid:name", $rtype->name))),
+              'class' => $css_class
+            ),
+          )
+        );
+      $variables['user_relationships'] .= '</div>';
+    }
+    //$output .= $variables['user_relationships'];
+  }
+  return $variables['user_relationships'];
 }

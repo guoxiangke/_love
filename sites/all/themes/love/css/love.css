@@ -16,8 +16,8 @@ body {
 }
 .site-des{
     color: #666;
-  max-width: 350px;
-    padding: 20px;
+    /*position: relative;
+    top: 20px;*/
 }
 .help-block{
   display: none;
@@ -26,6 +26,10 @@ body.not-logged-in {
     padding-top: 15px;
     background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
 }
+.site-des a {
+    color: #F73F9B;
+    text-decoration: none;
+} 
 /*page-user-register**/
 body.page-user-register {
     background: #FFF;/*
@@ -34,21 +38,11 @@ body.page-user-register {
 background-position: left 0;
 #0196BE http://m.xunlei.com/detail_kc_pc.html*/
 }
-.page-user-register .control-group{
-  float: left;
-  width: 50%
-}
-.page-user-register .form-type-password-confirm{
-   width: 100%
-}
-.page-user-register .form-type-password{
-  float: left;
-  width: 50%
-}
+
 .china-address-dropdown-replace .control-group{
   display: inline;
 }
-body.not-logged-in form#user-login {
+#love-login-form form#user-login {
 position: relative;
 padding: 20px 20px 20px;
 background: white;
@@ -59,11 +53,12 @@ border: 0;
 width: 350px;
 margin: 0 auto;
 float: right;
+margin-top:10px;
 }
-body.not-logged-in #user-login input {
+#love-login-form #user-login input {
 width: 278px;
 }
-body.not-logged-in #user-login::before {
+#love-login-form #user-login::before {
 content: '';
 position: absolute;
 top: -8px;
@@ -191,7 +186,7 @@ nav {
 	font-size: 16px  !important;
 }
 .main-menu .last a:hover {
- 	color: #F6C;
+ 	color: #F73F9B;
  }
 .main-menu li,.secondary-menu li{
 	float: left;
@@ -200,7 +195,9 @@ nav {
 secondary-menu li{
 	margin-left: 10px;
 }
-	
+.form-required {
+  color:#F73F9B;
+}
 
 
 #actions {
