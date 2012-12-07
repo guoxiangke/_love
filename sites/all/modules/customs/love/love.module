@@ -60,9 +60,26 @@ function china_address_field_widget_form_alter(&$form, &$form_state) {
 	//TODO
 }
 
+
 function love_form_alter(&$form, &$from_state, $form_id) {
 
+  if ($form_id == 'user_register_form') { 
+    # code... if 
+    $form['signature_settings']['#access'] = TRUE;
+    $form['signature_settings']['#weight'] = 11;
+    $form['picture']['#weight'] = 2;
+
+  $picture = $form['picture'];
+  $signature_settings = $form['signature_settings'];
+  unset($form['picture']);
+  unset($form['signature_settings']);
+  $form['profile_main']['picture'] = $picture;
+  //array_unshift($form['account'],$picture);
+  $form['profile_main']['signature_settings'] = $signature_settings;
+  dpm($form);
+  }
 }
+
 // when the bug of i18n + og_field   resolve ,can user below.
 //http://drupal.org/project/issues/og?text=i18n&status=All&priorities=All&categories=All&version=7.x&component=All
 /**
@@ -89,13 +106,19 @@ function love_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
  * set  group audience default love.
  * and when register ,not display let user choose which group to join,for the multilanguage bug of og+in18_field.
  */
-function love_form_user_register_form_alter(&$form, &$form_state, $form_id) {/*
+function love_form_user_login_alter(&$form, &$form_state, $form_id) {/*
   $form['og_group_ref']['#access'] = FALSE;
   $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
   //2 is the love group gid.
   $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
-}
+      $items = array();
+      if (0&&variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)) {
+        $items[] = l(t('Create new account'), 'user/register', array('attributes' => array('title' => t('Create a new user account.'))));
+      }
+      $items[] = l(t('Request new password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
 
+      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
+}
 /**
  * when a user invite by love group member,
  * let it join the love group too.
@@ -152,7 +175,7 @@ function love_exit() {
 	}
 }
 
-/**
+/*
  * @see template_preprocess_user_picture
 
 function love_user_picture($account) {
@@ -195,3 +218,15 @@ function love_user_picture($account) {
   }
   return $variables['user_picture'];
 } */
+
+/**
+ * Implement hook_ctools_plugin_api().
+ *
+ * This hook is needed to let ctools know about exportables.
+ * @see heartbeat_og_ctools_plugin_api
+ */
+function love_ctools_plugin_api($module, $api) {
+  if ($module == 'heartbeat' && $api == 'heartbeat') {
+    return array('version' => 1);
+  }
+}

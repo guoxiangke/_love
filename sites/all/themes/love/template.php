@@ -128,6 +128,13 @@ function love_preprocess_user_picture(&$variables) {
     }
   }
 }
+function love_preprocess_user_profile(&$variables) {
+  if($variables['elements']['#view_mode'] == 'full') {
+    //remove displayed of user picture on user page
+    unset($variables['elements']['user_picture']);
+    unset($variables['user_profile']['user_picture']);
+  }
+}
 /**
  * love_form_BASE_FORM_ID_alter
  */
@@ -147,7 +154,19 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
 	}
  
 }
-
+/*
+function love_form_alter(){
+  if ($form_id == 'user_register_form') {
+    # code... if 
+    $form['signature_settings']['#access'] = TRUE;
+  }
+  $picture = $form['picture'];
+  $signature_settings = $form['signature_settings'];
+  unset($form['picture']);
+  unset($form['signature_settings']);
+  $form['account']['picture'] = $picture;
+  $form['account']['signature_settings'] = $signature_settings;
+}*/
 function love_preprocess_block(&$variables, $hook) {
 // Add a count to all the blocks in the region.
  $variables['classes_array'][] = 'clearfix';
