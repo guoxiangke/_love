@@ -603,3 +603,15 @@ width: 16px;
 .privatemsg-message-odd .privatemsg-message-body{
   text-align:right;
 }
+.privatemsg-message-even .privatemsg-message-column {
+background: green;
+border: 2px white solid;
+border-radius: 25px;
+padding: 15px;
+}
+.privatemsg-message-odd .privatemsg-message-column {
+background: blue;
+border: 2px white solid;
+border-radius: 25px;
+padding: 15px;
+}
