@@ -23,7 +23,6 @@ body {
   display: none;
 }
 body.not-logged-in {
-    padding-top: 15px;
     background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html*/
 }
 .site-des a {
@@ -31,12 +30,8 @@ body.not-logged-in {
     text-decoration: none;
 } 
 /*page-user-register**/
-body.page-user-register {
-    background: #FFF;/*
-  background: url(../family_2.png);
-  background-repeat: no-repeat;
-background-position: left 0;
-#0196BE http://m.xunlei.com/detail_kc_pc.html*/
+body.page-user-password , body.page-user , body.page-user-register{
+    background: #FFF;
 }
 
 .china-address-dropdown-replace .control-group{
@@ -602,4 +597,44 @@ width: 16px;
 }
 .privatemsg-message-odd .privatemsg-message-body{
   text-align:right;
+}
+.privatemsg-message-even .privatemsg-message-column {
+  background:#FFF;
+  border:2px solid #D6F1F8;
+  border-radius:10px;
+  padding:10px;
+}
+.privatemsg-message-odd .privatemsg-message-column {
+  background:#EDF9FF;
+  border:2px solid #D6F1F8;
+  border-radius:10px;
+  padding:10px;
+}
+div.privatemsg-message-information {
+  border-bottom:none;
+  width: 100%;
+  margin-bottom: 5px;
+  display:none;
+}
+ul.privatemsg-message-actions,.privatemsg-author-name {
+ display: none;
+}
+.privatemsg-author-avatar img{
+  width:50px;
+}
+.page-messages #page-section{
+  background: url(../images/messages-bg.jpg);
+}
+
+.page-messages #page-section .breadcrumb{
+  background:none;
+}
+
+ul.about-us {
+  margin:0 0 0 0;
+}
+
+ul.about-us li{
+  list-style:none;
+  line-height: 26px;
 }

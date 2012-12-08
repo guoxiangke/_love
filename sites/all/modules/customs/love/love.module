@@ -76,7 +76,6 @@ function love_form_alter(&$form, &$from_state, $form_id) {
   $form['profile_main']['picture'] = $picture;
   //array_unshift($form['account'],$picture);
   $form['profile_main']['signature_settings'] = $signature_settings;
-  dpm($form);
   }
 }
 
