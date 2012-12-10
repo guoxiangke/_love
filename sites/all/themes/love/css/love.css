@@ -28,8 +28,10 @@ body {
 .site-des{
     color: #FFF;
     /*position: relative;
-    top: 20px;*/
+    top: 20px;
+    #F8376E #F837EE*/
 }
+/*红色系 #DD201E #BA1211  #F8376E #F7386C 蓝#02B4F0  #3456B8 黄#FDDC51 绿#84D995 */
 .help-block{
   display: none;
 }
@@ -37,7 +39,7 @@ body {
   margin-bottom: 0px;
   padding-left: 10px;
 background: #8CC5B2;
-color: #0B291F;
+color: #FFF;
 border-bottom-color: #88B7A7;
 
 border-radius: .3em .3em 0 0;
@@ -45,10 +47,11 @@ border-radius: .3em .3em 0 0;
 -moz-border-radius: .3em .3em 0 0;
 }
 .about-us{
+  color: #FFF;
 background: #E0F5EE;
-border-radius: .3em;
--webkit-border-radius: .3em;
--moz-border-radius: .3em;
+border-radius: 0 0 .3em .3em;;
+-webkit-border-radius: 0 0 .3em .3em;;
+-moz-border-radius: 0 0 .3em .3em;;
 }
 
 
