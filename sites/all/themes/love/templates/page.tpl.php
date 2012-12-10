@@ -13,15 +13,15 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <div class="main-title">
       <p class="bibles-say">“因此，人要离开父母与妻子联合，二人成为一体。” --创世纪 2:24</p>
     </div>
-      <?php if ( $messages ): ?>
-        <div id="love-messages"><?php print $messages; ?></div>
-      <?php endif; ?>
+
       <img src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_2.png" class="logo" />
     </div>
     <div class="main-content span4">
         <center>
           <img src="<?php print path_to_theme(); ?>/Logo.png" class="logo" />
-         
+          <?php if ( $messages ): ?>
+            <div id="love-messages"><?php print $messages; ?></div>
+          <?php endif; ?>
           <p class="site-slogan">幸福家庭，从婚恋迈出第一步,</p>
           <p class="site-slogan">响应呼召，组建家庭，让爱永不止息！</p>
         </center>

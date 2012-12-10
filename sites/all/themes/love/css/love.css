@@ -38,17 +38,16 @@ body {
  h2.block-title,  h2.pane-title {
   margin-bottom: 0px;
   padding-left: 10px;
-background: #8CC5B2;
+background: #2FADDF;
 color: #FFF;
-border-bottom-color: #88B7A7;
+border-bottom-color: #F7386C;
 
 border-radius: .3em .3em 0 0;
 -webkit-border-radius: .3em .3em 0 0;
 -moz-border-radius: .3em .3em 0 0;
 }
 .about-us{
-  color: #FFF;
-background: #E0F5EE;
+background: #E698CB;
 border-radius: 0 0 .3em .3em;;
 -webkit-border-radius: 0 0 .3em .3em;;
 -moz-border-radius: 0 0 .3em .3em;;
@@ -216,12 +215,17 @@ nav {
 	color: #333;
 }
 
-.main-menu a:hover,.secondary-menu a:hover {
+.main-menu a:hover{
 	height: 33px;
-	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
-	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
-	color: #333;
-
+  background: url(../images/nav_bgn.png) no-repeat center 0;
+  _background: url(../images/nav_bgn.gif) no-repeat center 0;
+	color: #F75C1F;
+}
+.secondary-menu a:hover {
+  height: 33px;
+  background: url(../images/nav_bgn.png) no-repeat 0 -40px;
+  _background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
+  color: #333;
 }
 .main-menu a.active{
 	background: url(../images/nav_bgn.png) no-repeat center 0;
@@ -233,7 +237,7 @@ nav {
 	font-size: 20px;
 	font-size: 16px  !important;
 }
-.main-menu .last a:hover {
+.main-menu a:hover {
  	color: #F73F9B;
  }
 .main-menu li,.secondary-menu li{
@@ -244,7 +248,7 @@ secondary-menu li{
 	margin-left: 10px;
 }
 .form-required {
-  color:#F73F9B;
+  color:#F75C1F;/*F73F9B*/
 }
 
 
