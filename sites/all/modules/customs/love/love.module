@@ -61,23 +61,6 @@ function china_address_field_widget_form_alter(&$form, &$form_state) {
 }
 
 
-function love_form_alter(&$form, &$from_state, $form_id) {
-
-  if ($form_id == 'user_register_form') { 
-    # code... if 
-    $form['signature_settings']['#access'] = TRUE;
-    $form['signature_settings']['#weight'] = 11;
-    $form['picture']['#weight'] = 2;
-
-  $picture = $form['picture'];
-  $signature_settings = $form['signature_settings'];
-  unset($form['picture']);
-  unset($form['signature_settings']);
-  $form['profile_main']['picture'] = $picture;
-  //array_unshift($form['account'],$picture);
-  $form['profile_main']['signature_settings'] = $signature_settings;
-  }
-}
 
 // when the bug of i18n + og_field   resolve ,can user below.
 //http://drupal.org/project/issues/og?text=i18n&status=All&priorities=All&categories=All&version=7.x&component=All

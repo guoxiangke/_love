@@ -28,29 +28,42 @@ body {
 .site-des{
     color: #FFF;
     /*position: relative;
-    top: 20px;
-    #F8376E #F837EE*/
+    top: 20px;*/
 }
-/*红色系 #DD201E #BA1211  #F8376E #F7386C 蓝#02B4F0  #3456B8 黄#FDDC51 绿#84D995 */
 .help-block{
   display: none;
 }
+.form-item-relationship-invite-approve .help-block{
+  background-color: #FFFCE5;
+  display: block;
+  color: #840;
+  background-image: url(../images/message-16-warning.png);
+  border-color: #ED5;
+  background-position: 8px 12px;
+background-repeat: no-repeat;
+border: 1px solid;
+margin: 6px 0;
+padding: 10px 10px 10px 30px;
+}
+
+
+
  h2.block-title,  h2.pane-title {
   margin-bottom: 0px;
   padding-left: 10px;
-background: #2FADDF;
-color: #FFF;
-border-bottom-color: #F7386C;
+background: #8CC5B2;
+color: #0B291F;
+border-bottom-color: #88B7A7;
 
 border-radius: .3em .3em 0 0;
 -webkit-border-radius: .3em .3em 0 0;
 -moz-border-radius: .3em .3em 0 0;
 }
 .about-us{
-background: #E698CB;
-border-radius: 0 0 .3em .3em;;
--webkit-border-radius: 0 0 .3em .3em;;
--moz-border-radius: 0 0 .3em .3em;;
+background: #E0F5EE;
+border-radius: .3em;
+-webkit-border-radius: .3em;
+-moz-border-radius: .3em;
 }
 
 
@@ -62,13 +75,61 @@ body.not-logged-in {
     text-decoration: none;
 } 
 /*page-user-register**/
+
 body.page-user-password , body.page-user , body.page-user-register{
     background: #FFF;
 }
-
+#edit-signature-format{
+  display: none;
+}
 .china-address-dropdown-replace .control-group{
   display: inline;
 }
+.control-group  label,.control-group .controls{
+  display:inline-block;
+}
+.control-group  label{
+  width:100px;
+}
+#edit-profile-main-field-sex-und .control-group{
+    display: inline-block;
+    width: 50px;
+}
+#edit-signature-settings label{
+   display:none;
+}
+#edit-name,#edit-mail,.form-type-password-confirm input,#edit-profile-main-field-name  input{
+  width:200px;
+}
+#edit-profile-main-field-birthday input{
+    width:80px;
+}
+#china-address-dropdown-replace-field-address .control-group  label{
+  width:20px;
+}
+#china-address-dropdown-replace-field-address {
+  padding-bottom:20px;
+}
+#profile-main-field-height-add-more-wrapper input{
+  width:133px;
+}
+#edit-profile-main-field-degree-und{
+  width:147px;
+}
+#profile-main-field-telephone-add-more-wrapper input,#profile-main-field-qq-add-more-wrapper input {
+  width:141px;
+}
+#profile-main-field-links-add-more-wrapper label{
+  display:none;
+}
+.form-item-relationship-invite-approve label{
+  display:block;
+  width: 100%;
+}
+#edit-relationship-invite-approve .control-group{
+  display:inline-block;
+}
+
 #love-login-form form#user-login {
 position: relative;
 padding: 20px 20px 20px;
@@ -215,17 +276,12 @@ nav {
 	color: #333;
 }
 
-.main-menu a:hover{
+.main-menu a:hover,.secondary-menu a:hover {
 	height: 33px;
-  background: url(../images/nav_bgn.png) no-repeat center 0;
-  _background: url(../images/nav_bgn.gif) no-repeat center 0;
-	color: #F75C1F;
-}
-.secondary-menu a:hover {
-  height: 33px;
-  background: url(../images/nav_bgn.png) no-repeat 0 -40px;
-  _background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
-  color: #333;
+	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
+	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
+	color: #333;
+
 }
 .main-menu a.active{
 	background: url(../images/nav_bgn.png) no-repeat center 0;
@@ -237,7 +293,7 @@ nav {
 	font-size: 20px;
 	font-size: 16px  !important;
 }
-.main-menu a:hover {
+.main-menu .last a:hover {
  	color: #F73F9B;
  }
 .main-menu li,.secondary-menu li{
@@ -248,7 +304,7 @@ secondary-menu li{
 	margin-left: 10px;
 }
 .form-required {
-  color:#F75C1F;/*F73F9B*/
+  color:#F73F9B;
 }
 
 
@@ -730,3 +786,5 @@ color: #D6F1F8;
 .WB_arrow span {
 margin: -11px 0 0;
 }
+
+/***/

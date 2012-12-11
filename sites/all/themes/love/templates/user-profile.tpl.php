@@ -56,7 +56,7 @@
                 <div class="accordion-group">
                     <div class="accordion-heading">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<?php print $id ?>">
-                            <i class="icon-<?php print $id ?>"></i><span><?php print isset($field['#title'])?$field['#title']:'No title';?></span>
+                            <i class="icon-<?php print $id ?>"></i><span><?php print isset($field['#title'])?$field['#title']:"Points";?></span>
                         </a>
                     </div>
                     <div id="collapse<?php print $id ?>" class="accordion-body <?php ($first_open)? print 'in' : '';?> collapse">

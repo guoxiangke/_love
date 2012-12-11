@@ -98,7 +98,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
           <?php endif; ?>
           <?php print render($title_suffix); ?>
           <?php print $messages; ?>
-          <?php if ($tabs): ?>
+          <?php if ($tabs&& !user_is_anonymous()): ?>
             <?php print render($tabs); ?>
           <?php endif; ?>
           <?php if ($page['help']): ?> 

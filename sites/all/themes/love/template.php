@@ -154,19 +154,25 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
 	}
  
 }
-/*
-function love_form_alter(){
-  if ($form_id == 'user_register_form') {
-    # code... if 
-    $form['signature_settings']['#access'] = TRUE;
-  }
-  $picture = $form['picture'];
-  $signature_settings = $form['signature_settings'];
-  unset($form['picture']);
-  unset($form['signature_settings']);
-  $form['account']['picture'] = $picture;
-  $form['account']['signature_settings'] = $signature_settings;
-}*/
+
+function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
+  //$form['rtid']['#access'] = FALSE;  
+  $form['account']['mail']['#disabled']=TRUE;
+  $form['relationship_invite_approve']['#default_value']='';
+  $form['relationship_invite_approve']['#required']=TRUE;
+  $form['relationship_invite_approve']['#weight']=-100;
+
+  $inviter = profile2_load_by_user($form['relationship_invite_requester']['#value']);
+  $form['relationship_invite_approve']['#title']='您认识'.$inviter['main']->field_name[LANGUAGE_NONE][0]['value'].'吗？';
+  # 
+  $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
+}
+function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
+
+  $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人
+  $form['rtid']['#access'] = FALSE;  
+
+}
 function love_preprocess_block(&$variables, $hook) {
 // Add a count to all the blocks in the region.
  $variables['classes_array'][] = 'clearfix';
