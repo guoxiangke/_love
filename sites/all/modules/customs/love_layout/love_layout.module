@@ -299,7 +299,58 @@ function love_layout_menu() {
     'access arguments' => array('add'),
     'type' => MENU_LOCAL_TASK,
   );
+  //http://dev.sina.org/relationship/12/request/1?destination=user/12
+  $items['ajax/relationship/%/request/%'] = array(
+    'title' => 'request',
+    'page callback'    => 'love_ajax_user_relationships_ui_request_submit',
+    'page arguments'   => array(2,4),
+    'access callback' => TRUE, 
+    // if (!user_relationships_can_request($user, $rtype) || !user_relationships_can_receive($account, $rtype))
+    'type' => MENU_CALLBACK,
+  );
+  //http://dev.sina.org/user/1/relationships/75/remove?destination=user/2
+  return $items;
 }
+
+/**
+ * Process relationship request.
+ * @see user_relationships_ui_request_submit
+ */
+function love_ajax_user_relationships_ui_request_submit($requestee,$rtid) {
+  $relationship = new stdClass;
+  $relationship->requestee = user_load($requestee);
+  global $user;
+  $relationship->requester = $user;
+  $relationship->type = user_relationships_type_load($rtid);
+  $ur = user_relationships_load(array('rtid' => $rtid, 'requester_id'=>$user->id,'requestee_id'=>$requestee));
+  if($ur){
+    dpm($ur);
+    drupal_set_message('already');
+  }else{
+    $relationship = user_relationships_request_relationship($relationship);
+    if ($relationship === FALSE) {
+      drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
+    }
+
+    drupal_set_message(user_relationships_get_message(($relationship->approved ? 'pre_approved' : 'submitted'), $relationship));
+      
+  }
+  //
+
+  //$requester = user_load($requester);
+  //user_relationships_request_relationship($requester, $requestee = NULL, $type = NULL, $approved = FALSE)
+  //#578372 leave all form values in the object for other functions to use
+  /*
+  $relationship = (object) $form_state['values'];
+  $relationship->requester = user_load($form_state['values']['requester']);
+  $relationship->requestee = user_load($form_state['values']['requestee']);
+  $relationship->type = user_relationships_type_load($form_state['values']['rtid']);
+
+  $relationship = user_relationships_request_relationship($relationship);
+*/
+  return '';
+}
+
 function _statuses_page($account) {
   $account = user_load($account);
   $output = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
@@ -457,7 +508,7 @@ function _love_user_relationships_link($variables) {
   }
   // Get a list of selected relationship types
   $all_rtypes = user_relationships_types_load();
-dpm($all_rtypes);
+
   foreach ($all_rtypes as $rtype) {
     $relationships = user_relationships_load(array('requester_id' => $user->uid, 'requestee_id' => $account->uid, 'rtid' => $rtype->rtid));
 
@@ -512,3 +563,4 @@ dpm($all_rtypes);
   }
   return $variables['user_relationships'];
 }
+
