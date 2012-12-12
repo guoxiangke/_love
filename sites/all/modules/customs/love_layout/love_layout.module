@@ -57,15 +57,16 @@ function love_layout_block_view($delta = '') {
     case 'sites_introduce':
       $block['title'] = t('About Us');
         //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
-      $block['content'] = '<ul class="about-us">
+      $block['content'] = '
+<ul class="about-us">
   <li>1.我们坚信婚姻是神所设立的，是对我们幸福生活的美好设计。</li>
   <li>2.我们认为组建家庭是神对人的一项呼召，在家庭中彰显神的荣耀。</li>
   <li>3.基于圣经，我们认为神所设立的美好婚姻是：一男一女、一夫一妻、一生一世,信与不信愿不相配。</li>
   <li>4.我们确信神在创世之先已未我们预备了另一半。</li>
   <li>5.我们相信神对我们的爱永不止息。</li>
-</ul>
-
-<div>爱是永不止息，是互相激励成长，需要公众见证，公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀</div>';//menu_local_tasks();
+<div>【永不止息】只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</div>
+<div>爱是永不止息，是互相激励成长，需要公众见证，公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀</div>
+</ul>';//menu_local_tasks();
   }
   return $block;
 }
@@ -396,8 +397,11 @@ function love_layout_form_alter(&$form, &$from_state, $form_id) {
   }
 
   if ($form_id == 'invite_form') {
-
-
+    $form['subject_markup']['#title'] = t('标题');
+    $form['message']['#disabled'] = TRUE;
+    $form['message']['#title'] = t('邀请函');
+    $form['from']['#access'] = FALSE;
+    $form['submit_show']['#access'] = FALSE;
   }
 }
 /*

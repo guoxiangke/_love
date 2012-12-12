@@ -88,7 +88,7 @@
 	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
 		<div>
-
+			<?php if(!isset($field_sex)) $field_sex=TRUE; ?>
 			<span><img src="<?php print drupal_get_path('theme','love'); print $field_sex?'/images/ic_sex_male.png':'/images/ic_sex_female.png';?>"></span>
 			<?php print $display_name;?>
 			<span><img src="<?php print drupal_get_path('theme','love'); print $field_sex?'/images/ic_user_male2.png':'/images/ic_user_famale2.png';?>"></span>
