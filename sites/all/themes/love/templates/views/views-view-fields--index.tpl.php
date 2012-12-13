@@ -49,6 +49,27 @@
 	}
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
+	$account = user_load($profile_uid);
+	$profile = profile2_load_by_user($account);
+
+	if(isset($profile['believes'])){
+		$province = $profile['believes']->field_address[LANGUAGE_NONE][0]['province'];
+		$city = $profile['believes']->field_address[LANGUAGE_NONE][0]['city'];
+		$county = $profile['believes']->field_address[LANGUAGE_NONE][0]['county'];
+	}else{
+		$province = $profile['main']->field_address[LANGUAGE_NONE][0]['province'];
+		$city = $profile['main']->field_address[LANGUAGE_NONE][0]['city'];
+		$county = $profile['main']->field_address[LANGUAGE_NONE][0]['county'];
+	}
+	$province = china_address_get_region_name($province);
+	$city = china_address_get_region_name($city);
+	$county = china_address_get_region_name($county);
+	if($province==$city){
+		$local = $province.$county;
+	}else{
+		$local = $province.$city;
+	}
+
 	$vote = $value;
 	$flag = $ops;
 	//dpm($field_name,$name);
@@ -56,8 +77,8 @@
 	  global $user;
 	  $ur_way = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid)),array('count'=>1));
 	  $friends = FALSE;
-	  $acquaintance = FALSE;
-	  $acquaintanced = FALSE; 
+	  $follow = FALSE;
+	  $follower = FALSE; 
 	  $no_relationships = FALSE;
 	  switch ($ur_way) {
 	    case '2':
@@ -70,8 +91,8 @@
 	      break;
 	    default:
 	    	// one-way relationships.
-	      $acquaintance = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$user->uid),array('count'=>1));
-        $acquaintanced = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$profile_uid),array('count'=>1));
+	    $follow = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$user->uid),array('count'=>1));
+        $follower = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$profile_uid),array('count'=>1));
 	      break;
 	  }
 	// 
@@ -80,6 +101,8 @@
 		$real_name = $field_name;
 	}
 	$display_name= $friends?$real_name:$name;
+	if(!isset($fields['field_sex']))$fields['field_sex']=TRUE;
+	$Ta = $field_sex?"他":"她";
 ?>
 <div class="t-pic float-l">
 	<div class="round120<?php if(isset($fields['field_sex'])) print $field_sex?" boy":" girl" ?>">
@@ -87,35 +110,30 @@
 	</div>
 	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
-		<div>
-			<?php if(!isset($field_sex)) $field_sex=TRUE; ?>
-			<span><img src="<?php print drupal_get_path('theme','love'); print $field_sex?'/images/ic_sex_male.png':'/images/ic_sex_female.png';?>"></span>
-			<?php print $display_name;?>
-			<span><img src="<?php print drupal_get_path('theme','love'); print $field_sex?'/images/ic_user_male2.png':'/images/ic_user_famale2.png';?>"></span>
-		</div>
-		<div>
-			<span><img src="<?php print drupal_get_path('theme','love'); print '/images/sns_shoot_location_normal.png';?>"></span>
-			北京海淀</div>
+		<ul>
+				<li><i class="icon-th-list"></i></li>
+				<li><a href="" rel="tooltip" data-placement="right" title="<?php echo $local;?>"><i class="icon-map-marker"></i></a></li>
 		<?php
 			if($friends){ ?>
-				<span><img title="你们是好友" src="<?php print drupal_get_path('theme','love'); print '/images/ic_userinfo_bothfollow.png';?>"></span>
+				<li><a href="" rel="tooltip" data-placement="right" title="互相关注"><i class="icon-retweet"></i></a></li>
+				<li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li>
 			<?php
 			}elseif($no_relationships){ ?>
-			
-			  <span><img title="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/contact_list_add_friend.png';?>"></span>
-				<span><img title="+认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/find_more_friend_addfriend_icon.png';?>"></span>
+				<li><a href="" rel="tooltip" data-placement="right" title="关注<?php echo $Ta;?>"><i class="icon-plus"></i></a></li>
 			<?php }
-			if($acquaintanced){ ?>
-				<span><img title="Ta想认识你" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
+			if($follower){ //Ta想认识你?>
+			<li><a href="" rel="tooltip" data-placement="right" title="关注<?php echo $Ta;?>"><i class="icon-plus"></i></a></li>
+				<li><a href="" rel="tooltip" data-placement="right" title="<?php echo $Ta;?>关注了你"><i class="icon-arrow-left"></i></a></li>
 			<?php 
 			}
-			if($acquaintance){ ?>
-				<span><img title="你想认识Ta" src="<?php print drupal_get_path('theme','love'); print '/images/mm_title_btn_add_contact_normal.png';?>"></span>
+			if($follow){ //你想认识Ta?>
+				<li><a href="" rel="tooltip" data-placement="right" title="你关注了<?php echo $Ta;?>"><i class="icon-arrow-right"></i></a></li>
+				<li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li>
 			<?php 
 			}
 		 ?>
+		</ul>
 		
-		<span><img src="<?php print drupal_get_path('theme','love'); print '/images/net_setalias_icon.png';?>"></span>
 	</div>
 	<?PHP endif; ?>
 </div>
@@ -135,13 +153,7 @@
 		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
 		<?php if (isset($flag)): ?>
 		<span class="flag"> <?php print $flag; ?> </span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_normal.png';?>"></span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/btn_top_pressed.png';?>"></span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/friendactivity_likeicon.png';?>"></span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/zemoji_e335.png';?>"></span>
 		<span><img title="收藏" src="http://simg.sinajs.cn/xblogstyle/images/common/icon_like.png"></span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_off.png';?>"></span>
-		<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/discuss_for_support_on.png';?>"></span>
 	<?php endif; ?>
 	</div>
 	<div class="t-footer clearfix">
@@ -154,13 +166,12 @@
 		 	<?php endif; ?>
 
 		 	<?php if (isset($vote)): ?>
-		 	<div class="vote"> <?php print $vote; ?> 
-			 <span><img title="赞" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_79.png';?>"></span>
-			 <span><img title="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_80.png';?>"></span>
-
-			<span><img title="收藏" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_66.png';?>"></span>
-		  <span><img title="踩" src="<?php print drupal_get_path('theme','love'); print '/images/smiley_67.png';?>"></span>
-		 </div>
+		 	<div class="vote"> <?php print $vote; ?>
+		 		<ul>
+		 			<li><a title="赞" href=""><i class="icon-thumbs-up"></i></a></li>
+		 			<li><a title="踩" href=""><i class="icon-thumbs-down"></i></a></li>
+		 		</ul>
+		 	</div>
 		 	<?php endif; ?>
 		</div>
 	</div>

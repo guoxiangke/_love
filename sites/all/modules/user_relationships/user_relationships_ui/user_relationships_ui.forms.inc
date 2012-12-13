@@ -129,7 +129,7 @@ function user_relationships_ui_request($form, &$form_state, $requestee) {
     else {
       $dest = "user/$requestee->uid";
     }
-    $form = confirm_form(
+    /*$form = confirm_form(
       $form,
       t('Request relationship'),
       $dest,
@@ -140,7 +140,7 @@ function user_relationships_ui_request($form, &$form_state, $requestee) {
       '',
       t('Send'), t('Cancel'),
       'user_relationships_request_confirm'
-    );
+    );*/
     return $form;
   }
 }

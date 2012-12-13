@@ -156,17 +156,25 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
 }
 
 function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
-  //$form['rtid']['#access'] = FALSE;  
-  $form['account']['mail']['#disabled']=TRUE;
+
+  //$form['account']['mail']['#disabled']=TRUE;
   $form['relationship_invite_approve']['#default_value']='';
   $form['relationship_invite_approve']['#required']=TRUE;
   $form['relationship_invite_approve']['#weight']=-100;
+dpm($form);
+  if(isset($form['relationship_invite_requester']['#value'])) {
 
-  $inviter = profile2_load_by_user($form['relationship_invite_requester']['#value']);
-  $form['relationship_invite_approve']['#title']='您认识'.$inviter['main']->field_name[LANGUAGE_NONE][0]['value'].'吗？';
-  # 
-  $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
-}
+    $inviter = profile2_load_by_user($form['relationship_invite_requester']['#value']);
+    if(isset($inviter['main']->field_name[LANGUAGE_NONE][0]['value'])) {
+      $inviter_name = $inviter['main']->field_name[LANGUAGE_NONE][0]['value'];
+    }else{
+      $inviter_name = $form['relationship_invite_requester']['#value']->name;//['name'];
+    }
+    $form['relationship_invite_approve']['#title']='您认识'.$inviter_name.'吗？';
+    # 
+    $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
+
+  }}
 
 function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     $form['subject_markup']['#title'] = t('标题');
@@ -178,7 +186,7 @@ function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
       $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人
       $form['rtid']['#access'] = FALSE;  
     }
-dpm($form);
+
 }
 function love_preprocess_block(&$variables, $hook) {
 // Add a count to all the blocks in the region.
