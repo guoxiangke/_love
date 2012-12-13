@@ -167,11 +167,18 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
   # 
   $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
 }
+
 function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
-
-  $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人
-  $form['rtid']['#access'] = FALSE;  
-
+    $form['subject_markup']['#title'] = t('标题');
+    $form['message']['#disabled'] = TRUE;
+    $form['message']['#title'] = t('邀请函');
+    $form['from']['#access'] = FALSE;
+    //$form['submit_show']['#access'] = FALSE;
+    if(isset($form['rtid'])) {
+      $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人
+      $form['rtid']['#access'] = FALSE;  
+    }
+dpm($form);
 }
 function love_preprocess_block(&$variables, $hook) {
 // Add a count to all the blocks in the region.

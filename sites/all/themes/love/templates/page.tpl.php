@@ -133,6 +133,13 @@ wmode="transparent" quality="high"><a href="#" rel="tooltip" title="未收到邀
       </div>
     </div>
   </div><!-- /container-fluid -->
+  <div class="top"> <a href="#"><img alt="Scroll to Top" src="http://www.splashnology.com/wp-content/themes/splash/images/scroll-top.png" style="opacity: 1;"></a>
+    <div class="clear"></div>
+    <div class="scroll">
+        <p>
+            To Top        </p>
+    </div>
+  </div>
   <footer class="footer container">
     <?php print render($page['footer']); ?>
   </footer>

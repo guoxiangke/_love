@@ -447,12 +447,8 @@ function love_layout_form_alter(&$form, &$from_state, $form_id) {
   $form['profile_main']['signature_settings'] = $signature_settings;*/
   }
 
-  if ($form_id == 'invite_form') {
-    $form['subject_markup']['#title'] = t('标题');
-    $form['message']['#disabled'] = TRUE;
-    $form['message']['#title'] = t('邀请函');
-    $form['from']['#access'] = FALSE;
-    $form['submit_show']['#access'] = FALSE;
+  if ($form_id == 'invite_form') {/**/
+
   }
 }
 /*
