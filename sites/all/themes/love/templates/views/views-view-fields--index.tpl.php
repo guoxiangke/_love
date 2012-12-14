@@ -111,7 +111,9 @@
 	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
 		<ul>
-				<li><i class="icon-th-list"></i></li>
+				<li><i class="icon-th-list icon-large"></i></li>
+				<li><i class="icon-camera-retro icon-large"></i></li>
+				
 				<li><a href="" rel="tooltip" data-placement="right" title="<?php echo $local;?>"><i class="icon-map-marker"></i></a></li>
 		<?php
 			if($friends){ ?>

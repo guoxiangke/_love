@@ -8,10 +8,9 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
 <div id="wrapper" class="container-fluid">
   <div class="row-fluid clearfix">
-
     <div id="falmily" class="span8">
-    <div class="main-title">
-      <p class="bibles-say">“因此，人要离开父母与妻子联合，二人成为一体。” --创世纪 2:24</p>
+      <div class="main-title">
+       <p class="bibles-say">“因此，人要离开父母与妻子联合，二人成为一体。” --创世纪 2:24</p>
     </div>
       <img src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_2.png" class="logo" />
     </div>

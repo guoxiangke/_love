@@ -1,4 +1,11 @@
-body {
+body.not-logged-in {
+    background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html  #2FADDF E00000 大红*/
+}
+/*page-user-register**/
+body.page-user-password , body.page-user , body.page-user-register{
+    background: #FFF;
+}
+body.logged-in {
 	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
 	/*background: url(../images/logo_bg.jpg) repeat; /dashboard_bg.png*/
   background-image: url(../images/graphy.png);
@@ -6,9 +13,10 @@ body {
   background-position: center top;
 }
 #falmily {
-  padding: 15px;
+  padding: 1%;
   background: white;
   overflow: hidden;
+  position: relative;
 }
 .main-title{
   position: absolute;
@@ -16,6 +24,8 @@ body {
   filter: alpha(opacity:50);
   moz-opacity: 0.5;
   opacity: 0.5;
+width: 97.19%;
+top: 2%;
 }
 .bibles-say {
   position: relative;
@@ -24,8 +34,10 @@ body {
   color: white;
   padding: 10px;
   letter-spacing: 4px;
+  line-height: 30px;
+  margin-bottom: 0px;
 }
-.site-slogan{
+.site-slogan {
   color: #FFF;
 }
 .site-des{
@@ -70,18 +82,13 @@ border-radius: .3em;
 }
 
 
-body.not-logged-in {
-    background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html  #2FADDF E00000 大红*/
-}
+
+
 .site-des a {
     color: #F73F9B;
     text-decoration: none;
 } 
-/*page-user-register**/
 
-body.page-user-password , body.page-user , body.page-user-register{
-    background: #FFF;
-}
 #edit-signature-format{
   display: none;
 }
@@ -795,4 +802,9 @@ color: #D6F1F8;
 margin: -11px 0 0;
 }
 
-/***/
+/**heartbeat activity*/
+li:hover [class^="icon-"]:before,
+li:hover [class*=" icon-"]:before {
+  font-size: 24px;
+  vertical-align: middle;
+}
