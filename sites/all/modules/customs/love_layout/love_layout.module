@@ -8,28 +8,13 @@ function love_layout_block_info() {
     'info' => t('the user info display on proile page.'),
     //'region' => 'sidebar_first',
   );
-  // takes user pictures from user profile and put it in a block
-  $blocks['user_picture'] = array(
-    'info' => t('User picture'),
-    'cache' => DRUPAL_NO_CACHE, //to be confirmed
-  );
-  // takes the local tasks and put it in a block
-  $blocks['menu_local_task'] = array(
-    'info' => t('Menu local tabs'),
-    'cache' => DRUPAL_NO_CACHE, //to be confirmed
-    'region' => 'sidebar_first',
-    'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => 'user/*',
-  );
-  /**
-   * Introduce of this sites on user/* page .when not login.
-   */
+  //Introduce of this sites on user/* page .when not login.
   $blocks['sites_introduce'] = array(
-    'info' => t('Introduce of this sites'),
+    'info' => t('About Us'),
     'cache' => DRUPAL_NO_CACHE, //to be confirmed
-    //'region' => 'sidebar_second',
+    'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => 'user/login\r\nuser/register\r\nuser/password',
+    //'pages' => 'user\r\nuser/login\r\nuser/register\r\nuser/password',
   );
   return $blocks;
 }
@@ -43,30 +28,20 @@ function love_layout_block_view($delta = '') {
       $block['subject'] = NULL;//t('User info')
       $block['content'] = love_layout_user_block();
       break;
-    case 'user_picture':
-      $block['title'] = NULL;
-      global $user;
-      $variables['account'] = $user;
-      $block['content'] = love_layout_template_preprocess_user_picture($variables);
-      break;
-
-    case 'menu_local_task':
-      $block['title'] = NULL;
-        //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
-      $block['content'] = '';//menu_local_tasks();
     case 'sites_introduce':
       $block['title'] = t('About Us');
         //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
       $block['content'] = '
-<ul class="about-us">
-  <li>1.我们坚信婚姻是神所设立的，是对我们幸福生活的美好设计。</li>
-  <li>2.我们认为组建家庭是神对人的一项呼召，在家庭中彰显神的荣耀。</li>
-  <li>3.基于圣经，我们认为神所设立的美好婚姻是：一男一女、一夫一妻、一生一世,信与不信愿不相配。</li>
-  <li>4.我们确信神在创世之先已未我们预备了另一半。</li>
-  <li>5.我们相信神对我们的爱永不止息。</li>
-<div>【永不止息】只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</div>
-<div>爱是永不止息，是互相激励成长，需要公众见证，公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀</div>
-</ul>';//menu_local_tasks();
+      <ul class="about-us">
+        <li>1.我们坚信婚姻是神所设立的，是对我们幸福生活的美好设计。</li>
+        <li>2.我们认为组建家庭是神对人的一项呼召，在家庭中彰显神的荣耀。</li>
+        <li>3.基于圣经，我们认为神所设立的美好婚姻是：一男一女、一夫一妻、一生一世,信与不信原不相配。</li>
+        <li>4.我们确信神在创世之先已未我们预备了另一半。</li>
+        <li>5.我们相信神对我们的爱永不止息。</li>
+      <div>【永不止息】只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</div>
+      <div>爱是永不止息，是互相激励成长，需要公众见证，公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀</div>
+      </ul>';//menu_local_tasks();
+      break;
   }
   return $block;
 }
@@ -83,7 +58,7 @@ function love_layout_user_block() {
   $picture = love_layout_template_preprocess_user_picture($variables);
   if($account->uid)
   $signature = $account->signature?$account->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
-
+  $variables['account'] = $account;
   $output = '
   <div class="aside">
               <div class="info-box">
@@ -102,13 +77,12 @@ function love_layout_user_block() {
                   </div>
                   
                   <div class="follow">
-                      <a class="follow-btn" href="http://www.diandian.com/follow/feesx">交友申请</a>
+                  '._love_user_relationships_link($variables).'
                   </div>
                   
               </div>
           </div>';
-          $variables['account'] = $account;
-          $output .= _love_user_relationships_link($variables);
+         
   return $output;//.drupal_render(menu_local_tasks());
 }
 
@@ -137,7 +111,6 @@ function love_layout_block_view_alter(&$data, $block) {
       //dpm($data,'data'); 
   }
     
-  //return $block;
 }
 /**
  * Get latest visitors for block content
@@ -290,15 +263,15 @@ function love_layout_modules_installed($modules) {
  * Implements hook_menu().
  */
 function love_layout_menu() {
-  $items['user/%/statuses'] = array(
-    'title' => 'Statuses',
-    'page callback'    => '_statuses_page',
-    'page arguments'   => array(1),
-    /*'file'             => 'privatemsg.pages.inc',*/
-    'access callback' => 'statuses_user_access',
-    'access arguments' => array('add'),
-    'type' => MENU_LOCAL_TASK,
-  );
+  // $items['user/%/statuses'] = array(
+  //   'title' => 'Statuses',
+  //   'page callback'    => '_statuses_page',
+  //   'page arguments'   => array(1),
+  //   'file'             => 'privatemsg.pages.inc',
+  //   'access callback' => 'statuses_user_access',
+  //   'access arguments' => array('add'),
+  //   'type' => MENU_LOCAL_TASK,
+  // );
   //http://dev.sina.org/relationship/12/request/1?destination=user/12
   $items['ajax/relationship/%/request/%'] = array(
     'title' => 'request',
@@ -316,38 +289,54 @@ function love_layout_menu() {
  * Process relationship request.
  * @see user_relationships_ui_request_submit
  */
-function love_ajax_user_relationships_ui_request_submit($requestee,$rtid) {
-  $relationship = new stdClass;
-  $relationship->requestee = user_load($requestee);
+function love_ajax_user_relationships_ui_request_submit($requestee_id,$rtid) {
   global $user;
-  $relationship->requester = $user;
-  $relationship->type = user_relationships_type_load($rtid);
-  $ur = user_relationships_load(array('rtid' => $rtid, 'requester_id'=>$user->id,'requestee_id'=>$requestee));
-  if($ur){
-    dpm($ur);
-    drupal_set_message('already');
-  }else{
-    $relationship = user_relationships_request_relationship($relationship);
-    if ($relationship === FALSE) {
-      drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
+  $requester = $user;
+  $requestee = user_load($requestee_id);
+  // $relationships_type = user_relationships_type_load($rtid);
+  // dpm($relationships_type);
+  if($rtid == '1'){//1 粉丝
+    $current_relationships = user_relationships_load(array('rtid' => $rtid,"requester_id" => $user->uid,'between' => array($requester->uid, $requestee->uid)));
+
+    if($current_relationships){
+      drupal_set_message(t('你已经是Ta的粉丝了，请勿重复请求！'));
+    }else{
+      $relationship = new stdClass;
+      $relationship->requestee = $requestee;
+      $relationship->requester = $user;
+      $relationship->type = user_relationships_type_load($rtid);
+      $relationship = user_relationships_request_relationship($relationship);
+      if ($relationship === FALSE) {
+        drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
+      }else{
+        drupal_set_message(t('关注成功，你现在是Ta的粉丝了～！'));
+      }
     }
 
-    drupal_set_message(user_relationships_get_message(($relationship->approved ? 'pre_approved' : 'submitted'), $relationship));
-      
+  }elseif($rtid == '2'){//2 熟人
+    //熟人rtid=2是单向关系，不需要互相请求，只一方即可。
+    $current_relationships = user_relationships_load(array('rtid' => $rtid,'between' => array($requester->uid, $requestee->uid)),array('sort'=>'rtid'));
+    if(count($current_relationships)){
+      if($current_relationships[$rtid][0]->approved) {
+        drupal_set_message(t('你们已经是熟人关系了，请勿重复请求!'));
+      }else {
+        drupal_set_message(t('你已经发送过熟人请求，请勿重复发送!'));
+      }
+    
+    }else{
+      $relationship = new stdClass;
+      $relationship->requestee = $requestee;
+      $relationship->requester = $user;
+      $relationship->type = user_relationships_type_load($rtid);
+      $relationship = user_relationships_request_relationship($relationship);
+      if ($relationship === FALSE) {
+        drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
+      }else{
+         drupal_set_message(t('恭喜，你的熟人请求已发送～，请耐心等待对方的确认!'));
+      }
+    }
   }
-  //
-
-  //$requester = user_load($requester);
-  //user_relationships_request_relationship($requester, $requestee = NULL, $type = NULL, $approved = FALSE)
-  //#578372 leave all form values in the object for other functions to use
-  /*
-  $relationship = (object) $form_state['values'];
-  $relationship->requester = user_load($form_state['values']['requester']);
-  $relationship->requestee = user_load($form_state['values']['requestee']);
-  $relationship->type = user_relationships_type_load($form_state['values']['rtid']);
-
-  $relationship = user_relationships_request_relationship($relationship);
-*/
+  drupal_goto();
   return '';
 }
 
@@ -359,6 +348,11 @@ function _statuses_page($account) {
 
 //$value = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
 function love_layout_menu_alter(&$items) {
+
+  $items['publish'] = $items['node/add/photo'];
+  $items['publish']['title'] = t('+Photo');
+  $items['publish']['menu_name'] = 'main-menu';
+  
   // Example - disable the page at node/add
   $items['messages']['title callback'] = 'privatemsg_title_callback_alter';
   $items['messages/recent'] = $items['messages'];
@@ -416,6 +410,8 @@ function privatemsg_title_callback_alter($title = NULL) {
  */
 function love_layout_admin_paths_alter(&$paths) {
   $paths['user/*/edit'] = FALSE;
+  $paths['user/*/edit/main'] = FALSE;
+    $paths['user/*/edit/believe'] = FALSE;
 }
 
 function love_layout_preprocess_page(&$variables) {
@@ -430,14 +426,9 @@ function love_layout_preprocess_page(&$variables) {
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {
-
   if ($form_id == 'user_register_form') {
     # code... if 
 
-    $form['signature_settings']['#access'] = TRUE;
-    $form['signature_settings']['#weight'] = 11;
-    $form['picture']['#weight'] = 2;
- 
   /*$picture = $form['picture'];
   $signature_settings = $form['signature_settings'];
   unset($form['picture']);
@@ -447,9 +438,39 @@ function love_layout_form_alter(&$form, &$from_state, $form_id) {
   $form['profile_main']['signature_settings'] = $signature_settings;*/
   }
 
-  if ($form_id == 'invite_form') {/**/
-
+  if ($form_id == 'user_login') {/**/
+    $form['name']['#title'] = '邮箱';
   }
+}
+// when the bug of i18n + og_field   resolve ,can user below.
+//http://drupal.org/project/issues/og?text=i18n&status=All&priorities=All&categories=All&version=7.x&component=All
+/**
+ * hook_form_FORM_ID_alter(&$form, &$form_state, $form_id)
+ * when add a new photo,set  group audience default love.
+ */
+function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
+ // $form['og_group_ref']['#access'] = FALSE;
+  /*
+  $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
+  //2 is the love group gid.
+  $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
+
+  // hidden some function now,body and tags 分享感言 标签功能暂不开放
+
+  $form['body']['#access'] = FALSE;
+  $form['field_tags']['#access'] = FALSE;
+  $form['og_group_ref']['#access'] = FALSE;
+  drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
+}
+
+/**
+ * add link to login -custom page.
+ */
+function love_layout_form_user_login_alter(&$form, &$form_state, $form_id) {
+      $items = array();
+      $items[] = l(t('Request new password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
+
+      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
 }
 /*
 * Implements HOOK_form_user_profile_form_alter
@@ -457,7 +478,7 @@ function love_layout_form_alter(&$form, &$from_state, $form_id) {
 */
 function love_layout_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
   dpm($form);
-  /*$form['accordions'] = array(
+  $form['accordions'] = array(
     '#type' => 'fieldset',
     '#weight' => 0,
   );
@@ -471,7 +492,7 @@ function love_layout_form_user_profile_form_alter(&$form, &$form_state, $form_id
       $form[$key]['#collapsed'] = TRUE;
       $form[$key]['#group'] = 'accordions' ;
     }
-  }*/
+  }
 }
 
 /**
@@ -480,7 +501,7 @@ function love_layout_form_user_profile_form_alter(&$form, &$form_state, $form_id
  */
 function love_layout_user_view($account, $view_mode) {
 
-  drupal_add_css(drupal_get_path('module', 'love_layout').'/css/profiles.css');
+  //drupal_add_css(drupal_get_path('module', 'love_layout').'/css/profiles.css');
 
 }
 

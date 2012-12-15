@@ -75,7 +75,8 @@
 	//dpm($field_name,$name);
 
 	  global $user;
-	  $ur_way = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid)),array('count'=>1));
+	  $rtid = 1;//粉丝 关注
+	  $ur_way = user_relationships_load(array('rtid' => array($rtid),'between' => array($user->uid,$profile_uid)),array('count'=>1));
 	  $friends = FALSE;
 	  $follow = FALSE;
 	  $follower = FALSE; 
@@ -91,8 +92,8 @@
 	      break;
 	    default:
 	    	// one-way relationships.
-	    $follow = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$user->uid),array('count'=>1));
-        $follower = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$profile_uid),'requester_id'=>$profile_uid),array('count'=>1));
+	    $follow = user_relationships_load(array('rtid' => array($rtid),'between' => array($user->uid,$profile_uid),'requester_id'=>$user->uid),array('count'=>1));
+        $follower = user_relationships_load(array('rtid' => array($rtid),'between' => array($user->uid,$profile_uid),'requester_id'=>$profile_uid),array('count'=>1));
 	      break;
 	  }
 	// 
@@ -111,29 +112,29 @@
 	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
 		<ul>
-				<li><i class="icon-th-list icon-large"></i></li>
-				<li><i class="icon-camera-retro icon-large"></i></li>
-				
-				<li><a href="" rel="tooltip" data-placement="right" title="<?php echo $local;?>"><i class="icon-map-marker"></i></a></li>
 		<?php
 			if($friends){ ?>
-				<li><a href="" rel="tooltip" data-placement="right" title="互相关注"><i class="icon-retweet"></i></a></li>
-				<li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li>
+				<li><a href="#" rel="tooltip" data-placement="right" title="互相关注"><i class="icon-retweet"></i></a></li>
+				<!--li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li-->
 			<?php
 			}elseif($no_relationships){ ?>
-				<li><a href="" rel="tooltip" data-placement="right" title="关注<?php echo $Ta;?>"><i class="icon-plus"></i></a></li>
+				<li><?php echo l('<i class="icon-plus"></i>',"ajax/relationship/$profile_uid/request/$rtid",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action'),'title'=>'关注'.$Ta,'rel'=>"tooltip",'data-placement'=>"right")));?>
+					
 			<?php }
 			if($follower){ //Ta想认识你?>
-			<li><a href="" rel="tooltip" data-placement="right" title="关注<?php echo $Ta;?>"><i class="icon-plus"></i></a></li>
-				<li><a href="" rel="tooltip" data-placement="right" title="<?php echo $Ta;?>关注了你"><i class="icon-arrow-left"></i></a></li>
+				<li><a href="#" rel="tooltip" data-placement="right" title="<?php echo $Ta;?>关注了你"><i class="icon-arrow-left"></i></a></li>
+				<li><?php echo l('<i class="icon-plus"></i>',"ajax/relationship/$profile_uid/request/$rtid",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action'),'title'=>'关注'.$Ta,'rel'=>"tooltip",'data-placement'=>"right")));?>
+				
 			<?php 
 			}
 			if($follow){ //你想认识Ta?>
-				<li><a href="" rel="tooltip" data-placement="right" title="你关注了<?php echo $Ta;?>"><i class="icon-arrow-right"></i></a></li>
-				<li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li>
+				<li><a href="#" rel="tooltip" data-placement="right" title="你关注了<?php echo $Ta;?>"><i class="icon-arrow-right"></i></a></li>
+				<!--li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li-->
 			<?php 
 			}
 		 ?>
+
+			<li><a href="#" rel="tooltip" data-placement="right" title="<?php echo $local;?>"><i class="icon-map-marker"></i></a></li>
 		</ul>
 		
 	</div>

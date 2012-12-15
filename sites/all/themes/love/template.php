@@ -161,7 +161,7 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
   $form['relationship_invite_approve']['#default_value']='';
   $form['relationship_invite_approve']['#required']=TRUE;
   $form['relationship_invite_approve']['#weight']=-100;
-dpm($form);
+
   if(isset($form['relationship_invite_requester']['#value'])) {
 
     $inviter = profile2_load_by_user($form['relationship_invite_requester']['#value']);
@@ -174,7 +174,19 @@ dpm($form);
     # 
     $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
 
-  }}
+  }
+
+    $form['signature_settings']['#access'] = TRUE;
+    $form['signature_settings']['#weight'] = 11;
+    $form['signature_settings']['#title'] = t('爱情宣言');
+    $form['signature_settings']['#description'] = t('120字以内，将显示在个人主页～');
+    unset($form['signature_settings']['signature']['#description']);
+    $form['picture']['#weight'] = -40;
+    $form['picture']['#description'] = '请使用正方形相片作为头像，显示效果更佳。';
+    $form['picture']['picture_upload']['#title'] = '';
+    //$form['picture']['picture_upload']['#required']=TRUE; 
+    
+}
 
 function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     $form['subject_markup']['#title'] = t('标题');

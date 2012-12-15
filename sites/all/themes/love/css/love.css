@@ -2,9 +2,10 @@ body.not-logged-in {
     background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html  #2FADDF E00000 大红*/
 }
 /*page-user-register**/
-body.page-user-password , body.page-user , body.page-user-register{
+body.page-user-password , body.page-user-register{
     background: #FFF;
 }
+
 body.logged-in {
 	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
 	/*background: url(../images/logo_bg.jpg) repeat; /dashboard_bg.png*/
@@ -24,8 +25,8 @@ body.logged-in {
   filter: alpha(opacity:50);
   moz-opacity: 0.5;
   opacity: 0.5;
-width: 97.19%;
-top: 2%;
+  width: 96.9%;
+  top: 2%;
 }
 .bibles-say {
   position: relative;
@@ -38,12 +39,18 @@ top: 2%;
   margin-bottom: 0px;
 }
 .site-slogan {
-  color: #FFF;
+  color: #000;
 }
 .site-des{
     color: #FFF;
     /*position: relative;
     top: 20px;*/
+}
+form#user-pass label{
+  width: auto;
+}
+input#edit-pass{
+   width: 200px;
 }
 .help-block{
   display: none;
@@ -85,7 +92,7 @@ border-radius: .3em;
 
 
 .site-des a {
-    color: #F73F9B;
+    color: #222;
     text-decoration: none;
 } 
 
@@ -123,14 +130,27 @@ border-radius: .3em;
 #profile-main-field-height-add-more-wrapper input{
   width:133px;
 }
-#edit-profile-main-field-degree-und{
-  width:147px;
+#profile-main-field-height-add-more-wrapper input#edit-profile-main-field-height-und-0-value{
+    width:137px;
 }
 #profile-main-field-telephone-add-more-wrapper input,#profile-main-field-qq-add-more-wrapper input {
   width:141px;
 }
+#edit-profile-main-field-degree-und{
+  width: 151px;
+}
 #profile-main-field-links-add-more-wrapper label{
   display:none;
+}
+#edit-signature-settings div.controls{
+  width: 500px;
+}
+.page-user-register .fieldset-description {
+  color: #840;
+  padding-bottom: 10px;
+}
+.form-wrapper legend{
+  margin-bottom: 10px;
 }
 .form-item-relationship-invite-approve label{
   display:block;
@@ -167,12 +187,18 @@ z-index: -1;
 background: rgba(0, 0, 0, 0.08);
 border-radius: 4px;
 }
-body.not-logged-in img.logo {
+body.not-logged-in .sitename {
 margin-bottom: 30px;
+font-size: 50px;
+color: white;
 }
 center {
 display: block;
 text-align: -webkit-center;
+}
+#user-login ul{
+  display: inline-block;
+  list-style: none;
 }
 .main-content{
     padding:0 20px;
@@ -447,7 +473,7 @@ h1,h2{
     border-top: 1px solid #114260;
     padding: 10px 5px;
 }
-.aside .follow a.follow-btn {
+.aside .follow span{
     background: url("http://x.libdd.com/farm1/90ecce/a28632b4/follow-btn.png") no-repeat scroll 0 0 transparent;
     color: #999999;
     display: block;

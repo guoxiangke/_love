@@ -1,24 +1,5 @@
 <?php
-/**
- * hook_menu_alter
- */
-function love_menu_alter(&$items) {
-  // Example - disable the page at node/add
-  $items['publish'] = $items['node/add/photo'];
-	$items['publish']['title'] = t('+Photo');
-	$items['publish']['menu_name'] = 'main-menu';
 
-  //$items['user']['title callback'] = love_dynamic_menu_call();
-}
-/* TODO:XXX 
-function love_dynamic_menu_call(){
-  global $user;
-  if($user->uid) {
-    return $user->name;
-  }else{
-    return t('My account');
-  }
-}*/
 /**
  * Implements of hook_theme().
  */
@@ -34,11 +15,6 @@ function love_theme($existing, $type, $theme, $path) {
   );
 }
 
-function love_init(){
-  //drupal_add_js(drupal_get_path('module', 'rate') .'/rate.js');
-
-  //TODO:view process
-}
 /**
  * Theme preprocess for views-view-index.tpl.php.
  * prepare comments vars for qustion view page for both question and answers in module Level.
@@ -53,54 +29,7 @@ function love_preprocess_views_view(&$vars) {
     drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
   }
 }
-/**
- *  Implements hook_field_widget_form_alter($element, $form_state, $context)
- */
-function china_address_field_widget_form_alter(&$form, &$form_state) {
-	//TODO
-}
 
-
-
-// when the bug of i18n + og_field   resolve ,can user below.
-//http://drupal.org/project/issues/og?text=i18n&status=All&priorities=All&categories=All&version=7.x&component=All
-/**
- * hook_form_FORM_ID_alter(&$form, &$form_state, $form_id)
- * when add a new photo,set  group audience default love.
- */
-function love_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
- // $form['og_group_ref']['#access'] = FALSE;
-  /*
-  $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
-  //2 is the love group gid.
-  $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
-
-  // hidden some function now,body and tags 分享感言 标签功能暂不开放
-  $form['body']['#access'] = FALSE;
-  $form['field_tags']['#access'] = FALSE;
-
-  drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
-}
-
-/**
- * when a user invite by love group member,
- * let it join the love group too.
- * set  group audience default love.
- * and when register ,not display let user choose which group to join,for the multilanguage bug of og+in18_field.
- */
-function love_form_user_login_alter(&$form, &$form_state, $form_id) {/*
-  $form['og_group_ref']['#access'] = FALSE;
-  $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
-  //2 is the love group gid.
-  $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
-      $items = array();
-      if (0&&variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)) {
-        $items[] = l(t('Create new account'), 'user/register', array('attributes' => array('title' => t('Create a new user account.'))));
-      }
-      $items[] = l(t('Request new password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
-
-      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
-}
 /**
  * when a user invite by love group member,
  * let it join the love group too.
@@ -156,50 +85,6 @@ function love_exit() {
     }
 	}
 }
-
-/*
- * @see template_preprocess_user_picture
-
-function love_user_picture($account) {
-  $variables['user_picture'] = '';
-  if (variable_get('user_pictures', 0)) {
-    //$account = $variables['account'];
-    if (!empty($account->picture)) {
-      // @TODO: Ideally this function would only be passed file objects, but
-      // since there's a lot of legacy code that JOINs the {users} table to
-      // {node} or {comments} and passes the results into this function if we
-      // a numeric value in the picture field we'll assume it's a file id
-      // and load it for them. Once we've got user_load_multiple() and
-      // comment_load_multiple() functions the user module will be able to load
-      // the picture files in mass during the object's load process.
-      if (is_numeric($account->picture)) {
-        $account->picture = file_load($account->picture);
-      }
-      if (!empty($account->picture->uri)) {
-        $filepath = $account->picture->uri;
-      }
-    }
-    elseif (variable_get('user_picture_default', '')) {
-      $filepath = variable_get('user_picture_default', '');
-    }
-    if (isset($filepath)) {
-      $alt = t("@user's picture", array('@user' => format_username($account)));
-      // If the image does not have a valid Drupal scheme (for eg. HTTP),
-      // don't load image styles.
-      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
-        $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
-      }
-      else {
-        $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
-      }
-      if (!empty($account->uid) && user_access('access user profiles')) {
-        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
-        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
-      }
-    }
-  }
-  return $variables['user_picture'];
-} */
 
 /**
  * Implement hook_ctools_plugin_api().
