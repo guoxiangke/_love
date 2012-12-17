@@ -48,9 +48,11 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 	<div class="container">
     <div class="logo">
       <?php if ($logo): ?>
-        <a class="brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-          <!--img src="http://simg.sinajs.cn/xblogstyle/images/common/logo_act.png" alt=""-->
+          
+          <a class="brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+          <span  class="site-name">永不止息<i class="icon-fire"></i></span>
+          <!--img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+          <img src="http://simg.sinajs.cn/xblogstyle/images/common/logo_act.png" alt=""-->
         </a>
       <?php endif;?>
     </div>
@@ -60,12 +62,17 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
           <?php print $primary_nav; ?>
         </div>
       <?php endif; ?>
+
      	<?php if ($secondary_nav): ?>
-     		<div class="pull-right">
+     		<div class="pull-right ml-24">
           <?php print $secondary_nav; ?>
         </div>
       <?php endif; ?>
-
+      <?php if (!user_is_anonymous()): ?>
+      <div class="pull-right">
+          <?php print $menu_user_picture; ?>
+      </div>
+      <?php endif; ?>
    </nav>
   </div></div>
 </header>

@@ -85,28 +85,35 @@ function open_weibo_form_alter(&$form, $form_state, $form_id) {
  */
 	//isset($form['#node']->nid) 
 	//not the edit node form.
+	$synch_types = variable_get('synch_types', NULL);
+  if(!$synch_types){
+    $synch_types = array();
+  }else{
+    $synch_types = array_filter(unserialize($synch_types));
+  }
+
 	if(isset($form['#node']) && !isset($form['#node']->nid) 
-	&& $form['#node']->type .'_node_form' == $form_id){
-		//启用模块，并设置同步
-		$module ='open_weibo';
-		if(module_exists($module)&&variable_get($module.'_enabled')){
-			$form[$module] = array(
-	      '#type' => 'fieldset',
-	      '#title' => '同步到新浪微博',
-	      '#collapsible' => true,
-	      '#collapsed' => true,
-	      '#tree' => true
-	    );
-	    $form[$module]['synch'] = array(
-	      '#type' => 'radios',
-	      '#title' => '发送',
-	      '#required' => true,
-	      '#default_value' => 0,
-	      '#options' => array('否', '是'),
-	    );
+		&& $form['#node']->type .'_node_form' == $form_id) {
+		if(in_array($form['#node']->type, array_keys($synch_types)) && $synch_types[$form['#node']->type]) {//$synch_types[$form['#node']->type] == 1
+ 		//启用模块，并设置同步
+			$module ='open_weibo';
+			if(module_exists($module)&&variable_get($module.'_enabled')){
+				$form[$module] = array(
+		      '#type' => 'fieldset',
+		      '#title' => '同步到新浪微博',
+		      '#collapsible' => true,
+		      '#collapsed' => true,
+		      '#tree' => true
+		    );
+		    $form[$module]['synch'] = array(
+		      '#type' => 'radios',
+		      '#title' => '发送',
+		      '#required' => true,
+		      '#default_value' => 0,
+		      '#options' => array('否', '是'),
+		    );
+			}
 		}
-		
-		
 	};
 	
 	//comment #id

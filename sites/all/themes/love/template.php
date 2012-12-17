@@ -42,7 +42,7 @@ function love_preprocess_page(&$vars) {
     //TODO: XXX Docy menu @see love_menu_alter() love_dynamic_menu_call()
     //dynamic menu of userName in navbar.
     global $user;if($user->uid)
-    $vars['secondary_menu']['menu-2']['title'] =  $user->name;
+    $vars['secondary_menu']['menu-2']['title'] = $user->name;
     $vars['secondary_nav'] = theme('links__system_secondary_menu', array(
       'links' => $vars['secondary_menu'],
       'attributes' => array(
@@ -54,9 +54,21 @@ function love_preprocess_page(&$vars) {
         'class' => array('element-invisible'),
       )
     ));
+
   }
   else {
     $vars['secondary_nav'] = FALSE;
+  }
+
+  $account = user_load($user->uid);
+  if($account->uid){
+    if(isset($account->picture->uri)){
+      $filepath = $account->picture->uri;
+    }elseif (variable_get('user_picture_default', '')) {
+      $filepath = variable_get('user_picture_default', '');
+    }
+    $vars['menu_user_picture'] = theme('image_style', array('style_name' => 'canvas30', 'path' => $filepath, 'getsize' => TRUE, 'attributes' => array('class' => 'thumb', 'width' => '30', 'height' => '30')));
+  
   }
 
   // Prepare header.

@@ -53,7 +53,7 @@ function love_layout_user_block() {
   global $user;
   //TODO: 
   $account = user_load(arg(1));
-  $account=$account?$account:$user;
+  $account = $account?$account:$user;
   $variables['account'] = $account;
   $picture = love_layout_template_preprocess_user_picture($variables);
   if($account->uid)
@@ -70,10 +70,10 @@ function love_layout_user_block() {
 
                   </div>
                   <div class="links links-with-follow">
-                      <a href="http://feesx.diandian.com/submit">投稿</a> / 
-                      <a href="http://feesx.diandian.com/inbox">私信</a> / 
-                      <a href="http://feesx.diandian.com/archive">存档</a> /
-                      <a href="http://feesx.diandian.com/rss">RSS</a>
+                      <a href="">+熟人</a> /
+                      '.l(t('Messages'),'messages/new/'.$account->uid,array('query' => drupal_get_destination())).' / 
+                      '.l(t('Blog'),'user/'.$account->uid.'/blog',array('query' => drupal_get_destination())).' / 
+                      <a href="">+粉丝</a>
                   </div>
                   
                   <div class="follow">
@@ -115,7 +115,7 @@ function love_layout_block_view_alter(&$data, $block) {
 /**
  * Get latest visitors for block content
  */
-function user_visits_display_block_4love($uid = NULL, $limit = 5) {
+function user_visits_display_block_4love($uid = NULL, $limit = 9) {
   $output = "";
   if (!$uid && (arg(0) == 'user' && is_numeric(arg(1)))) {
     $uid = arg(1);
@@ -131,8 +131,9 @@ function user_visits_display_block_4love($uid = NULL, $limit = 5) {
       }
     }
     $output = theme('user_visits_total', array('total' => user_visits_total($uid))).$output;
+    $output .= '</div>';
   }
-  $output .= '</div>';
+
   return $output;
 }
 /**
@@ -259,87 +260,6 @@ function love_layout_modules_installed($modules) {
   }
 }
 
-/**
- * Implements hook_menu().
- */
-function love_layout_menu() {
-  // $items['user/%/statuses'] = array(
-  //   'title' => 'Statuses',
-  //   'page callback'    => '_statuses_page',
-  //   'page arguments'   => array(1),
-  //   'file'             => 'privatemsg.pages.inc',
-  //   'access callback' => 'statuses_user_access',
-  //   'access arguments' => array('add'),
-  //   'type' => MENU_LOCAL_TASK,
-  // );
-  //http://dev.sina.org/relationship/12/request/1?destination=user/12
-  $items['ajax/relationship/%/request/%'] = array(
-    'title' => 'request',
-    'page callback'    => 'love_ajax_user_relationships_ui_request_submit',
-    'page arguments'   => array(2,4),
-    'access callback' => TRUE, 
-    // if (!user_relationships_can_request($user, $rtype) || !user_relationships_can_receive($account, $rtype))
-    'type' => MENU_CALLBACK,
-  );
-  //http://dev.sina.org/user/1/relationships/75/remove?destination=user/2
-  return $items;
-}
-
-/**
- * Process relationship request.
- * @see user_relationships_ui_request_submit
- */
-function love_ajax_user_relationships_ui_request_submit($requestee_id,$rtid) {
-  global $user;
-  $requester = $user;
-  $requestee = user_load($requestee_id);
-  // $relationships_type = user_relationships_type_load($rtid);
-  // dpm($relationships_type);
-  if($rtid == '1'){//1 粉丝
-    $current_relationships = user_relationships_load(array('rtid' => $rtid,"requester_id" => $user->uid,'between' => array($requester->uid, $requestee->uid)));
-
-    if($current_relationships){
-      drupal_set_message(t('你已经是Ta的粉丝了，请勿重复请求！'));
-    }else{
-      $relationship = new stdClass;
-      $relationship->requestee = $requestee;
-      $relationship->requester = $user;
-      $relationship->type = user_relationships_type_load($rtid);
-      $relationship = user_relationships_request_relationship($relationship);
-      if ($relationship === FALSE) {
-        drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
-      }else{
-        drupal_set_message(t('关注成功，你现在是Ta的粉丝了～！'));
-      }
-    }
-
-  }elseif($rtid == '2'){//2 熟人
-    //熟人rtid=2是单向关系，不需要互相请求，只一方即可。
-    $current_relationships = user_relationships_load(array('rtid' => $rtid,'between' => array($requester->uid, $requestee->uid)),array('sort'=>'rtid'));
-    if(count($current_relationships)){
-      if($current_relationships[$rtid][0]->approved) {
-        drupal_set_message(t('你们已经是熟人关系了，请勿重复请求!'));
-      }else {
-        drupal_set_message(t('你已经发送过熟人请求，请勿重复发送!'));
-      }
-    
-    }else{
-      $relationship = new stdClass;
-      $relationship->requestee = $requestee;
-      $relationship->requester = $user;
-      $relationship->type = user_relationships_type_load($rtid);
-      $relationship = user_relationships_request_relationship($relationship);
-      if ($relationship === FALSE) {
-        drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
-      }else{
-         drupal_set_message(t('恭喜，你的熟人请求已发送～，请耐心等待对方的确认!'));
-      }
-    }
-  }
-  drupal_goto();
-  return '';
-}
-
 function _statuses_page($account) {
   $account = user_load($account);
   $output = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
@@ -349,10 +269,10 @@ function _statuses_page($account) {
 //$value = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
 function love_layout_menu_alter(&$items) {
 
-  $items['publish'] = $items['node/add/photo'];
-  $items['publish']['title'] = t('+Photo');
-  $items['publish']['menu_name'] = 'main-menu';
-  
+  //$items['publish'] = $items['node/add/photo'];
+  $items['node/add/photo']['title'] = t('+');
+  $items['node/add/photo']['menu_name'] = 'main-menu';
+
   // Example - disable the page at node/add
   $items['messages']['title callback'] = 'privatemsg_title_callback_alter';
   $items['messages/recent'] = $items['messages'];
@@ -365,7 +285,7 @@ function love_layout_menu_alter(&$items) {
   $items['myspace']['menu_name'] = 'love';
   $items['myspace']['access callback'] = 'user_is_logged_in';
 
-  $items['publish/photo'] = $items['publish'];
+  $items['publish/photo'] = $items['node/add/photo'];
   $items['publish/photo']['title'] = t('上传相片');
   $items['publish/photo']['menu_name'] = 'love';
 
@@ -411,7 +331,10 @@ function privatemsg_title_callback_alter($title = NULL) {
 function love_layout_admin_paths_alter(&$paths) {
   $paths['user/*/edit'] = FALSE;
   $paths['user/*/edit/main'] = FALSE;
-    $paths['user/*/edit/believe'] = FALSE;
+  $paths['user/*/edit/believe'] = FALSE;
+
+  $paths['node/add/*'] = FALSE;
+    
 }
 
 function love_layout_preprocess_page(&$variables) {
@@ -472,28 +395,7 @@ function love_layout_form_user_login_alter(&$form, &$form_state, $form_id) {
 
       $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
 }
-/*
-* Implements HOOK_form_user_profile_form_alter
-* @see druedu_layout_alter_form_user_profile_form_alter
-*/
-function love_layout_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
-  dpm($form);
-  $form['accordions'] = array(
-    '#type' => 'fieldset',
-    '#weight' => 0,
-  );
-  $special_case = array('field_firstname', 'field_lastname');
-  foreach($form as $key => $field) {
-    if(is_array($field) && (strstr($key,'field_') || strstr($key, 'group_')) && !in_array($key , $special_case)) {
-      ($form[$key][$field['#language']]['#required']) ? $required = '  <span class="summary">('.t('Field required').')</span>' : $required = '';
-      $form[$key]['#type'] = 'fieldset';
-      $form[$key]['#title'] =  $form[$key][LANGUAGE_NONE]['#title']. $required;
-      $form[$key]['#collapsible'] = TRUE;
-      $form[$key]['#collapsed'] = TRUE;
-      $form[$key]['#group'] = 'accordions' ;
-    }
-  }
-}
+
 
 /**
  * Implements hook_user_view().

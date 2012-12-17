@@ -1,6 +1,87 @@
 <?php
 
 /**
+ * Implements hook_menu().
+ */
+function love_menu() {
+  // $items['user/%/statuses'] = array(
+  //   'title' => 'Statuses',
+  //   'page callback'    => '_statuses_page',
+  //   'page arguments'   => array(1),
+  //   'file'             => 'privatemsg.pages.inc',
+  //   'access callback' => 'statuses_user_access',
+  //   'access arguments' => array('add'),
+  //   'type' => MENU_LOCAL_TASK,
+  // );
+  //http://dev.sina.org/relationship/12/request/1?destination=user/12
+  $items['ajax/relationship/%/request/%'] = array(
+    'title' => 'request',
+    'page callback'    => 'love_ajax_user_relationships_ui_request_submit',
+    'page arguments'   => array(2,4),
+    'access callback' => TRUE, 
+    // if (!user_relationships_can_request($user, $rtype) || !user_relationships_can_receive($account, $rtype))
+    'type' => MENU_CALLBACK,
+  );
+  //http://dev.sina.org/user/1/relationships/75/remove?destination=user/2
+  return $items;
+}
+
+/**
+ * Process relationship request.
+ * @see user_relationships_ui_request_submit
+ */
+function love_ajax_user_relationships_ui_request_submit($requestee_id,$rtid) {
+  global $user;
+  $requester = $user;
+  $requestee = user_load($requestee_id);
+  // $relationships_type = user_relationships_type_load($rtid);
+  // dpm($relationships_type);
+  if($rtid == '1'){//1 粉丝
+    $current_relationships = user_relationships_load(array('rtid' => $rtid,"requester_id" => $user->uid,'between' => array($requester->uid, $requestee->uid)));
+
+    if($current_relationships){
+      drupal_set_message(t('你已经是Ta的粉丝了，请勿重复请求！'));
+    }else{
+      $relationship = new stdClass;
+      $relationship->requestee = $requestee;
+      $relationship->requester = $user;
+      $relationship->type = user_relationships_type_load($rtid);
+      $relationship = user_relationships_request_relationship($relationship);
+      if ($relationship === FALSE) {
+        drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
+      }else{
+        drupal_set_message(t('关注成功，你现在是Ta的粉丝了～！'));
+      }
+    }
+
+  }elseif($rtid == '2'){//2 熟人
+    //熟人rtid=2是单向关系，不需要互相请求，只一方即可。
+    $current_relationships = user_relationships_load(array('rtid' => $rtid,'between' => array($requester->uid, $requestee->uid)),array('sort'=>'rtid'));
+    if(count($current_relationships)){
+      if($current_relationships[$rtid][0]->approved) {
+        drupal_set_message(t('你们已经是熟人关系了，请勿重复请求!'));
+      }else {
+        drupal_set_message(t('你已经发送过熟人请求，请勿重复发送!'));
+      }
+    
+    }else{
+      $relationship = new stdClass;
+      $relationship->requestee = $requestee;
+      $relationship->requester = $user;
+      $relationship->type = user_relationships_type_load($rtid);
+      $relationship = user_relationships_request_relationship($relationship);
+      if ($relationship === FALSE) {
+        drupal_set_message(user_relationships_get_message('unknown_error', $relationship));
+      }else{
+         drupal_set_message(t('恭喜，你的熟人请求已发送～，请耐心等待对方的确认!'));
+      }
+    }
+  }
+  drupal_goto();
+  return '';
+}
+
+/**
  * Implements of hook_theme().
  */
 function love_theme($existing, $type, $theme, $path) {

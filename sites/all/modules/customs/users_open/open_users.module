@@ -45,7 +45,7 @@ function open_users_user_delete($account) {
     ->condition('uid', $account->uid)
     ->execute();
 }
-/**
+/*
  * 获取用户绑定信息 即users_open表内容
  * return obj
  * 
@@ -99,6 +99,7 @@ function open_users_bandapi($open_user,$jump=true){
       //未登录状态  
       // TO DO: 弹出新窗口，让用户输入Email地址
       $_SESSION['temp_open_user'] = $open_user;
+      drupal_set_message('您还没有注册，微薄登录不可用，【永不止息】目前只接受熟人邀请注册，您可以填写邮箱来申请排队内测～');
       drupal_goto('open_users/email');      
     }
   }else{
@@ -170,7 +171,7 @@ function open_users_register($open_user,$module='open_users'){
 	    'name' => $name,
 	    'pass'=>$pass, 
 	    'mail'=>$open_user['open_mail'],
-	    'status'=>1,
+	    'status'=>0,//love custom not let user form weibo reg
 	    'init'=>$open_user['open_mail'],
 	    'picture'=>$open_user['open_picture'],
 	    'signature'=>$open_user['open_signature'],
@@ -183,10 +184,11 @@ function open_users_register($open_user,$module='open_users'){
       return;
     }
   	user_set_authmaps($account, array("authname_$module" => $name));
-		
-		drupal_set_message('已为你成功创建帐号，随机密码：'.$pass.'，如果你需要从本站直接登录，请记住此密码或'.l('立即修改', 'user/'.$account->uid.'/edit'));
+		//hide info for love custom
+		// drupal_set_message('已为你成功创建帐号，随机密码：'.$pass.'，如果你需要从本站直接登录，请记住此密码或'.l('立即修改', 'user/'.$account->uid.'/edit'));
     if($open_user['open_name'] <> $user_info['name']){
-      drupal_set_message('您的用户名 '.$open_user['open_name'].' 已经被注册，您可以使用新的用户名 '.$user_info['name'].' ，您也可以'.l('修改用户名', 'user/'.$account->uid.'/edit'));
+        //hide info for love custom
+        // drupal_set_message('您的用户名 '.$open_user['open_name'].' 已经被注册，您可以使用新的用户名 '.$user_info['name'].' ，您也可以'.l('修改用户名', 'user/'.$account->uid.'/edit'));
   		return $account;
  		}    
   }
@@ -270,9 +272,9 @@ function open_users_email_validate($form, &$form_state) {
 function open_users_email_submit($form, &$form_state){
 	$mail = trim($form_state['values']['user_band_login_email']);
 	$ac = user_load_by_mail($mail);
-	$uid=0;
+	$uid = 0;
 	if($ac) {
-		$uid=$ac->uid;
+		$uid = $ac->uid;
 	}
 	$open_user = $_SESSION['temp_open_user'];
 	if( $uid == 0){ //$open_user中的Email尚未注册
@@ -285,12 +287,15 @@ function open_users_email_submit($form, &$form_state){
 	$account = user_load($uid);
 	$module = 'open_users';
 	user_set_authmaps($account, array("authname_$module" => $account->name));
-	// Log user in.
+  //love custom not let login.
+
+	/*/ Log user in.
 	$form_state['uid'] = $account->uid;
 	user_login_submit(array(), $form_state); 
 	
 	unset($_SESSION['temp_open_user']);
 	drupal_goto('user/'.$account->uid.'/edit');
+  */
 }
 /*
  * 处理绑定过程
