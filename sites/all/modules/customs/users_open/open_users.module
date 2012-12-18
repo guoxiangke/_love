@@ -111,10 +111,15 @@ function open_users_bandapi($open_user,$jump=true){
 		user_set_authmaps($account, array("authname_$module" => $account->name));
 		// Log user in.
 		$form_state['uid'] = $account->uid;
-		user_login_submit(array(), $form_state); 
-  } 
-  if($jump){
-    //drupal_goto(); // jump to <front>
+    if($account->status) {
+      user_login_submit(array(), $form_state); 
+    }else{
+      drupal_set_message(t('对不起，您的帐户已经被登记，还没有熟人邀请，暂时不能通过微博登陆！'), 'status', FALSE);
+    }
+  
+    if($jump){
+      //drupal_goto(); // jump to <front>
+    }
   }
 }
 /**
@@ -189,8 +194,8 @@ function open_users_register($open_user,$module='open_users'){
     if($open_user['open_name'] <> $user_info['name']){
         //hide info for love custom
         // drupal_set_message('您的用户名 '.$open_user['open_name'].' 已经被注册，您可以使用新的用户名 '.$user_info['name'].' ，您也可以'.l('修改用户名', 'user/'.$account->uid.'/edit'));
-  		return $account;
- 		}    
+ 		} 
+    return $account;   
   }
  
 }
@@ -278,7 +283,7 @@ function open_users_email_submit($form, &$form_state){
 	}
 	$open_user = $_SESSION['temp_open_user'];
 	if( $uid == 0){ //$open_user中的Email尚未注册
-		$open_user['open_mail'] = $mail;
+		$open_user['open_mail'] = $mail;dpm($open_user,'$open_user1');
 		$user = open_users_register($open_user);
 		$uid = $user->uid;
 	}
@@ -296,6 +301,8 @@ function open_users_email_submit($form, &$form_state){
 	unset($_SESSION['temp_open_user']);
 	drupal_goto('user/'.$account->uid.'/edit');
   */
+  drupal_set_message(t('您的请求信息已登记，请耐心等待审核及注册邀请函！'), 'status', FALSE);
+  drupal_goto();
 }
 /*
  * 处理绑定过程

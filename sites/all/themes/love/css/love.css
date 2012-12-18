@@ -2,7 +2,7 @@ body.not-logged-in {
     background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html  #2FADDF E00000 大红*/
 }
 /*page-user-register**/
-body.page-user-password , body.page-user-register{
+body.page-user-password , body.page-user-register, body.page-open-users{
     background: #FFF;
 }
 

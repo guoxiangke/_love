@@ -70,7 +70,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
       <?php endif; ?>
       <?php if (!user_is_anonymous()): ?>
       <div class="pull-right">
-          <?php print $menu_user_picture; ?>
+          <?php global $user;print l($menu_user_picture,'user/'.$user->uid,array('html'=>TRUE,'attributes'=>array('title'=>$user->name))); ?>
       </div>
       <?php endif; ?>
    </nav>

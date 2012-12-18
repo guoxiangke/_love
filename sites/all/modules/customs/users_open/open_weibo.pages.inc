@@ -25,7 +25,7 @@ function weibo_login() {
 		try {
 			$token = $o->getAccessToken( 'code', $keys ) ;
 		} catch (OAuthException $e) {
-			dpm($e,'OAuthException');			 
+			//dpm($e,'OAuthException');			 
 			drupal_set_message('新浪微博帐号验证失败', 'error');
 			drupal_goto('user');
 		} 

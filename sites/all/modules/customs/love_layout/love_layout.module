@@ -53,7 +53,7 @@ function love_layout_user_block() {
   global $user;
   //TODO: 
   $account = user_load(arg(1));
-  $account = $account?$account:$user;
+  $account = $account->uid?$account:$user;
   $variables['account'] = $account;
   $picture = love_layout_template_preprocess_user_picture($variables);
   if($account->uid)
@@ -280,10 +280,10 @@ function love_layout_menu_alter(&$items) {
   $items['messages/recent']['title'] = t('Messages');
   //$items['messages/recent']['title callback'] = 'privatemsg_title_callback_alter';
 
-  $items['myspace'] = $items['user'];
-  $items['myspace']['title'] = t('Myspace');
-  $items['myspace']['menu_name'] = 'love';
-  $items['myspace']['access callback'] = 'user_is_logged_in';
+
+  $items['user']['title'] = t('Myspace');
+  $items['user']['menu_name'] = 'love';
+  $items['user']['access callback'] = 'user_is_logged_in';
 
   $items['publish/photo'] = $items['node/add/photo'];
   $items['publish/photo']['title'] = t('上传相片');
@@ -349,20 +349,12 @@ function love_layout_preprocess_page(&$variables) {
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {
-  if ($form_id == 'user_register_form') {
-    # code... if 
-
-  /*$picture = $form['picture'];
-  $signature_settings = $form['signature_settings'];
-  unset($form['picture']);
-  unset($form['signature_settings']);
-  $form['profile_main']['picture'] = $picture;
-  //array_unshift($form['account'],$picture);
-  $form['profile_main']['signature_settings'] = $signature_settings;*/
-  }
 
   if ($form_id == 'user_login') {/**/
     $form['name']['#title'] = '邮箱';
+  }
+  if($form_id == 'privatemsg_new') {
+    $form['subject']['#access'] = FALSE;
   }
 }
 // when the bug of i18n + og_field   resolve ,can user below.

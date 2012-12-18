@@ -156,7 +156,11 @@
 		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
 		<?php if (isset($flag)): ?>
 		<span class="flag"> <?php print $flag; ?> </span>
-		<span><img title="收藏" src="http://simg.sinajs.cn/xblogstyle/images/common/icon_like.png"></span>
+		<span><ul>
+		 			<li><a title="赞" href=""><i class="icon-star-empty"></i></a></li>
+		 			<li><a title="踩" href=""><i class="icon-star"></i></a></li>
+		 		</ul>
+		</span>
 	<?php endif; ?>
 	</div>
 	<div class="t-footer clearfix">

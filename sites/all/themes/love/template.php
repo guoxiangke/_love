@@ -41,8 +41,9 @@ function love_preprocess_page(&$vars) {
   if (isset($vars['secondary_menu'])) {
     //TODO: XXX Docy menu @see love_menu_alter() love_dynamic_menu_call()
     //dynamic menu of userName in navbar.
-    global $user;if($user->uid)
-    $vars['secondary_menu']['menu-2']['title'] = $user->name;
+    global $user;
+    //if($user->uid)
+    //$vars['secondary_menu']['menu-2']['title'] = $user->name;
     $vars['secondary_nav'] = theme('links__system_secondary_menu', array(
       'links' => $vars['secondary_menu'],
       'attributes' => array(
@@ -212,6 +213,7 @@ function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     }
 
 }
+
 function love_preprocess_block(&$variables, $hook) {
 // Add a count to all the blocks in the region.
  $variables['classes_array'][] = 'clearfix';
@@ -221,4 +223,26 @@ function love_preprocess_block(&$variables, $hook) {
 //if ($variables['block_html_id'] == 'block-system-main') {
 //  $variables['theme_hook_suggestions'] = array_diff($variables['theme_hook_suggestions'], array('block__no_wrapper'));
 //}
+}
+/**
+ *  fixed private msg bug [user]
+ *  http://drupal.org/node/1749106  #3
+ */
+
+function love_privatemsg_username($variables) {
+  $recipient = $variables['recipient'];
+  $options = $variables['options'];
+  if (!isset($recipient->uid)) {
+    $recipient->uid = $recipient->recipient;
+  }
+  if (!empty($options['plain'])) {
+    $name = check_plain(format_username($recipient));
+    if (!empty($options['unique'])) {
+      //$name .= ' [user]'; //CHANGED: do not addd user
+    }
+    return $name;
+  }
+  else {
+    return theme('username', array('account' => $recipient));
+  }
 }
