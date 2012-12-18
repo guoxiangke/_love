@@ -334,6 +334,7 @@ function love_layout_admin_paths_alter(&$paths) {
   $paths['user/*/edit/believe'] = FALSE;
 
   $paths['node/add/*'] = FALSE;
+  $paths['node/*/delete'] = FALSE;
     
 }
 
@@ -393,8 +394,19 @@ function love_layout_form_user_login_alter(&$form, &$form_state, $form_id) {
  * Implements hook_user_view().
  * @see statuses_user_view()
  */
-function love_layout_user_view($account, $view_mode) {
-
+function love_layout_user_view_alter(&$build) {
+  //dpm($build);
+  $build['privatemsg_send_new_message']['#access'] = FALSE;
+  global $user;
+  if(arg(1)){
+    $ac = user_load(arg(1));
+    if($user->uid == $ac->uid){
+      //$build['privatemsg_send_new_message']['#access'] = FALSE;
+      
+    }else{
+      $build['summary']['#access'] = FALSE;
+    }
+  }
   //drupal_add_css(drupal_get_path('module', 'love_layout').'/css/profiles.css');
 
 }

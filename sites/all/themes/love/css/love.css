@@ -833,8 +833,11 @@ li:hover [class^="icon-"]:before,
 li:hover [class*=" icon-"]:before {
   font-size: 24px;
   vertical-align: middle;
+  text-decoration:none;
 }
-
+.view-id-index li{
+  list-style:none;
+}
 .ml-24 {
   margin-left: -24px;
 }
