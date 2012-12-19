@@ -66,7 +66,7 @@ function love_layout_user_block() {
                      '.$picture.'
                   </div>
                   <div class="description description-with-follow">
-                    '.$signature.'
+                    '.truncate_utf8($signature, $max_length=120, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1).'
 
                   </div>
                   <div class="links links-with-follow">
@@ -266,6 +266,51 @@ function _statuses_page($account) {
   return $output;
 }
 
+/**
+ * Implements hook_menu().
+ */
+function love_layout_menu() {
+  $items = array();
+  $items['user/%/statuses'] = array(
+    'title' => t('Statuses'),
+    'description' => 'User statuses.',
+    'page callback' => '_love_statuses_user_view',
+    'page arguments' => array(1),
+    'access arguments' => array('Update and view own stream'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+/**
+ * Implements hook_user_view().
+ * @see statuses_user_view()
+ */
+function _love_statuses_user_view($account) {
+  if (variable_get('statuses_profile', 1)) {
+    $account = user_load($account);
+    $value = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
+    // Don't show this section if there's nothing there or the user doesn't have permission to see it.
+    if (empty($value)) {
+      return;
+    }
+    if (!isset($account->content['statuses'])) {
+      $account->content['statuses'] = array();
+    }
+    $account->content['statuses'] += array(
+      '#type' => 'user_profile_category',
+      '#attributes' => array('class' => array('statuses-profile-category')),
+      '#weight' => -5,
+      '#title' => t('Messages'),
+    );
+    $account->content['statuses']['status'] = array(
+      '#type' => 'user_profile_item',
+      '#title' => '',
+      '#markup' => $value,
+      '#attributes' => array('class' => array('statuses profile')),
+    );
+    return $account->content['statuses'];
+  }
+}
 //$value = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
 function love_layout_menu_alter(&$items) {
 
@@ -350,10 +395,6 @@ function love_layout_preprocess_page(&$variables) {
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {
-
-  if ($form_id == 'user_login') {/**/
-    $form['name']['#title'] = '邮箱';
-  }
   if($form_id == 'privatemsg_new') {
     $form['subject']['#access'] = FALSE;
   }
@@ -379,15 +420,6 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
   drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
 }
 
-/**
- * add link to login -custom page.
- */
-function love_layout_form_user_login_alter(&$form, &$form_state, $form_id) {
-      $items = array();
-      $items[] = l(t('Request new password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
-
-      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
-}
 
 
 /**
@@ -395,7 +427,6 @@ function love_layout_form_user_login_alter(&$form, &$form_state, $form_id) {
  * @see statuses_user_view()
  */
 function love_layout_user_view_alter(&$build) {
-  //dpm($build);
   $build['privatemsg_send_new_message']['#access'] = FALSE;
   global $user;
   if(arg(1)){
@@ -408,7 +439,12 @@ function love_layout_user_view_alter(&$build) {
     }
   }
   //drupal_add_css(drupal_get_path('module', 'love_layout').'/css/profiles.css');
-
+  if (variable_get('statuses_profile', 1)) {
+    if (isset($build['statuses'])) {
+      unset($build['statuses']);
+      //$build['statuses']['#access'] = FALSE;
+    }
+  }
 }
 
 

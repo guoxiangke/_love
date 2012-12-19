@@ -521,8 +521,10 @@ function logintoboggan_user_register_submit($form, &$form_state) {
     $message = t('Thank you for applying for an account. Your account is currently pending approval by the site administrator.<br />Once it has been approved, you will receive an e-mail containing further instructions.');
   }
 
-  // Mail the user.
-  _user_mail_notify($mailkey, $account);
+  if(isset($mailkey)) {// Mail the user.
+    _user_mail_notify($mailkey, $account);
+  //hack by dale //http://drupal.org/node/1427544#comment-6279020
+  }
 
   drupal_set_message($message);
 

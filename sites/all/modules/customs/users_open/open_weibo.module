@@ -18,7 +18,7 @@ function open_weibo_menu() {
     'file' => 'open_weibo.pages.inc',
   );
   $items['user/%user/open_users/weibo'] = array(
-    'title' => 'weibo个人设置',
+    'title' => t('Weibo Settings'),
     'page callback' => 'open_weibo_user_config',
     'page arguments' => array(1),
     'access callback' => 'user_edit_access',

@@ -10,7 +10,7 @@
 
 Drupal.behaviors.LoveInit = {
   attach: function(context) {
-
+  	
   }
 }
 })(jQuery);

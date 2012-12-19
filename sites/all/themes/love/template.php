@@ -168,6 +168,22 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
  
 }
 
+/**
+ * add link to login -custom page.
+ */
+function love_form_user_login_alter(&$form, &$form_state, $form_id) {
+
+      $form['name']['#title'] = '邮箱';
+      if(isset( $form['open_weibo_login'])){
+        $form['actions']['weibo'] = $form['open_weibo_login'];
+        $form['open_weibo_login']['#access'] = FALSE;
+      }
+      $items = array();
+      $items[] = l(t('Request new password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
+
+      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
+}
+
 function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
 
   //$form['account']['mail']['#disabled']=TRUE;

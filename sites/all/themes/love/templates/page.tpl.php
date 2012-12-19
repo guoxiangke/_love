@@ -128,13 +128,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
       </div>
     </div>
   </div><!-- /container-fluid -->
-  <div class="top"> <a href="#"><img alt="Scroll to Top" src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/images/scroll-top.png" style="opacity: 1;"></a>
-    <div class="clear"></div>
-    <div class="scroll">
-        <p>
-            To Top        </p>
-    </div>
-  </div>
+  <a href="#" class="scrollup">Scroll</a>
   <footer class="footer container">
     <?php print render($page['footer']); ?>
   </footer>
