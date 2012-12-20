@@ -178,3 +178,15 @@ function love_ctools_plugin_api($module, $api) {
     return array('version' => 1);
   }
 }
+/**
+ * bug fix
+ * @see http://drupal.org/node/1286876#comment-5294866
+ */
+function love_form_node_type_form_alter(){
+  // if (module_exists('token')) {
+  //     $form['auto_nodetitle']['token_help'] = array(
+  //       '#theme' => 'token_tree',
+  //       '#token_types' => array('node'),
+  //     );
+  // }
+}

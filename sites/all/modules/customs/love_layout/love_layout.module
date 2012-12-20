@@ -5,7 +5,7 @@
 function love_layout_block_info() {
   $blocks = array();
   $blocks['love_user_block'] = array(
-    'info' => t('the user info display on proile page.'),
+    'info' => t('User info'),
     //'region' => 'sidebar_first',
   );
   //Introduce of this sites on user/* page .when not login.
@@ -52,14 +52,51 @@ function love_layout_block_view($delta = '') {
 function love_layout_user_block() {
   global $user;
   //TODO: 
-  $account = user_load(arg(1));
-  $account = $account->uid?$account:$user;
+  // if(arg(0) == 'user'){
+  //   $account = user_load(arg(1));
+  //   $account = $account->uid?$account:$user;
+  // }else {
+  //   $account = $user;
+  // }
+  // $account = $account->uid?$account:$user;
+  $account = $user;
   $variables['account'] = $account;
+  $variables['image_style'] = 'sc250';
   $picture = love_layout_template_preprocess_user_picture($variables);
   if($account->uid)
   $signature = $account->signature?$account->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
   $variables['account'] = $account;
-  $output = '
+  // '.l('<em class="icon-setting"></em>完善资料','user/'.$account->uid.'/edit/believes',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
+  //'.l('<em class="icon-upload"></em>进入相册','user/'.$account->uid.'',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
+  $output = '<div class="right-module module-selfInfo" data-log="userIntro">
+            '.$picture.'
+            <div class="module-selfInfo-inner">
+               <div class="module-selfInfo-arrow">
+                  <em class="icon-user-arrow"></em>
+               </div>
+               <div class="module-selfInfo-title">
+                  <h2><a class="link-mt" data-log="nickname" target="_blank" href="/601017">'.$account->name.'</a></h2>
+               </div>
+               <div id="selfInfo" class="module-selfInfo-setting">
+                  <ul>
+                     <li>
+                        <h3 class="text-md">个人资料</h3>
+                        
+                     </li>
+                     <li class="noBg">
+                        <h3 class="text-md">我的相册</h3>
+                     </li>
+                     <li>
+                        <h3 class="text-md">我的缘分</h3>
+                        <a class="link-mt" href="/followers" target="_blank">被收藏0</a>
+                        <span class="text-sd fR" style="margin:-1px 3px 0;">|</span>
+                        <a class="link-mt" href="/following" target="_blank">收藏<em class="js-following-count">7</em></a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>';
+  $output2 = '
   <div class="aside">
               <div class="info-box">
                   <div class="avatar">
@@ -99,7 +136,7 @@ function love_layout_block_view_alter(&$data, $block) {
 
   if($block->delta == 'my_latest_visitors'){
     global $user;
-    $limit = variable_get('user_visits_block_items_' . $block->delta, 9);
+    $limit = variable_get('user_visits_block_items_' . $block->delta, 8);
     $data['content'] =  user_visits_display_block_4love($user->uid, $limit);
   }
 
@@ -115,7 +152,7 @@ function love_layout_block_view_alter(&$data, $block) {
 /**
  * Get latest visitors for block content
  */
-function user_visits_display_block_4love($uid = NULL, $limit = 9) {
+function user_visits_display_block_4love($uid = NULL, $limit = 8) {
   $output = "";
   if (!$uid && (arg(0) == 'user' && is_numeric(arg(1)))) {
     $uid = arg(1);
@@ -208,7 +245,9 @@ function love_layout_template_preprocess_user_picture($variables) {
       $alt = $variables['timestamp'] ?  t('!time ago', array('!time' => format_interval(REQUEST_TIME - $variables['timestamp']))) : '';
       // If the image does not have a valid Drupal scheme (for eg. HTTP),
       // don't load image styles.
+
       if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+        $style = isset($variables['image_style'])?$variables['image_style']:$style;
         $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
       }
       else {
@@ -227,7 +266,7 @@ function love_layout_template_preprocess_user_picture($variables) {
  * Get latest visitors for block content.
  * @see user_visits_adv_visitors_block()
  */
-function _love_user_visits_adv_visitors_block($limit = 9) {
+function _love_user_visits_adv_visitors_block($limit = 8) {
   global $user;
   $output = '';
 
@@ -396,8 +435,13 @@ function love_layout_preprocess_page(&$variables) {
     $variables['body_classes'] .= 'error-404,';
   }  */
   //module_load_include('inc', 'love_layout', 'love_layout.customs'); 
-    module_load_include('inc', 'node', 'node.pages'); 
-   $variables['add_photo'] = node_add('photo');
+  module_load_include('inc', 'node', 'node.pages'); 
+  module_load_include('inc', 'love_layout', 'love_layout.customs');  
+  $variables['add_photo'] = _node_add4love('photo');
+  //feedback of webform.
+  $node = node_load(19);
+  $variables['feedback'] = _node_page_view4love($node);
+
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {
