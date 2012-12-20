@@ -29,6 +29,15 @@ Drupal.behaviors.statusInit = {
       return false;
   });
 
+  $('.menu-457').click(function(e){
+    e.preventDefault();
+    options = {
+      keyboard: false
+    };
+    $('#add-photo').modal('show');
+  });
+
+
  }
 };
 

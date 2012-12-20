@@ -356,6 +356,9 @@ function love_layout_menu_alter(&$items) {
   //加认识 男-女
   //-认识
   //互相认识 转角缘分 
+//http://drupal.org/node/1336212#comment-6049694 bug fix when node_add_form in addtional
+   $items['file/ajax']['file'] = 'node.pages.inc';
+   $items['file/ajax']['file path'] = drupal_get_path('module', 'node');
 }
 /**
  * multilanguage t() for message.
@@ -392,11 +395,20 @@ function love_layout_preprocess_page(&$variables) {
   elseif (preg_match('@HTTP/1\.[01]\x20+404@', $headers)) {
     $variables['body_classes'] .= 'error-404,';
   }  */
+  //module_load_include('inc', 'love_layout', 'love_layout.customs'); 
+    module_load_include('inc', 'node', 'node.pages'); 
+   $variables['add_photo'] = node_add('photo');
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {
   if($form_id == 'privatemsg_new') {
     $form['subject']['#access'] = FALSE;
+  }
+  if($form_id == 'webform_client_form_19') {
+    $form['submitted']['email']['#access'] = FALSE;
+  }
+  if($form_id == 'photo_node_form'){
+   // dpm($form);
   }
 }
 // when the bug of i18n + og_field   resolve ,can user below.

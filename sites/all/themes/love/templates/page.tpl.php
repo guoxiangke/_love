@@ -63,15 +63,35 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
         </div>
       <?php endif; ?>
 
-     	<?php if ($secondary_nav): ?>
+     <!-- 	<?php if ($secondary_nav): ?>
      		<div class="pull-right ml-24">
           <?php print $secondary_nav; ?>
         </div>
-      <?php endif; ?>
+      <?php endif; ?> -->
+
+
       <?php if (!user_is_anonymous()): ?>
       <div class="pull-right">
-          <?php global $user;print l($menu_user_picture,'user/'.$user->uid,array('html'=>TRUE,'attributes'=>array('title'=>$user->name))); ?>
-      </div>
+        <span class="btn-group">
+          <a class="btn" href="#"  data-toggle="dropdown"  rel="tooltip" data-placement="bottom" data-original-title="<?php echo $user->name;?>"> <i class="icon-user"></i><?php print truncate_utf8($user->name, $max_length=7, $wordsafe = TRUE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);?></a>
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-caret-down"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="#"><i class="icon-bell"></i> 通知</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="icon-pencil"></i> 编辑个人资料</a></li>
+              <li><a href="#"><i class="icon-pencil"></i> 编辑信仰资料</a></li>
+              <li><a href="#"><i class="icon-heart"></i> 编辑择偶标准</a></li>
+          </ul>
+         </span>
+        <span class="menu-pic">
+        <?php global $user;print l($menu_user_picture,'user/'.$user->uid,array('html'=>TRUE,'attributes'=>array('title'=>$user->name))); ?>
+        </span>
+        <span class="secondary-menu menu-group"><a href="/relationships/my" rel="tooltip" data-placement="bottom" title="我的关系"><i class="icon-group  icon-large"></i></a></span>
+        <span class="secondary-menu menu-invite"><a href="/invite/others" rel="tooltip" data-placement="bottom" title="邀请熟人"><i class="icon-gift  icon-large"></i></a></span>
+        <span class="secondary-menu menu-message"><a href="/messages/recent" rel="tooltip" data-placement="bottom" title="消息"><i class="icon-envelope  icon-large"></i></a></span>
+        <span class="secondary-menu menu-logout"><a href="/user/logout" rel="tooltip" data-placement="bottom" title="退出"><i class="icon-signout  icon-large"></i></a></span>
+        
+        </div>
       <?php endif; ?>
    </nav>
   </div></div>
@@ -129,6 +149,27 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     </div>
   </div><!-- /container-fluid -->
   <a href="#" class="scrollup">Scroll</a>
+  <div class="love-feedback" data-toggle="modal" data-target="#suggestion" >意<br>见<br>反<br>馈<br></div>
+  <!-- Modal -->
+<div id="suggestion" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">［永不止息］需要有你！</h3>
+   </div>
+   <div class="modal-body">
+    <?php $node = node_load(19); print drupal_render(node_page_view($node)) ;?>
+  </div>
+</div>
+<div id="add-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+
+     <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">添加照片，展现风采</h3>
+   </div>
+   <div class="modal-body">
+     <?php print render($add_photo); ?>
+  </div>
+</div>
   <footer class="footer container">
     <?php print render($page['footer']); ?>
   </footer>

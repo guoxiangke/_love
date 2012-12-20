@@ -79,6 +79,7 @@ function open_weibo_form_alter(&$form, $form_state, $form_id) {
 		 $form['open_weibo_login'] = array('#markup' => theme('item_list', array('items' => $items)));
 		}
 	}
+
 /**
  * Implementation of hook_form_alter
  * //TODO 判断存在的第三方模块，设置是否同步
@@ -94,7 +95,8 @@ function open_weibo_form_alter(&$form, $form_state, $form_id) {
 
 	if(isset($form['#node']) && !isset($form['#node']->nid) 
 		&& $form['#node']->type .'_node_form' == $form_id) {
-		if(in_array($form['#node']->type, array_keys($synch_types)) && $synch_types[$form['#node']->type]) {//$synch_types[$form['#node']->type] == 1
+		if(in_array($form['#node']->type, array_keys($synch_types)) && $synch_types[$form['#node']->type]) {
+		//$synch_types[$form['#node']->type] == 1
  		//启用模块，并设置同步
 			$module ='open_weibo';
 			if(module_exists($module)&&variable_get($module.'_enabled')){
@@ -180,7 +182,14 @@ function open_weibo_node_insert($node) {
 	//1.2 同步类型匹配
 	//2.节点form设置同步 
 	//3.session过期提示
-	if($node->open_weibo['synch']) {
+	$synch_types = variable_get('synch_types', NULL);
+  if(!$synch_types){
+    $synch_types = array();
+  }else{
+    $synch_types = array_filter(unserialize($synch_types));
+  }
+
+	if(in_array($node->type, array_keys($synch_types)) && $synch_types[$node->type] && $node->open_weibo['synch']) {
 		if(key_exists($node->type, $synch_types)
 		&& open_weibo_synch($node->title,$node->type,node_uri($node))){
 			drupal_set_message('Synch to weibo sucess!','status');
