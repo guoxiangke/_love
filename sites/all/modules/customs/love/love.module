@@ -190,3 +190,41 @@ function love_form_node_type_form_alter(){
   //     );
   // }
 }
+/**
+ * return the relationship of two users.
+ * ->
+ * 
+ */
+function love_ur_between($account,$rtid = 1,$requester=NULL){
+
+    global $user;
+    $rtid = $rtid?$rtid:1;//粉丝 关注
+    $requester=$requester?$requester:$user;
+    if(is_numeric($account)) {
+      $account = user_load($account);
+    }
+    $requestee = $account;
+    $ur_way = user_relationships_load(array('rtid' => array($rtid),'between' => array($requestee->uid,$requester->uid)),array('count'=>1));
+    $friends = FALSE;
+    $follow = FALSE;
+    $follower = FALSE; 
+    $no_relationships = FALSE;
+    switch ($ur_way) {
+      case '2':
+        // two-way relationships.
+        $friends = TRUE;
+        return 'friends';
+        break;
+      case '0':
+        $no_relationships = TRUE;
+        // no-way relationships.
+        return FALSE;
+        break;
+      default:
+        // one-way relationships.
+        $follow = user_relationships_load(array('rtid' => array($rtid),'between' => array($requestee->uid,$requester->uid),'requester_id'=>$requester->uid),array('count'=>1));
+        $follower = user_relationships_load(array('rtid' => array($rtid),'between' => array($requestee->uid,$requester->uid),'requester_id'=>$requestee->uid),array('count'=>1));
+        return $follow?'follow':'follower';
+        break;
+    }
+}

@@ -5,7 +5,11 @@
 function love_layout_block_info() {
   $blocks = array();
   $blocks['love_user_block'] = array(
-    'info' => t('User info'),
+    'info' => t('Love User info'),
+    //'region' => 'sidebar_first',
+  );
+  $blocks['love_profile_block'] = array(
+    'info' => t('Love User profile'),
     //'region' => 'sidebar_first',
   );
   //Introduce of this sites on user/* page .when not login.
@@ -22,105 +26,24 @@ function love_layout_block_info() {
  * Implements hook_block_view().
  */
 function love_layout_block_view($delta = '') {
+  module_load_include('inc', 'love_layout', 'love_layout.block');
   $block = array();
   switch ($delta) {
     case 'love_user_block':
       $block['subject'] = NULL;//t('User info')
-      $block['content'] = love_layout_user_block();
+      $block['content'] = love_block_user_info();
       break;
     case 'sites_introduce':
       $block['title'] = t('About Us');
         //Do not call menu_primary_local_tasks or menu_secondary_local_tasks because it does not output single item...
-      $block['content'] = '
-      <ul class="about-us">
-        <li>1.我们坚信婚姻是神所设立的，是对我们幸福生活的美好设计。</li>
-        <li>2.我们认为组建家庭是神对人的一项呼召，在家庭中彰显神的荣耀。</li>
-        <li>3.基于圣经，我们认为神所设立的美好婚姻是：一男一女、一夫一妻、一生一世,信与不信原不相配。</li>
-        <li>4.我们确信神在创世之先已未我们预备了另一半。</li>
-        <li>5.我们相信神对我们的爱永不止息。</li>
-      <div>【永不止息】只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</div>
-      <div>爱是永不止息，是互相激励成长，需要公众见证，公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀</div>
-      </ul>';//menu_local_tasks();
+      $block['content'] = love_block_about_us();
+      break;
+    case 'love_profile_block':
+      $block['subject'] = NULL;//t('User info')
+      $block['content'] = love_block_profile_info();
       break;
   }
   return $block;
-}
-
-/**
- * Get relate user info , context will be  used.
- */
-function love_layout_user_block() {
-  global $user;
-  //TODO: 
-  // if(arg(0) == 'user'){
-  //   $account = user_load(arg(1));
-  //   $account = $account->uid?$account:$user;
-  // }else {
-  //   $account = $user;
-  // }
-  // $account = $account->uid?$account:$user;
-  $account = $user;
-  $variables['account'] = $account;
-  $variables['image_style'] = 'sc250';
-  $picture = love_layout_template_preprocess_user_picture($variables);
-  if($account->uid)
-  $signature = $account->signature?$account->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
-  $variables['account'] = $account;
-  // '.l('<em class="icon-setting"></em>完善资料','user/'.$account->uid.'/edit/believes',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
-  //'.l('<em class="icon-upload"></em>进入相册','user/'.$account->uid.'',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
-  $output = '<div class="right-module module-selfInfo" data-log="userIntro">
-            '.$picture.'
-            <div class="module-selfInfo-inner">
-               <div class="module-selfInfo-arrow">
-                  <em class="icon-user-arrow"></em>
-               </div>
-               <div class="module-selfInfo-title">
-                  <h2><a class="link-mt" data-log="nickname" target="_blank" href="/601017">'.$account->name.'</a></h2>
-               </div>
-               <div id="selfInfo" class="module-selfInfo-setting">
-                  <ul>
-                     <li>
-                        <h3 class="text-md">个人资料</h3>
-                        
-                     </li>
-                     <li class="noBg">
-                        <h3 class="text-md">我的相册</h3>
-                     </li>
-                     <li>
-                        <h3 class="text-md">我的缘分</h3>
-                        <a class="link-mt" href="/followers" target="_blank">被收藏0</a>
-                        <span class="text-sd fR" style="margin:-1px 3px 0;">|</span>
-                        <a class="link-mt" href="/following" target="_blank">收藏<em class="js-following-count">7</em></a>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </div>';
-  $output2 = '
-  <div class="aside">
-              <div class="info-box">
-                  <div class="avatar">
-                     '.$picture.'
-                  </div>
-                  <div class="description description-with-follow">
-                    '.truncate_utf8($signature, $max_length=120, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1).'
-
-                  </div>
-                  <div class="links links-with-follow">
-                      <a href="">+熟人</a> /
-                      '.l(t('Messages'),'messages/new/'.$account->uid,array('query' => drupal_get_destination())).' / 
-                      '.l(t('Blog'),'user/'.$account->uid.'/blog',array('query' => drupal_get_destination())).' / 
-                      <a href="">+粉丝</a>
-                  </div>
-                  
-                  <div class="follow">
-                  '._love_user_relationships_link($variables).'
-                  </div>
-                  
-              </div>
-          </div>';
-         
-  return $output;//.drupal_render(menu_local_tasks());
 }
 
 
@@ -164,6 +87,7 @@ function user_visits_display_block_4love($uid = NULL, $limit = 8) {
     if (is_array($visitors)) {
       foreach ($visitors as $visitor) {
         $account = user_load($visitor->vuid);
+        if(isset($account->uid))
         $output .= theme('user_visits_4love', array('account' => $account, 'timestamp' => $visitor->visit));
       }
     }

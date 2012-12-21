@@ -46,17 +46,19 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 <header id="navbar" role="banner" class="navbar navbar-fixed-top">
 
 	<div class="container">
-    <div class="logo">
-      <?php if ($logo): ?>
-          
-          <a class="brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-          <span  class="site-name">永不止息<i class="icon-fire"></i></span>
-          <!--img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-          <img src="http://simg.sinajs.cn/xblogstyle/images/common/logo_act.png" alt=""-->
-        </a>
-      <?php endif;?>
-    </div>
+    
     <nav role="navigation" class="clearfix">
+      <div class="logo">
+        <?php if ($logo): ?>
+            
+            <a class="brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+            <span  class="site-name">永不止息<i class="icon-fire"></i></span>
+            <!--img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+            <img src="http://simg.sinajs.cn/xblogstyle/images/common/logo_act.png" alt=""-->
+          </a>
+        <?php endif;?>
+      </div>
+
       <?php if ($primary_nav): ?>
       	<div class="pull-left">
           <?php print $primary_nav; ?>
@@ -72,7 +74,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
       <?php if (!user_is_anonymous()): ?>
       <div class="pull-right">
-        <span class="btn-group">
+<!--         <span class="menu-user btn-group">
           <a class="btn" href="#"  data-toggle="dropdown"  rel="tooltip" data-placement="bottom" data-original-title="<?php echo $user->name;?>"> <i class="icon-user"></i><?php print truncate_utf8($user->name, $max_length=7, $wordsafe = TRUE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);?></a>
           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-caret-down"></span></a>
           <ul class="dropdown-menu">
@@ -82,11 +84,19 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
               <li class="divider"></li>
               <li><a href="#"><i class="icon-group"></i> 我的关系</a></li>
           </ul>
-         </span>
+         </span> -->
         <span class="menu-pic">
-        <?php global $user;print l($menu_user_picture,'user/'.$user->uid,array('html'=>TRUE,'attributes'=>array('title'=>$user->name))); ?>
+        <?php global $user;print l($menu_user_picture,'user/'.$user->uid,array('html'=>TRUE,'attributes'=>array('title'=>$user->name,'data-toggle'=>'dropdown'))); ?>
+          <ul class="dropdown-menu">
+              <li><a href="/user"><i class="icon-home"></i> 我的主页</a></li>
+              <li><a href="/user/<?php echo $user->uid?>/edit/main"><i class="icon-cog"></i> 编辑个人资料</a></li>
+              <li><a href="/user/<?php echo $user->uid?>/edit/believes"><i class="icon-pencil"></i> 编辑信仰资料</a></li>
+              <li><a href="/user/<?php echo $user->uid?>/edit/requirements"><i class="icon-heart"></i> 编辑择偶标准</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="icon-group"></i> 我的关系</a></li>
+          </ul>
         </span>
-        <!--span class="secondary-menu menu-group"><a href="/relationships/my" rel="tooltip" data-placement="bottom" title="我的关系"><i class="icon-group  icon-large"></i></a></span-->
+        <!--span class=" menu-group"><a href="/relationships/my" rel="tooltip" data-placement="bottom" title="我的关系"><i class="icon-group  icon-large"></i></a></span-->
         <span class="secondary-menu menu-invite"><a href="/invite/others" rel="tooltip" data-placement="bottom" title="邀请熟人"><i class="icon-gift  icon-large"></i></a></span>
         <span class="secondary-menu menu-message"><a href="/messages/recent" rel="tooltip" data-placement="bottom" title="消息"><i class="icon-envelope  icon-large"></i></a></span>
         <span class="secondary-menu menu-logout"><a href="/user/logout" rel="tooltip" data-placement="bottom" title="退出"><i class="icon-signout  icon-large"></i></a></span>

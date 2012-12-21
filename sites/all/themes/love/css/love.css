@@ -310,7 +310,21 @@ nav {
 .secondary-menu a:hover {
 	color: #FFF;
 }
-
+#navbar .pull-right span{
+  display:inline-block;
+}
+#navbar .pull-right .menu-pic {
+display: inline;
+position:relative;
+}
+#navbar .pull-right .menu-pic img{
+vertical-align: top;
+}
+.logo a.brand {padding-top:0;}
+#navbar .menu-user{
+  vertical-align: top;
+  margin-top: 0px;
+}
 .main-menu a.active{
 	background: url(../images/nav_bgn.png) no-repeat center 0;
 	_background: url(../images/nav_bgn.gif) no-repeat center 0;
@@ -514,6 +528,214 @@ float: right;
 }
 .module-selfInfo-setting{
    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+/********user profile block*********/
+.profile-basic {
+background: url("http://img3.cache.netease.com/love/image/page/profile/basicInfo_bg.png") repeat scroll left top;
+height: 250px;
+position: relative;
+margin-bottom: 14px;
+-webkit-border-radius: 3px 3px 0 0;
+-moz-border-radius: 3px 3px 0 0;
+border-radius: 3px 3px 0 0;
+margin: 0 20px;
+}
+.profile-avatar {
+background: white;
+float: left;
+height: 250px;
+position: relative;
+overflow: hidden;
+width: 250px;
+-webkit-border-radius: 3px 0 0 0;
+-moz-border-radius: 3px 0 0 0;
+border-radius: 3px 0 0 0;
+}
+.profile-avatar img {
+-webkit-border-radius: 3px 0 0 0;
+-moz-border-radius: 3px 0 0 0;
+border-radius: 3px 0 0 0;
+min-height: 250px;
+min-width: 250px;
+}
+.profile-basic-main {
+margin-left: 250px;
+padding: 19px 27px 10px;
+}
+.profile-verify {
+margin-top: 2px;
+}
+.profile-verify em, .profile-verify span, .profile-verify a {
+display: inline-block;
+vertical-align: bottom;
+margin-right: 2px;
+}
+.icon-female, .icon-female-gray {
+background-position: -209px 0;
+height: 18px;
+width: 20px;
+background-color: transparent;
+background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
+_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-repeat: no-repeat;
+display: inline-block;
+font-size: 0;
+}
+.profile-name, .profile-age {
+bottom: -2px;
+font: normal 20px/1.2 微软雅黑E\8F6F\96C5\9ED1,黑体ED1\4F53,宋体B8B\4F53;
+position: relative;
+}
+.profile-age {
+bottom: -1px;
+font: normal 16px/1.2 微软雅黑E\8F6F\96C5\9ED1,黑体ED1\4F53,宋体B8B\4F53;
+margin-left: 6px;
+}
+.icon-verify, .icon-verify-disabled {
+background-position: 0 0;
+height: 20px;
+width: 20px;
+}
+.icon-mobile-disabled {
+background-position: -26px -25px;
+}
+.icon-mobile, .icon-mobile-disabled {
+background-position: -26px 0;
+height: 20px;
+width: 20px;
+background-color: transparent;
+background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
+_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-repeat: no-repeat;
+display: inline-block;
+font-size: 0;
+}
+ .icon-verify, .icon-verify-disabled {
+background-position: 0 0;
+height: 20px;
+width: 20px;
+background-color: transparent;
+background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
+_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-repeat: no-repeat;
+display: inline-block;
+font-size: 0;
+}
+.icon-mobile-disabled {
+background-position: -26px -25px;
+}
+.icon-verify-disabled {
+background-position: 0 -25px;
+}
+.profile-basic .profileList {
+margin-top: 18px;
+}
+.profileList {
+overflow: hidden;
+}
+.profileList ul {
+list-style: none;
+}
+.profileList, .profile .form-group, .profile-monolog {
+font-size: 14px;
+}
+.profileList li {
+margin-bottom: 10px;
+}
+.profile-basic .profileList li {
+float: left;
+width: 50%;
+margin: 0 -15px 7px 0;
+list-style: none;
+}
+.profile-label {
+color: #8A8F9C;
+display: inline-block;
+text-align: right;
+width: 260px;
+}
+.profile-basic .profile-label {
+display: inline;
+text-align: left;
+width: auto;
+}
+
+.profile-relation-btn {
+padding-top: 10px;
+}
+.profile-relation-btn .btn-mess, .profile-relation-btn .btn-fav-box {
+vertical-align: top;
+}
+
+.btn-mess {
+background: #7092B9;
+display: inline-block;
+color: white;
+height: 25px;
+line-height: 25px;
+padding: 0 8px;
+}
+.btn-mess-txt {
+position: relative;
+}
+.btn-mess {
+color: white;
+line-height: 25px;
+}
+.btn-fav {
+background: #93B973;
+color: white;
+display: inline-block;
+padding: 0 8px;
+position: relative;
+height: 25px;
+line-height: 25px;
+}
+.btn-fav-txt {
+position: relative;
+padding-left: 16px;
+}
+.btn-fav {
+color: white;
+line-height: 25px;
+}
+
+.profile-elite {
+position: absolute;
+right: -11px;
+top: 19px;
+width: 150px;
+}
+.profile-elite-income, .profile-elite-corp, .profile-elite-school {
+color: white;
+display: inline;
+float: right;
+height: 28px;
+margin-right: -11px;
+text-indent: -99999em;
+}
+.elite-income .profile-elite-income, .elite-corp .profile-elite-corp, .elite-school .profile-elite-school {
+margin-right: 0;
+}
+.profile-elite-school, .profile-elite-corp{
+  background-color: transparent;
+background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
+_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-repeat: no-repeat;
+}
+.profile-elite-school{
+background-position: -441px -25px;
+width: 47px;
+}
+.profile-elite-corp {
+background-position: -390px -25px;
+width: 47px;
+}
+.profile-elite-arrow {
+position: absolute;
+right: 0;
+bottom: -4px;
+font-size: 0;
 }
 /*****************/
 
@@ -872,3 +1094,5 @@ z-index: 100;
 #page-wrapper aside.span3{
    padding-right: 11px;
 }
+
+
