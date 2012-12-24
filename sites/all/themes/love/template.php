@@ -186,7 +186,7 @@ function love_form_user_login_alter(&$form, &$form_state, $form_id) {
 
 function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
 
-  //$form['account']['mail']['#disabled']=TRUE;
+  $form['account']['mail']['#disabled']=TRUE;
   $form['relationship_invite_approve']['#default_value']='';
   $form['relationship_invite_approve']['#required']=TRUE;
   $form['relationship_invite_approve']['#weight']=-100;
