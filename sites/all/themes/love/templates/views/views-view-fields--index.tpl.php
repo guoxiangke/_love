@@ -155,13 +155,22 @@
 	<div class="t-field_photo">
 		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
 		<?php if (isset($flag)): ?>
-		<span class="flag"> <?php print $flag; ?> </span>
+		<!-- <span class="flag"> <?php print $flag; ?> </span>
 		<span><ul>
 		 			<li><a title="赞" href=""><i class="icon-star-empty"></i></a></li>
 		 			<li><a title="踩" href=""><i class="icon-star"></i></a></li>
 		 		</ul>
-		</span>
-	<?php endif; ?>
+		</span> -->
+		<?php endif; ?>
+		<?php if (isset($vote)): ?>
+		 	<div class="vote-1">
+		 	<div class=""> <?php print $vote; ?> </div>
+		 	<!-- 	<ul>
+		 			<li><a title="赞" rel="tooltip" data-placement="left" href="javascript:void(0)"><i class="icon-thumbs-up"></i></a></li>
+		 			<li><a title="踩" rel="tooltip" data-placement="right" href="javascript:void(0)"><i class="icon-thumbs-down"></i></a></li>
+		 		</ul> -->
+		 	</div>
+		<?php endif; ?>
 	</div>
 	<div class="t-footer clearfix">
 		<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
@@ -172,14 +181,7 @@
 			<?php if (isset($delete_node)): ?><span class="del"> <?php print $delete_node; ?> </span><?php endif; ?>
 		 	<?php endif; ?>
 
-		 	<?php if (isset($vote)): ?>
-		 	<div class="vote"> <?php print $vote; ?>
-		 		<ul>
-		 			<li><a title="赞" href=""><i class="icon-thumbs-up"></i></a></li>
-		 			<li><a title="踩" href=""><i class="icon-thumbs-down"></i></a></li>
-		 		</ul>
-		 	</div>
-		 	<?php endif; ?>
+
 		</div>
 	</div>
 </div>

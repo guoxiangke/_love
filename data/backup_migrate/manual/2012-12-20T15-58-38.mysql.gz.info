@@ -1,0 +1,8 @@
+filename = "2012-12-20T15-58-38"
+description = ""
+datestamp = "1355990321"
+generator = "Backup and Migrate (http://drupal.org/project/backup_migrate)"
+generatorversion = "7.x-2.x"
+sites[0][version] = "7.17"
+sites[0][name] = "永不止息"
+sites[0][url] = "http://dev.sina.org/"

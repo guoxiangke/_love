@@ -37,6 +37,13 @@ Drupal.behaviors.statusInit = {
     $('#add-photo').modal('show');
   });
 
+  // $('.t-field_photo').find('ul').hide();
+  // $('.t-field_photo img').hover(function(){
+  //   console.log($(this).parents('.t-field_photo').find('ul'));
+  //   $(this).parents('.t-field_photo').find('ul').fadeToggle();
+  // });
+
+
 
  }
 };

@@ -1095,4 +1095,18 @@ z-index: 100;
    padding-right: 11px;
 }
 
-
+/*index views */
+.vote-1,.vote-1 ul,.vote-1 ul li{
+	display:inline-block;
+}
+.t-field_photo {
+	position: relative;
+}
+.vote-1 {
+	position: absolute;
+	left: 0px;
+background-color: #FFF;
+}
+.vote-1 ul{
+	margin:0;
+}
