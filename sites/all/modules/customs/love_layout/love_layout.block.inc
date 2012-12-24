@@ -183,7 +183,7 @@ function love_block_profile_info() {
     $ur_action =l('<i class="icon-plus"></i>关注Ta',"ajax/relationship/$account->uid/request/1",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'关注Ta')));
     $ur_output = '<a href="#" rel="tooltip" data-placement="right" title="暂无关系"><i class="icon-eye-close"></i></a>';
    }
-   $privite_msg = '<a class="btn-mess mess-trigger" href="messages/new/'.$account->uid.'">
+   $privite_msg = '<a class="btn-mess mess-trigger" href="/messages/new/'.$account->uid.'">
            <span class="btn-mess-txt"><i class="icon-envelope"></i>私信</span>
           </a> ';
   }else{
@@ -202,7 +202,7 @@ function love_block_profile_info() {
 	$output = '<div id="basicInfoBox" class="profile-basic profile-basic-edit">
          <div class="profile-avatar">'.$picture.'</div>
          <div class="profile-basic-main">
-                              <div class="profile-elite elite-school js-eliteTag">
+                              <!--div class="profile-elite elite-school js-eliteTag">
                            <div class="profile-elite-school" title="">神的</div>
                            <div class="profile-elite-corp" title="">宝贝</div>
                   <div class="profile-elite-arrow">
@@ -210,7 +210,7 @@ function love_block_profile_info() {
             <em class="profile-arrow-school"></em>
             <em class="profile-arrow-corp"></em>
          </div>
-      </div>
+      </div-->
             <div class="profile-verify">
                      <em title="在线" class="icon-female"></em>
       
