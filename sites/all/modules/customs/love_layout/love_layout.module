@@ -343,8 +343,9 @@ function love_layout_admin_paths_alter(&$paths) {
   $paths['user/*/edit'] = FALSE;
   $paths['user/*/edit/main'] = FALSE;
   $paths['user/*/edit/believe'] = FALSE;
-
   $paths['node/add/*'] = FALSE;
+
+  $paths['node/*/edit'] = FALSE;
   $paths['node/*/delete'] = FALSE;
     
 }

@@ -118,7 +118,7 @@ function open_users_bandapi($open_user,$jump=true){
     }
   
     if($jump){
-      //drupal_goto(); // jump to <front>
+      drupal_goto(); // jump to <front>
     }
   }
 }

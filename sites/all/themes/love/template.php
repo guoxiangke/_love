@@ -159,7 +159,7 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
 			$form['options']['#access'] = FALSE; 
 			$form['comment_settings']['#access'] = FALSE; 
 			
-		  $form['path']['#access'] = FALSE;
+		  //$form['path']['#access'] = FALSE;
 			$form['revision_information']['#access'] = FALSE; 
 			$form['menu']['#access'] = FALSE; 
       $form['actions']['preview']['#access'] = FALSE; 
@@ -225,7 +225,7 @@ function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     $form['message']['#disabled'] = TRUE;
     //$form['message']['#title'] = t('邀请函');
     $form['from']['#access'] = FALSE;
-    //$form['submit_show']['#access'] = FALSE;
+    $form['submit_show']['#access'] = FALSE;
     $form['message']['#access'] = FALSE; 
     if(isset($form['rtid'])) {
       $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人

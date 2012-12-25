@@ -54,29 +54,6 @@ function love_block_user_info() {
                </div>
             </div>
          </div>';
-  $output2 = '
-  <div class="aside">
-              <div class="info-box">
-                  <div class="avatar">
-                     '.$picture.'
-                  </div>
-                  <div class="description description-with-follow">
-                    '.truncate_utf8($signature, $max_length=120, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1).'
-
-                  </div>
-                  <div class="links links-with-follow">
-                      <a href="">+熟人</a> /
-                      '.l(t('Messages'),'messages/new/'.$account->uid,array('query' => drupal_get_destination())).' / 
-                      '.l(t('Blog'),'user/'.$account->uid.'/blog',array('query' => drupal_get_destination())).' / 
-                      <a href="">+粉丝</a>
-                  </div>
-                  
-                  <div class="follow">
-                  '._love_user_relationships_link($variables).'
-                  </div>
-                  
-              </div>
-          </div>';
          
   return $output;//.drupal_render(menu_local_tasks());
 }
@@ -108,8 +85,16 @@ function love_block_profile_info() {
   $year_born =  date("Y",strtotime($field_birthday));
   $field_height  = $profile['main']->field_height[LANGUAGE_NONE][0]['value'];
   //TODO more....
-  if(isset($profile['main']->field_character[LANGUAGE_NONE][0]['taxonomy_term']))
-  $field_character  = $profile['main']->field_character[LANGUAGE_NONE][0]['taxonomy_term']->name;
+  if(isset($profile['main']->field_character[LANGUAGE_NONE])){
+    foreach ($profile['main']->field_character[LANGUAGE_NONE] as $key => $value) {
+      $tids[] = $value['tid'];
+    }
+    $ts = taxonomy_term_load_multiple($tids);
+    $field_character ='';
+    foreach ($ts as $key => $term) {
+      $field_character .= ' '.$term->name;
+    }
+  }
   if(isset($profile['believes'])){
     $province = $profile['believes']->field_address[LANGUAGE_NONE][0]['province'];
     $city = $profile['believes']->field_address[LANGUAGE_NONE][0]['city'];
@@ -170,12 +155,16 @@ function love_block_profile_info() {
    $my_space = FALSE;
    $ur = love_ur_between($account);
    if($ur == 'friends'){//<->
+    $ur = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$account->uid)));
+    $rid = array_keys($ur);$rid =$rid[0];
     $ur_output = '<i class="icon-retweet"></i>互相关注';
-    $ur_action =l('<i class="icon-minus"></i>取消关注',"ajax/relationship/$account->uid/request/1",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'取消关注')));
+    $ur_action =l('<i class="icon-minus"></i>取消关注',"user/{$user->uid}/relationships/$rid/remove",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'取消关注')));
    }elseif($ur == 'follow'){//->
+      $ur = user_relationships_load(array('rtid' => array(1),'between' => array($user->uid,$account->uid)));
+     $rid = array_keys($ur);$rid =$rid[0];
     $ur_output = '<i class="icon-arrow-left"></i>你关注了Ta';
 
-    $ur_action =l('<i class="icon-minus"></i>取消关注',"ajax/relationship/$account->uid/request/1",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'取消关注')));
+    $ur_action =l('<i class="icon-minus"></i>取消关注',"user/{$user->uid}/relationships/$rid/remove",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'取消关注')));
    }elseif($ur == 'follower'){//<-
     $ur_output = '<i class="icon-arrow-right"></i>Ta关注了你';
     $ur_action =l('<i class="icon-plus"></i>关注Ta',"ajax/relationship/$account->uid/request/1",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'关注Ta')));
@@ -188,16 +177,18 @@ function love_block_profile_info() {
           </a> ';
   }else{
     $ur_action =l('<i class="icon-cogs"></i>完善信息',"user/$account->uid/edit/believes",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action','btn-fav', 'mess-trigger'),'title'=>'关注Ta')));
-    $privite_msg = '<a class="btn-mess mess-trigger" href="messages/recent">
+    $privite_msg = '<a class="btn-mess mess-trigger" href="/messages/recent">
            <span class="btn-mess-txt"><i class="icon-envelope"></i>私信</span>
           </a> ';
 
-    $ur_output = '<a href="#" rel="tooltip" data-placement="right" title="nothings"><i class="icon-eye-open"></i></a>';
+    $ur_output = '';//'<a href="javascript:void(0)" rel="tooltip" data-placement="right" title="'.t('My account').'"><i class="icon-eye-open"></i></a>';
     $my_space = TRUE;
     $edit_profile_main_link = l('－－','user/'.$account->uid.'/edit/main',array('attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right')));
     $edit_profile_believes_link = l('－－','user/'.$account->uid.'/edit/believes',array('attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right')));
     $edit_profile_love_link = l('－－','user/'.$account->uid.'/edit/requirements',array('attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right')));
   }
+
+  $variables['account'] = $account;
 
 	$output = '<div id="basicInfoBox" class="profile-basic profile-basic-edit">
          <div class="profile-avatar">'.$picture.'</div>
@@ -222,7 +213,7 @@ function love_block_profile_info() {
             <div class="js-preview">
          <ul class="profileList">
             <li><span class="profile-label">身高：</span>'.$field_height.'cm</li>
-             <li><span class="profile-label">性格特点：</span>'.(isset($field_character)?$field_character:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).' </li>
+             <li><span class="profile-label">性格特点：</span>'.(isset($field_character)?truncate_utf8($field_character, $max_length=8, $wordsafe = FALSE, $add_ellipsis = TRUE):($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).' </li>
             <li><span class="profile-label">恋爱状态：</span>'.$field_marriage.'</li>
             <li><span class="profile-label">来自：</span>'.(isset($now_local)?$now_local:($my_space?$edit_profile_believes_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙神秘，没有留下踪迹！">－－</a>')).'</li>
             <li><span class="profile-label">学历：</span>'.(isset($field_degree)?$field_degree:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'</li>
@@ -236,7 +227,8 @@ function love_block_profile_info() {
             <div class="js-edit"></div>
         <div class="profile-relation-btn">
           '.$privite_msg.$ur_action.'
-      </div>
+        </div>
+        <div class="profile-ur-op">'._love_user_relationships_link($variables).'</div>
                </div>
 </div>';
 	return $output;
