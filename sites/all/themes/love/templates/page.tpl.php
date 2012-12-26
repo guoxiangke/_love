@@ -170,6 +170,15 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <?php print drupal_render($feedback);?>
   </div>
 </div>
+<div id="invite_form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">有爱分享，邀请熟人</h3>
+   </div>
+   <div class="modal-body">
+    <?php print drupal_render($invite_form);?>
+  </div>
+</div>
 <div id="add-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
 
      <div class="modal-header">

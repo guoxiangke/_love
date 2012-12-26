@@ -301,6 +301,7 @@ function love_layout_menu_alter(&$items) {
   
   $items['invite/others']['title'] = t('邀请熟人');
   $items['invite/others']['menu_name'] = 'love';
+  //$items['invite/others']['delivery callback'] = 'ajax_deliver';
 
   $items['relationships/my'] = $items['relationships'];
   $items['relationships/my']['menu_name'] = 'love';
@@ -366,7 +367,8 @@ function love_layout_preprocess_page(&$variables) {
   //feedback of webform.
   $node = node_load(19);
   $variables['feedback'] = _node_page_view4love($node);
-
+  
+  $variables['invite_form'] = drupal_get_form('invite_form');
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {

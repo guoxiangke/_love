@@ -51,7 +51,14 @@
 	//give frendly name...
 	$account = user_load($profile_uid);
 	$profile = profile2_load_by_user($account);
-
+	//dpm($profile);
+	// views alter 
+	if(isset($profile['main']->field_name[LANGUAGE_NONE]))
+		$field_name = $profile['main']->field_name[LANGUAGE_NONE][0]['value'];
+	
+	if(isset($profile['main']->field_sex[LANGUAGE_NONE]))
+		$field_sex = $profile['main']->field_sex[LANGUAGE_NONE][0]['value'];
+	
 	if(isset($profile['believes'])){
 		$province = $profile['believes']->field_address[LANGUAGE_NONE][0]['province'];
 		$city = $profile['believes']->field_address[LANGUAGE_NONE][0]['city'];
@@ -98,15 +105,15 @@
 	  }
 	// 
 	$real_name = $name;
-	if(!is_null($fields['field_name']->content)){
+	if(isset($field_name)){
 		$real_name = $field_name;
 	}
 	$display_name= $friends?$real_name:$name;
-	if(!isset($fields['field_sex']))$fields['field_sex']=TRUE;
+	if(!isset($field_sex))$fields=TRUE;
 	$Ta = $field_sex?"他":"她";
 ?>
 <div class="t-pic float-l">
-	<div class="round120<?php if(isset($fields['field_sex'])) print $field_sex?" boy":" girl" ?>">
+	<div class="round120<?php print $field_sex?" boy":" girl" ?>">
 		<?php print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
 	</div>
 	<?php if($user->uid != $profile_uid):?>
