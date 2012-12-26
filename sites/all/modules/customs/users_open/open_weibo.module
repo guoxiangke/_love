@@ -128,7 +128,6 @@ function open_weibo_form_alter(&$form, $form_state, $form_id) {
 		//启用模块，并设置同步
 		$module ='open_weibo';
 		if(module_exists($module)&&variable_get($module.'_enabled')){
-			dpm($form);
 			$form[$module] = array(
 	      '#type' => 'fieldset',
 	      '#title' => '同步到新浪微博',
