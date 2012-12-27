@@ -228,3 +228,26 @@ function love_ur_between($account,$rtid = 1,$requester=NULL){
         break;
     }
 }
+/**
+ * $type string 
+ * $account uid/obj
+ */
+function love_get_nodes_by_type($type,$account=NULL){
+      /**EntityFieldQuery**/
+    if(!isset($account)){
+      global $user;
+      $account = $user;
+    }elseif(is_numeric($account)){
+      $account = user_load($account);
+    }
+    $query = new EntityFieldQuery();
+    return $entities = $query->entityCondition('entity_type', 'node')
+                    //->entityCondition('bundle', $type)
+                    ->propertyCondition('type', $type)
+                    ->propertyCondition('uid', $account->uid)
+                    ->propertyCondition('status', 1)
+                    //->fieldCondition('field_date', 'value', array('2011-03-01', '2011-03-31'), 'BETWEEN')
+                    //->fieldOrderBy('field_date', 'value', 'ASC')
+                    ->propertyOrderBy('created', 'DESC')
+                    ->execute();
+}

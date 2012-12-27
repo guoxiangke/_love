@@ -170,6 +170,9 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <?php print drupal_render($feedback);?>
   </div>
 </div>
+ <?php 
+//limit 
+ if (isset($invite_form)): ?>
 <div id="invite_form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -179,6 +182,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <?php print drupal_render($invite_form);?>
   </div>
 </div>
+<?php endif ?>
 <div id="add-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
 
      <div class="modal-header">

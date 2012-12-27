@@ -109,6 +109,12 @@ function love_layout_theme($existing, $type, $theme, $path) {
         'referer'   => NULL,
       ),
     ),
+    'modal_validation' => array(
+      'template' => 'modal-validation',
+      'arguments' => array('params' => null),
+      'path' => drupal_get_path('module', 'love_layout')."/templates",
+    ),
+
   );
 }
 
@@ -242,8 +248,32 @@ function love_layout_menu() {
     'access arguments' => array('Update and view own stream'),
     'type' => MENU_LOCAL_TASK,
   );
+  //call from a node edit form
+  $items['node/%/delete/nojs'] = array(
+    'title' => 'delete',
+    'page callback' => 'druedu_layout_alter_modal_node_delete',
+    'page arguments' => array(1, 3),
+    'access callback' => 'node_access',
+    'access arguments' => array('delete', 1),
+    'weight' => 0,
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+    'file' => 'love_layout.pages.inc',
+  );   
+  $items['node/%/delete/ajax'] = array(
+    'delivery callback' => 'ajax_deliver',
+  ) + $items['node/%/delete/nojs'];
   return $items;
 }
+function love_layout_views_post_render(&$view) {
+  if (isset($view->field['delete_node'])) {
+    drupal_add_library('system', 'drupal.ajax');
+    drupal_add_js(array('destination' => current_path()), 'setting');
+    drupal_add_js(drupal_get_path('module', 'love_layout') .'/js/delete_popup.js');
+    }
+}
+
+
 /**
  * Implements hook_user_view().
  * @see statuses_user_view()
@@ -367,8 +397,12 @@ function love_layout_preprocess_page(&$variables) {
   //feedback of webform.
   $node = node_load(19);
   $variables['feedback'] = _node_page_view4love($node);
-  
-  $variables['invite_form'] = drupal_get_form('invite_form');
+
+  //$remaining_invites = invite_get_remaining_invites($user);
+  global $user;
+  if (invite_get_remaining_invites($user)) {
+    $variables['invite_form'] = drupal_get_form('invite_form');
+  }
 }
 
 function love_layout_form_alter(&$form, &$from_state, $form_id) {

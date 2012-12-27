@@ -26,31 +26,37 @@ function love_block_user_info() {
   $variables['account'] = $account;
   // '.l('<em class="icon-setting"></em>完善资料','user/'.$account->uid.'/edit/believes',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
   //'.l('<em class="icon-upload"></em>进入相册','user/'.$account->uid.'',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
+  $focus_num = user_relationships_load(array('rtid' => array(1),'requester_id' => array($account->uid)),array('count'=>TRUE));
+  $follow_num = user_relationships_load(array('rtid' => array(1),'requestee_id' => array($account->uid)),array('count'=>TRUE));
+  $friends_num = user_relationships_load(array('rtid' => array(2),'approved'=>array(1),'user' => array($account->uid)),array('count'=>TRUE));
   $output = '<div class="right-module module-selfInfo" data-log="userIntro">
             '.$picture.'
             <div class="module-selfInfo-inner">
                <div class="module-selfInfo-arrow">
-                  <em class="icon-user-arrow"></em>
+                  <b class="triangle_top"></b>
                </div>
                <div class="module-selfInfo-title">
                   <h2><a class="link-mt" data-log="nickname" target="_blank" href="/601017">'.$account->name.'</a></h2>
                </div>
                <div id="selfInfo" class="module-selfInfo-setting">
-                  <ul>
-                     <li>
-                        <h3 class="text-md">个人资料</h3>
-                        
-                     </li>
-                     <li class="noBg">
-                        <h3 class="text-md">我的相册</h3>
-                     </li>
-                     <li>
-                        <h3 class="text-md">我的缘分</h3>
-                        <a class="link-mt" href="/followers" target="_blank">被收藏0</a>
-                        <span class="text-sd fR" style="margin:-1px 3px 0;">|</span>
-                        <a class="link-mt" href="/following" target="_blank">收藏<em class="js-following-count">7</em></a>
-                     </li>
-                  </ul>
+                      <div class="user-total">
+                      <div class="t-focus"> 
+                        <div class="num">'. $focus_num .'</div>
+                        <div>关注</div>
+                       </div>
+                      <div class="t-follow">
+                        <div class="num">'. $follow_num .'</div>
+                        <div>粉丝</div>
+                      </div>
+                      <div class="t-nodes">
+                        <div class="num">'. count(love_get_nodes_by_type('photo',$account)).'</div>
+                        <div>照片</div>
+                      </div>
+                      <div class="t-friends">
+                        <div class="num">'. $friends_num .'</div>
+                        <div>熟人</div>
+                      </div>
+                    </div>
                </div>
             </div>
          </div>';
@@ -188,6 +194,26 @@ function love_block_profile_info() {
     $edit_profile_love_link = l('－－','user/'.$account->uid.'/edit/requirements',array('attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right')));
   }
 
+  // online status
+  // Count users active within the defined period.
+  $online_status = FALSE;
+  $interval = REQUEST_TIME - variable_get('user_block_seconds_online', 900);
+  $authenticated_count = db_query("SELECT COUNT(DISTINCT s.uid) FROM {sessions} s WHERE s.timestamp >= :timestamp AND s.uid > 0", array(':timestamp' => $interval))->fetchField();
+  // Display a list of currently online users.
+  if ($authenticated_count) {
+    $items = db_query('SELECT u.uid FROM {users} u INNER JOIN {sessions} s ON u.uid = s.uid WHERE u.uid = :uid AND s.timestamp >= :interval AND s.uid > 0', array(':uid'=>$account->uid,':interval' => $interval))->fetchAll();
+    if(count($items)){
+      $online_status = TRUE;
+    };
+  }
+
+  //sex
+  $field_sex = FALSE;
+  $profile = profile2_load_by_user($account);
+  if(isset($profile['main']->field_sex[LANGUAGE_NONE]))
+  $field_sex = $profile['main']->field_sex[LANGUAGE_NONE][0]['value'];
+//icon-female-gray
+  //icon-female
   $variables['account'] = $account;
 
 	$output = '<div id="basicInfoBox" class="profile-basic profile-basic-edit">
@@ -203,8 +229,7 @@ function love_block_profile_info() {
          </div>
       </div-->
             <div class="profile-verify">
-                     <em title="在线" class="icon-female"></em>
-      
+                     <em title="'.($online_status?'在线':'离线').'" class="icon-'.($field_sex?'':'fe').'male'.($online_status?'':'-gray').'"></em>
          <span id="profileVerifyName" class="profile-name">'.(isset($display_name)?truncate_utf8($display_name, $max_length=8, $wordsafe = FALSE, $add_ellipsis = TRUE):$account->name).'</span><span class="profile-age">'.($year_now-$year_born).'岁</span>
                                  <a title="身份已认证" target="_blank" href="/verified/name" class="icon-verify"></a>
          

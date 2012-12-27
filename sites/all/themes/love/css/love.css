@@ -445,22 +445,15 @@ background-color:#FFF;
 position: relative;
 height: 0;
 }
-.module-selfInfo-arrow .icon-user-arrow {
-position: absolute;
-top: -20px;
-left: 30px;
-}
-.icon-user-arrow {
-background-position: -346px -19px;
-height: 11px;
-width: 21px;
-
-background-color: transparent;
-background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
-_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
-background-repeat: no-repeat;
-display: inline-block;
+.module-selfInfo-inner .triangle_top {
+border-color: transparent transparent #FFF;
+border-style: solid;
+border-width: 10px;
 font-size: 0;
+left: 30px;
+position: absolute;
+text-align: center;
+top: -30px;
 }
 
 .module-selfInfo-title {
@@ -477,8 +470,27 @@ float: left;
 }
 .module-selfInfo-setting {
 background: #F0F7FF;
-padding: 5px 10px;
+padding: 15px 15px;
 }
+/**user-info-block*/
+.user-total .t-focus,.user-total .t-follow,.user-total .t-nodes, .user-total .t-friends{
+	display:inline-block;
+		width: 23%;
+		text-align:center;
+}
+.user-total .t-follow{
+	border-left: 1px solid rgba(100, 100, 100, 0.4); 
+	border-right: 1px solid rgba(100, 100, 100, 0.4);
+}
+ .user-total .t-friends{	
+	border-left: 1px solid rgba(100, 100, 100, 0.4); 
+}
+.user-total .num{
+	font-size: 20px;
+	color:#08C;
+	overflow:hidden;
+}
+
 #selfInfo ul,#selfInfo ol{
   list-style:none;
 }
@@ -570,14 +582,41 @@ display: inline-block;
 vertical-align: bottom;
 margin-right: 2px;
 }
-.icon-female, .icon-female-gray {
-background-position: -209px 0;
-height: 18px;
-width: 20px;
+
+.icon-female, .icon-female-gray,.icon-male, .icon-male-gray  {
 background-color: transparent;
 background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
 _background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
 background-repeat: no-repeat;
+display: inline-block;
+font-size: 0;
+}
+
+.icon-female, .icon-female-gray {
+background-position: -209px 0;
+height: 18px;
+width: 20px;
+}
+.icon-female-gray {
+background-position: -234px 0;
+}
+.icon-male, .icon-male-gray {
+background-position: -159px 0;
+height: 18px;
+width: 20px;
+
+}
+.icon-male-gray {
+background-position: -184px 0;
+}
+.status-ico{
+	height: 18px;
+width: 20px;
+background-color: transparent;
+background-image: url('../images/online.png');
+_background-image: url('../images/online.png');
+background-repeat: no-repeat;
+background-size:1% 1%;
 display: inline-block;
 font-size: 0;
 }
@@ -942,30 +981,51 @@ width: 16px;
 }
 .privatemsg-message-column {
   width:50%;
-  border:2px solid #666;
+  border-radius:10px;
+  padding:10px;
+  position:relative;
 }
 .privatemsg-message-even .privatemsg-message-column {
   background:#FFF;
   border:2px solid #D6F1F8;
-  border-radius:10px;
-  padding:10px;
-  padding-bottom: 0px;
 }
 .privatemsg-message-odd .privatemsg-message-column {
   background:#EDF9FF;
   border:2px solid #D6F1F8;
-  border-radius:10px;
-  padding:10px;
-  padding-bottom: 0px;
+}
+.privatemsg-message-actions {
+	font-size:80%;
+}
+.privatemsg-author-name {
+	font-size:100%;
 }
 div.privatemsg-message-information {
-    border-top: 1px dotted #C5C5C5;
-  border-bottom: 0px dotted #C5C5C5;
+  border-bottom: 1px dotted #C5C5C5;
   width: 100%;
   margin-bottom: 0px;
 }
 .privatemsg-author-avatar img{
   width:50px;
+}
+.privatemsg-message-even .triangle_top {
+	border-color: transparent #FFF transparent transparent;
+	border-style: solid;
+	border-width: 10px;
+	font-size: 0;
+	left: -20px;
+	position: absolute;
+	text-align: center;
+	top: 16px;
+}
+.privatemsg-message-odd .triangle_top {
+	border-color: transparent transparent transparent #EDF9FF;
+	border-style: solid;
+	border-width: 10px;
+	font-size: 0;
+	left: 425px;
+	position: absolute;
+	text-align: center;
+	top: 15px;
 }
 .page-messages #page-section{
   background: url(../images/messages-bg.jpg);
@@ -997,33 +1057,6 @@ ul.privatemsg-message-actions {
 }
 .privatemsg-author-avatar {
 width: 10%;
-}
-.WB_arrow {
-position: absolute;
-margin:  0 0 0 -18px;
-margin:  0  0/9 0 -17px;
-width: 22px;
-cursor: default;
-}
-.privatemsg-message-odd .WB_arrow {
-position: relative;
-}
-.WB_arrow * {
-font-family: "SimSun";
-overflow: hidden;
-font-size: 12px;
-line-height: 1.231;
-display: block;
-height: 12px;
-}
-.S_line1_c {
-color: #FFF;
-}
-.S_bg1_c {
-color: #D6F1F8;
-}
-.WB_arrow span {
-margin: -11px 0 0;
 }
 
 /**heartbeat activity*/
@@ -1164,4 +1197,17 @@ background-color: #FFF;
 }
 .heartbeat-activity img.avatar {
 	border:4px solid #FFF;
+}
+.h-avatar img{
+	width:50px;
+}
+
+/**blocks**/
+section.block{
+	background-color:#FFF;
+	margin-bottom:10px;
+	font: 12px/1.6 arial,helvetica,sans-serif;
+}
+#block-user-visits-my-latest-visitors {
+	padding: 20px;
 }
