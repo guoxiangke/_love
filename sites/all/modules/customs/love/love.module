@@ -116,15 +116,29 @@ function love_preprocess_views_view(&$vars) {
  * let it join the love group too.
  * and when register ,not display let user choose which group to join,for the multilanguage bug of og.
  */
-function love_user_insert(&$edit, $account, $category) {
+function love_user_presave(&$edit, $account, $category) {
   //2 is the love group gid.
-  //$edit['og_group_ref'][LANGUAGE_NONE][0] = array('target_id'=>2);
-  $account->og_group_ref[LANGUAGE_NONE][0] = array('target_id'=>2);
+  $edit['og_group_ref'][LANGUAGE_NONE][0] = array('target_id'=>2);
+  //$account->og_group_ref[LANGUAGE_NONE][0] = array('target_id'=>2);
+  //user_save($account);
+}
+function love_user_login(&$edit, $account)
+{
+  // Your logic will set $redirection to the desired location
+  $redirection = 'photos';
+
+  // Unless there is already a redirection going, or the user is trying to reset his password, we redirect to $redirection.
+  if (empty($_GET['destination'])
+    && !is_null($redirection)
+    && (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset'))
+  {
+    $_GET['destination'] = $redirection; // Should we use $edit['redirect'] instead..?
+  }
 }
 
-function love_node_insert($node) {
+function love_node_presave($node) {
   if($node->type == 'photo') {
-    $node->og_group_ref[LANGUAGE_NONE][0] = array('target_id'=>2);
+    $node->og_group_ref[LANGUAGE_NONE][0] = array('target_id'=>'2');
   }
 }
 
@@ -182,14 +196,7 @@ function love_ctools_plugin_api($module, $api) {
  * bug fix
  * @see http://drupal.org/node/1286876#comment-5294866
  */
-function love_form_node_type_form_alter(){
-  // if (module_exists('token')) {
-  //     $form['auto_nodetitle']['token_help'] = array(
-  //       '#theme' => 'token_tree',
-  //       '#token_types' => array('node'),
-  //     );
-  // }
-}
+
 /**
  * return the relationship of two users.
  * ->

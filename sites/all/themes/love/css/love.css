@@ -26,8 +26,10 @@ body.logged-in {
   moz-opacity: 0.5;
   opacity: 0.5;
   width: 96.9%;
+  width: 97.2% !important;
   top: 2%;
 }
+
 .bibles-say {
   position: relative;
   font-size: 22px;

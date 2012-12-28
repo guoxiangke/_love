@@ -109,12 +109,6 @@ function love_layout_theme($existing, $type, $theme, $path) {
         'referer'   => NULL,
       ),
     ),
-    'modal_validation' => array(
-      'template' => 'modal-validation',
-      'arguments' => array('params' => null),
-      'path' => drupal_get_path('module', 'love_layout')."/templates",
-    ),
-
   );
 }
 
@@ -248,31 +242,8 @@ function love_layout_menu() {
     'access arguments' => array('Update and view own stream'),
     'type' => MENU_LOCAL_TASK,
   );
-  //call from a node edit form
-  $items['node/%/delete/nojs'] = array(
-    'title' => 'delete',
-    'page callback' => 'druedu_layout_alter_modal_node_delete',
-    'page arguments' => array(1, 3),
-    'access callback' => 'node_access',
-    'access arguments' => array('delete', 1),
-    'weight' => 0,
-    'type' => MENU_LOCAL_TASK,
-    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
-    'file' => 'love_layout.pages.inc',
-  );   
-  $items['node/%/delete/ajax'] = array(
-    'delivery callback' => 'ajax_deliver',
-  ) + $items['node/%/delete/nojs'];
   return $items;
 }
-function love_layout_views_post_render(&$view) {
-  if (isset($view->field['delete_node'])) {
-    drupal_add_library('system', 'drupal.ajax');
-    drupal_add_js(array('destination' => current_path()), 'setting');
-    drupal_add_js(drupal_get_path('module', 'love_layout') .'/js/delete_popup.js');
-    }
-}
-
 
 /**
  * Implements hook_user_view().
@@ -430,14 +401,14 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
   $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
 
   // hidden some function now,body and tags 分享感言 标签功能暂不开放
-
-  //$form['body']['#access'] = FALSE;
-  $form['field_tags']['#access'] = FALSE;
-  $form['og_group_ref']['#access'] = FALSE;
   drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
+  drupal_add_css(drupal_get_path('module','love_layout').'/css/love-photo-add.css');
 }
-
-
+function love_layout_init() {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL) {
+    drupal_goto('<front>');
+  }
+}
 
 /**
  * Implements hook_user_view().
