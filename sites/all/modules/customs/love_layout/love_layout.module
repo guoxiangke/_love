@@ -431,7 +431,7 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
 
   // hidden some function now,body and tags 分享感言 标签功能暂不开放
 
-  $form['body']['#access'] = FALSE;
+  //$form['body']['#access'] = FALSE;
   $form['field_tags']['#access'] = FALSE;
   $form['og_group_ref']['#access'] = FALSE;
   drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');

@@ -111,6 +111,11 @@
 	$display_name= $friends?$real_name:$name;
 	if(!isset($field_sex))$fields=TRUE;
 	$Ta = $field_sex?"他":"她";
+
+	$field_birthday = $profile['main']->field_birthday[LANGUAGE_NONE][0]['value'];
+  $year_now =  date("Y",time());
+  $year_born =  date("Y",strtotime($field_birthday));
+  $field_height  = $profile['main']->field_height[LANGUAGE_NONE][0]['value'];
 ?>
 <div class="t-pic float-l">
 	<div class="round120<?php print $field_sex?" boy":" girl" ?>">
@@ -140,8 +145,6 @@
 			<?php 
 			}
 		 ?>
-
-			<li><a href="#" rel="tooltip" data-placement="right" title="<?php echo $local;?>"><i class="icon-map-marker"></i></a></li>
 		</ul>
 		
 	</div>
@@ -155,40 +158,50 @@
 			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name float-l"> <?php print l($display_name,'user/'.$profile_uid,array('html'=>true));?> 上传了照片</div>
+		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true)); print "，[$real_name]".'，'.($year_now-$year_born).'岁，'.$field_height.'厘米，'.$local;?> </div>
 		
 	</div>
-	<?php if (isset($body)): ?><div class="t-body"> <?php //print $body; ?> </div><?php endif; ?>
-	<div class="t-field_photo">
-		<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
-		<?php if (isset($flag)): ?>
-		<!-- <span class="flag"> <?php print $flag; ?> </span>
-		<span><ul>
-		 			<li><a title="赞" href=""><i class="icon-star-empty"></i></a></li>
-		 			<li><a title="踩" href=""><i class="icon-star"></i></a></li>
-		 		</ul>
-		</span> -->
-		<?php endif; ?>
-		<?php if (isset($vote)): ?>
-		 	<div class="vote-1">
-		 	<div class=""> <?php print $vote; ?> </div>
-		 	<!-- 	<ul>
-		 			<li><a title="赞" rel="tooltip" data-placement="left" href="javascript:void(0)"><i class="icon-thumbs-up"></i></a></li>
-		 			<li><a title="踩" rel="tooltip" data-placement="right" href="javascript:void(0)"><i class="icon-thumbs-down"></i></a></li>
-		 		</ul> -->
-		 	</div>
-		<?php endif; ?>
-	</div>
-	<div class="t-footer clearfix">
-		<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
-		<div class="t-created  float-l"> <?php print $created; ?> </div>
-		<div class="t-links  float-r">
-			<?php global $user; if ($user->uid<>0): //TODO ?>
-			<?php if (isset($edit_node)): ?><span class="edit"> <?php print $edit_node; ?> </span><?php endif; ?>
-			<?php if (isset($delete_node)): ?><span class="del"> <?php print $delete_node; ?> </span><?php endif; ?>
-		 	<?php endif; ?>
-
-
+	<?php if (isset($body)): ?>
+	<div class="t-body">
+		<p>刚刚上传了相片</p>
+		<div class="t-field_photo">
+			<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
+			<?php if (isset($flag)): ?>
+			<!-- <span class="flag"> <?php print $flag; ?> </span>
+			<span><ul>
+			 			<li><a title="赞" href=""><i class="icon-star-empty"></i></a></li>
+			 			<li><a title="踩" href=""><i class="icon-star"></i></a></li>
+			 		</ul>
+			</span> -->
+			<?php endif; ?>
+			<?php if (isset($vote)): ?>
+			 	<div class="vote-1">
+			 	<div class=""> <?php print $vote; ?> </div>
+			 	<!-- 	<ul>
+			 			<li><a title="赞" rel="tooltip" data-placement="left" href="javascript:void(0)"><i class="icon-thumbs-up"></i></a></li>
+			 			<li><a title="踩" rel="tooltip" data-placement="right" href="javascript:void(0)"><i class="icon-thumbs-down"></i></a></li>
+			 		</ul> -->
+			 	</div>
+			<?php endif; ?>
 		</div>
-	</div>
+		<?php if (strlen($body)!=0): ?>
+		<div class="t-des">
+			<?php print $body; ?>
+		</div>
+		<?php endif; ?>
+		<div class="t-footer clearfix">
+			<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
+			<div class="t-created  float-l"> <?php print $created; ?> </div>
+			<div class="t-links  float-r">
+				<?php global $user; if ($user->uid<>0): //TODO ?>
+				<?php if (isset($edit_node)): ?><span class="edit"> <?php print $edit_node; ?> </span><?php endif; ?>
+				<?php if (isset($delete_node)): ?><span class="del"> <?php print $delete_node; ?> </span><?php endif; ?>
+			 	<?php endif; ?>
+
+
+			</div>
+		</div>
+	</div><?php endif; //<!--end t-body-->?>
+
+
 </div>
