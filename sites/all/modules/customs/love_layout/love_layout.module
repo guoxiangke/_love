@@ -20,6 +20,10 @@ function love_layout_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     //'pages' => 'user\r\nuser/login\r\nuser/register\r\nuser/password',
   );
+  $blocks['love_qr_block'] = array(
+    'info' =>t('WeiChat-QR'),
+    'region' => 'sidebar_second',
+  );
   return $blocks;
 }
 /**
@@ -41,6 +45,10 @@ function love_layout_block_view($delta = '') {
     case 'love_profile_block':
       $block['subject'] = NULL;//t('User info')
       $block['content'] = love_block_profile_info();
+      break;
+    case 'love_qr_block':
+      $block['subject'] = t('WeiChat-QR');
+      $block['content'] = love_block_weichat_qr();
       break;
   }
   return $block;
@@ -406,6 +414,7 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
 }
 function love_layout_init() {
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL) {
+    if(node_load(arg(0))->type == 'photo')
     drupal_goto('<front>');
   }
 }

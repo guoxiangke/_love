@@ -115,7 +115,20 @@
 	$field_birthday = $profile['main']->field_birthday[LANGUAGE_NONE][0]['value'];
   $year_now =  date("Y",time());
   $year_born =  date("Y",strtotime($field_birthday));
-  $field_height  = $profile['main']->field_height[LANGUAGE_NONE][0]['value'];
+  if(isset($profile['main']->field_height[LANGUAGE_NONE][0])){
+	$field_height  = $profile['main']->field_height[LANGUAGE_NONE][0]['value'];
+  }else{
+  	$field_height  = 'xxx';
+  }
+  //
+  if(isset($profile['main']->field_marriage[LANGUAGE_NONE][0])){
+  	  $all_fields_on_my_website = field_info_fields();
+	  $field_marriage = $profile['main']->field_marriage[LANGUAGE_NONE][0]['value'];
+	  $marriage_value = list_allowed_values($all_fields_on_my_website["field_marriage"]);
+	  $field_marriage = $marriage_value[$field_marriage];
+  }else{
+  	$field_marriage = '婚恋状态-未知';
+  }
 ?>
 <div class="t-pic float-l">
 	<div class="round120<?php print $field_sex?" boy":" girl" ?>">
@@ -158,7 +171,7 @@
 			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true)); print "，[$real_name]".'，'.($year_now-$year_born).'岁，'.$field_height.'厘米，'.$local;?> </div>
+		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true)); print "，[$real_name]".'，'.$field_marriage.'，'.($year_now-$year_born).'岁，'.$field_height.'厘米，'.$local;?> </div>
 		
 	</div>
 	<?php if (isset($body)): ?>
