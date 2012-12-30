@@ -276,6 +276,6 @@ function love_block_about_us() {
 }
 
 function love_block_weichat_qr() {
-  return '微信关注，了解永不止息动态哦！<img src="'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/>';
+  return '微信关注，了解永不止息动态哦！<img src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/>';
 }
 ?>
