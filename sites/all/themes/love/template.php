@@ -219,15 +219,17 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
 
 function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     //dpm($form);
-    $form['email']['#type'] = 'textfield';
+
     $form['submit']['#value'] = t('发送邀请');
     //$form['subject_markup']['#title'] = t('标题');
     $form['subject_markup']['#access'] = FALSE;
     $form['message']['#disabled'] = TRUE;
     //$form['message']['#title'] = t('邀请函');
     $form['from']['#access'] = FALSE;
-    if(!user_access('administer users'))
-    $form['submit_show']['#access'] = FALSE;
+    if(!user_access('administer users')) {
+     $form['submit_show']['#access'] = FALSE;
+     $form['email']['#type'] = 'textfield';
+    }
     $form['message']['#access'] = FALSE; 
     if(isset($form['rtid'])) {
       $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人
