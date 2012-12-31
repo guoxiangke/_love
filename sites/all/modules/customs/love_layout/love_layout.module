@@ -414,7 +414,7 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
 }
 function love_layout_init() {
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL) {
-    if(node_load(arg(0))->type == 'photo')
+    if(node_load(arg(1))->type == 'photo')
     drupal_goto('<front>');
   }
 }
