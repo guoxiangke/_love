@@ -159,7 +159,9 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     </div>
   </div><!-- /container-fluid -->
   <a href="#" class="scrollup">Scroll</a>
+  <?php if (!user_is_anonymous()): ?>
   <div class="love-feedback" data-toggle="modal" data-target="#suggestion" >意<br>见<br>反<br>馈<br></div>
+
   <!-- Modal -->
 <div id="suggestion" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-header">
@@ -170,8 +172,9 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <?php print drupal_render($feedback);?>
   </div>
 </div>
+  <?php endif; ?>
  <?php 
-//limit 
+//limit
  if (isset($invite_form)): ?>
 <div id="invite_form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-header">

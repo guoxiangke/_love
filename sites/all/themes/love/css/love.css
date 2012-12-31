@@ -189,6 +189,13 @@ z-index: -1;
 background: rgba(0, 0, 0, 0.08);
 border-radius: 4px;
 }
+#love-login-form {
+  position: absolute;
+}
+.site-des{
+  position: relative;
+  top: 220px;
+}
 body.not-logged-in .sitename {
 margin-bottom: 30px;
 font-size: 50px;

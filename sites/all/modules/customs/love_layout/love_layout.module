@@ -47,7 +47,7 @@ function love_layout_block_view($delta = '') {
       $block['content'] = love_block_profile_info();
       break;
     case 'love_qr_block':
-      $block['subject'] = t('WeiChat-QR');
+      $block['subject'] = t('微信关注');
       $block['content'] = love_block_weichat_qr();
       break;
   }

@@ -185,7 +185,6 @@ function love_form_user_login_alter(&$form, &$form_state, $form_id) {
 }
 
 function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
-
   $form['account']['mail']['#disabled']=TRUE;
   $form['relationship_invite_approve']['#default_value']='';
   $form['relationship_invite_approve']['#required']=TRUE;
@@ -201,10 +200,11 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
     }
     $form['relationship_invite_approve']['#title']='您认识'.$inviter_name.'吗？';
     # 
-    $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！<br/>12.24日起为内测阶段，请朋友们暂时不要邀请熟人加入。');
+    $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
 
   }
-
+    $form['account']['name']['#title'] = t('昵称');
+    $form['account']['mail']['#title'] = t('邮箱');
     $form['signature_settings']['#access'] = TRUE;
     $form['signature_settings']['#weight'] = 11;
     $form['signature_settings']['#title'] = t('爱情宣言');
