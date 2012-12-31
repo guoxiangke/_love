@@ -197,7 +197,7 @@
 			 	</div>
 			<?php endif; ?>
 		</div>
-		<?php if (strlen($body)!=0): ?>
+		<?php if (0&&strlen($body)!=0): ?>
 		<div class="t-des">
 			<?php print $body; ?>
 		</div>
