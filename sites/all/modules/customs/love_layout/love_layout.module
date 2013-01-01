@@ -445,6 +445,11 @@ function love_layout_user_view_alter(&$build) {
   $build['profile_main']['#access'] = FALSE;
   $build['profile_believes']['#access'] = FALSE;
   $build['userpoints']['#access'] = FALSE;
+  $build['love_intro'] = array(
+    '#type' => 'user_profile_item',
+    '#title' => '更多精彩，值得期待！',
+    '#markup' => '这里还没想好放什么呢，个人相册，所有资料，时间轴～^_^!',
+  );
 }
 
 
