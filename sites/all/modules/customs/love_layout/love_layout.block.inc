@@ -30,7 +30,8 @@ function love_block_user_info() {
   $follow_num = user_relationships_load(array('rtid' => array(1),'requestee_id' => array($account->uid)),array('count'=>TRUE));
   $friends_num = user_relationships_load(array('rtid' => array(2),'approved'=>array(1),'user' => array($account->uid)),array('count'=>TRUE));
   $photo_nodes = love_get_nodes_by_type('photo',$account);
-  $photo_nodes = $photo_nodes['node']; 
+  if(isset( $photo_nodes['node']))
+   $photo_nodes = $photo_nodes['node']; 
   $output = '<div class="right-module module-selfInfo" data-log="userIntro">
             '.$picture.'
             <div class="module-selfInfo-inner">
