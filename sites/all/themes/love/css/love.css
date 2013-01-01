@@ -594,8 +594,8 @@ margin-right: 2px;
 
 .icon-female, .icon-female-gray,.icon-male, .icon-male-gray  {
 background-color: transparent;
-background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
-_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-image: url('../images/icon_v121219.png');
+_background-image: url('../images/icon_fixed_v121219.png');
 background-repeat: no-repeat;
 display: inline-block;
 font-size: 0;
@@ -652,8 +652,8 @@ background-position: -26px 0;
 height: 20px;
 width: 20px;
 background-color: transparent;
-background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
-_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-image: url('../images/icon_v121219.png');
+_background-image: url('../images/icon_fixed_v121219.png');
 background-repeat: no-repeat;
 display: inline-block;
 font-size: 0;
@@ -663,8 +663,8 @@ background-position: 0 0;
 height: 20px;
 width: 20px;
 background-color: transparent;
-background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
-_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-image: url('../images/icon_v121219.png');
+_background-image: url('../images/icon_fixed_v121219.png');
 background-repeat: no-repeat;
 display: inline-block;
 font-size: 0;
@@ -767,8 +767,8 @@ margin-right: 0;
 }
 .profile-elite-school, .profile-elite-corp{
   background-color: transparent;
-background-image: url('http://img1.cache.netease.com/love/image/sprites/icon/icon_v121219.png');
-_background-image: url('http://img3.cache.netease.com/love/image/sprites/icon/icon_fixed_v121219.png');
+background-image: url('../images/icon_v121219.png');
+_background-image: url('../images/icon_fixed_v121219.png');
 background-repeat: no-repeat;
 }
 .profile-elite-school{

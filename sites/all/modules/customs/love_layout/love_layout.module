@@ -166,9 +166,11 @@ function love_layout_template_preprocess_user_picture($variables) {
       if (!empty($account->picture->uri)) {
         $filepath = $account->picture->uri;
       }
+      $default = FALSE;
     }
     elseif (variable_get('user_picture_default', '')) {
       $filepath = variable_get('user_picture_default', '');
+      $default = TRUE;
     }
     if (isset($filepath)) {
       //$alt = t("@user's picture", array('@user' => format_username($account)));
@@ -187,8 +189,8 @@ function love_layout_template_preprocess_user_picture($variables) {
       }
       if (!empty($account->uid) && user_access('access user profiles')) {
         global $user;
-        if($user->uid == $account->uid){
-          $attributes = array('attributes' => array('title' => t('修改头像.')), 'html' => TRUE);
+        if($user->uid == $account->uid && $default){
+          $attributes = array('attributes' => array('title' => t('修改头像')), 'html' => TRUE);
           $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid/edit", $attributes);
         }else{
           $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
@@ -339,6 +341,13 @@ function love_layout_menu_alter(&$items) {
 //http://drupal.org/node/1336212#comment-6049694 bug fix when node_add_form in addtional
    $items['file/ajax']['file'] = 'node.pages.inc';
    $items['file/ajax']['file path'] = drupal_get_path('module', 'node');
+
+//
+   if(!user_access('administer users')){
+    $items['user/%user/invites']['page arguments'] = array('pending', 1);
+    ///unset($items['user/%user/invites/expired']);
+    //unset($items['user/%user/invites/accepted']);
+   }
 }
 /**
  * multilanguage t() for message.
