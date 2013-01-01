@@ -186,8 +186,15 @@ function love_layout_template_preprocess_user_picture($variables) {
         $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
       }
       if (!empty($account->uid) && user_access('access user profiles')) {
-        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
-        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
+        global $user;
+        if($user->uid == $account->uid){
+          $attributes = array('attributes' => array('title' => t('修改头像.')), 'html' => TRUE);
+          $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid/edit", $attributes);
+        }else{
+          $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+          $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
+        
+        }
       }
     }
     return $variables['user_picture'];
@@ -391,8 +398,11 @@ function love_layout_form_alter(&$form, &$from_state, $form_id) {
   if($form_id == 'webform_client_form_19') {
     $form['submitted']['email']['#access'] = FALSE;
   }
-  if($form_id == 'photo_node_form'){
-   // dpm($form);
+  if($form_id == 'user_profile_form'){
+    $form['picture']['#weight'] = -100;
+    $picture = $form['picture'];
+    unset($form['picture']);
+    array_unshift($form,$picture);
   }
 }
 // when the bug of i18n + og_field   resolve ,can user below.
