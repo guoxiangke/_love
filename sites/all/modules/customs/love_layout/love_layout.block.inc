@@ -29,6 +29,8 @@ function love_block_user_info() {
   $focus_num = user_relationships_load(array('rtid' => array(1),'requester_id' => array($account->uid)),array('count'=>TRUE));
   $follow_num = user_relationships_load(array('rtid' => array(1),'requestee_id' => array($account->uid)),array('count'=>TRUE));
   $friends_num = user_relationships_load(array('rtid' => array(2),'approved'=>array(1),'user' => array($account->uid)),array('count'=>TRUE));
+  $photo_nodes = love_get_nodes_by_type('photo',$account);
+  $photo_nodes = $photo_nodes['node']; 
   $output = '<div class="right-module module-selfInfo" data-log="userIntro">
             '.$picture.'
             <div class="module-selfInfo-inner">
@@ -49,7 +51,7 @@ function love_block_user_info() {
                         <div>粉丝</div>
                       </div>
                       <div class="t-nodes">
-                        <div class="num">'. count(love_get_nodes_by_type('photo',$account)).'</div>
+                        <div class="num">'. count($photo_nodes).'</div>
                         <div>照片</div>
                       </div>
                       <div class="t-friends">
@@ -82,6 +84,7 @@ function love_block_profile_info() {
   $signature = $account->signature?$account->signature:"这家伙很懒，还没写签名....这家伙很懒，还没写签名....这家伙很懒，还没写签名....";
 
   $profile = profile2_load_by_user($account);
+
   //dpm($profile);
   if(isset($profile['main']->field_name[LANGUAGE_NONE][0]['safe_value']))
   $display_name = $profile['main']->field_name[LANGUAGE_NONE][0]['safe_value'];
@@ -244,7 +247,7 @@ function love_block_profile_info() {
             <li><span class="profile-label">学历：</span>'.(isset($field_degree)?$field_degree:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'</li>
             <li><span class="profile-label">籍贯：</span>'.(isset($home_local)?$home_local:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'<i class="icon-unlock"></i></li>
             <li><span class="profile-label">行业：</span>'.(isset($field_industry)?$field_industry:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'</li>
-            <li title=""><span class="profile-label">链接：</span>'.(isset($field_links_title)?$field_links_title:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'</li>
+            <li title=""><span class="profile-label">链接：</span>'.(isset($field_links)?($field_links_title?$field_links_title:'暂不公开'):($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'</li>
            
             <!--li><span class="profile-label">月均收入：</span>'.(isset($field_salary)?$field_salary:($my_space?$edit_profile_main_link:'<a href="#" rel="tooltip" data-placement="right" title="这家伙很懒，还在空着！">－－</a>')).'</li-->
          </ul>
