@@ -220,7 +220,7 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
 function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     //dpm($form);
 
-    //$form['submit']['#value'] = t('发送邀请');
+    $form['submit']['#value'] = t('发送邀请');
     $form['submit_show']['#value'] = t('生成邀请链接');;
     //$form['subject_markup']['#title'] = t('标题');
     $form['subject_markup']['#access'] = FALSE;
