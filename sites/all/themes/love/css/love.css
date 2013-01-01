@@ -345,25 +345,44 @@ vertical-align: top;
 	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
 	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
 	color: #333;
-
 }
 .main-menu a.active{
 	background: url(../images/nav_bgn.png) no-repeat center 0;
 	_background: url(../images/nav_bgn.gif) no-repeat center 0;
 	color: #333;
 }
-	
-.main-menu .last a{
-	font-size: 20px;
-	font-size: 16px  !important;
-}
-.main-menu .last a:hover {
- 	color: #F73F9B;
- }
+
 .main-menu li,.secondary-menu li{
 	float: left;
 	list-style: none;
 }
+/*add photo*/
+.menu-457 {
+	position: relative;
+}
+.menu-457 a{
+	background-color: transparent;
+	background-image: url('../images/icon_v121219.png');
+	background-repeat: no-repeat;
+	width: 23px;
+	height: 60px;
+	background-position: -43px -80px;
+	position: absolute;
+	top: -10px;
+	text-indent: -1000px;
+}
+.menu-457 a:hover{
+	background-color: transparent;
+	background-image: url('../images/icon_v121219.png');
+	background-repeat: no-repeat;
+	width: 23px;
+	height: 60px;
+	background-position: 0 -80px;
+	position: absolute;
+	top: -10px;
+	text-indent: -1000px;
+}
+
 secondary-menu li{
 	margin-left: 10px;
 }
