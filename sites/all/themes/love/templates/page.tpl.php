@@ -35,7 +35,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
             
             <li>为<a href="#" rel="tooltip" title="请为本站营造良好的社交环境。<br/>为教会单身守望。">本站代祷</a> ，<a href="#" rel="tooltip" title="如果您觉得打开速度慢，那么您可以在网站服务器升级上有分">支持奉献</a>，<a href="http://blog.liangyou.net/lianai/" rel="tooltip" title="打开速度慢，这个建议就不用提了^_^">意见建议</a></li>
             <!--li><a href="http://blog.liangyou.net/lianai/"  rel="tooltip" title="如果您还未收到邀请，听听这个节目，预备自己成为理想的另一半吧！"><img src="<?php print path_to_theme(); ?>/lianai.jpg" alt=""></a><a href="#" rel="tooltip" title="打开速度慢，这个建议就不用提了^_^"></a></li-->
-            <li><embed type="application/x-shockwave-flash" width="290" height="24" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')?>/player.swf?soundFile=http://liangyou.nissigz.com/media/se/se<?php echo date("ymd");?>.mp3&amp;bg=0xCDDFF3&amp;leftbg=0x357DCE&amp;lefticon=0xF2F2F2&amp;rightbg=0x357DCE&amp;rightbghover=0x4499EE&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x357DCE&amp;slider=0x357DCE&amp;track=0xFFFFFF&amp;border=0xFFFFFF&amp;loader=0x8EC2F4&amp;autostart=yes&amp;loop=no" wmode="transparent" quality="high"><a href="#"  title="未收到邀请？听听这个节目，预备自己成为理想的另一半吧！">今日广播</a>
+            <li><embed type="application/x-shockwave-flash" width="290" height="24" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')?>/player.swf?soundFile=http://liangyou.nissigz.com/media/se/se<?php echo date("ymd");?>.mp3&amp;bg=0xCDDFF3&amp;leftbg=0x357DCE&amp;lefticon=0xF2F2F2&amp;rightbg=0x357DCE&amp;rightbghover=0x4499EE&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x357DCE&amp;slider=0x357DCE&amp;track=0xFFFFFF&amp;border=0xFFFFFF&amp;loader=0x8EC2F4&amp;autostart=no&amp;loop=no" wmode="transparent" quality="high"><a href="#"  title="未收到邀请？听听这个节目，预备自己成为理想的另一半吧！">今日广播</a>
 </li>          </ul>
         </div>
       </div>
@@ -180,6 +180,9 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
    <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h3 id="myModalLabel">有爱分享，邀请熟人</h3>
+   </div>
+   <div class="form-item-relationship-invite-approve">
+    <p class="help-block">提示：由于QQ限制，QQ邮箱请生成链接发给好友，其他邮箱可以直接发送邀请。</p>
    </div>
    <div class="modal-body">
     <?php print drupal_render($invite_form);?>

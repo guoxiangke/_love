@@ -220,14 +220,15 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
 function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
     //dpm($form);
 
-    $form['submit']['#value'] = t('发送邀请');
+    //$form['submit']['#value'] = t('发送邀请');
+    $form['submit_show']['#value'] = t('生成邀请链接');;
     //$form['subject_markup']['#title'] = t('标题');
     $form['subject_markup']['#access'] = FALSE;
     $form['message']['#disabled'] = TRUE;
     //$form['message']['#title'] = t('邀请函');
     $form['from']['#access'] = FALSE;
     if(!user_access('administer users')) {
-     $form['submit_show']['#access'] = FALSE;
+     $form['submit']['#access'] = FALSE;
      $form['email']['#type'] = 'textfield';
     }
     $form['message']['#access'] = FALSE; 
