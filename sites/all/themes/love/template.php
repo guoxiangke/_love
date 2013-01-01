@@ -136,7 +136,7 @@ function love_preprocess_user_picture(&$variables) {
       if (!empty($account->uid) && user_access('access user profiles')) {
         $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
 				//XXX dale user/uid =>profile-main/uid
-        $variables['user_picture'] = l($variables['user_picture'], "profile-main/$account->uid", $attributes);
+        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
       }
     }
   }
