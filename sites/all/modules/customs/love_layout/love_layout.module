@@ -445,8 +445,6 @@ function love_layout_user_view_alter(&$build) {
   $build['profile_main']['#access'] = FALSE;
   $build['profile_believes']['#access'] = FALSE;
   $build['userpoints']['#access'] = FALSE;
-  
-  dpm($build);
 }
 
 
