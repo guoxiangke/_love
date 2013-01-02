@@ -87,6 +87,7 @@ function love_block_profile_info() {
   $profile = profile2_load_by_user($account);
 
   //dpm($profile);
+  
   if(isset($profile['main']->field_name[LANGUAGE_NONE][0]['safe_value']))
   $display_name = $profile['main']->field_name[LANGUAGE_NONE][0]['safe_value'];
   //$display_name = $field_name;
@@ -218,6 +219,20 @@ function love_block_profile_info() {
   $field_sex = $profile['main']->field_sex[LANGUAGE_NONE][0]['value'];
 //icon-female-gray
   //icon-female
+  $field_telephone = FALSE;
+  if(isset($profile['main']->field_telephone[LANGUAGE_NONE][0])){
+    $field_telephone = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
+  }
+if($my_space){
+  if($field_telephone){
+    $telphone_links = '<a title="手机已填写" target="_blank" href="#" class="icon-mobile"></a>';
+  }else{
+    //$edit_profile_main_link
+    $telphone_links = l('','user/'.$account->uid.'/edit/main',array('attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right','class'=>array('icon-mobile-disabled'))));
+  }
+}else{
+  $telphone_links = '';
+}
   $variables['account'] = $account;
 
 	$output = '<div id="basicInfoBox" class="profile-basic profile-basic-edit">
@@ -235,9 +250,9 @@ function love_block_profile_info() {
             <div class="profile-verify">
                      <em title="'.($online_status?'在线':'离线').'" class="icon-'.($field_sex?'':'fe').'male'.($online_status?'':'-gray').'"></em>
          <span id="profileVerifyName" class="profile-name">'.(isset($display_name)?truncate_utf8($display_name, $max_length=8, $wordsafe = FALSE, $add_ellipsis = TRUE):$account->name).'</span><span class="profile-age">'.($year_now-$year_born).'岁</span>
-                                 <a title="身份已认证" target="_blank" href="/verified/name" class="icon-verify"></a>
+                                 <a title="身份已认证" target="_blank" href="" class="icon-verify"></a>
          
-                           <a title="手机未认证" target="_blank" href="/verified/mobile" class="icon-mobile-disabled"></a>'.$ur_output.'
+                           '.$telphone_links.$ur_output.'
                      </div>
             <div class="js-preview">
          <ul class="profileList">
