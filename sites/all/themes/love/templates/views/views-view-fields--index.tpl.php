@@ -171,7 +171,7 @@
 			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true)); print "，[$real_name]".'，'.$field_marriage.'，'.($year_born).'，'.$field_height.'厘米，'.$local;?> </div>
+		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true)); print '，【'.$real_name.'】'.$field_marriage.'，'.($year_born).'，'.$field_height.'厘米，'.$local;?> </div>
 		
 	</div>
 	<?php if (isset($body)): ?>
@@ -196,12 +196,15 @@
 			 		</ul> -->
 			 	</div>
 			<?php endif; ?>
+			
+			<?php if (strlen($body)!=0): ?>
+			<div class="t-des">
+				<?php print $body; ?>
+			</div>
+			<?php endif; ?>
+
 		</div>
-		<?php if (0&&strlen($body)!=0): ?>
-		<div class="t-des">
-			<?php print $body; ?>
-		</div>
-		<?php endif; ?>
+
 		<div class="t-footer clearfix">
 			<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
 			<div class="t-created  float-l"> <?php print $created; ?> </div>
