@@ -54,7 +54,7 @@ $('#user-register-form #edit-submit').click(function(e){
     if($('#edit-picture-upload').val()){
       $('#user-register-form').submit();
     }else{
-      alert('请选择照片！最好是正方形的哦，这些现实效果最佳~');
+      alert('请选择照片！最好是正方形的哦，这样现实效果最佳~');
     }
 });
 
