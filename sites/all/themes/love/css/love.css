@@ -316,7 +316,7 @@ nav {
 }
 
 .secondary-menu a:hover {
-	color: #FFF;
+	color: #333;
 }
 #navbar .pull-right span{
   display:inline-block;
@@ -339,7 +339,7 @@ vertical-align: top;
 	color: #333;
 }
 
-.main-menu a:hover,.secondary-menu a:hover {
+.main-menu a:hover{
 	height: 33px;
 	background: url(../images/nav_bgn.png) no-repeat 0 -40px;
 	_background: url(../images/nav_bgn.gif) no-repeat 0 -40px;
@@ -1255,6 +1255,7 @@ a:hover [class*=" icon-"]:before {
 }
 .h-main{
 	margin-left:10px;
+	width: 90%;
 }
 .h-attachs{
 	margin-top:5px;
