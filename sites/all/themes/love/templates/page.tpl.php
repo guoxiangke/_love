@@ -107,7 +107,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
   </div></div>
 </header>
 
-<div class="container" >
+<div class="container">
 
   <header role="banner" id="page-header">
     <?php if ( $site_slogan ): ?>
@@ -116,7 +116,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
     <?php print render($page['header']); ?>
   </header> <!-- /#header -->
-  <div class="container-fluid">
+  <div class="container-fluid" id="pjax-container">
     <div class="row-fluid">
       <div class="row" id="page-wrapper">
         

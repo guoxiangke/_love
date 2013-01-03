@@ -1099,12 +1099,8 @@ width: 10%;
 }
 
 /**heartbeat activity*/
-li:hover [class^="icon-"]:before,
-li:hover [class*=" icon-"]:before {
-  font-size: 24px;
-  vertical-align: middle;
-  text-decoration:none;
-}
+
+
 .view-id-index li{
   list-style:none;
 }
@@ -1168,21 +1164,47 @@ z-index: 100;
 }
 
 /*index views */
-.vote-1,.vote-1 ul,.vote-1 ul li{
+.love_vote,.love_vote ul,.love_vote ul li{
 	display:inline-block;
 }
 .t-field_photo {
 	position: relative;
 }
-.vote-1 {
+.love_vote {
 	position: absolute;
 	left: 2px;
 	top: 2px;
 background-color: #FFF;
 }
-.vote-1 ul{
+.love_vote ul{
 	margin:0;
 }
+.rate-info {
+	display:block;
+}
+.rate-number-up-down-btn-down,.rate-number-up-down-btn-up{
+	overflow: visible;
+	text-indent: 0;
+	background: none;
+}
+.rate-number-up-down-btn-down{
+	display: none;
+}
+a:hover [class^="icon-"]:before,
+a:hover [class*=" icon-"]:before {
+  font-size: 24px;
+  vertical-align: middle;
+  text-decoration:none;
+}
+.love_vote .rate-voted{
+	font-size: 24px;
+	color: #F6C;
+}
+.love_vote .rate-voted:hover{
+	font-size: 24px;
+	color: #666;
+}
+
 /***set all submit buttoms**/
 
 .form-submit {
@@ -1295,9 +1317,6 @@ div.form-actions {
 .t-footer {
 	font-size:12px;
 	color:#999;
-}
-.rate-info {
-	display:none;
 }
 .t-des {
 	background: #F4F4EC;

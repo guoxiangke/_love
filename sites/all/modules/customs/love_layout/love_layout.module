@@ -432,7 +432,7 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
   drupal_add_css(drupal_get_path('module','love_layout').'/css/love-photo-add.css');
 }
 function love_layout_init() {
-  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL) {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL &&!user_access('administer users')) {
     if(node_load(arg(1))->type == 'photo')
     drupal_goto('<front>');
   }

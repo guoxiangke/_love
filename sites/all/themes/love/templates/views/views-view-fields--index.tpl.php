@@ -189,14 +189,10 @@
 			<?php endif; ?>
 			<?php if (isset($vote)): ?>
 			 	<div class="vote-1">
-			 	<div class=""> <?php print $vote; ?> </div>
-			 	<!-- 	<ul>
-			 			<li><a title="赞" rel="tooltip" data-placement="left" href="javascript:void(0)"><i class="icon-thumbs-up"></i></a></li>
-			 			<li><a title="踩" rel="tooltip" data-placement="right" href="javascript:void(0)"><i class="icon-thumbs-down"></i></a></li>
-			 		</ul> -->
+			 	<div class="love_vote"> <?php print $vote; ?> </div>
 			 	</div>
 			<?php endif; ?>
-			
+
 			<?php if (strlen($body)!=0): ?>
 			<div class="t-des">
 				<?php print $body; ?>

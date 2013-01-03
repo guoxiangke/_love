@@ -50,8 +50,8 @@ Drupal.behaviors.statusInit = {
   //   $(this).parents('.t-field_photo').find('ul').fadeToggle();
   // });
 
-
-
+$('.rate-number-up-down-btn-up').html('<i class="icon-thumbs-up"></i>').attr('title','顶');
+$('.rate-number-up-down-btn-down').html('<i class="icon-thumbs-down"></i>').attr('title','踩');
  }
 };
 
