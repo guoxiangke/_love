@@ -1180,7 +1180,7 @@ background-color: #FFF;
 	margin:0;
 }
 .rate-info {
-	display:block;
+	display:hidden;
 }
 .rate-number-up-down-btn-down,.rate-number-up-down-btn-up{
 	overflow: visible;

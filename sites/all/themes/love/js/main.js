@@ -44,14 +44,21 @@ Drupal.behaviors.statusInit = {
     };
     $('#invite_form').modal('show');
   });
-  // $('.t-field_photo').find('ul').hide();
-  // $('.t-field_photo img').hover(function(){
-  //   console.log($(this).parents('.t-field_photo').find('ul'));
-  //   $(this).parents('.t-field_photo').find('ul').fadeToggle();
-  // });
+
 
 $('.rate-number-up-down-btn-up').html('<i class="icon-thumbs-up"></i>').attr('title','顶');
 $('.rate-number-up-down-btn-down').html('<i class="icon-thumbs-down"></i>').attr('title','踩');
+
+$('#user-register-form #edit-submit').click(function(e){
+    e.preventDefault();
+    if($('#edit-picture-upload').val()){
+      $('#user-register-form').submit();
+    }else{
+      alert('请选择照片！最好是正方形的哦，这些现实效果最佳~');
+    }
+});
+
+
  }
 };
 
