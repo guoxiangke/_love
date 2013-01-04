@@ -83,23 +83,22 @@ function love_layout_block_view_alter(&$data, $block) {
 
   if($block->delta == 'my_latest_visitors'){
     global $user;
-    $limit = variable_get('user_visits_block_items_' . $block->delta, 8);
-    $data['content'] =  user_visits_display_block_4love($user->uid, $limit);
+    $limit = variable_get('user_visits_block_items_' . $block->delta, 12);
+    $data['content'] =  user_visits_display_block_4love($user->uid, $limit=12);
   }
-
-  if( $block->delta == 'latest_visitors'){
-      //$block['subject'] = t('Latest visitors');
-      //$block['content'] = user_visits_display_block_1(NULL, $limit);
-      //dpm($block,'block');
-      //$data['content'] = 'nothings';
-      //dpm($data,'data'); 
+//hide two block in user/my page.
+  if( $block->module == 'user_relationship_blocks'){
+    if( in_array($block->delta , array('user-2-them_to_you','user-2-you_to_them'))){
+      $data['content'] = '';
+    }
   }
     
 }
+
 /**
  * Get latest visitors for block content
  */
-function user_visits_display_block_4love($uid = NULL, $limit = 8) {
+function user_visits_display_block_4love($uid = NULL, $limit = 12) {
   $output = "";
   if (!$uid && (arg(0) == 'user' && is_numeric(arg(1)))) {
     $uid = arg(1);
@@ -209,7 +208,7 @@ function love_layout_template_preprocess_user_picture($variables) {
           $attributes = array('attributes' => array('title' => t('修改头像')), 'html' => TRUE);
           $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid/edit", $attributes);
         }else{
-          $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+          $attributes = array('attributes' => array('title' => $account->name), 'html' => TRUE);
           $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
         
         }

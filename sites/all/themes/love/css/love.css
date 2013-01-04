@@ -141,7 +141,8 @@ border-radius: .3em;
 #edit-profile-main-field-degree-und{
   width: 151px;
 }
-#profile-main-field-links-add-more-wrapper label{
+#profile-main-field-links-add-more-wrapper label,#profile-main-field-links-renren-add-more-wrapper label
+,#profile-main-field-qq-zone-add-more-wrapper label{
   display:none;
 }
 #edit-signature-settings div.controls{

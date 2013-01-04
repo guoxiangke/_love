@@ -329,7 +329,7 @@ function user_relationship_blocks_block_save($delta = NULL, $edit = NULL) {
     if (!$settings[$delta]) {
       // No overridden settings yet, return default array.
       $settings[$delta] = (object) array(
-        'size' => 10,
+        'size' => 12,
         'bid' => $delta,
         'sort' => 'newest',
       );
@@ -356,7 +356,7 @@ function template_preprocess_user_relationships_block(&$variables) {
     $settings->sort = 'newest';
   }
   if (empty($settings->size)) {
-    $settings->size = 10;
+    $settings->size = 12;
   }
 
   // select the appropriate set of relationships based on admin's configuration settings

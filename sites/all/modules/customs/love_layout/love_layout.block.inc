@@ -318,7 +318,12 @@ function love_signature_block() {
   if($account->uid == $user->uid || user_access('administer users') ){//#edit-signature-settings
     $edit_link = '<div id="edit-love-signature">'.l('<i class="icon-pencil"></i>'.t('edit'),"user/$account->uid/edit",array('fragment' => 'edit-signature-settings','html'=>TRUE)).'</div>';
   }
-  return '<div id="love-signature">'.$account->signature.'</div>'.$edit_link;
+  if(strlen($account->signature)) {
+    $signature = $account->signature;
+  }else {
+    $signature ='这家伙或许很懒，或许是个空心菜，这么好展示自我得几乎都无语^_^';
+  }//truncate_utf8($signature, $max_length=255, $wordsafe = FALSE, $add_ellipsis = TRUE)
+  return '<div id="love-signature">'.$signature.'</div>'.$edit_link;
 }
 
 ?>
