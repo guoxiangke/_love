@@ -1115,10 +1115,6 @@ width: 10%;
   color: #FFF;/*#F73F9B;*/
   font-size: 20px;
 }
-.logo a.brand:hover{
-  color: #F73F9B;
-  font-size: 21px;
-}
 
 .scrollup{
     width:40px;
@@ -1330,4 +1326,47 @@ div.form-actions {
 }
 a:hover{
 	text-decoration:none;
+}
+
+/**ico fire*/
+@font-face {
+  font-family: 'Elusive-Icons';
+  src:url('../elusiveIconfont/font/Elusive-Icons.eot');
+  src:url('../elusiveIconfont/font/Elusive-Icons.eot?#iefix') format('embedded-opentype'),
+    url('../elusiveIconfont/font/Elusive-Icons.svg#Elusive-Icons') format('svg'),
+    url('../felusiveIconfont/ont/Elusive-Icons.woff') format('woff'),
+    url('../elusiveIconfont/font/Elusive-Icons.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.site-name [class^="icon-"]:before,
+.site-name [class*=" icon-"]:before {
+  font-family: 'Elusive-Icons';
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-name a [class^="icon-"],
+.site-name a [class*=" icon-"] {
+  display: inline-block;
+  text-decoration: inherit;
+}
+.site-name .icon-fire::before {
+content: "";
+}
+.site-name [class^="icon-"]::before,.site-name  [class*=" icon-"]::before {
+font-family: 'Elusive-Icons';
+font-weight: normal;
+font-style: normal;
+speak: none;
+line-height: 1;
+display: inline-block;
+text-decoration: inherit;
+-webkit-font-smoothing: antialiased;
 }
