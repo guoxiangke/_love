@@ -28,6 +28,10 @@ function love_layout_block_info() {
     'info' =>t('婚恋广播'),
     'region' => 'sidebar_second',
   );
+  $blocks['love_signature'] = array(
+    'info' =>t('内心独白'),
+    'region' => 'sidebar_second',
+  );
   return $blocks;
 }
 /**
@@ -57,6 +61,10 @@ function love_layout_block_view($delta = '') {
     case 'love_fm_block':
       $block['subject'] = t('婚恋广播').date("(n月j日)");
       $block['content'] = love_fm_block();
+      break;
+    case 'love_signature':
+      $block['subject'] = t('内心独白');
+      $block['content'] = love_signature_block();
       break;
   }
   return $block;

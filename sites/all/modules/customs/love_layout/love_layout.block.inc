@@ -228,7 +228,7 @@ if($my_space){
     $telphone_links = '<a title="手机已填写" target="_blank" href="#" class="icon-mobile"></a>';
   }else{
     //$edit_profile_main_link
-    $telphone_links = l('','user/'.$account->uid.'/edit/main',array('attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right','class'=>array('icon-mobile-disabled'))));
+    $telphone_links = l('','user/'.$account->uid.'/edit/main',array('fragment' => 'profile2_main_form_group_contact','attributes'=>array('title'=>'现在完善','rel'=>'tooltip','data-placement'=>'right','class'=>array('icon-mobile-disabled'))));
   }
 }else{
   $telphone_links = '';
@@ -307,4 +307,18 @@ function love_fm_block() {//<?php echo date("ymd");? >
 <a href="http://audio.liangyou.net/download.php?t=2&c=bf&f=bf'.(date("ymd")).'.wma" id="radio-home">幸福满家园</a>  </div>
 </div>';
 }
+
+function love_signature_block() {
+  global $user;
+  $account = $user;
+  if(arg(0) == 'user' && is_numeric(arg(1))){
+    $account = user_load(arg(1));
+  }
+  $edit_link = '';
+  if($account->uid == $user->uid || user_access('administer users') ){//#edit-signature-settings
+    $edit_link = '<div id="edit-love-signature">'.l('<i class="icon-pencil"></i>'.t('edit'),"user/$account->uid/edit",array('fragment' => 'edit-signature-settings','html'=>TRUE)).'</div>';
+  }
+  return '<div id="love-signature">'.$account->signature.'</div>'.$edit_link;
+}
+
 ?>

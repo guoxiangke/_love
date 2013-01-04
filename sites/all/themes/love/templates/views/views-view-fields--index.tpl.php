@@ -139,21 +139,21 @@
 		<ul>
 		<?php
 			if($friends){ ?>
-				<li><a href="#" rel="tooltip" data-placement="right" title="互相关注"><i class="icon-retweet"></i></a></li>
+				<li><a href="#"  class="love-icon" title="互相关注"><i class="icon-retweet"></i><?php echo '互关注';?></a></li>
 				<!--li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li-->
 			<?php
 			}elseif($no_relationships){ ?>
-				<li><?php echo l('<i class="icon-plus"></i>',"ajax/relationship/$profile_uid/request/$rtid",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action'),'title'=>'关注'.$Ta,'rel'=>"tooltip",'data-placement'=>"right")));?>
+				<li><?php echo l('<i class="icon-plus"></i>'.'关注'.$Ta,"ajax/relationship/$profile_uid/request/$rtid",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action'),'title'=>'关注'.$Ta)));?>
 					
 			<?php }
 			if($follower){ //Ta想认识你?>
-				<li><a href="#" rel="tooltip" data-placement="right" title="<?php echo $Ta;?>关注了你"><i class="icon-arrow-left"></i></a></li>
-				<li><?php echo l('<i class="icon-plus"></i>',"ajax/relationship/$profile_uid/request/$rtid",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action'),'title'=>'关注'.$Ta,'rel'=>"tooltip",'data-placement'=>"right")));?>
+				<li><a href="#"  class="love-icon" title="<?php echo $Ta;?>关注了你"><i class="icon-arrow-left"></i>被关注</a></li>
+				<li><?php echo l('<i class="icon-plus"></i>'.'关注'.$Ta,"ajax/relationship/$profile_uid/request/$rtid",array('html'=>TRUE,'query' => drupal_get_destination(),'attributes'=>array('class' => array('love-icon','love-icon-action'),'title'=>'关注'.$Ta)));?>
 				
 			<?php 
 			}
 			if($follow){ //你想认识Ta?>
-				<li><a href="#" rel="tooltip" data-placement="right" title="你关注了<?php echo $Ta;?>"><i class="icon-arrow-right"></i></a></li>
+				<li><a href="#" class="love-icon" title="你关注了<?php echo $Ta;?>"><i class="icon-arrow-right"></i>已关注</a></li>
 				<!--li><a href="" rel="tooltip" data-placement="right" title="取消关注"><i class="icon-minus"></i></a></li-->
 			<?php 
 			}
