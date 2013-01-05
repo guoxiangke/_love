@@ -25,12 +25,16 @@ function love_layout_block_info() {
     'region' => 'sidebar_second',
   );
   $blocks['love_fm_block'] = array(
-    'info' =>t('婚恋广播'),
+    'info' =>t('love_fm_block'),
     'region' => 'sidebar_second',
   );
   $blocks['love_signature'] = array(
-    'info' =>t('内心独白'),
+    'info' =>t('love_signature'),
     'region' => 'sidebar_second',
+  );
+  $blocks['love_user_timeline'] = array(
+    'info' =>t('love_user_timeline'),
+    'region' => 'content',
   );
   return $blocks;
 }
@@ -55,7 +59,7 @@ function love_layout_block_view($delta = '') {
       $block['content'] = love_block_profile_info();
       break;
     case 'love_qr_block':
-      $block['subject'] = t('微信扫一扫');
+      $block['subject'] = t('微信关注');
       $block['content'] = love_block_weichat_qr();
       break;
     case 'love_fm_block':
@@ -65,6 +69,10 @@ function love_layout_block_view($delta = '') {
     case 'love_signature':
       $block['subject'] = t('内心独白');
       $block['content'] = love_signature_block();
+      break;
+    case 'love_user_timeline':
+      $block['subject'] = t('时光轴');
+      $block['content'] = love_user_timeline();
       break;
   }
   return $block;

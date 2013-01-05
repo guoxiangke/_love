@@ -295,7 +295,7 @@ function love_block_about_us() {
 }
 
 function love_block_weichat_qr() {
-  return '了解永不止息动态哦！<img src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/>';
+  return '永不止息动态早知道<img src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/>';
 }
 function love_fm_block() {//<?php echo date("ymd");? >
   return '恋爱季节:我们一起学习如何去爱吧！'//<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')? >
@@ -318,12 +318,78 @@ function love_signature_block() {
   if($account->uid == $user->uid || user_access('administer users') ){//#edit-signature-settings
     $edit_link = '<div id="edit-love-signature">'.l('<i class="icon-pencil"></i>'.t('edit'),"user/$account->uid/edit",array('fragment' => 'edit-signature-settings','html'=>TRUE)).'</div>';
   }
-  if(strlen($account->signature)) {
+  if(isset($account->signature) && strlen($account->signature)) {
     $signature = $account->signature;
   }else {
-    $signature ='这家伙或许很懒，或许是个空心菜，这么好展示自我得几乎都无语^_^';
+    $signature ='这家伙或许很懒，或许是个空心菜，这么好展示自我得机会都无语^_^';
   }//truncate_utf8($signature, $max_length=255, $wordsafe = FALSE, $add_ellipsis = TRUE)
   return '<div id="love-signature">'.$signature.'</div>'.$edit_link;
 }
 
+function love_user_timeline() {
+  drupal_add_css(drupal_get_path('module', 'love_layout').'/jQueryTimelinr_0952/css/style_v.css');
+  drupal_add_js(drupal_get_path('module', 'love_layout').'/jQueryTimelinr_0952/js/jquery.timelinr-0.9.52.js');
+
+  global $user;
+  $account = $user;
+  if(arg(0) == 'user' && is_numeric(arg(1))){
+    $account = user_load(arg(1));
+  }
+  $profile = profile2_load_by_user($account);
+
+  //dpm($profile);
+  
+  if(isset($profile['main']->field_name[LANGUAGE_NONE][0]['safe_value']))
+  $display_name = $profile['main']->field_name[LANGUAGE_NONE][0]['safe_value'];
+  //$display_name = $field_name;
+  $field_birthday = $profile['main']->field_birthday[LANGUAGE_NONE][0]['value'];
+  $year_now =  date("Y",time());
+  $year_born =  date("Y",strtotime($field_birthday));
+  $field_height  = $profile['main']->field_height[LANGUAGE_NONE][0]['value'];
+  //TODO more....
+  $dates[$field_birthday] = $field_birthday;
+  $photos = love_get_nodes_by_type($type='photo',$account);
+  $photos = node_load_multiple(array_keys($photos['node']));
+  $dates_li = '';
+  $issues_li = '';
+  // dpm($photos);
+  foreach ($photos as $key => $node) {
+     $dates_li .= '<li><a href="#'.$node->changed.'">'.date('n-j',$node->changed).'</a><span>'.date('Y',$node->changed).'</span></li>';
+     $variables = array(
+      'path' => $node->field_photo[LANGUAGE_NONE][0]['uri'], 
+      'alt' => 'Test alt',
+      'title' => 'Test title',
+      'attributes' => array('class' => 'some-img', 'id' => 'my-img'),
+      );
+     $style = 's550';
+     $img = theme('image_style', array('style_name' => $style, 'path' => $node->field_photo[LANGUAGE_NONE][0]['uri']));//theme('image', $variables);
+     $issues_li .= '<li id="'.$node->changed.'">
+        '.$img.'
+        <p>'.$node->body[LANGUAGE_NONE][0]['value'].'</p>
+      </li>';
+  }
+  $dates_li .= '<li><a href="#'.strtotime($field_birthday).'">'.date('n-j',strtotime($field_birthday)).'</a><span>'.date('Y',strtotime($field_birthday)).'</span></li>';
+
+  $issues_li .= '<li id="'.strtotime($field_birthday).'">
+        <img src="images/2.png" width="256" height="256" />
+        <h1>'.date('Y-m-d',strtotime($field_birthday)).'</h1>
+        <p>1987年3月10日 [ 丁卯年(兔年)  二月十一] 修改生日</p>
+      </li>';
+
+  $output = '
+  <div id="timeline" class="row-fluid">
+    <ul id="dates" class="span3">
+    '.$dates_li.'
+    </ul>
+    <ul id="issues" class="span9">
+    '.$issues_li.'
+    </ul>
+    
+    <a href="#" id="next">+</a>
+    <a href="#" id="prev">-</a>
+  </div>';
+  // <div id="grad_top"></div>
+  //   <div id="grad_bottom"></div>
+  return $output;
+}
 ?>
