@@ -129,7 +129,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
         <section class="<?php print _twitter_bootstrap_content_span($columns); ?>" id="page-section">  
           
           <?php if ($page['content']['love_layout_love_signature']): print render($page['content']['love_layout_love_signature']); endif;?>
-          
+           <?php if ($page['content']['love_layout_love_user_timeline']): print render($page['content']['love_layout_love_user_timeline']); endif;?>
           <?php if ($page['highlighted']): ?>
             <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
           <?php endif; ?>

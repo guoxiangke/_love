@@ -150,27 +150,31 @@ h1,h2,h4,h5,h6 {
 		#next,
 		#prev {
 			position: absolute;
-			left: 95%;
+			left: 93.5%;
 			font-size: 70px;
-			width: 38px;
-			height: 22px;
-			background-position: 0 -44px;
+			width: 51px;
+			height: 50px;
 			background-repeat: no-repeat;
 			text-indent: -9999px;
 			overflow: hidden;
 		}
-			#next:hover,
-			#prev:hover {
-				background-position:  0 0;
-			}
-			#next {
-				bottom: 0;
-				background-image: url('../images/next_v.png');
-			}
-			#prev {
-				top: 0;
-				background-image: url('../images/prev_v.png');
-			}
+
+		#next {
+			bottom: 77%;
+			 background-position: 0 0;
+			background-image: url('http://wowslider.com/images/engine/arrows.png');
+		}
+		#prev {
+			top: 5%;
+			background-position: 100% 0;
+			background-image: url('http://wowslider.com/images/engine/arrows.png');
+		}
+		#prev:hover{
+		    background-position: 100% 100%;
+		}
+		#next:hover {
+		    background-position: 0 100%;
+		}
 				#next.disabled,
 				#prev.disabled {
 					opacity: 0.2;
