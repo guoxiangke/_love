@@ -373,10 +373,22 @@ function love_user_timeline() {
   $issues_li .= '<li id="'.strtotime($field_birthday).'">
         <img src="images/2.png" width="256" height="256" />
         <h1>'.date('Y-m-d',strtotime($field_birthday)).'</h1>
-        <p>1987年3月10日 [ 丁卯年(兔年)  二月十一] 修改生日</p>
+        <p>'.date('Y-m-d',strtotime($field_birthday)).'我出生啦！</p>
       </li>';
 
-  $output = '
+  $output = '<script>
+  (function ($) {
+    $(function(){
+      $().timelinr({
+        orientation:  "vertical",
+        issuesSpeed:  300,
+        datesSpeed:   100,
+        arrowKeys:    "true",
+        startAt:    3
+      })
+    });
+})(jQuery);
+</script>
   <div id="timeline" class="row-fluid">
     <ul id="dates" class="span3">
     '.$dates_li.'
@@ -390,6 +402,6 @@ function love_user_timeline() {
   </div>';
   // <div id="grad_top"></div>
   //   <div id="grad_bottom"></div>
-  return $output;
+  return '镌刻您的真爱之旅<br/>时间就像一条长长的线，空间就像一个大大的圆，我们的故事发生在它们中间～'.$output;
 }
 ?>

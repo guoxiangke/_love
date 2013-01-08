@@ -46,8 +46,6 @@ Drupal.behaviors.statusInit = {
   });
 
 
-$('.rate-number-up-down-btn-up').html('<i class="icon-thumbs-up"></i>').attr('title','顶');
-$('.rate-number-up-down-btn-down').html('<i class="icon-thumbs-down"></i>').attr('title','踩');
 
 $('#user-register-form #edit-submit').click(function(e){
     e.preventDefault();
@@ -59,15 +57,27 @@ $('#user-register-form #edit-submit').click(function(e){
 });
 
 
-    $(function(){
-      $().timelinr({
-        orientation:  "vertical",
-        issuesSpeed:  300,
-        datesSpeed:   100,
-        arrowKeys:    "true",
-        startAt:    3
-      })
-    });
+  $('.rate-number-up-down-btn-up').html('<i class="icon-thumbs-up"></i>').attr('title','顶');
+  $('.rate-number-up-down-btn-down').html('<i class="icon-thumbs-down"></i>').attr('title','踩');
+  $('.vote-1').addClass('hide');
+
+//   $('.t-field_photo .photo').hover(
+//    function () {
+//    $(this).parents('.t-field_photo').find('.vote-1').removeClass('hide');
+//    }, 
+//    function () {
+//     $(this).parents('.t-field_photo').find('.vote-1').addClass('hide');
+//    }
+//   );
+    $caption = $(this).parents('.t-field_photo').find('.vote-1')
+    
+  $('.t-field_photo .photo').hover(function(){
+      $(this).parents('.t-field_photo').find('.vote-1').stop(true, true).fadeIn('fast');
+    },function(){
+      $(this).parents('.t-field_photo').find('.vote-1').stop(true, true).fadeOut('fast');
+    }
+  );
+
 
 
  }

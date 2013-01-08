@@ -38,6 +38,7 @@
 /**
  * new fields:
  * $picture
+ * image_style_url($variables['style_name'], $variables['path']);
  * $name
  * $field_photo $body $created $filed_tags $edit_node $delete_node
  */
@@ -52,6 +53,7 @@
 	$account = user_load($profile_uid);
 	$profile = profile2_load_by_user($account);
 	//dpm($profile);
+	//dpm($account);
 	// views alter 
 	if(isset($profile['main']->field_name[LANGUAGE_NONE]))
 		$field_name = $profile['main']->field_name[LANGUAGE_NONE][0]['value'];
@@ -130,10 +132,28 @@
   	$field_marriage = '婚恋状态-未知';
   }
 ?>
-<div class="t-pic float-l">
-	<div class="round120<?php print $field_sex?" boy":" girl" ?>">
+<div class="t-pic float-l"><!-- 
+	<div class=" hide round<?php print $field_sex?" boy":" girl" ?>">
 		<?php print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
-	</div>
+	</div> -->
+	<ul class="ch-grid">
+		<li>
+			<?php 
+			 $style_name = 'canvas100'; $path = $account->picture->uri;
+			 $user_pic =  image_style_url($style_name, $path);
+			 ?><?php //print $local.'<br>'.$local.'<br>'.$year_born.' '.$field_height.'cm'; ?>
+			<div class="ch-item ch-img-1" style="background-image: url(<?php print $user_pic;?>)">
+				<?php //print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
+				<?php print l('<div class="ch-info">
+					<h3>'.$real_name.'</h3>
+					<p>'.$local.'<br>'.$field_marriage.'<br>'.$year_born.' '.$field_height.'</p>
+				</div>','user/'.$profile_uid,array('html'=>TRUE));?>
+				
+			</div>
+		</li>
+		
+		
+	</ul>
 	<?php if($user->uid != $profile_uid):?>
 	<div class="t-user-info">
 		<ul>
@@ -159,7 +179,7 @@
 			}
 		 ?>
 		</ul>
-		
+
 	</div>
 	<?PHP endif; ?>
 </div>
@@ -171,26 +191,23 @@
 			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true)); print '，【'.$real_name.'】'.$field_marriage.'，'.($year_born).'，'.$field_height.'厘米，'.$local;?> </div>
+		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true));?> 刚刚上传了相片 </div>
 		
 	</div>
 	<?php if (isset($body)): ?>
 	<div class="t-body">
-		<p>刚刚上传了相片</p>
-		<div class="t-field_photo">
-			<?php if (isset($field_photo)): ?><span class="photo"> <?php print $field_photo; ?> </span><?php endif; ?>
-			<?php if (isset($flag)): ?>
-			<!-- <span class="flag"> <?php print $flag; ?> </span>
-			<span><ul>
-			 			<li><a title="赞" href=""><i class="icon-star-empty"></i></a></li>
-			 			<li><a title="踩" href=""><i class="icon-star"></i></a></li>
-			 		</ul>
-			</span> -->
+		<div class="t-field_photo clearfix">
+			<?php if (isset($field_photo)): ?>
+			<div class="photo">
+				<?php print $field_photo; ?> 
+				<?php if (isset($vote)): ?>
+				 	<div class="vote-1">
+				 		<div class="love_vote"> <?php print $vote; ?> </div>
+				 	</div>
+				<?php endif; ?>
+			</div>
 			<?php endif; ?>
-			<?php if (isset($vote)): ?>
-			 	<div class="vote-1">
-			 	<div class="love_vote"> <?php print $vote; ?> </div>
-			 	</div>
+			<?php if (isset($flag)): ?>
 			<?php endif; ?>
 
 			<?php if (strlen($body)!=0): ?>
