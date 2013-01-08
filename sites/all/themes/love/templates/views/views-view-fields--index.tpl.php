@@ -146,7 +146,7 @@
 				<?php //print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
 				<?php print l('<div class="ch-info">
 					<h3>'.$real_name.'</h3>
-					<p>'.$local.'<br>'.$field_marriage.'<br>'.$year_born.' '.$field_height.'</p>
+					<p>'.$local.'<br>'.$field_marriage.'<br>'.$year_born.' '.$field_height.'cm</p>
 				</div>','user/'.$profile_uid,array('html'=>TRUE));?>
 				
 			</div>
