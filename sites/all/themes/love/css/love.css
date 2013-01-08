@@ -1171,6 +1171,8 @@ z-index: 100;
 }
 .t-field_photo .photo{
 	float:left;
+	height: 225px;
+	overflow: hidden;
 }
 .t-des{
 	float: right;
