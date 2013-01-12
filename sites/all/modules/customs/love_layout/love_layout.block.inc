@@ -349,7 +349,10 @@ function love_user_timeline() {
   //TODO more....
   $dates[$field_birthday] = $field_birthday;
   $photos = love_get_nodes_by_type($type='photo',$account);
+  //add default pic of timeline.
+  $photos = $photos?$photos:array('107'=>node_load(107));
   $photos = node_load_multiple(array_keys($photos['node']));
+
   $dates_li = '';
   $issues_li = '';
   // dpm($photos);
@@ -371,7 +374,8 @@ function love_user_timeline() {
   $dates_li .= '<li><a href="#'.strtotime($field_birthday).'">'.date('n-j',strtotime($field_birthday)).'</a><span>'.date('Y',strtotime($field_birthday)).'</span></li>';
 
   $issues_li .= '<li id="'.strtotime($field_birthday).'">
-        <img src="images/2.png" width="256" height="256" />
+        <img src="/'.drupal_get_path('module','love_layout').'/birth-default.jpg" width="256" height="256" />
+
         <h1>'.date('Y-m-d',strtotime($field_birthday)).'</h1>
         <p>'.date('Y-m-d',strtotime($field_birthday)).'我出生啦！</p>
       </li>';
