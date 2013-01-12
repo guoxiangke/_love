@@ -350,7 +350,7 @@ function love_user_timeline() {
   $dates[$field_birthday] = $field_birthday;
   $photos = love_get_nodes_by_type($type='photo',$account);
   //add default pic of timeline.
-  $photos = $photos?$photos:array('node'=>array('107'=>node_load(107));
+  $photos = $photos?$photos:array('node'=>array('107'=>node_load(107)));
   $photos = node_load_multiple(array_keys($photos['node']));
 
   $dates_li = '';
