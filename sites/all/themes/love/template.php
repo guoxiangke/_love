@@ -90,6 +90,12 @@ function love_preprocess_page(&$vars) {
   $slogan_text = $vars['site_slogan'];
   $site_name_text = $vars['site_name'];
   $vars['site_name_and_slogan'] = $site_name_text . ' ' . $slogan_text;
+
+  //Page Template Suggestions per Node Type
+  if (isset($vars['node'])) {
+  // If the node type is "blog" the template suggestion will be "page--blog.tpl.php".
+   $vars['theme_hook_suggestions'][] = 'page__'. str_replace('_', '--', $vars['node']->type);
+  }
 }
 
 /**

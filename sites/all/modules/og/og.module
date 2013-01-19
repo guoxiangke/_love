@@ -5,8 +5,8 @@
  * Enable users to create and manage groups with roles and permissions.
  */
 
-// Add field widget related code.
-require drupal_get_path('module', 'og') . '/includes/og.field.inc';
+// Add field widget related code.drupal_get_path('module', 'og') . 
+require 'includes/og.field.inc';
 
 /**
  * Define active group content states.

@@ -160,19 +160,19 @@ h1,h2,h4,h5,h6 {
 
 		#next {
 			bottom: 77%;
-			 background-position: 0 0;
+			 background-position: 100% 0;
 			background-image: url('../images/arrows.png');
 		}
 		#prev {
 			top: 5%;
-			background-position: 100% 0;
+			background-position: 0  100%;
 			background-image: url('../images/arrows.png');
 		}
 		#prev:hover{
 		    background-position: 100% 100%;
 		}
 		#next:hover {
-		    background-position: 0 100%;
+		    background-position: 100% 100%;
 		}
 				#next.disabled,
 				#prev.disabled {
