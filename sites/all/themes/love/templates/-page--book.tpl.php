@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Fullscreen Pageflip Layout with BookBlock</title>
-		<meta name="description" content="Fullscreen Pageflip Layout with BookBlock" />
-		<meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico"> 
-		<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" />
-		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
-		<link rel="stylesheet" type="text/css" href="css/custom.css" />
-		<script src="js/modernizr.custom.79639.js"></script>
-	</head>
-	<body>
 		<div id="container" class="container">	
 
 			<div class="menu-panel">
@@ -27,8 +10,8 @@
 					<li><a href="#item5">Commencing practice</a></li>
 				</ul>
 				<div>
-					<a href="http://tympanus.net/Development/AudioPlayer/">&larr; Previous Demo: Responsive Audio Player</a>
-					<a href="http://tympanus.net/codrops/?p=12795">Back to the Codrops Article</a>
+					<a href="">&larr; 下一本</a>
+					<a href="">返回</a>
 				</div>
 			</div>
 
@@ -378,18 +361,8 @@
 			</div>
 				
 		</div><!-- /container -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<script src="js/jquery.mousewheel.js"></script>
-		<script src="js/jquery.jscrollpane.min.js"></script>
-		<script src="js/jquerypp.custom.js"></script>
-		<script src="js/jquery.bookblock.js"></script>
-		<script src="js/page.js"></script>
 		<script>
-			$(function() {
-
+			(function ($) {
 				Page.init();
-
-			});
+			})(jQuery);
 		</script>
-	</body>
-</html>

@@ -572,16 +572,16 @@ function _love_user_relationships_link($variables) {
 //book node type css and js
 function love_layout_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'book' && $view_mode == 'full') {
-    drupal_add_css(drupal_get_path('module','love_layout').'/book/css/jquery.jscrollpane.custom.css');  
-    drupal_add_css(drupal_get_path('module','love_layout').'/book/css/bookblock.css');
-    drupal_add_css(drupal_get_path('module','love_layout').'/book/css/custom.css');
-    drupal_add_css(drupal_get_path('module','love_layout').'/book/css/bookblock.css');  
+    // drupal_add_css(drupal_get_path('module','love_layout').'/book/css/jquery.jscrollpane.custom.css');  
+    // drupal_add_css(drupal_get_path('module','love_layout').'/book/css/bookblock.css');
+    // drupal_add_css(drupal_get_path('module','love_layout').'/book/css/custom.css');
+    // drupal_add_css(drupal_get_path('module','love_layout').'/book/css/bookblock.css');  
 
-    drupal_add_js(drupal_get_path('module','love_layout').'/book/js/modernizr.custom.79639.js');
-    drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.mousewheel.js');
-    drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.jscrollpane.min.js');
-    drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquerypp.custom.js');
-    drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.bookblock.js');
-    drupal_add_js(drupal_get_path('module','love_layout').'/book/js/page.js');
+    // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/modernizr.custom.79639.js');
+    // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.mousewheel.js');
+    // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.jscrollpane.min.js');
+    // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquerypp.custom.js');
+    // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.bookblock.js');
+    // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/page.js');
   }
 }
