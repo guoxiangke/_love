@@ -22,7 +22,7 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 	<body>
 		<div id="container" class="container">	<pre>
 <?php 
-	$book_index_nid = 106;
+	$book_index_nid = 102;
   $book_node = node_load($book_index_nid);
   $tree = book_menu_subtree_data($book_node->book);
   $tree = array_shift($tree); // Do not include the book item itself.
@@ -34,7 +34,7 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 				<ul id="menu-toc" class="menu-toc">
 				<?php 
 				$items = array();
-				echo '<li><a href="#book-'.$book_node->nid.'">简介</a></li>';
+				//echo '<li><a href="#book-'.$book_node->nid.'">'.$book_node->title.'</a></li>';
 				foreach ($tree['below'] as $key => $value) {
 					$nid = $value['link']['nid'];
 					echo '<li><a href="#book-'.$nid.'">'.$value['link']['link_title'].'</a></li>';
