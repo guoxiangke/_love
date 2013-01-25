@@ -1,0 +1,42 @@
+ /** 公告 **/
+#gg{
+	position: fixed;
+	bottom: 0;
+	background:#000;
+	width: 100%;
+	height:23px;
+	line-height:23px;
+	z-index: 9999;
+	opacity: .60;
+	filter: alpha(opacity=60);
+	_bottom:auto;
+	_width: 100%;
+	_position: absolute;
+	_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+	-webkit-box-shadow:10px 0 5px #000;
+	-moz-box-shadow:10px 0 5px #000;
+	box-shadow:10px 0 5px #000;
+	}
+#gg a{
+	color: #fff;
+	font-size: 13px;
+	letter-spacing:2px;
+	text-shadow: 0px 1px 0px #000;
+	}
+.close a {
+	float:right;
+	margin:0 10px 0 0;
+	}
+.heartbeat-stream-siteactivity {
+	float:left;
+	height:100px;
+	color: #fff;
+	margin:0 0 0 20px;
+	background:url(http://www.zoneself.org/wp-content/themes/product/images/bulletin.gif) no-repeat;
+	min-height:23px;
+	overflow:hidden;
+	}
+.heartbeat-activity{
+	height:100px;
+	padding-left:25px;
+	}

@@ -277,3 +277,50 @@ function love_privatemsg_username($variables) {
     return theme('username', array('account' => $recipient));
   }
 }
+
+
+/**
+ * Theme function for a list of heartbeat activity messages.
+ */
+function love_heartbeat_list($variables) {
+echo '123213';
+  $heartbeatStream = $variables['stream'];
+
+  if (!$heartbeatStream || !$heartbeatStream->hasAccess()) {
+    return '';
+  }
+
+  global $user, $language;
+  $content = '';
+
+  $content .= $heartbeatStream->prefix;
+
+  if (!isset($heartbeatStream->config) || empty($heartbeatStream->config->class)) {
+
+    $content .= drupal_render($variables['content']);
+
+  }
+  else {
+
+    $content .= '<div id="heartbeat-stream-' . $heartbeatStream->config->class . '" class="heartbeat-' . ($heartbeatStream->isPage() ? 'page' : 'block')  . ' heartbeat-stream heartbeat-stream-' . $heartbeatStream->config->class . '">';
+    $content .= '<ul class="heartbeat-messages-wrapper">';
+
+    if (empty($heartbeatStream->messages)) {
+
+      $content .= '<p class="heartbeat-empty"><em>' . t('No activity yet.') . '</em></p>';
+
+    }
+    else {
+
+      $content .= drupal_render($variables['content']);
+
+    }
+
+    $content .= '</ul></div>';
+
+  }
+
+  $content .= $heartbeatStream->suffix;
+
+  return $content;
+}
