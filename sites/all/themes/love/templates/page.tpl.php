@@ -203,4 +203,19 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <?php print render($page['footer']); ?>
   </footer>
 </div>
+
+  <?php if (isset($heartbeats)): ?>
+  <div id="gg">
+    <div class="close"><a href="javascript:void(0)" onclick="jQuery('#gg').slideUp('slow');" title="关闭">×</a>
+    <div id="feedb"><a href="activities" title="更多" class="image"><img src="http://www.zoneself.org/wp-content/themes/product/images/feed.gif"></a></div>
+ <!--    <div class="weibo">
+      <a class="sina_t" href="javascript:(function(){window.open('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)+'&source=bookmark','_blank','width=450,height=400');})()" title="分享到新浪微博" rel="nofollow">新浪微博</a></div>
+      <a class="qq_t" href="javascript:void(0);" onclick="window.open('http://v.t.qq.com/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&amp;url='+encodeURIComponent(location.href)+'&amp;rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); " title="分享到腾讯微博" rel="nofollow">腾讯微博</a>
+    </div> -->
+    <div class="bulletin">
+       <?php print $heartbeats; ?>
+    </div>
+  </div>
+  <?php endif ?>
+
 <?php endif ?>

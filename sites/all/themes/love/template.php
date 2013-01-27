@@ -283,7 +283,6 @@ function love_privatemsg_username($variables) {
  * Theme function for a list of heartbeat activity messages.
  */
 function love_heartbeat_list($variables) {
-echo '123213';
   $heartbeatStream = $variables['stream'];
 
   if (!$heartbeatStream || !$heartbeatStream->hasAccess()) {
