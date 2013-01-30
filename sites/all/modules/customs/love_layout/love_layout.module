@@ -263,6 +263,12 @@ function love_layout_modules_installed($modules) {
   }
 }
 
+function _statuses_page($account) {
+  $account = user_load($account);
+  $output = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
+  return $output;
+}
+
 /**
  * Implements hook_menu().
  */
@@ -394,6 +400,14 @@ function love_layout_admin_paths_alter(&$paths) {
 }
 
 function love_layout_preprocess_page(&$variables) {
+ /* $headers = drupal_get_http_header();
+
+  if (preg_match('@HTTP/1\.[01]\x20+403@', $headers)) {
+    $variables['body_classes'] .= 'error-403,';
+  }
+  elseif (preg_match('@HTTP/1\.[01]\x20+404@', $headers)) {
+    $variables['body_classes'] .= 'error-404,';
+  }  */
   //module_load_include('inc', 'love_layout', 'love_layout.customs'); 
   module_load_include('inc', 'node', 'node.pages'); 
   module_load_include('inc', 'love_layout', 'love_layout.customs');  
@@ -410,12 +424,7 @@ function love_layout_preprocess_page(&$variables) {
 
   
   if(drupal_is_front_page()) {
-
-    drupal_add_css(drupal_get_path('module','love_layout').'/css/activities.css');
-    drupal_add_js(drupal_get_path('module','love_layout').'/js/Scroll_activity.js');
-    module_load_include('inc','heartbeat','heartbeat.pages');
-    $heartbeat_messages_page = heartbeat_messages_page('siteactivity');
-    $variables['heartbeats'] = render($heartbeat_messages_page);
+    
   }
 }
 

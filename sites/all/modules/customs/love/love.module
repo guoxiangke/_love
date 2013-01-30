@@ -4,6 +4,15 @@
  * Implements hook_menu().
  */
 function love_menu() {
+  // $items['user/%/statuses'] = array(
+  //   'title' => 'Statuses',
+  //   'page callback'    => '_statuses_page',
+  //   'page arguments'   => array(1),
+  //   'file'             => 'privatemsg.pages.inc',
+  //   'access callback' => 'statuses_user_access',
+  //   'access arguments' => array('add'),
+  //   'type' => MENU_LOCAL_TASK,
+  // );
   //http://dev.sina.org/relationship/12/request/1?destination=user/12
   $items['ajax/relationship/%/request/%'] = array(
     'title' => 'request',
