@@ -141,7 +141,7 @@ function love_preprocess_user_picture(&$variables) {
       }
       if (!empty($account->uid) && user_access('access user profiles')) {
         $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
-				//XXX dale user/uid =>profile-main/uid
+        //XXX dale user/uid =>profile-main/uid
         $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
       }
     }
@@ -159,18 +159,18 @@ function love_preprocess_user_profile(&$variables) {
  */
  
 function love_form_node_form_alter(&$form, &$from_state, $form_id) {
-	
-	if($form_id == 'photo_node_form'){ //node/add/photo
-			$form['author']['#access'] = FALSE;
-			$form['options']['#access'] = FALSE; 
-			$form['comment_settings']['#access'] = FALSE; 
-			
-		  $form['path']['#access'] = FALSE;
-			$form['revision_information']['#access'] = FALSE; 
-			$form['menu']['#access'] = FALSE; 
+  
+  if($form_id == 'photo_node_form'){ //node/add/photo
+      $form['author']['#access'] = FALSE;
+      $form['options']['#access'] = FALSE; 
+      $form['comment_settings']['#access'] = FALSE; 
+      
+      $form['path']['#access'] = FALSE;
+      $form['revision_information']['#access'] = FALSE; 
+      $form['menu']['#access'] = FALSE; 
       $form['actions']['preview']['#access'] = FALSE; 
       
-	}
+  }
  
 }
 
@@ -283,7 +283,6 @@ function love_privatemsg_username($variables) {
  * Theme function for a list of heartbeat activity messages.
  */
 function love_heartbeat_list($variables) {
-echo '123213';
   $heartbeatStream = $variables['stream'];
 
   if (!$heartbeatStream || !$heartbeatStream->hasAccess()) {

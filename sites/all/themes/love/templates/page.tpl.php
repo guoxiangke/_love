@@ -35,7 +35,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
             
             <li>为<a href="#" rel="tooltip" title="请为本站营造良好的社交环境。<br/>为教会单身守望。">本站代祷</a> ，<a href="#" rel="tooltip" title="如果您觉得打开速度慢，那么您可以在网站服务器升级上有分">支持奉献</a>，<a href="http://blog.liangyou.net/lianai/" rel="tooltip" title="打开速度慢，这个建议就不用提了^_^">意见建议</a></li>
             <!--li><a href="http://blog.liangyou.net/lianai/"  rel="tooltip" title="如果您还未收到邀请，听听这个节目，预备自己成为理想的另一半吧！"><img src="<?php print path_to_theme(); ?>/lianai.jpg" alt=""></a><a href="#" rel="tooltip" title="打开速度慢，这个建议就不用提了^_^"></a></li-->
-            <li><embed type="application/x-shockwave-flash" width="290" height="24" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')?>/player.swf?soundFile=http://liangyou.nissigz.com/media/se/se<?php echo date("ymd");?>.mp3&amp;bg=0xCDDFF3&amp;leftbg=0x357DCE&amp;lefticon=0xF2F2F2&amp;rightbg=0x357DCE&amp;rightbghover=0x4499EE&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x357DCE&amp;slider=0x357DCE&amp;track=0xFFFFFF&amp;border=0xFFFFFF&amp;loader=0x8EC2F4&amp;autostart=no&amp;loop=no" wmode="transparent" quality="high"><a href="#"  title="未收到邀请？听听这个节目，预备自己成为理想的另一半吧！">今日广播</a>
+            <li><embed type="application/x-shockwave-flash" width="240" height="24" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')?>/player.swf?soundFile=http://liangyou.nissigz.com/media/se/se<?php echo date("ymd");?>.mp3&amp;bg=0xCDDFF3&amp;leftbg=0x357DCE&amp;lefticon=0xF2F2F2&amp;rightbg=0x357DCE&amp;rightbghover=0x4499EE&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x357DCE&amp;slider=0x357DCE&amp;track=0xFFFFFF&amp;border=0xFFFFFF&amp;loader=0x8EC2F4&amp;autostart=no&amp;loop=no" wmode="transparent" quality="high"><a href="#"  title="未收到邀请？听听这个节目，预备自己成为理想的另一半吧！">今日广播</a>
 </li>          </ul>
         </div>
       </div>
@@ -45,7 +45,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
 <header id="navbar" role="banner" class="navbar navbar-fixed-top">
 
-	<div class="container">
+  <div class="container">
     
     <nav role="navigation" class="clearfix">
       <div class="logo">
@@ -60,13 +60,13 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
       </div>
 
       <?php if ($primary_nav): ?>
-      	<div class="pull-left">
+        <div class="pull-left">
           <?php print $primary_nav; ?>
         </div>
       <?php endif; ?>
 
-     <!-- 	<?php if ($secondary_nav): ?>
-     		<div class="pull-right ml-24">
+     <!--   <?php if ($secondary_nav): ?>
+        <div class="pull-right ml-24">
           <?php print $secondary_nav; ?>
         </div>
       <?php endif; ?> -->
@@ -203,4 +203,19 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     <?php print render($page['footer']); ?>
   </footer>
 </div>
+
+  <?php if (isset($heartbeats)): ?>
+  <div id="gg">
+    <div class="close"><a href="javascript:void(0)" onclick="jQuery('#gg').slideUp('slow');" title="关闭">×</a>
+    <div id="feedb"><a href="activities" title="更多" class="image"><img src="http://www.zoneself.org/wp-content/themes/product/images/feed.gif"></a></div>
+ <!--    <div class="weibo">
+      <a class="sina_t" href="javascript:(function(){window.open('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)+'&source=bookmark','_blank','width=450,height=400');})()" title="分享到新浪微博" rel="nofollow">新浪微博</a></div>
+      <a class="qq_t" href="javascript:void(0);" onclick="window.open('http://v.t.qq.com/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&amp;url='+encodeURIComponent(location.href)+'&amp;rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); " title="分享到腾讯微博" rel="nofollow">腾讯微博</a>
+    </div> -->
+    <div class="bulletin">
+       <?php print $heartbeats; ?>
+    </div>
+  </div>
+  <?php endif ?>
+
 <?php endif ?>

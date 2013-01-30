@@ -1,10 +1,9 @@
- /** 公告 **/
+/** 公告 **/
 #gg{
 	position: fixed;
 	bottom: 0;
 	background:#000;
 	width: 100%;
-	height:23px;
 	line-height:23px;
 	z-index: 9999;
 	opacity: .60;
@@ -20,23 +19,62 @@
 #gg a{
 	color: #fff;
 	font-size: 13px;
-	letter-spacing:2px;
-	text-shadow: 0px 1px 0px #000;
 	}
-.close a {
+#gg .close a {
 	float:right;
 	margin:0 10px 0 0;
 	}
-.heartbeat-stream-siteactivity {
-	float:left;
-	height:100px;
+.bulletin {
+	height:35px;
 	color: #fff;
 	margin:0 0 0 20px;
-	background:url(http://www.zoneself.org/wp-content/themes/product/images/bulletin.gif) no-repeat;
+	background:url(../images/bulletin.gif) no-repeat;
 	min-height:23px;
 	overflow:hidden;
 	}
-.heartbeat-activity{
-	height:100px;
-	padding-left:25px;
+.bulletin li{
+	float:left;
 	}
+
+#heartbeat-stream-siteactivity{
+	font-size: 12px;
+	font-weight: normal;
+	text-shadow:none;
+}
+#gg .close{
+	opacity: 0.7;
+}
+#gg .close:hover {
+	opacity: 0.8;
+}
+#gg #heartbeat-stream-siteactivity  a{
+	float:none;
+	}
+
+
+#gg .h-avatar img {
+width: 30px;
+}
+
+#gg .heartbeat-activity img.avatar {
+border: none;
+}
+#gg .h-content .h-msg {
+	float: left;
+}
+#gg .h-content {
+	width: 80%;
+}
+#gg .h-attachs {
+margin-top: 0px;
+}
+
+#gg .heartbeat-activity {
+padding: 3px 0 0px;
+}
+#gg .heartbeat-activity{
+  border-bottom: 0px dotted #CCCCCC;
+}
+#admin-menu{
+	display: none;
+}
