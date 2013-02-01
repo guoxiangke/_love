@@ -268,13 +268,14 @@ function love_layout_modules_installed($modules) {
  */
 function love_layout_menu() {
   $items = array();
-  $items['user/%/statuses'] = array(
+  $items['statuses'] = array(
     'title' => t('Statuses'),
     'description' => 'User statuses.',
     'page callback' => '_love_statuses_user_view',
     'page arguments' => array(1),
     'access arguments' => array('Update and view own stream'),
-    'type' => MENU_LOCAL_TASK,
+    'type' => MENU_NORMAL_ITEM,
+    'menu_name'=> 'main-menu'
   );
   return $items;
 }
@@ -409,7 +410,7 @@ function love_layout_preprocess_page(&$variables) {
   }
 
   
-  if(drupal_is_front_page()) {
+  if(drupal_is_front_page()&&!user_is_anonymous()) {
 
     drupal_add_css(drupal_get_path('module','love_layout').'/css/activities.css');
     drupal_add_js(drupal_get_path('module','love_layout').'/js/Scroll_activity.js');
