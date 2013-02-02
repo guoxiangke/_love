@@ -29,6 +29,5 @@ function ybread_cron() {
    /* Your code here */
    $prefix = url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=');
    $html = file_get_html($prefix.'ybreads');
-   watchdog('ybread', 'ybreads corn runs!');
    unset($html);
 }

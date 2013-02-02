@@ -48,62 +48,62 @@ function ybread_page(){
 					选择 “开始-&gt;控制面板-&gt;添加删除程序-&gt;设定程序和访问默认值-&gt;双击 自定义-&gt;
 					往下拉找到 选择一个媒体播放器-&gt;选择window media player 确定”
 				</p>
-				<p>下载收听<a href="http://liangyou.nissigz.com/media/bv/bv'.date("ymd").'.wma" >&gt;&gt;今日节目</a> </p></div><div>文字来源：雅米 ya-mi.org   音频来源：良友电台 liangyou.net</div>';
+				<p style="color:#666">下载收听:<a href="http://liangyou.nissigz.com/media/bv/bv'.date("ymd").'.wma" >今日节目</a> &nbsp;&nbsp;文字来源：雅米&nbsp;ya-mi.org&nbsp;&nbsp;音频来源：良友电台&nbsp;liangyou.net </p></div>';
 	$node_view = node_view($node); ;
   return drupal_render($node_view).$player;
 }
 
-
-function objectToArray($d) {
-		if (is_object($d)) {
-			// Gets the properties of the given object
-			// with get_object_vars function
-			$d = get_object_vars($d);
-		}
+//////////////////////////////////
+// function objectToArray($d) {
+// 		if (is_object($d)) {
+// 			// Gets the properties of the given object
+// 			// with get_object_vars function
+// 			$d = get_object_vars($d);
+// 		}
  
-		if (is_array($d)) {
-			/*
-			* Return array converted to object
-			* Using __FUNCTION__ (Magic constant)
-			* for recursive call
-			*/
-			return array_map(__FUNCTION__, $d);
-		}
-		else {
-			// Return array
-			return $d;
-		}
-	}
+// 		if (is_array($d)) {
+// 			/*
+// 			* Return array converted to object
+// 			* Using __FUNCTION__ (Magic constant)
+// 			* for recursive call
+// 			*/
+// 			return array_map(__FUNCTION__, $d);
+// 		}
+// 		else {
+// 			// Return array
+// 			return $d;
+// 		}
+// 	}
 
-	function arrayToObject($d) {
-		if (is_array($d)) {
-			/*
-			* Return array converted to object
-			* Using __FUNCTION__ (Magic constant)
-			* for recursive call
-			*/
-			return (object) array_map(__FUNCTION__, $d);
-		}
-		else {
-			// Return object
-			return $d;
-		}
-	}
+// 	function arrayToObject($d) {
+// 		if (is_array($d)) {
+// 			/*
+// 			* Return array converted to object
+// 			* Using __FUNCTION__ (Magic constant)
+// 			* for recursive call
+// 			*/
+// 			return (object) array_map(__FUNCTION__, $d);
+// 		}
+// 		else {
+// 			// Return object
+// 			return $d;
+// 		}
+// 	}
 
-/**
- * Curl版本
- * 使用方法：
- * $post_string = "app=request&version=beta";
- * request_by_curl('http://facebook.cn/restServer.php',$post_string);
- */
-function request_by_curl($remote_server, $post_string)
-{
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $remote_server);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, 'mypost=' . $post_string);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_USERAGENT, "Jimmy's CURL Example beta");
-	$data = curl_exec($ch);
-	curl_close($ch);
-	return $data;
-} 
+// /**
+//  * Curl版本
+//  * 使用方法：
+//  * $post_string = "app=request&version=beta";
+//  * request_by_curl('http://facebook.cn/restServer.php',$post_string);
+//  */
+// function request_by_curl($remote_server, $post_string)
+// {
+// 	$ch = curl_init();
+// 	curl_setopt($ch, CURLOPT_URL, $remote_server);
+// 	curl_setopt($ch, CURLOPT_POSTFIELDS, 'mypost=' . $post_string);
+// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// 	curl_setopt($ch, CURLOPT_USERAGENT, "Jimmy's CURL Example beta");
+// 	$data = curl_exec($ch);
+// 	curl_close($ch);
+// 	return $data;
+// } 

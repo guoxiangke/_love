@@ -460,6 +460,7 @@ h1,h2{
 
 #page-section{
 	padding-left: 30px;
+	margin-bottom: 30px;
 }
 /* 用户区块*/
 
@@ -1576,4 +1577,32 @@ letter-spacing: 1px;
 
 .ch-item:hover .ch-info p {
 	opacity: 1;
+}
+
+/*ybread*/
+.node-ybread .field-name-body p{
+	text-indent: 2em;
+	line-height: 28px;
+	font-size: 16px;
+	color: #000;
+}
+.ybread-img {
+	float: left;
+	padding-right: 30px;
+	width: 500px;
+}
+.ybread-img img{
+	box-shadow: 0 0px 1px rgba(34, 25, 25, 0.1);
+	-webkit-box-shadow: rgba(34, 25, 25, 0.1) 0px 0px 1px;
+	border: 10px solid #FFF;
+	border-radius: .3em;
+	-webkit-border-radius: .3em;
+	-moz-border-radius: .3em;
+}
+.page-ybreads h1{
+	display: none;
+}
+.node-ybread h2:before
+{ 
+content:"灵命日粮: ";
 }
