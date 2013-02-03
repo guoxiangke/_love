@@ -270,6 +270,17 @@ function love_layout_modules_installed($modules) {
  */
 function love_layout_menu() {
 
+  // $items['statuses'] = $items['statuses/share'];
+  // //  array(
+  // //   'title' => t('Statuses'),
+  // //   'description' => 'User statuses.',
+  // //   'page callback' => '_love_statuses_user_view',
+  // //   'page arguments' => array(1),
+  // //   'access arguments' => array('Update and view own stream'),
+  // //   'type' => MENU_NORMAL_ITEM,
+  // //   'menu_name'=> 'main-menu'
+  // // );
+  // $items['statuses']['menu_name'] = 'main-menu';
 }
 
 /**
@@ -306,18 +317,6 @@ function _love_statuses_user_view($account) {
 }
 //$value = theme('statuses_form_display', array('recipient' => $account, 'type' => 'user'));
 function love_layout_menu_alter(&$items) {
-
-  $items['statuses'] = $items['statuses/share'];
-  //  array(
-  //   'title' => t('Statuses'),
-  //   'description' => 'User statuses.',
-  //   'page callback' => '_love_statuses_user_view',
-  //   'page arguments' => array(1),
-  //   'access arguments' => array('Update and view own stream'),
-  //   'type' => MENU_NORMAL_ITEM,
-  //   'menu_name'=> 'main-menu'
-  // );
-  $items['statuses']['menu_name'] = 'main-menu';
 
   //$items['publish'] = $items['node/add/photo'];
   $items['node/add/photo']['title'] = t('+');
@@ -437,6 +436,9 @@ function love_layout_form_alter(&$form, &$from_state, $form_id) {
     $picture = $form['picture'];
     unset($form['picture']);
     array_unshift($form,$picture);
+  }
+  if($form_id == 'status_node_form'){
+    $form['title']['#type'] = 'textarea';
   }
 }
 // when the bug of i18n + og_field   resolve ,can user below.
@@ -571,6 +573,15 @@ function _love_user_relationships_link($variables) {
   }
   return $variables['user_relationships'];
 }
+function ur_tt($name, $string, $langcode = NULL, $update = FALSE) {
+  if (module_exists('i18nstrings')) {
+    return tt($name, $string, $langcode, $update);
+  }
+  else {
+    return $string;
+  }
+}
+
 //book node type css and js
 function love_layout_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'book' && $view_mode == 'full') {
@@ -585,5 +596,21 @@ function love_layout_node_view($node, $view_mode, $langcode) {
     // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquerypp.custom.js');
     // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.bookblock.js');
     // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/page.js');
+  }
+}
+/**
+ * Implements hook_views_pre_build().
+ */
+function love_layout_views_pre_build(&$view) {
+  // add form for status.
+   if (
+    $view->name == 'status' &&
+    //user_access('administer site configuration') &&
+    $view->current_display == 'page_status_all'
+  ) {
+    module_load_include('inc', 'node', 'node.pages'); 
+    module_load_include('inc', 'love_layout', 'love_layout.customs');  
+    $form['add_status'] = _node_add4love('status');
+    $view->attachment_before = drupal_render($form['add_status']);
   }
 }

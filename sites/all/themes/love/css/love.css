@@ -319,7 +319,9 @@ nav .pull-left{
 	text-decoration: none;
 	font-size: 13px;
 }
-
+.menu-invite{
+	padding-top: 6px;
+}
 .secondary-menu a:hover {
 	color: #333;
 }
@@ -366,26 +368,25 @@ vertical-align: top;
 }
 .menu-457 a{
 	background-color: transparent;
-	background-image: url('../images/icon_v130131.png');
+	background-image: url('../images/icon_v121219.png');
 	background-repeat: no-repeat;
-	width: 127px;
-	height: 39px;
-	background-position: 0px -73px;
+	width: 23px;
+	height: 60px;
+	background-position: -43px -80px;
 	position: absolute;
+	top: -10px;
 	text-indent: -1000px;
-	outline: none;
-	top: 7px;
 }
 .menu-457 a:hover{
 	background-color: transparent;
-	background-image: url('../images/icon_v130131.png');
+	background-image: url('../images/icon_v121219.png');
 	background-repeat: no-repeat;
-	width: 127px;
-	height: 39px;
-	background-position: 0px -115px;
+	width: 23px;
+	height: 60px;
+	background-position: 0 -80px;
 	position: absolute;
+	top: -10px;
 	text-indent: -1000px;
-	outline: none;
 }
 
 secondary-menu li{

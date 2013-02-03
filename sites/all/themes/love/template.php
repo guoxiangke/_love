@@ -160,7 +160,7 @@ function love_preprocess_user_profile(&$variables) {
  
 function love_form_node_form_alter(&$form, &$from_state, $form_id) {
   
-  if($form_id == 'photo_node_form'){ //node/add/photo
+  if($form_id == 'photo_node_form' || $form_id == 'status_node_form'){ //node/add/photo
       $form['author']['#access'] = FALSE;
       $form['options']['#access'] = FALSE; 
       $form['comment_settings']['#access'] = FALSE; 
@@ -169,8 +169,7 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
       $form['revision_information']['#access'] = FALSE; 
       $form['menu']['#access'] = FALSE; 
       $form['actions']['preview']['#access'] = FALSE; 
-      $form['book']['#access'] = FALSE; 
-      
+      $form['book']['#access'] = FALSE;     
   }
  
 }
