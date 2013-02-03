@@ -169,6 +169,7 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
       $form['revision_information']['#access'] = FALSE; 
       $form['menu']['#access'] = FALSE; 
       $form['actions']['preview']['#access'] = FALSE; 
+      $form['book']['#access'] = FALSE; 
       
   }
  

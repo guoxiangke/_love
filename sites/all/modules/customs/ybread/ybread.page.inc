@@ -11,7 +11,7 @@ function ybread_page(){
 	  $html = file_get_html('http://simplified-odb.org/');
 		// get title
 		$node = new stdClass();
-		$node->uid = 172; //uid of love.
+		$node->uid = '172'; //uid of love.
 		$node->type = 'ybread';
 		node_object_prepare($node);
 		//get title
