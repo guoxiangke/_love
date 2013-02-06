@@ -190,7 +190,7 @@ function open_weibo_node_insert($node) {
 
 	if(in_array($node->type, array_keys($synch_types)) && $synch_types[$node->type] && $node->open_weibo['synch']) {
 		if(key_exists($node->type, $synch_types)
-		&& open_weibo_synch($node->title,$node->type,node_uri($node))){
+		&& open_weibo_synch($node->title,node_type_get_name($node),node_uri($node))){
 			drupal_set_message('Synch to weibo sucess!','status');
 		}else{
 			drupal_set_message('Synch to weibo error!','error');
@@ -215,23 +215,22 @@ function open_weibo_comment_insert($comment) {
 	//3.session过期提示
 	dpm($comment,'$comment');
 	if($comment->open_weibo['synch']) {
-		if(open_weibo_synch($comment->subject?$comment->subject:$comment->comment_body[LANGUAGE_NONE][0]['value'],'comment',comment_uri($comment))){
+		if(open_weibo_synch($comment->subject?$comment->subject:$comment->comment_body[LANGUAGE_NONE][0]['value'],t('Comments'),comment_uri($comment))){
 			drupal_set_message('Synch to weibo sucess!','status');
 		}else{
 			drupal_set_message('Synch to weibo error!','error');
 		}
 	}
 }
-function open_weibo_synch($title,$type,$uri){ //$entity
+function open_weibo_synch($title,$type,$uri_array){ //$entity
 	if(isset($_SESSION['open_weibo_access_token'])){
 		require_once("weibo_sdk/saetv2.ex.class.php");
 		$weibo_config = open_weibo_get_config();
 		$token = $_SESSION['open_weibo_access_token'];
 		$c = new SaeTClientV2( $weibo_config['open_weibo_app_key'], $weibo_config['open_weibo_app_secret'],$token['access_token']);
-    $status = '我在'.variable_get('site_name').'发布了'.$type.'：'.$title;
-    $status .= '快来看看啊'.url($uri_array['path']);
+    $status = '我在【'.variable_get('site_name').'】发布了'.$type.'：'.truncate_utf8($title, $max_length=120, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);
+    $status .= ' '.url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=').$uri_array['path'];
     $synch = $c->update( $status, $lat = NULL, $long = NULL, $annotations = NULL );
- 		dpm($synch); 
 		return  $synch['mid']?TRUE:FALSE;
 	}
 }

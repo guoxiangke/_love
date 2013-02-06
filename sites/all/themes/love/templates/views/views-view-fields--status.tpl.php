@@ -133,23 +133,18 @@
   	$field_marriage = '婚恋状态-未知';
   }
 ?>
-<div class="t-pic float-l"><!-- 
-	<div class=" hide round<?php print $field_sex?" boy":" girl" ?>">
-		<?php print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
-	</div> -->
+<div class="t-pic float-l"> 
+	
 	<ul class="ch-grid">
 		<li>
 			<?php 
-			 $style_name = 'canvas100'; $path = $account->picture->uri;
-			 $user_pic =  image_style_url($style_name, $path);
+			 $style_name = 'canvas100'; 
+			 $filepath = $account->picture->uri;
+			 $user_pic = theme('image_style', array('style_name' => $style_name, 'path' => $filepath, 'getsize' => TRUE, 'attributes' => array('class' => 'thumb', 'width' => '50', 'height' => '50')));
 			 ?><?php //print $local.'<br>'.$local.'<br>'.$year_born.' '.$field_height.'cm'; ?>
-			<div class="ch-item ch-img-1" style="background-image: url(<?php print $user_pic;?>)">
-				<?php //print l($picture,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
-				<?php print l('<div class="ch-info">
-					<h3>'.$real_name.'</h3>
-					<p>'.$local.'<br>'.$field_marriage.'<br>'.$year_born.' '.$field_height.'cm</p>
-				</div>','user/'.$profile_uid,array('html'=>TRUE));?>
-				
+		
+			<div class=" round<?php print $field_sex?" boy":" girl" ?>">
+				<?php print l($user_pic,'user/'.$profile_uid,array('html'=>TRUE)) ; ?>
 			</div>
 		</li>
 		
@@ -222,8 +217,10 @@
 		</div>
 
 		<div class="t-footer clearfix">
-			<div class="filed_tags float-l"> <?php print $field_status_tags; ?> </div>
 			<div class="t-created  float-l"> <?php print $created; ?> </div>
+			<?php if (isset($field_status_tags)): ?>
+			<div class="filed_tags float-l"> <?php print $field_status_tags; ?> </div>
+			<?php endif; ?>
 			<div class="t-links  float-r">
 				<?php global $user; if ($user->uid<>0): //TODO ?>
 				<?php if (isset($edit_node)): ?><span class="edit"> <?php print $edit_node; ?> </span><?php endif; ?>

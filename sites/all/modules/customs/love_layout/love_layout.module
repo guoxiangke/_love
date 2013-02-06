@@ -440,7 +440,7 @@ function love_layout_form_alter(&$form, &$form_state, $form_id) {
 
 
 
-  if($form_id == 'status_node_form'){
+  if(0&&$form_id == 'status_node_form'){
     $form['title']['#type'] = 'textarea';
     $files = array('node');
     _ajax_register_needed_files($form_state,  $files);
@@ -730,4 +730,44 @@ function love_layout_views_pre_build(&$view) {
     $form['add_status'] = _node_add4love('status');
     $view->attachment_before = drupal_render($form['add_status']);
   }
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function love_layout_node_presave($node) {
+  if($node->type == 'status') {
+
+   $pattern = '/#([^\\#|.]+)#/';
+   preg_match_all($pattern, $node->title, $matches, PREG_SET_ORDER);
+   $node->field_status_tags[LANGUAGE_NONE] = array();
+   foreach ($matches as $key => $value) {
+
+      $term_name = $value[1];
+      $term = taxonomy_get_term_by_name($term_name);
+      //new one
+      if(!count($term)){
+       $term = new stdClass();
+       $term->vid = 1;
+       $term->name = $term_name;
+       taxonomy_term_save($term);
+       //$term = taxonomy_get_term_by_name($term_name);
+       foreach ($term as $value) {
+          //dpm($value,$key);
+          $node->field_status_tags[LANGUAGE_NONE][$term->tid]['tid'] = $term->tid;
+        }
+      }else{
+        foreach ($term as $tid => $value) {
+          // dpm($value,$tid);
+          $node->field_status_tags[LANGUAGE_NONE][$tid]['tid'] = $tid;
+        }
+      }
+   }
+  }
+}
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function love_layout_form_status_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_status_tags']['#access'] = FALSE;
 }

@@ -455,7 +455,11 @@ secondary-menu li{
 }
 
 .view-index .views-row{
-	margin-bottom: 30px;
+	padding: 15px 0;
+	border-bottom: 1px dotted #CCC;
+}
+.view-status .views-row{
+	padding: 15px 0;
 	border-bottom: 1px dotted #CCC;
 }
 h1,h2{
@@ -1350,6 +1354,8 @@ div.form-actions {
 .t-body {
 	background-color:#FFF;
 	padding: 10px 30px 15px;
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px #ccc;
 }
 .t-footer {
 	font-size:12px;
@@ -1464,6 +1470,10 @@ letter-spacing: 1px;
 	height: 100px;
 	display: inline-block;
 	/*margin: 20px;*/
+}
+.view-status .ch-grid li {
+	width: 50px;
+	height: 50px;
 }
 
 

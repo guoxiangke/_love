@@ -7,7 +7,11 @@ function ybread_page(){
 	$result = db_query($query, array(':type' => $content_type))->fetch();
 
   //dvm(12*60*60);
-  if(time()-$result->created > 43200) {
+  $now = date('d',time());
+  $hour = date('G',time());
+  $last = date('d',$result->created);
+
+  if($now -$last == 1 && $hour >= 7) {
 	  $html = file_get_html('http://simplified-odb.org/');
 		// get title
 		$node = new stdClass();
