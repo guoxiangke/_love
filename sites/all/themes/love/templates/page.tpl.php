@@ -8,12 +8,45 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
 <div id="wrapper" class="container-fluid">
   <div class="row-fluid clearfix">
+
     <div id="falmily" class="span8">
-      <div class="main-title">
+
+     <!--  <div class="main-title">
        <p class="bibles-say">“因此，人要离开父母与妻子联合，二人成为一体。” --创世纪 2:24</p>
+      </div>
+      <img src="<?php //print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_2.png" /> -->
+      <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="item active"><div class="main-title">
+       <p class="bibles-say">“因此，人要离开父母与妻子联合，二人成为一体。” --创世纪 2:24</p>
+      </div>
+            <img src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_3.png" />
+            <div class="carousel-caption">
+              <h4>异象：</h4>
+              <p>爱是互相激励、共同成长，并且需要公众见证、公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀。</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_2.png" />
+            <div class="carousel-caption">
+              <h4>创世纪 2:18</h4>
+              <p>耶和华神说，那人独居不好，我要为他造一个配偶帮助他。</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_1.png" />
+            <div class="carousel-caption">
+              <h4>以弗所书5:33</h4>
+              <p>然而你们各人都当爱妻子，如同爱自己一样。妻子也当敬重她的丈夫。</p>
+           </div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+      </div>
+
     </div>
-      <img src="<?php print 'http://'.$_SERVER['HTTP_HOST'].'/'.path_to_theme(); ?>/family_2.png" />
-    </div>
+
     <div class="main-content span4">
         <center>
            <h1 class="sitename">永不止息</h1>
@@ -30,8 +63,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
         <div class="site-des">
           <p>&nbsp;&nbsp;</p>
           <ul>
-            <li>异象：爱是永不止息，是互相激励、共同成长，并且需要公众见证、公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀。<a href="#" rel="tooltip" data-placement="bottom" title="【永不止息】是@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。">成长历程</a></li>
-            <li>【永不止息】只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</li>
+            <li>【永不止息】只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。<a href="#" rel="tooltip" data-placement="right" title="【永不止息】是@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。">成长历程</a></li>
             
             <li>为<a href="#" rel="tooltip" title="请为本站营造良好的社交环境。<br/>为教会单身守望。">本站代祷</a> ，<a href="#" rel="tooltip" title="如果您觉得打开速度慢，那么您可以在网站服务器升级上有分">支持奉献</a>，<a href="http://blog.liangyou.net/lianai/" rel="tooltip" title="打开速度慢，这个建议就不用提了^_^">意见建议</a></li>
             <!--li><a href="http://blog.liangyou.net/lianai/"  rel="tooltip" title="如果您还未收到邀请，听听这个节目，预备自己成为理想的另一半吧！"><img src="<?php print path_to_theme(); ?>/lianai.jpg" alt=""></a><a href="#" rel="tooltip" title="打开速度慢，这个建议就不用提了^_^"></a></li-->
