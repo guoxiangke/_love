@@ -112,6 +112,9 @@
 		$real_name = $field_name;
 	}
 	$display_name= $friends?$real_name:$name;
+	if($user->uid == $profile_uid){
+		$display_name= $real_name;
+	}
 	if(!isset($field_sex))$fields=TRUE;
 	$Ta = $field_sex?"他":"她";
 
@@ -187,7 +190,7 @@
 			
 			// TODO:是朋友，显示真名，否则显示昵称
 		?>
-		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true));?>琪儿 24岁 160厘米 大专 8张照片  </div>
+		<div class="t-name float-l"><?php // print l($display_name,'user/'.$profile_uid,array('html'=>true));// 24岁 160厘米 大专 8张照片  ?> </div>
 		
 	</div>
 	<?php if (isset($title)): ?>
@@ -217,6 +220,8 @@
 		</div>
 
 		<div class="t-footer clearfix">
+			<div class="t-by  float-l"> 
+			--by <?php  print l($display_name,'user/'.$profile_uid,array('html'=>true));// 24岁 160厘米 大专 8张照片  ?> </div>
 			<div class="t-created  float-l"> <?php print $created; ?> </div>
 			<?php if (isset($field_status_tags)): ?>
 			<div class="filed_tags float-l"> <?php print $field_status_tags; ?> </div>

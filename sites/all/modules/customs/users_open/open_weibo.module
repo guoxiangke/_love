@@ -100,16 +100,16 @@ function open_weibo_form_alter(&$form, $form_state, $form_id) {
  		//启用模块，并设置同步
 			$module ='open_weibo';
 			if(module_exists($module)&&variable_get($module.'_enabled')){
-				$form[$module] = array(
-		      '#type' => 'fieldset',
-		      '#title' => '同步到新浪微博',
-		      '#collapsible' => true,
-		      '#collapsed' => true,
-		      '#tree' => true
-		    );
+				// $form[$module] = array(
+		  //     '#type' => 'fieldset',
+		  //     '#title' => '同步',
+		  //     '#collapsible' => true,
+		  //     '#collapsed' => FALSE,
+		  //     '#tree' => true
+		  //   );
 		    $form[$module]['synch'] = array(
 		      '#type' => 'radios',
-		      '#title' => '发送',
+		      '#title' => '微博同步',
 		      '#required' => true,
 		      '#default_value' => 0,
 		      '#options' => array('否', '是'),

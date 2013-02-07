@@ -440,19 +440,9 @@ function love_layout_form_alter(&$form, &$form_state, $form_id) {
 
 
 
-  if(0&&$form_id == 'status_node_form'){
+  if($form_id == 'status_node_form'){
     $form['title']['#type'] = 'textarea';
-    $files = array('node');
-    _ajax_register_needed_files($form_state,  $files);
-    // !$form['title']['#default_value'] mean not the edit form.
-    if (!$form['title']['#default_value'] && !isset($form['actions']['submit']['#ajax'])) {
-      $form['actions']['submit']['#ajax'] = array(
-          'callback' => '_ajax_answer_submit_js',
-          'wrapper' => $form['#id'],
-          'method' => 'replace',
-          'effect' => 'fade',
-        );
-    }
+    $form['field_status_tags']['#access'] = FALSE;
   }
 }
 
@@ -486,78 +476,6 @@ function _ajax_register_needed_files(&$form_state, array $files) {
     }
   }
 }
-
- /**
- * Builds the answer node.
- * @see druedu_qa_ajax_comments_submit_js
- * TODO: for status sumbit
- */
-function _ajax_answer_submit_js($form, &$form_state) {
-  // Return the actual form if it contains errors.
-  if (form_get_errors()) {
-    return $form;
-  }
-  
-  $commands = ajax_command_remove('.vertical-tabs');
-  return array('#type' => 'ajax', '#commands' => $commands);
-
-
-  $node = node_load($form_state['build_info']['args'][0]->nid);
-  //$notify_text = variable_get('ajax_comments_notify', '') ? theme('ajax_comments_notify_text') : '';
-  $text = t('Your answer has been posted.');
-  $status = 'status';
-  unset($_SESSION['messages']['status']);
-  $notify_text = '<div id="messages"><div class="clearfix"><div class="messages ajax-comments ' . $status . '"><h2 class="element-invisible">Status message</h2>' . $text . '</div></div></div>';
-  //TODO: where is $notify_text ?
-  // Don't display as a preview as this is being submitted.
-  ////unset($comment_build['comment_body']['#object']->in_preview);
-
-  // Are we editing a comment.
-  if (isset($form['cid']['#value'])) {
-    // Remove wrapper because the form we replace exists inside the wrapper.
-    unset($comment_build['#prefix']);
-    unset($comment_build['#suffix']);
-
-    // Trim surrounding whitespace so ajax.js doesn't wrap us in a new div.
-    $comment_output = trim(drupal_render($comment_build));
-    $commands[] = ajax_command_replace('#' . $form['#id'], $comment_output);
-  }
-  // Or are we replying to another comment.
-  elseif (isset($form_state['values']['pid'])) {
-    // Append comment to parent wrapper.
-    $node_output = drupal_render($node_build);
-    watchdog('5.2.ajax_sumit', $node_output);
-    $commands[] = ajax_command_append('#answers',  $node_output . $notify_text);
-
-    // Delete the form.
-    $commands[] = ajax_command_invoke('#' . $form['#id'], 'remove');
-  }
-  // Or is this a brand new comment?
-  else {
-    // Append comment to root comment wrapper.
-    $question_nid = $node->field_answer[LANGUAGE_NONE][0]['target_id'];
-    //system/ajax bug fix.
-    $_GET['destination']='node/'.$node->nid;
-    $views = views_embed_view('question','answers_attachment',$question_nid);
-    $question = node_load($question_nid);
-    if(!$question->field_computed_answers[LANGUAGE_NONE][0]['value']){
-      $views = '<div class="attachment attachment-before">
-      <h3>1 answer</h3>    </div>'.$views;
-    }else{
-       $commands[] = ajax_command_remove('.view-display-id-answers_attachment .attachment-before');
-       $views = '<div class="attachment attachment-before">
-      <h3>'.format_plural($question->field_computed_answers[LANGUAGE_NONE][0]['value'], '1 answer', '@count answers').'</h3>    </div>'.$views;
-    }
-    $commands[] = ajax_command_invoke(NULL, 'disableSubmitButton');
-    $commands[] = ajax_command_html('#answers',   $views . $notify_text);
-    //If we have a default form, update it with a new one.
-    // Otherwise, delete it.
-   {
-    //  $commands[] = ajax_command_remove('#' . $form['#id']);
-    }
-  }
-}
-
 // when the bug of i18n + og_field   resolve ,can user below.
 //http://drupal.org/project/issues/og?text=i18n&status=All&priorities=All&categories=All&version=7.x&component=All
 /**
@@ -769,5 +687,67 @@ function love_layout_node_presave($node) {
  * Implements hook_form_FORM_ID_alter().
  */
 function love_layout_form_status_node_form_alter(&$form, &$form_state, $form_id) {
-  $form['field_status_tags']['#access'] = FALSE;
+
+      $files = array('node');
+    _ajax_register_needed_files($form_state,  $files);
+    // !$form['title']['#default_value'] mean not the edit form.
+    if (!$form['title']['#default_value'] && !isset($form['actions']['submit']['#ajax'])) {
+      $form['actions']['submit']['#ajax'] = array(
+          'callback' => '_ajax_status_submit_js',
+          'wrapper' => 'views-status-rows',
+          'method' => 'replace',
+          'effect' => 'fade',
+        );
+    }
+}
+
+
+ /**
+ * Builds the answer node.
+ * @see druedu_qa_ajax_comments_submit_js
+ * TODO: for status sumbit
+ */
+function _ajax_status_submit_js($form, &$form_state) {
+   watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
+  // Return the actual form if it contains errors.
+  if (form_get_errors()) {
+    return $form;
+  }
+ watchdog('2', 'message', array(), WATCHDOG_NOTICE, 'link');
+  // $commands = ajax_command_remove('.vertical-tabs');
+  // return array('#type' => 'ajax', '#commands' => $commands);
+
+
+
+  //$notify_text = variable_get('ajax_comments_notify', '') ? theme('ajax_comments_notify_text') : '';
+  // $text = t('Your answer has been posted.');
+  // $status = 'status';
+  // unset($_SESSION['messages']['status']);
+  // $notify_text = '<div id="messages"><div class="clearfix"><div class="messages ajax-comments ' . $status . '"><h2 class="element-invisible">Status message</h2>' . $text . '</div></div></div>';
+  //TODO: where is $notify_text ?
+  // Don't display as a preview as this is being submitted.
+  ////unset($comment_build['comment_body']['#object']->in_preview);
+
+  // Are we editing a comment.
+  {
+    // Append comment to root comment wrapper.
+    // $question_nid = $node->field_answer[LANGUAGE_NONE][0]['target_id'];
+    // //system/ajax bug fix.
+    // $_GET['destination']='node/'.$node->nid;
+    $views = views_embed_view('status');//,'page_status_all'
+         watchdog('3', 'message'.print_r($views,TRUE), array(), WATCHDOG_NOTICE, 'link');
+    {
+      //  $commands[] = ajax_comman.d_remove('.view-display-id-answers_attachment .attachment-before');
+      //  $views = '<div class="attachment attachment-before">
+      // <h3>'.format_plural($question->field_computed_answers[LANGUAGE_NONE][0]['value'], '1 answer', '@count answers').'</h3>    </div>'.$views;
+    }
+    //$commands[] = ajax_command_invoke(NULL, 'disableSubmitButton');
+    $commands[] = ajax_command_html('#views-status-rows', $views);
+    return array('#type' => 'ajax', '#commands' => $commands);
+    //If we have a default form, update it with a new one.
+    // Otherwise, delete it.
+   {
+    //  $commands[] = ajax_command_remove('#' . $form['#id']);
+    }
+  }
 }

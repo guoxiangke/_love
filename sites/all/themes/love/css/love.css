@@ -462,6 +462,27 @@ secondary-menu li{
 	padding: 15px 0;
 	border-bottom: 1px dotted #CCC;
 }
+.view-status .filed_tags{
+	margin-left: 10px;
+}
+.view-status .views-row a{
+	color: #999;
+}
+.view-status .views-row a:hover{
+	color: #666;
+}
+.view-status .views-row .t-footer{
+	padding-top: 5px;
+}
+.view-index .views-row a:hover{
+	color: #666;
+}
+.view-index .views-row .t-footer{
+	padding-top: 5px;
+}
+.view-status .views-row .t-footer .float-l{
+	padding-right: 10px;
+}
 h1,h2{
 	font-size: 20px;
 	font-weight: lighter;
