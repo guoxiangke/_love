@@ -486,9 +486,9 @@ function _ajax_register_needed_files(&$form_state, array $files) {
 function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
   $form['og_group_ref']['#access'] = FALSE;
   
-  $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
+  //$options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
   //2 is the love group gid.
-  $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];
+  //$form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];
 
   // hidden some function now,body and tags 分享感言 标签功能暂不开放
   drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
@@ -657,7 +657,7 @@ function love_layout_views_pre_build(&$view) {
 function love_layout_node_presave($node) {
   if($node->type == 'status') {
 
-   $pattern = '/#([^\\#|.]+)#/';
+   $pattern = '/#([^\\#|.]+)#|＃([^\\＃|.]+)＃/';
    preg_match_all($pattern, $node->title, $matches, PREG_SET_ORDER);
    $node->field_status_tags[LANGUAGE_NONE] = array();
    foreach ($matches as $key => $value) {

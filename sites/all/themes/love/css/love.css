@@ -484,6 +484,12 @@ secondary-menu li{
 .view-status .views-row .t-footer .float-l{
 	padding-right: 10px;
 }
+.view-status .views-row .t-user-info li{
+	list-style:none;
+}
+.view-status .views-row  .btn-mess, .love-icon {
+	background: none;
+}
 h1,h2{
 	font-size: 20px;
 	font-weight: lighter;
