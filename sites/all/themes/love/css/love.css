@@ -1673,3 +1673,25 @@ content:"灵命日粮: ";
 	margin: 0;
 	padding: 0;
 }
+
+.feedTagName {
+position: relative;
+top: -10px;
+display: inline-block;
+height: 25px;
+padding-right: 12px;
+background: url(http://simg.sinajs.cn/xblogstyle/images/common/ico_tagfeed.png) right -114px no-repeat;
+_background: url(http://simg.sinajs.cn/xblogstyle/images/common/ico_tagfeed.gif) right -114px no-repeat;
+}
+.feedTagName span {
+padding: 0 10px;
+overflow: hidden;
+width: 56px;
+display: inline-block;
+height: 25px;
+line-height: 23px;
+_line-height: 25px;
+background: #77b3d5;
+color: #fff;
+font-size: 14px;
+}

@@ -48,6 +48,9 @@
 			$$id .= $field->separator;
 		}
 	}
+	$topic_id = $fields['field_status_topic']->content;
+	$topic = $fields['field_status_topic_1']->content;
+	 
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
 	$account = user_load($profile_uid);
@@ -194,31 +197,13 @@
 		
 	</div>
 	<?php if (isset($title)): ?>
-	<div class="t-body">
-		<?php print $title; ?> 
-		<div class="t-field_photo clearfix">
-			<?php if (isset($field_photo)): ?>
-
-			<div class="photo">
-				<?php print $field_photo; ?> 
-				<?php if (isset($vote)): ?>
-				 	<div class="vote-1">
-				 		<div class="love_vote"> <?php print $vote; ?> </div>
-				 	</div>
-				<?php endif; ?>
-			</div>
-			<?php endif; ?>
-			<?php if (isset($flag)): ?>
-			<?php endif; ?>
-
-			<?php if (isset($body) && strlen($body)!=0): ?>
-			<div class="t-des">
-				<?php print $body; ?>
-			</div>
-			<?php endif; ?>
-
+	<div class="t-body t-tid-<?php echo $topic_id?>">
+		<span class="feedTagName">
+			<span><?php echo $topic;?></span>
+		</span>
+		<div class="t-text">
+		<?php print $title; ?>
 		</div>
-
 		<div class="t-footer clearfix">
 			<div class="t-by  float-l"> 
 			--by <?php  print l($display_name,'user/'.$profile_uid,array('html'=>true));// 24岁 160厘米 大专 8张照片  ?> </div>
