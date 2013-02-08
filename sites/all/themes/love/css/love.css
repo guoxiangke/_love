@@ -1642,3 +1642,27 @@ letter-spacing: 1px;
 { 
 content:"灵命日粮: ";
 }
+
+
+#edit-synch{
+	border:none;
+	background:left no-repeat;
+	background-image: url(../images/switch.png);
+	width:105px;
+	height:46px;
+	padding:0;
+	margin:0;
+
+}
+
+#edit-synch .control-group,#edit-synch .controls,#edit-synch .controls label{
+	width:50px;
+	height:40px;
+	display:inline-block;
+	cursor:pointer;
+	margin-bottom: 0;
+}
+#edit-synch .control-group label{
+	margin: 0;
+	padding: 0;
+}
