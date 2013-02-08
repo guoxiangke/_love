@@ -83,7 +83,7 @@ $('#user-register-form #edit-submit').click(function(e){
 
   $('#edit-synch').css('background-position', 'right');
   $('input[type=radio]').css('display','none');
-  //$('#edit-synch .controls').css('text-indent','-10000px');
+  $('#edit-synch label').css('text-indent','-10000px');
 
     $("input[name=synch]").change(function() {
       var button = $(this).val();
