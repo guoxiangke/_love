@@ -442,6 +442,7 @@ function love_layout_form_alter(&$form, &$form_state, $form_id) {
 
   if($form_id == 'status_node_form'){
     $form['title']['#type'] = 'textarea';
+    unset($form['title']['#title']);// = t('我shuo');
     $form['field_status_tags']['#access'] = FALSE;
   }
 }
@@ -483,11 +484,11 @@ function _ajax_register_needed_files(&$form_state, array $files) {
  * when add a new photo,set  group audience default love.
  */
 function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
- // $form['og_group_ref']['#access'] = FALSE;
-  /*
+  $form['og_group_ref']['#access'] = FALSE;
+  
   $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
   //2 is the love group gid.
-  $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];*/
+  $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];
 
   // hidden some function now,body and tags 分享感言 标签功能暂不开放
   drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
@@ -688,7 +689,7 @@ function love_layout_node_presave($node) {
  */
 function love_layout_form_status_node_form_alter(&$form, &$form_state, $form_id) {
 
-      $files = array('node');
+    $files = array('node');
     _ajax_register_needed_files($form_state,  $files);
     // !$form['title']['#default_value'] mean not the edit form.
     if (!$form['title']['#default_value'] && !isset($form['actions']['submit']['#ajax'])) {
