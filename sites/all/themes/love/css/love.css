@@ -487,7 +487,7 @@ secondary-menu li{
 .view-status .views-row .t-user-info li{
 	list-style:none;
 }
-.view-status .views-row  .btn-mess, .love-icon {
+.view-status .views-row  .btn-mess,.view-status .views-row  .love-icon {
 	background: #FFF;
 }
 h1,h2{
