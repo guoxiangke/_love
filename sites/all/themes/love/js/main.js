@@ -85,16 +85,21 @@ $('#user-register-form #edit-submit').click(function(e){
   $('input[type=radio]').css('display','none');
   $('#edit-synch label').css('text-indent','-10000px');
 
-    $("input[name=synch]").change(function() {
+    $("input[name=synch]").click(function() {
       var button = $(this).val();
     
-    if(button == '0'){ $('#edit-synch').css('background-position', 'right'); }
+    if(button == '0'){ $('#edit-synch').css('background-position', 'right'); 
+
+    }
     if(button == '1'){ $('#edit-synch').css('background-position', 'left'); }  
 
    });
 
 });
 
+  $.fn.emptyTextarea = function() {
+    $('.node-status-form textarea').val('');
+  };
 
 
  }

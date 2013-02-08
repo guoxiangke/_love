@@ -708,12 +708,10 @@ function love_layout_form_status_node_form_alter(&$form, &$form_state, $form_id)
  * TODO: for status sumbit
  */
 function _ajax_status_submit_js($form, &$form_state) {
-   watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
   // Return the actual form if it contains errors.
   if (form_get_errors()) {
     return $form;
   }
- watchdog('2', 'message', array(), WATCHDOG_NOTICE, 'link');
   // $commands = ajax_command_remove('.vertical-tabs');
   // return array('#type' => 'ajax', '#commands' => $commands);
 
@@ -735,13 +733,12 @@ function _ajax_status_submit_js($form, &$form_state) {
     // //system/ajax bug fix.
     // $_GET['destination']='node/'.$node->nid;
     $views = views_embed_view('status');//,'page_status_all'
-         watchdog('3', 'message'.print_r($views,TRUE), array(), WATCHDOG_NOTICE, 'link');
     {
       //  $commands[] = ajax_comman.d_remove('.view-display-id-answers_attachment .attachment-before');
       //  $views = '<div class="attachment attachment-before">
       // <h3>'.format_plural($question->field_computed_answers[LANGUAGE_NONE][0]['value'], '1 answer', '@count answers').'</h3>    </div>'.$views;
     }
-    //$commands[] = ajax_command_invoke(NULL, 'disableSubmitButton');
+    $commands[] = ajax_command_invoke(NULL, 'emptyTextarea');
     $commands[] = ajax_command_html('#views-status-rows', $views);
     return array('#type' => 'ajax', '#commands' => $commands);
     //If we have a default form, update it with a new one.

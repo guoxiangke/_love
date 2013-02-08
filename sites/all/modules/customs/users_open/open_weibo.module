@@ -188,7 +188,7 @@ function open_weibo_node_insert($node) {
     $synch_types = array_filter(unserialize($synch_types));
   }
 
-	if(in_array($node->type, array_keys($synch_types)) && $synch_types[$node->type] && $node->open_weibo['synch']) {
+	if(in_array($node->type, array_keys($synch_types)) && $synch_types[$node->type] && $node->synch) {
 		if(key_exists($node->type, $synch_types)
 		&& open_weibo_synch($node->title,node_type_get_name($node),node_uri($node))){
 			drupal_set_message('Synch to weibo sucess!','status');
