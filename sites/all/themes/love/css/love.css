@@ -1413,10 +1413,28 @@ a:hover{
   text-shadow:none;
   /*position: relative;*/
 }
-.site-name .icon-fire{
-  color: #FFF;/*#F73F9B;*/
-  font-size: 20px;
+.site-name .icon-fire
+        { 
+        	color: #FFF;/*#F73F9B;*/
+	  		font-size: 20px;
+        	position: relative;
+        	top: -175px;
+        }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+	.site-name .icon-fire{
+	  color: #FFF;/*#F73F9B;*/
+	  font-size: 20px;
+	  position: inherit;
+	}
 }
+
+@-moz-document url-prefix()    /*Firefox*/
+{
+    
+}
+
 .site-name [class^="icon-"]:before,
 .site-name [class*=" icon-"]:before {
   font-family: 'Elusive-Icons';
