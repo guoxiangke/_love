@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "ninghao.net.drupal"
+	version 	= "1.0.0">
+
+	<name>Drupal App</name>
+
+	<description>
+		This is test app for drupal.
+	</description>
+
+	<author href="http://ninghao.net"
+		email="117663444@qq.com">
+		ninghao.net
+	</author>
+
+	<icon src="icon.png" gap:role="default" />
+	<icon src="36.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="48.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="72.png" gap:platform="android" gap:density="hdpi" />
+
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/network"/>
+
+	<preference name="orientation" value="portrait" />
+</widget>
