@@ -48,6 +48,14 @@
 			$$id .= $field->separator;
 		}
 	}
+	$status_type = 'photo';
+	if(is_null($fields['field_photo']->content)){
+		$status_type = 'status';
+	}
+
+	$topic_id = $fields['field_status_topic']->content;
+	$topic = $fields['field_status_topic_1']->content;
+
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
 	$account = user_load($profile_uid);
@@ -138,8 +146,13 @@
 	</div> -->
 	<ul class="ch-grid">
 		<li>
-			<?php 
-			 $style_name = 'canvas100'; $path = $account->picture->uri;
+			<?php
+			if(is_object($account->picture)){
+				$path =  $account->picture->uri;
+			}else{
+				$path = variable_get('user_picture_default');
+			}
+			 $style_name = 'canvas100';
 			 $user_pic =  image_style_url($style_name, $path);
 			 ?><?php //print $local.'<br>'.$local.'<br>'.$year_born.' '.$field_height.'cm'; ?>
 			<div class="ch-item ch-img-1" style="background-image: url(<?php print $user_pic;?>)">
@@ -190,11 +203,17 @@
 			//delete when user has real name...
 			
 			// TODO:是朋友，显示真名，否则显示昵称
+			$status_messages ='发布了说说';	
+			if($status_type == 'photo') {
+				$status_messages ='上传了照片';
+			}
 		?>
-		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true));?> 刚刚上传了相片 </div>
+		<div class="t-name float-l"><?php print l($display_name,'user/'.$profile_uid,array('html'=>true));?> 刚刚<?php echo $status_messages?> </div>
 		
 	</div>
 	<?php if (isset($body)): ?>
+
+	<?php if($status_type =='photo') {?>
 	<div class="t-body">
 		<div class="t-field_photo clearfix">
 			<?php if (isset($field_photo)): ?>
@@ -218,6 +237,7 @@
 
 		</div>
 
+
 		<div class="t-footer clearfix">
 			<!--div class="filed_tags float-l"> <?php print $field_tags; ?> </div-->
 			<div class="t-created  float-l"> <?php print $created; ?> </div>
@@ -230,7 +250,36 @@
 
 			</div>
 		</div>
-	</div><?php endif; //<!--end t-body-->?>
+	</div>
+		<?php }else{ ?>
+			<div class="t-body t-tid-<?php echo $topic_id?>">
+				<span class="feedTagName">
+					<span><?php echo $topic;?></span>
+				</span>
+				<div class="t-text">
+				<?php print $title; ?>
+				</div>
+				<div class="t-footer clearfix">
+					<div class="t-by  float-l"> 
+					--by <?php  print l($display_name,'user/'.$profile_uid,array('html'=>true));// 24岁 160厘米 大专 8张照片  ?> </div>
+					<div class="t-created  float-l"> <?php print $created; ?> </div>
+					<?php if (isset($field_status_tags)): ?>
+					<div class="filed_tags float-l"> <?php print $field_status_tags; ?> </div>
+					<?php endif; ?>
+					<div class="t-links  float-r">
+						<?php global $user; if ($user->uid<>0): //TODO ?>
+						<?php if (isset($edit_node)): ?><span class="edit"> <?php print $edit_node; ?> </span><?php endif; ?>
+						<?php if (isset($delete_node)): ?><span class="del"> <?php print $delete_node; ?> </span><?php endif; ?>
+					 	<?php endif; ?>
+
+
+					</div>
+				</div>
+			</div>
+
+		<?php
+		} ?>
+	<?php endif; //<!--end t-body-->?>
 
 
 </div>

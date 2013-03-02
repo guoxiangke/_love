@@ -171,7 +171,18 @@ function love_form_node_form_alter(&$form, &$from_state, $form_id) {
       $form['actions']['preview']['#access'] = FALSE; 
       $form['book']['#access'] = FALSE;     
   }
- 
+  if($form_id == 'photo_node_form') {
+    $form['og_group_ref'][LANGUAGE_NONE][0]['admin']['#access'] = FALSE;
+    // $form['field_status_tags']['#access'] = FALSE;
+    if(isset($form['og_group_ref'][LANGUAGE_NONE][0]['default'])) {
+      // $options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
+      //2 is the love group gid.
+      $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = 2;  
+
+      $form['og_group_ref']['#prefix'] = '<div class="hide">';
+      $form['og_group_ref']['#suffix'] = '</div>';
+    }
+  }
 }
 
 /**

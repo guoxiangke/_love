@@ -1360,8 +1360,8 @@ section.block h3{
   text-indent: 1em;
 }
 /**node-add-photo form*/
-#body-add-more-wrapper label, #body-add-more-wrapper  .controls,#body-add-more-wrapper .help-block {
-    display: block;
+#body-add-more-wrapper .help-block {
+    /*display: block;*/
 }
 #edit-field-photo-und-0-upload-button {
 	display:none;
@@ -1711,4 +1711,20 @@ _line-height: 25px;
 background: #77b3d5;
 color: #fff;
 font-size: 14px;
+}
+
+/*photo add re-css*/
+#photo-node-form #body-add-more-wrapper label{
+
+}
+
+.publish_help span{
+	padding: 3px;
+}
+.publish_help .focus{
+	color: white;
+	background-color:#2FADDF; 
+}
+.publish_help {
+	margin-bottom: 10px;
 }

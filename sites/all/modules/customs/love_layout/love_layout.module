@@ -484,15 +484,24 @@ function _ajax_register_needed_files(&$form_state, array $files) {
  * when add a new photo,set  group audience default love.
  */
 function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) {
-  $form['og_group_ref']['#access'] = FALSE;
-  
-  //$options = $form['og_group_ref'][LANGUAGE_NONE][0]['default']['#options'];
-  //2 is the love group gid.
-  //$form['og_group_ref'][LANGUAGE_NONE][0]['default']['#default_value'] = $options[2];
+  // $form['og_group_ref']['#access'] = FALSE;
 
-  // hidden some function now,body and tags 分享感言 标签功能暂不开放
-  drupal_add_js(drupal_get_path('module','love').'/js/love-photo-add.js');
-  drupal_add_css(drupal_get_path('module','love_layout').'/css/love-photo-add.css');
+  $form['title']['#type'] = 'textarea';
+  $form['title']['#title'] = t('文字传情');
+  $form['help'] = array(
+    '#markup' => t('<div class="publish_help"><span class="publish_photo"><i class="icon-camera"></i>发布照片</span> <span class="publish_status"><i class="icon-comment"></i>真爱大家说</span></div>'),
+    '#weight' => -10,
+  );
+   $form['helps'] = array(
+          '#type' => 'radios',
+          '#title' => t('展现自我'),
+          '#required' => true,
+          '#options' => array(t('发布照片'), t('真爱大家说')),
+          '#default_value' => 0,
+          '#weight' => -10,
+          '#prefix' => '<div class="hide">',
+          '#suffix' => '</div>',
+        );
 }
 function love_layout_init() {
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL &&!user_access('administer users')) {
@@ -633,21 +642,26 @@ function love_layout_node_view($node, $view_mode, $langcode) {
     // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/jquery.bookblock.js');
     // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/page.js');
   }
+  if($node->type == 'photo') {
+    drupal_goto('photos');
+  }
 }
 /**
  * Implements hook_views_pre_build().
  */
 function love_layout_views_pre_build(&$view) {
   // add form for status.
-   if (
-    $view->name == 'status' &&
-    //user_access('administer site configuration') &&
-    $view->current_display == 'page_status_all'
-  ) {
+  if ($view->name == 'status' && $view->current_display == 'page_status_all') {
     module_load_include('inc', 'node', 'node.pages'); 
     module_load_include('inc', 'love_layout', 'love_layout.customs');  
     $form['add_status'] = _node_add4love('status');
     $view->attachment_before = drupal_render($form['add_status']);
+  }elseif($view->name == 'index'){
+
+    // module_load_include('inc', 'node', 'node.pages'); 
+    // module_load_include('inc', 'love_layout', 'love_layout.customs');  
+    // $form['add_status'] = _node_add4love('photo');
+    // $view->attachment_before = drupal_render($form['add_status']);
   }
 }
 
@@ -655,7 +669,7 @@ function love_layout_views_pre_build(&$view) {
  * Implements hook_node_presave().
  */
 function love_layout_node_presave($node) {
-  if($node->type == 'status') {
+  if($node->type == 'status' || $node->type == 'photo') {
 
    $pattern = '/#([^\\#|.]+)#|＃([^\\＃|.]+)＃/';
    preg_match_all($pattern, $node->title, $matches, PREG_SET_ORDER);
