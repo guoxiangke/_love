@@ -53,8 +53,11 @@
 		$status_type = 'status';
 	}
 
-	$topic_id = $fields['field_status_topic']->content;
-	$topic = $fields['field_status_topic_1']->content;
+	
+	if(isset($fields['field_status_topic']))
+		$topic_id = $fields['field_status_topic']->content;
+	if(isset($fields['field_status_topic_1']))
+		$topic = $fields['field_status_topic_1']->content;
 
 	$profile_uid = $fields['uid']->raw;
 	//give frendly name...
