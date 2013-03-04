@@ -281,6 +281,15 @@ function love_layout_menu() {
   // //   'menu_name'=> 'main-menu'
   // // );
   // $items['statuses']['menu_name'] = 'main-menu';
+  $items['timeline'] = array(
+    'title' => t('timeline'),
+    'page callback'    => 'love_user_timeline',
+    'file'             => 'love_layout.block.inc',
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+    'menu_name' =>'main-menu',
+  );
+  return $items;
 }
 
 /**
