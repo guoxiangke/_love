@@ -357,6 +357,7 @@ function love_user_timeline() {
   $issues_li = '';
   // dpm($photos);
   foreach ($photos as $key => $node) {
+    if(!isset($node->field_photo[LANGUAGE_NONE])) continue;
      $dates_li .= '<li><a href="#'.$node->changed.'">'.date('n-j',$node->changed).'</a><span>'.date('Y',$node->changed).'</span></li>';
      $variables = array(
       'path' => $node->field_photo[LANGUAGE_NONE][0]['uri'], 
