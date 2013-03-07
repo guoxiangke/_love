@@ -119,7 +119,7 @@
 <div class="clear">&nbsp;</div>
 <!-- Begin Experience Section -->
 <dl>
-<dt>项目经验:</dt>
+<dt>项目经验: </dt>
 
 <dd>
 
