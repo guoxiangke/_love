@@ -18,7 +18,8 @@
 			'gv'=>'生活无国界',
 			'hg'=>'欢乐卡洽碰',
 			'ws'=>'长夜的牵引',
-			'se'=>'恋爱季节'
+			'se'=>'恋爱季节',
+			'eg'=>'英语世界',
 		);
 		foreach($types as $key=>$value){
 			?>
@@ -26,7 +27,11 @@
 				<h3><?php echo $value;?></h3>
 				<ul>
 					<?php
-							$media_type =($key=='se')?'mp3':'wma';
+							$mp3 = array('se');
+							$media_type = 'wma';
+							if(in_array($key, $mp3)) {
+								$media_type = 'mp3';
+							}
 							$days = date( "t",mktime(0,0,0,date('m'),1,date('Y')));
 							for	($i=1;$i<=$days;$i++){
 								
