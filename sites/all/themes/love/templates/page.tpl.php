@@ -225,7 +225,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
      <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">添加照片，展现风采</h3>
+      <h3 id="myModalLabel">请选择 添加照片or真爱大家说</h3>
    </div>
    <div class="modal-body">
      <?php print render($add_photo); ?>
@@ -234,9 +234,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
   <footer class="footer container">
     <?php print render($page['footer']); ?>
   </footer>
-</div>
-
-  <?php if (isset($heartbeats)): ?>
+    <?php if (isset($heartbeats)): ?>
   <div id="gg">
     <div class="close"><a href="javascript:void(0)" onclick="jQuery('#gg').slideUp('slow');" title="关闭">×</a>
     <div id="feedb"><a href="activities" title="更多" class="image"><img src="http://www.zoneself.org/wp-content/themes/product/images/feed.gif"></a></div>
@@ -249,5 +247,9 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
     </div>
   </div>
   <?php endif ?>
+  
+</div>
+
+
 
 <?php endif ?>

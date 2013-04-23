@@ -161,7 +161,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
         <section class="<?php print _twitter_bootstrap_content_span($columns); ?>" id="page-section">  
           
           <?php if (isset($page['content']['love_layout_love_signature'])): print render($page['content']['love_layout_love_signature']); endif;?>
-           <?php if (isset($page['content']['love_layout_love_user_timeline'])): print render($page['content']['love_layout_love_user_timeline']); endif;?>
+           <?php// if (isset($page['content']['love_layout_love_user_timeline'])): print render($page['content']['love_layout_love_user_timeline']); endif;?>
           <?php if ($page['highlighted']): ?>
             <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
           <?php endif; ?>
@@ -228,7 +228,7 @@ if(isset($status) && $status == '403 Forbidden' && user_is_anonymous()): ?>
 
      <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">添加照片，展现风采</h3>
+      <h3 id="myModalLabel">请选择 添加照片or真爱大家说</h3>
    </div>
    <div class="modal-body">
      <?php print render($add_photo); ?>
