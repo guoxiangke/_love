@@ -5,7 +5,7 @@
 function weibo_login() {
 	//TODO weibo用户已经绑定B账户，但他在A账户里又进行绑定，此时跳转到用户B了，需要组织并提示。
   $weibo_config = open_weibo_get_config();
-	if(is_null($weibo_config['open_weibo_app_key']) || is_null($weibo_config['open_weibo_app_secret'])){
+	if(is_null($weibo_config['open_weibo_app_key']) || is_null($weibo_config['open_weibo_app_secret'])) {
 		 drupal_set_message(t('请配置appkey&app_secret'),'error');
 		 drupal_goto('admin/config/openusers/weibo');
 		 return;
@@ -14,10 +14,9 @@ function weibo_login() {
 	global $o;
   $o = new SaeTOAuthV2( $weibo_config['open_weibo_app_key'] , $weibo_config['open_weibo_app_secret'], $access_token = NULL, $refresh_token = NULL) ;//($client_id, $client_secret, $access_token = NULL, $refresh_token = NULL) 
 
-	if (!isset($_REQUEST['code'])){
+	if (!isset($_REQUEST['code'])) {
 		$aurl = $o->getAuthorizeURL( $weibo_config['open_weibo_redirect_uri']);
 		header("Location:$aurl");
-    return;
 	}else{
 		$keys = array();
 		$keys['code'] = $_REQUEST['code'];
