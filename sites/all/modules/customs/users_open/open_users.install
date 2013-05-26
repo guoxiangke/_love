@@ -55,6 +55,13 @@ function open_users_schema() {
         'not null' => true,
         'size' => 'medium'
       ),
+      'open_token_expires_in' => array(//update_7000
+        'type' => 'varchar',
+        'length' => '255',
+        'default' => '',
+        'not null' => TRUE,
+        'description' => 'The open users picture.',
+      ),
     ),
     'unique keys' => array(
       'open_uid_type' => array('open_uid','open_type'),
@@ -133,12 +140,6 @@ function open_users_update_7000() {
   );
 	
 	db_add_field( 'open_users', 'open_picture', $new_field);
-	/* Q:如何drupal7 install更新添加表并更新表内容为其他列的unserialize
-	$ret = array();
-  // NOTE: update_sql() doesn't support %-substitution parameters
-  //$open_picture = unserialize('select open_users_info form open_users');
-  $ret[] = db_query("UPDATE {open_users} SET open_picture = ???$open_picture???'");//update_sql
-  return $ret;*/
 };
 /**
  * add new table about synch types.
@@ -179,3 +180,17 @@ function open_users_update_7001() {
 function open_users_update_7002() {
 	db_drop_table('open_users_synch_type');
 }
+/**
+ * add new open_token_expires_in field to table open_users and update info.
+ */
+function open_users_update_7003() {
+  $new_field = array(
+    'type' => 'varchar',
+    'length' => '255',
+    'default' => '',
+    'not null' => TRUE,
+    'description' => 'The open users picture.',
+  );
+  
+  db_add_field( 'open_users', 'open_token_expires_in', $new_field);
+};

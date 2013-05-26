@@ -412,7 +412,7 @@ function love_layout_preprocess_page(&$variables) {
   //module_load_include('inc', 'love_layout', 'love_layout.customs'); 
   module_load_include('inc', 'node', 'node.pages'); 
   module_load_include('inc', 'love_layout', 'love_layout.customs');  
-  $variables['add_photo'] = _node_add4love('photo');
+  // $variables['add_photo'] = _node_add4love('photo');
   //feedback of webform.
   $node = node_load(19);
   $variables['feedback'] = _node_page_view4love($node);
@@ -511,6 +511,16 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
           '#prefix' => '<div class="hide">',
           '#suffix' => '</div>',
         );
+   $weibo_config = open_weibo_get_config();
+   $user_config = open_users_get_config();
+   if(!isset($_SESSION['open_weibo_access_token']) && $user_config)
+    $_SESSION['open_weibo_access_token'] = unserialize($user_config->open_token);
+
+   dpm($weibo_config,'weibo_config');
+   dpm($user_config,'user_config');
+   if(!$user_config->open_token_expires_in){
+    dpm('retoken please');
+   }
 }
 function love_layout_init() {
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL &&!user_access('administer users')) {

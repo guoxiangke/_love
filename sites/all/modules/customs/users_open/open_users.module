@@ -126,12 +126,22 @@ function open_users_bandapi($open_user,$jump=true){
  * replace new token when oauther2.0
  */
 function open_users_refresh_token($uid,$open_user){
-	$query_parameters = array(
-		':open_token' =>serialize($open_user['open_token']),
-		':uid' =>$uid,
-		':open_type' =>$open_user['open_type'],
-	);
-  db_query("update {open_users} set open_token = :open_token where uid=:uid and open_type=:open_type",$query_parameters);
+	// $query_parameters = array(
+	// 	':open_token' =>serialize($open_user['open_token']),
+ //    ':open_token_expires_in' =>$open_user['open_token_expires_in'],
+	// 	':uid' =>$uid,
+	// 	':open_type' =>$open_user['open_type'],
+	// );
+ //  db_query("update {open_users} set open_token = :open_token, open_token_expires_in = :open_token_expires_in where uid=:uid and open_type=:open_type",$query_parameters);
+  //
+  $num_updated = db_update('open_users') // Table name no longer needs {}
+  ->fields(array(
+    'open_token' => serialize($open_user['open_token']),
+    'open_token_expires_in' => $open_user['open_token_expires_in'],
+  ))
+  ->condition('uid', $uid)
+  ->condition('open_type', $open_user['open_type'])
+  ->execute();
 }
 /*
  * 
@@ -330,9 +340,10 @@ function open_users_band($uid,$open_user){
 		':open_picture'=>$open_picture,
 		':open_type'=>$open_type,
 		':open_token'=>serialize($open_token),
-		':open_config'=>serialize($open_user)
+		':open_config'=>serialize($open_user),
+    ':open_token_expires_in'=>serialize($open_token_expires_in),
 	);
-	db_query("INSERT INTO {open_users} (uid, open_uid, open_name, open_picture, open_type, open_token, open_config) VALUES (:uid,:open_uid,:open_name,:open_picture,:open_type,:open_token,:open_config)",$query_parameters);
+	db_query("INSERT INTO {open_users} (uid, open_uid, open_name, open_picture, open_type, open_token, open_config) VALUES (:uid,:open_uid,:open_name,:open_picture,:open_type,:open_token,:open_config,:open_token_expires_in)",$query_parameters);
   drupal_set_message(t('Binding @open_type user @open_name successfully.',array('@open_type'=>$open_type,'@open_name'=>$open_name)),'status');
 }
 
@@ -416,4 +427,16 @@ function open_users_form_alter00(&$form, $form_state, $form_id) {
   }
   
   return $form;
+}
+function open_users_get_config($uid = 0,$open_type = 'weibo') {
+  global $user;
+  if(!$uid){
+    $uid = $user->uid;
+  }
+  $result = db_query(
+    'SELECT * FROM {open_users} WHERE uid =:uid  AND open_type=:open_type',
+    array(':uid' => $uid,':open_type' => $open_type)
+  )->fetchAll();
+  if(isset($result[0]->uid))
+  return $result[0];
 }

@@ -45,7 +45,8 @@ function weibo_login() {
       'open_picture'=>$userInfo['profile_image_url'].'.jpg',        
       'open_signature'=>$userInfo['description'],
       'open_location'=>array('city'=>$userInfo['city'],'province'=>$userInfo['province'],'location'=>$userInfo['location'],'blog'=>$userInfo['url']),
-      'open_info'=>$userInfo
+      'open_info'=>$userInfo,
+      'open_token_expires_in' =>$token['expires_in'],
     );
     open_users_bandapi($open_weibo_user);
 	}
@@ -155,7 +156,7 @@ function open_weibo_admin_config(){
   $form['open_weibo_redirect_uri'] = array(
     '#type' => 'textfield',
     '#title' => t('App回调地址redirect_uri'),
-    '#default_value' => $base_url.'?q=open_users/weibo',
+    '#default_value' => $base_url.'/?q=open_users/weibo',
     '#required' => TRUE,
   );
 	//optional

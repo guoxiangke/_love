@@ -11,7 +11,7 @@ function ybread_menu() {
    *  'type' => MENU_SUGGESTED_ITEM,
    *);
    */
-  $items['ybreads'] = array(
+  $items['lingming'] = array(
     'title' => '灵命日粮',
     'page callback' => 'ybread_page',
     'type' => MENU_NORMAL_ITEM,
