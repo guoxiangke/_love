@@ -535,9 +535,9 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
 
    // dpm($weibo_config,'weibo_config');
    // dpm($user_config,'user_config');
-   if(!$user_config->open_token_expires_in){
-    dpm('retoken please');
-   }
+   // if(!$user_config->open_token_expires_in){
+   //  dpm('retoken please');
+   // }
 }
 function love_layout_init() {
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL &&!user_access('administer users')) {
