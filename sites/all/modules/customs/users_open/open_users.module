@@ -293,7 +293,7 @@ function open_users_email_submit($form, &$form_state){
 	}
 	$open_user = $_SESSION['temp_open_user'];
 	if( $uid == 0){ //$open_user中的Email尚未注册
-		$open_user['open_mail'] = $mail;dpm($open_user,'$open_user1');
+		$open_user['open_mail'] = $mail;
 		$user = open_users_register($open_user);
 		$uid = $user->uid;
 	}
@@ -333,6 +333,7 @@ function open_users_band($uid,$open_user){
 		$open_picture = $open_user['open_picture'];
   	unset($open_user['open_picture']);
 	}else{$open_picture='';}
+  $open_token_expires_in = $open_user['open_token_expires_in'];
 	$query_parameters = array(
 		':uid'=>$uid,
 		':open_uid'=>$open_uid,
@@ -343,7 +344,7 @@ function open_users_band($uid,$open_user){
 		':open_config'=>serialize($open_user),
     ':open_token_expires_in'=>serialize($open_token_expires_in),
 	);
-	db_query("INSERT INTO {open_users} (uid, open_uid, open_name, open_picture, open_type, open_token, open_config) VALUES (:uid,:open_uid,:open_name,:open_picture,:open_type,:open_token,:open_config,:open_token_expires_in)",$query_parameters);
+	db_query("INSERT INTO {open_users} (uid, open_uid, open_name, open_picture, open_type, open_token, open_config,open_token_expires_in) VALUES (:uid,:open_uid,:open_name,:open_picture,:open_type,:open_token,:open_config,:open_token_expires_in)",$query_parameters);
   drupal_set_message(t('Binding @open_type user @open_name successfully.',array('@open_type'=>$open_type,'@open_name'=>$open_name)),'status');
 }
 
