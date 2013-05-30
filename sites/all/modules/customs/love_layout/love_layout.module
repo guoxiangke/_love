@@ -282,16 +282,23 @@ function love_layout_menu() {
   // // );
   // $items['statuses']['menu_name'] = 'main-menu';
   $items['timeline'] = array(
-    'title' => t('timeline'),
+    'title' => 'timeline',
     'page callback'    => 'love_user_timeline',
     'file'             => 'love_layout.block.inc',
     'access arguments' => array('access content'),
     'type' => MENU_NORMAL_ITEM,
     'menu_name' =>'main-menu',
   );
+  $items['welcome'] = array(
+    'title' => 'Welcome,Please login first!',
+    'page callback'    => 'love_anonymous_welcome',
+    'access callback' => 'user_is_anonymous',
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'love_layout.pages.inc',
+
+  );
   return $items;
 }
-
 /**
  * Implements hook_user_view().
  * @see statuses_user_view()
@@ -412,7 +419,7 @@ function love_layout_preprocess_page(&$variables) {
   //module_load_include('inc', 'love_layout', 'love_layout.customs'); 
   module_load_include('inc', 'node', 'node.pages'); 
   module_load_include('inc', 'love_layout', 'love_layout.customs');  
-  // $variables['add_photo'] = _node_add4love('photo');
+  $variables['add_photo'] = _node_add4love('photo');
   //feedback of webform.
   $node = node_load(19);
   $variables['feedback'] = _node_page_view4love($node);
@@ -423,14 +430,24 @@ function love_layout_preprocess_page(&$variables) {
     $variables['invite_form'] = drupal_get_form('invite_form');
   }
   
-  if(drupal_is_front_page() && !user_is_anonymous() && module_exists('heartbeat_defaults')) {
+  // if(drupal_is_front_page() && !user_is_anonymous() && module_exists('heartbeat_defaults')) {
 
-    drupal_add_css(drupal_get_path('module','love_layout').'/css/activities.css');
-    drupal_add_js(drupal_get_path('module','love_layout').'/js/Scroll_activity.js');
-    module_load_include('inc','heartbeat','heartbeat.pages');
-    $heartbeat_messages_page = heartbeat_messages_page('siteactivity');
-    $variables['heartbeats'] = render($heartbeat_messages_page);
-  }
+  //   drupal_add_css(drupal_get_path('module','love_layout').'/css/activities.css');
+  //   drupal_add_js(drupal_get_path('module','love_layout').'/js/Scroll_activity.js');
+  //   module_load_include('inc','heartbeat','heartbeat.pages');
+  //   $heartbeat_messages_page = heartbeat_messages_page('siteactivity');
+  //   $variables['heartbeats'] = render($heartbeat_messages_page);
+  // }
+//tpl
+    /*  <?php if (isset($heartbeats)): ?>
+  <div id="gg">
+    <div class="close"><a href="javascript:void(0)" onclick="jQuery('#gg').slideUp('slow');" title="关闭">×</a>
+    <div id="feedb"><a href="activities" title="更多" class="image"><img src="http://www.zoneself.org/wp-content/themes/product/images/feed.gif"></a></div>
+    <div class="bulletin">
+       <?php print $heartbeats; ?>
+    </div>
+  </div>
+  <?php endif ?>*/
 }
 
 function love_layout_form_alter(&$form, &$form_state, $form_id) {
@@ -516,8 +533,8 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
    if(!isset($_SESSION['open_weibo_access_token']) && $user_config)
     $_SESSION['open_weibo_access_token'] = unserialize($user_config->open_token);
 
-   dpm($weibo_config,'weibo_config');
-   dpm($user_config,'user_config');
+   // dpm($weibo_config,'weibo_config');
+   // dpm($user_config,'user_config');
    if(!$user_config->open_token_expires_in){
     dpm('retoken please');
    }
