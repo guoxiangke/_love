@@ -20,6 +20,7 @@ echo $showtime=date("w");
 echo $showtime=date("w",$get_date);
 ?>节目)</b><br/>
 <br/><br/>
+<p>下载方法：鼠标右键-》链接另存为 即可下载！耶稣爱你^_^</p>
 <?php
 $program=array(
 				'ws'=>'长夜的牵引',
