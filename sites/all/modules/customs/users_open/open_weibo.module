@@ -216,9 +216,9 @@ function open_weibo_comment_insert($comment) {
 	dpm($comment,'$comment');
 	if($comment->open_weibo['synch']) {
 		if(open_weibo_synch($comment->subject?$comment->subject:$comment->comment_body[LANGUAGE_NONE][0]['value'],t('Comments'),comment_uri($comment))){
-			drupal_set_message('Synch to weibo sucess!','status');
+			drupal_set_message(t('Synch to weibo sucess!'),'status');
 		}else{
-			drupal_set_message('Synch to weibo error!','error');
+			drupal_set_message(t('Synch to weibo error!'),'error');
 		}
 	}
 }

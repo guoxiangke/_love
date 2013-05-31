@@ -1,3 +1,7 @@
+body {
+	font-size: 62.5%;
+}
+
 body.not-logged-in {
     background-color: #2FADDF;/*#0196BE http://m.xunlei.com/detail_kc_pc.html  #2FADDF E00000 大红*/
 }
@@ -32,10 +36,10 @@ body.logged-in,body.page-lingming {
 
 .bibles-say {
   position: relative;
-  font-size: 22px;
+  font-size: 2em;
   font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
   color: white;
-  padding: 10px;
+  padding: 1em;
   letter-spacing: 4px;
   line-height: 30px;
   margin-bottom: 0px;
