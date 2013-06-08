@@ -148,7 +148,7 @@
 
      <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">请选择 添加照片or真爱大家说</h3>
+      <h3 id="myModalLabel">请选择[照片]或[文字]发布到朋友圈</h3>
    </div>
    <div class="modal-body">
      <?php print render($add_photo); ?>

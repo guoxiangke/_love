@@ -253,7 +253,7 @@ function love_form_invite_form_alter(&$form, &$from_state, $form_id) {
       $form['rtid']['#default_value'] = 2;//$form['rtid']['#options'][2];//#options 熟人
       $form['rtid']['#access'] = FALSE;  
     }
-
+    $form['ur_request']['#access'] = FALSE;
 }
 
 function love_preprocess_block(&$variables, $hook) {

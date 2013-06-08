@@ -111,11 +111,11 @@ $('#user-register-form #edit-submit').click(function(e){
       $('#photo-node-form #edit-body').show('fast');
 
       $('#photo-node-form .form-item-title').hide('fast');
-      // $('#photo-node-form #edit-field-status-topic').hide('fast');
+      $('#photo-node-form #edit-field-status-topic').hide('fast');
     }
     function add_status() {
       $('#photo-node-form .form-item-title').show('fast');
-      // $('#photo-node-form #edit-field-status-topic').fadeIn('fast');
+      $('#photo-node-form #edit-field-status-topic').show('fast');
 
       $('#photo-node-form #edit-field-photo').hide('fast');
       $('#photo-node-form #edit-body').hide('fast');

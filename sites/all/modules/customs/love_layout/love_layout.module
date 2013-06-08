@@ -471,6 +471,7 @@ function love_layout_form_alter(&$form, &$form_state, $form_id) {
     unset($form['title']['#title']);// = t('我shuo');
     $form['field_status_tags']['#access'] = FALSE;
   }
+
 }
 
 /**
@@ -528,10 +529,10 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
           '#prefix' => '<div class="hide">',
           '#suffix' => '</div>',
         );
-   $weibo_config = open_weibo_get_config();
-   $user_config = open_users_get_config();
-   if(!isset($_SESSION['open_weibo_access_token']) && $user_config)
-    $_SESSION['open_weibo_access_token'] = unserialize($user_config->open_token);
+   // $weibo_config = open_weibo_get_config();
+   // $user_config = open_users_get_config();
+   // if(!isset($_SESSION['open_weibo_access_token']) && $user_config)
+   //  $_SESSION['open_weibo_access_token'] = unserialize($user_config->open_token);
 
    // dpm($weibo_config,'weibo_config');
    // dpm($user_config,'user_config');
@@ -539,13 +540,6 @@ function love_layout_form_photo_node_form_alter(&$form, &$form_state, $form_id) 
    //  dpm('retoken please');
    // }
 }
-function love_layout_init() {
-  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL &&!user_access('administer users')) {
-    if(node_load(arg(1))->type == 'photo')
-    drupal_goto('<front>');
-  }
-}
-
 /**
  * Implements hook_user_view().
  * @see statuses_user_view()
@@ -679,7 +673,8 @@ function love_layout_node_view($node, $view_mode, $langcode) {
     // drupal_add_js(drupal_get_path('module','love_layout').'/book/js/page.js');
   }
   if($node->type == 'photo') {
-    drupal_goto('photos');
+    drupal_set_message(t('For now, you can see the comment page! will go the front page!'), 'status', FALSE);
+    drupal_goto('<front>');
   }
 }
 /**

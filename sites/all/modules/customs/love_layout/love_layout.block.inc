@@ -367,9 +367,11 @@ function love_user_timeline() {
       );
      $style = 's550';
      $img = theme('image_style', array('style_name' => $style, 'path' => $node->field_photo[LANGUAGE_NONE][0]['uri']));//theme('image', $variables);
+     $body_string = '';
+     if(isset($node->body[LANGUAGE_NONE][0]['value'])) $body_string = $node->body[LANGUAGE_NONE][0]['value'];
      $issues_li .= '<li id="'.$node->changed.'">
         '.$img.'
-        <p>'.$node->body[LANGUAGE_NONE][0]['value'].'</p>
+        <p>' . $body_string . '</p>
       </li>';
   }
   $dates_li .= '<li><a href="#'.strtotime($field_birthday).'">'.date('n-j',strtotime($field_birthday)).'</a><span>'.date('Y',strtotime($field_birthday)).'</span></li>';
