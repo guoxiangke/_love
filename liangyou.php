@@ -27,7 +27,7 @@
 				<h3><?php echo $value;?></h3>
 				<ul>
 					<?php
-							$mp3 = array('se');
+							$mp3 = array('se','ws');
 							$media_type = 'wma';
 							if(in_array($key, $mp3)) {
 								$media_type = 'mp3';
