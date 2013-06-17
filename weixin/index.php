@@ -1,8 +1,12 @@
 <?php
+//
+define('DRUPAL_ROOT', '../');
+require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
+drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
 /**
   * wechat php test
   */
-
 //define your token
 define("TOKEN", "ybzx");
 $wechatObj = new wechatCallbackapiTest();
@@ -47,9 +51,11 @@ class wechatCallbackapiTest
               		$msgType = "text";
                 	$contentStr = "Welcome to wechat world!";
                 	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                	echo $resultStr;
+                	watchdog('resultStr', $resultStr, array(), WATCHDOG_NOTICE, 'link');
+                    echo $resultStr;
                 }else{
                 	echo "Input something...";
+                    watchdog('resultStr', 'Input something...', array(), WATCHDOG_NOTICE, 'link');
                 }
 
         }else {
