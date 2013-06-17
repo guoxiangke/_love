@@ -28,7 +28,7 @@ class wechatCallbackapiTest
     {
 		//get post data, May be due to the different environments
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-
+        watchdog('mp-postStr', print_r($postStr,true), array(), WATCHDOG_NOTICE, 'link');
       	//extract post data
 		if (!empty($postStr)){
                 
@@ -36,6 +36,7 @@ class wechatCallbackapiTest
                 $fromUsername = $postObj->FromUserName;
                 $toUsername = $postObj->ToUserName;
                 $keyword = trim($postObj->Content);
+                watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
                 $time = time();
                 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
