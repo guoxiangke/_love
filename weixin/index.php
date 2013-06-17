@@ -11,7 +11,7 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 define("TOKEN", "ybzx");
 $wechatObj = new wechatCallbackapiTest();
 $wechatObj->valid();
-
+$wechatObj->responseMsg();
 class wechatCallbackapiTest
 {
 	public function valid()
