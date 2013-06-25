@@ -62,6 +62,7 @@ function mp_service_response() {
 		//subscribe begin
 		if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
 			$contentStr = '欢迎您的关注，我们将不定期推送永不止息最新动态。<br/>如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？<br/>【1】玩法介绍<br/>【2】发布相片/心情<br/>【3】查看最近活跃的弟兄姊妹<br/> 【回复0进入主菜单】';
+			$msgType = "text";
 			$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
     	if(!mp_get_uid_by_FromUserName($fromUsername)) {
     		//record the user in db
@@ -73,7 +74,23 @@ function mp_service_response() {
 		//
 		if(!empty( $keyword )) {
   		$msgType = "text";
-    	$contentStr = t('Thanks for your focus~,we will do our best for you!');
+    	switch ($keyword) {
+    		case '0':
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？<br/>【1】玩法介绍<br/>【2】发布相片/心情<br/>【3】查看最近活跃的弟兄姊妹<br/> ';
+    			break;
+    		case '1':
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？<br/>【1】玩法介绍<br/>【2】发布相片/心情<br/>【3】查看最近活跃的弟兄姊妹<br/> 【回复0进入主菜单】';
+    			break;
+    		case '2':
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？<br/>【1】玩法介绍<br/>【2】发布相片/心情<br/>【3】查看最近活跃的弟兄姊妹<br/> 【回复0进入主菜单】';
+    			break;
+    		case '3':
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？<br/>【1】玩法介绍<br/>【2】发布相片/心情<br/>【3】查看最近活跃的弟兄姊妹<br/> 【回复0进入主菜单】';
+    			break;
+    		default:
+    				$contentStr = t('Thanks for your focus~,we will do our best for you!');
+    			break;
+    	}
     	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
         //生成本站订单begin
 
