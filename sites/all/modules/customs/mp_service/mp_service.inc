@@ -17,7 +17,6 @@ class wechatCallbackapiTest
         //valid signature , option
         if($this->checkSignature()){
         	echo $echoStr;
-            watchdog('mp_service', 'message0'.$echoStr, array(), WATCHDOG_NOTICE, 'link');
         	exit;
         }
     }
