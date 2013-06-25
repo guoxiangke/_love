@@ -52,22 +52,23 @@ function mp_service_response() {
               $field_mp_type = 2;
               break;
       }
-      $textTpl = "<xml>
-		<ToUserName><![CDATA[%s]]></ToUserName>
-		<FromUserName><![CDATA[%s]]></FromUserName>
-		<CreateTime>%s</CreateTime>
-		<MsgType><![CDATA[%s]]></MsgType>
-		<Content><![CDATA[%s]]></Content>
-		<FuncFlag>0</FuncFlag>
-		</xml>";             
+                $textTpl = "<xml>
+							<ToUserName><![CDATA[%s]]></ToUserName>
+							<FromUserName><![CDATA[%s]]></FromUserName>
+							<CreateTime>%s</CreateTime>
+							<MsgType><![CDATA[%s]]></MsgType>
+							<Content><![CDATA[%s]]></Content>
+							<FuncFlag>0</FuncFlag>
+							</xml>";          
 				if(!empty( $keyword ))
                 {
               		$msgType = "text";
                 	$contentStr = t('Thanks for your focus~,we will do our best for you!');
                 	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                 	if(!mp_get_uid_by_FromUserName($fromUsername)) {
-                        
-                    }
+                        //record the user in db
+                  }
+                	watchdog('mp_get_uid_by_FromUserName', mp_get_uid_by_FromUserName($fromUsername), array(), WATCHDOG_NOTICE, 'link');
                     //生成本站订单begin
 
                     $node = new stdClass();
@@ -92,7 +93,7 @@ function mp_service_response() {
                     $node->field_mp_fromusername['und'][0]['value'] = $postObj->FromUserName;
                     if($node = node_submit($node)) { // Prepare node for saving
                         node_save($node);
-                        watchdog('mp-add mp-receive node', "Node with nid " . $node->nid . " saved!\n", array(), WATCHDOG_NOTICE, 'link');
+                        watchdog('mp-add mp-receive node', "Node with nid " . $node->nid . " saved!\n".$resultStr, array(), WATCHDOG_NOTICE, 'link');
                     }
                     echo $resultStr;
 
