@@ -44,19 +44,19 @@ function love_block_user_info() {
                <div id="selfInfo" class="module-selfInfo-setting">
                       <div class="user-total">
                       <div class="t-focus"> 
-                        <div class="num">'. $focus_num .'</div>
+                        <div class="num"><a href="javascript:void(0);" title="现在还不可以点">'. $focus_num .'</a></div>
                         <div>关注</div>
                        </div>
                       <div class="t-follow">
-                        <div class="num">'. $follow_num .'</div>
+                        <div class="num"><a href="javascript:void(0);" title="以后可以点">'. $follow_num .'</a></div>
                         <div>粉丝</div>
                       </div>
                       <div class="t-nodes">
-                        <div class="num">'. count($photo_nodes).'</div>
+                        <div class="num"><a href="javascript:void(0);" title="敬请期待">'. count($photo_nodes).'</a></div>
                         <div>照片</div>
                       </div>
                       <div class="t-friends">
-                        <div class="num">'. $friends_num .'</div>
+                        <div class="num"><a href="javascript:void(0);" title="^_^还没做完">'. $friends_num .'</a></div>
                         <div>熟人</div>
                       </div>
                     </div>
