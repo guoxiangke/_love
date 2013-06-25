@@ -16,7 +16,7 @@ function mp_service_menu() {
     'title' => 'valid&response',
     'page callback' => 'mp_service_response',
     // 'page arguments' => array(),
-    // 'access arguments' => array(''),
+    'access callback' => TRUE,
     // 'type' => ,
     // 'file' => ,
   );
