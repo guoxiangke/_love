@@ -217,7 +217,7 @@ function love_form_user_register_form_alter(&$form, &$from_state, $form_id) {
     }
     $form['relationship_invite_approve']['#title']='您认识'.$inviter_name.'吗？';
     # 
-    $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！');
+    $form['relationship_invite_approve']['#description'] = t('为了营造良好的本站环境，请您如实选择您和邀请者之间的关系，谢谢合作！<br/>提醒：在选择家乡时，请确保之前的必填内容正确才会不出错。这个我以后在修改，谢谢您的体谅！');
 
   }
     $form['account']['name']['#title'] = t('昵称');
