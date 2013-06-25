@@ -5,7 +5,7 @@
 
 //define your token
 define("TOKEN", "ybzx");
-$wechatObj = new wechatCallbackapiTest();
+// $wechatObj = new wechatCallbackapiTest();
 // $wechatObj->valid();
 
 class wechatCallbackapiTest
@@ -47,7 +47,6 @@ class wechatCallbackapiTest
                     $msgType = "text";
                     $contentStr = "Welcome to wechat world!";
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                    watchdog('mp_service', '<pre>'.print_r($resultStr,true), array(), WATCHDOG_NOTICE, 'link');
                     echo $resultStr;
                 }else{
                     echo "Input something...";
