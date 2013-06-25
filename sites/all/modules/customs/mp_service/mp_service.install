@@ -1,0 +1,49 @@
+<?php
+//FromUserName: oNAD2jp8gQsG0woB6K6Aua2oZzxA
+//give the 
+//bingEmail: + bindUsername = the bindUid
+// if no this FromUserName, the first time visit this site. 回复菜单。
+// 欢迎您关注[永不止息],
+//uid 0/1 FromUserName 
+/**
+ * Implements hook_schema().
+ */
+function mp_service_schema() {
+  $schema['mp_service'] = array(
+    'description' => '',
+    'fields' => array(
+			'uid' => array(
+				'description' => '',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE,
+				'default' => 0
+			),
+      'fromusername' => array(
+        'description' => 'fromusername',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''
+       ),
+      'created' => array(
+        'description' => 'The Unix timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'uid' => array('uid'),
+      ),
+    'primary key' => array('fromusername'),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function mp_service_uninstall() {
+	db_query("DELETE FROM {variable} WHERE name LIKE 'mp_service_%%'");
+}

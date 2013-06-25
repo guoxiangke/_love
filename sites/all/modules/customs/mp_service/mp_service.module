@@ -1,0 +1,59 @@
+<?php
+//
+/**
+ * Implements hook_menu().
+ */
+function mp_service_menu() {
+  /*
+   *$items['blog'] = array(
+   *  'title' => 'blogs',
+   *  'page callback' => 'blog_page',
+   *  'access arguments' => array('access content'),
+   *  'type' => MENU_SUGGESTED_ITEM,
+   *);
+   */
+  $items['mp_service'] = array(
+    'title' => 'valid&response',
+    'page callback' => 'mp_service_response',
+    // 'page arguments' => array(),
+    // 'access arguments' => array(''),
+    // 'type' => ,
+    // 'file' => ,
+  );
+
+  return $items;
+}
+function mp_service_response() {
+	//preg to get key_words
+	module_load_include(type, module, name);
+	module_load_include('inc', 'mp_service', 'mp_service');
+	$wechatObj = new wechatCallbackapiTest();
+	$wechatObj->valid();
+	// $wechatObj->responseMsg();
+
+	switch ($key_words) {
+		case 'value':
+			# code...
+			break;
+		
+		default:
+			# code...
+			break;
+	}
+}
+
+
+function mp_get_uid_by_FromUserName($FromUserName){
+	$uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
+	if($uid === FALSE) {
+		$result = db_insert('mp_service')
+			->fields(array(
+			  'uid' => 0,
+			  'fromusername' => $FromUserName,
+			  'created' => REQUEST_TIME,
+			))
+			->execute();
+		return 0;
+	}
+	return $uid;
+}
