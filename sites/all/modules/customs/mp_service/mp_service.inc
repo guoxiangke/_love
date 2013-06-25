@@ -62,30 +62,30 @@ class wechatCallbackapiTest
                     }
                     //生成本站订单begin
 
-                    $node = new stdClass();
-                    $node->title = $postObj->MsgId;
-                    $node->type = 'mp_receive';
-                    node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
-                    $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
-                    //todo:
-                    //bind user
-                    //mp_respone
-                    //get_uid_by_FormUserName('oNAD2jlAk0ZGHkgezd_MnQbGrBPM');
-                    $node->uid = 1;
-                    $node->status = 1; //(1 or 0): published or not
-                    $node->promote = 0; //(1 or 0): promoted to front page
-                    $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
-                    $node->path['pathauto'] = false;
-                    $node->body[$node->language][0]['value']   = $postObj->Content . print_r($postObj,true);
-                    $node->body[$node->language][0]['summary'] = text_summary($postObj->Content);
-                    $node->body[$node->language][0]['format']  = 'filtered_html';
+                    // $node = new stdClass();
+                    // $node->title = $postObj->MsgId;
+                    // $node->type = 'mp_receive';
+                    // node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+                    // $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+                    // //todo:
+                    // //bind user
+                    // //mp_respone
+                    // //get_uid_by_FormUserName('oNAD2jlAk0ZGHkgezd_MnQbGrBPM');
+                    // $node->uid = 1;
+                    // $node->status = 1; //(1 or 0): published or not
+                    // $node->promote = 0; //(1 or 0): promoted to front page
+                    // $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
+                    // $node->path['pathauto'] = false;
+                    // $node->body[$node->language][0]['value']   = $postObj->Content . print_r($postObj,true);
+                    // $node->body[$node->language][0]['summary'] = text_summary($postObj->Content);
+                    // $node->body[$node->language][0]['format']  = 'filtered_html';
 
-                    $node->field_mp_type['und'][0]['value'] = $field_mp_type;
-                    $node->field_mp_fromusername['und'][0]['value'] = $postObj->FromUserName;
-                    if($node = node_submit($node)) { // Prepare node for saving
-                        node_save($node);
-                        watchdog('mp-add mp-receive node', "Node with nid " . $node->nid . " saved!\n", array(), WATCHDOG_NOTICE, 'link');
-                    }
+                    // $node->field_mp_type['und'][0]['value'] = $field_mp_type;
+                    // $node->field_mp_fromusername['und'][0]['value'] = $postObj->FromUserName;
+                    // if($node = node_submit($node)) { // Prepare node for saving
+                    //     node_save($node);
+                    //     watchdog('mp-add mp-receive node', "Node with nid " . $node->nid . " saved!\n", array(), WATCHDOG_NOTICE, 'link');
+                    // }
                     echo $resultStr;
 
                 }else{
