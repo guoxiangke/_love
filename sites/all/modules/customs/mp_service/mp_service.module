@@ -29,6 +29,7 @@ function mp_service_response() {
 	module_load_include('inc', 'mp_service', 'mp_service');
 	$wechatObj = new wechatCallbackapiTest();
 	$wechatObj->valid();
+	watchdog('mp_service', 'message1', array(), WATCHDOG_NOTICE, 'link');
 	// $wechatObj->responseMsg();
 
 	switch ($key_words) {
