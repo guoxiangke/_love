@@ -31,15 +31,15 @@ function mp_service_response() {
 
 	//preg to get key_words
 	$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-  watchdog('mp-postStr', print_r($postStr,true), array(), WATCHDOG_NOTICE, 'link');
-  watchdog('mp-_POST', print_r($_POST,true), array(), WATCHDOG_NOTICE, 'link');
       	//extract post data
 	if (!empty($postStr)) {
 		$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+	  watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
+	  //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
+	  //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
 	  $fromUsername = $postObj->FromUserName;
 	  $toUsername = $postObj->ToUserName;
 	  $keyword = trim($postObj->Content);
-	  watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
 	  $time = time();
 	  switch ($postObj->MsgType) {
 	      case 'text':
@@ -57,14 +57,24 @@ function mp_service_response() {
 			<MsgType><![CDATA[%s]]></MsgType>
 			<Content><![CDATA[%s]]></Content>
 			<FuncFlag>0</FuncFlag>
-			</xml>";             
+			</xml>";
+
+		//subscribe begin
+		if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
+			$contentStr = '欢迎您的关注，我们将不定期推送永不止息最新动态。<br/>如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？<br/>【1】玩法介绍<br/>【2】发布相片/心情<br/>【3】查看最近活跃的弟兄姊妹<br/> 【回复0进入主菜单】';
+			$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+    	if(!mp_get_uid_by_FromUserName($fromUsername)) {
+    		//record the user in db
+    	}
+			echo $resultStr;
+      exit;
+		}
+		//subscribe end
+		//
 		if(!empty( $keyword )) {
   		$msgType = "text";
     	$contentStr = t('Thanks for your focus~,we will do our best for you!');
     	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-    	if(!mp_get_uid_by_FromUserName($fromUsername)) {
-            
-        }
         //生成本站订单begin
 
         // $node = new stdClass();
