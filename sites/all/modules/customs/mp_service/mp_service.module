@@ -61,7 +61,7 @@ function mp_service_response() {
 
 		//subscribe begin
 		if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
-			$contentStr = '欢迎您的关注，我们将不定期推送永不止息最新动态。\r\n如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\r\n【1】玩法介绍\r\n【2】发布相片/心情\r\n【3】查看最近活跃的弟兄姊妹\r\n 【回复0进入主菜单】';
+			$contentStr = '欢迎您的关注，我们将不定期推送永不止息最新动态。\n如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n 【回复0进入主菜单】';
 			$msgType = "text";
 			$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
     	if(!mp_get_uid_by_FromUserName($fromUsername)) {
@@ -76,16 +76,16 @@ function mp_service_response() {
   		$msgType = "text";
     	switch ($keyword) {
     		case '0':
-    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\r\n【1】玩法介绍\r\n【2】发布相片/心情\r\n【3】查看最近活跃的弟兄姊妹';
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹';
     			break;
     		case '1':
-    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？【1】玩法介绍\r\n【2】发布相片/心情\r\n【3】查看最近活跃的弟兄姊妹\r\n 【回复0进入主菜单】';
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n 【回复0进入主菜单】';
     			break;
     		case '2':
-    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\r\n【1】玩法介绍\r\n【2】发布相片/心情\r\n【3】查看最近活跃的弟兄姊妹\r\n 【回复0进入主菜单】';
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n 【回复0进入主菜单】';
     			break;
     		case '3':
-    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\r\n【1】玩法介绍\r\n【2】发布相片/心情\r\n【3】查看最近活跃的弟兄姊妹\r\n 【回复0进入主菜单】';
+    			$contentStr = '如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n 【回复0进入主菜单】';
     			break;
     		default:
     				$contentStr = t('Thanks for your focus~,we will do our best for you!');
