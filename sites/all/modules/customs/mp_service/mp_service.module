@@ -4,7 +4,6 @@
  * Implements hook_menu().
  */
 function mp_service_menu() {
-   */
   $items['mp_service'] = array(
     'title' => 'valid&response',
     'page callback' => 'mp_service_response',
