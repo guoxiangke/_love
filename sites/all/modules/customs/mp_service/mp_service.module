@@ -29,15 +29,36 @@ function mp_service_response() {
 watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
-            $wechatObj->text("hello, I'm wechat")->reply();
-            exit;
-            break;
+     
+      $keyword =  trim($wechatObj->getRevContent());
+      switch ($keyword) {
+        case '00':
+          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！";
+          break;
+        case '1':
+          $contentStr ="如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹【回复00进入主菜单】\n 测试开发中～敬请期待！";
+          break;
+        case '2':
+          $contentStr = "【20】发布照片\n【21】想对你说(写给喜欢的人)\n【22】无主情话(随便说点情话)\n【23】时光隧道(分享我的过去)\n【24】独居生活(记录现在的生活)\n【回复00进入主菜单】\n 测试开发中～敬请期待！";
+          break;
+        case '3':
+          $contentStr =  "【3】查看最近活跃的弟兄姊妹有：【回复00进入主菜单】\n 测试开发中～敬请期待！";
+          break;
+        default:
+            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
+          break;
+      }
+      $wechatObj->text($contentStr)->reply();
+      exit;
+      break;
     case Wechat::MSGTYPE_EVENT:
-            break;
+      $wechatObj->text("欢迎关注[Smile],我们将不定期发送永不止息最新动态给您~\n通过微信玩转永不止息？【回复00进入主菜单】\n所有功能测试开发中～敬请期待！")->reply();
+      break;
     case Wechat::MSGTYPE_IMAGE:
-            break;
+      $wechatObj->text("已收到您发送的图片！")->reply();
+      break;
     default:
-            $wechatObj->text("help info")->reply();
+      $wechatObj->text("【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！")->reply();
   }
   return;
 
