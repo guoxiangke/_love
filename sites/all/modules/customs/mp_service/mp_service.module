@@ -26,7 +26,7 @@ function mp_service_response() {
 	$wechatObj = new Wechat($options);
 	$weObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $weObj->getRev()->getRevType();
-
+watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
             $weObj->text("hello, I'm wechat")->reply();
