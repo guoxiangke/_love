@@ -24,12 +24,12 @@ function mp_service_response() {
     'token'=> variable_get('mp_service_token', 'ybzx'),//填写你设定的key
   );
 	$wechatObj = new Wechat($options);
-	$weObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
-  $type = $weObj->getRev()->getRevType();
+	$wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
+  $type = $wechatObj->getRev()->getRevType();
 watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
-            $weObj->text("hello, I'm wechat")->reply();
+            $wechatObj->text("hello, I'm wechat")->reply();
             exit;
             break;
     case Wechat::MSGTYPE_EVENT:
@@ -37,7 +37,7 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
     case Wechat::MSGTYPE_IMAGE:
             break;
     default:
-            $weObj->text("help info")->reply();
+            $wechatObj->text("help info")->reply();
   }
   return;
 
