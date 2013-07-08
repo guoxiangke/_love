@@ -69,7 +69,11 @@ function mp_service_response() {
           $contentStr =  "Q:如何查看用户昵称？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
           break;
         case '901':
-          $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+          $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单\n回复【00】返回主菜单";
+          break;
+
+        case '911':
+          $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单";
           break;
         default:
             $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
@@ -82,7 +86,7 @@ function mp_service_response() {
             }
             $name = $keywords[0];
             if(strlen($keywords[1])!=4) {
-              $contentStr = "手机后四位信息【".$keywords[1]."】不正确！";
+              $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
               // break;
             }
             $error_msg = user_validate_name($name);
@@ -92,23 +96,23 @@ function mp_service_response() {
             }
             $account = user_load_by_name($name);
             if(!$account) {
-              $contentStr = "不存在用户名【".$name."】！";
+              $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
               // break;
             }else {
               $profile = profile2_load_by_user($account);
               $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
               if(substr($tel, 7)!==$keywords[1]) {
-                $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！";
+                $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
                 // break;
               }else {
                 //if bind,or not
                 $uid = mp_service_is_bind($account->uid);
                 if($uid) {
-                  $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
+                  $contentStr = "您的账户【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
                   // break;
                 }else {
                   mp_service_bind_uid($FromUserName,$account->uid);
-                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
+                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
                   // break;
                 }
               }
