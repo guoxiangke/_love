@@ -133,6 +133,7 @@ function mp_service_response() {
       $wechatObj->text("已收到您发送的图片！")->reply();
       break;
 
+  }
 }
 
 
