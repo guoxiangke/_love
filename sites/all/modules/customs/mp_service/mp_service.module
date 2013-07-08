@@ -37,22 +37,20 @@ function my_module_function($last_reply_code=0) {
 }
 
 function mp_service_response() {
-	module_load_include('inc', 'mp_service', 'mp_service');
+  module_load_include('inc', 'mp_service', 'mp_service');
   $options = array(
     'token'=> variable_get('mp_service_token', 'ybzx'),//填写你设定的key
   );
-	$wechatObj = new Wechat($options);
-	// $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
+  $wechatObj = new Wechat($options);
+  // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
-  $FromUserName =  $wechatObj->getRev()->getRevFrom();
-  watchdog('FromUserName', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
-  watchdog('type', $type, array(), WATCHDOG_NOTICE, 'link');
+watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
+     
       $keyword =  trim($wechatObj->getRevContent());
-      watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
       switch ($keyword) {
-        case '00':
+         case '00':
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！";
           break;
         case '1':
@@ -74,78 +72,185 @@ function mp_service_response() {
           $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单，回复【00】返回主菜单";
           break;
         default:
-          $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
-          if(substr($keyword, 0,2)=='91') {//9,1,13812345678
-            // str_replace('91', '', $keyword);
-            $keyword = substr($keyword, 2);
-            $keywords = explode('?', $keyword);
+            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
+            if(substr($keyword, 0,2)=='91') { 
+              // str_replace('91', '', $keyword);
+              $keyword = substr($keyword, 2);
+              $keywords = explode('?', $keyword);
 
-            if (!isset($keywords[1])) {
-              $keywords = explode('？', $keyword);
-            }
-            $name = $keywords[0];
-            watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
-            if(strlen($keywords[1])!=4) {
-              $contentStr = "手机后四位信息【".$keywords[1]."】不正确\n 测试开发中～敬请期待！";
-              break;
-            }
-            $error_msg = user_validate_name($name);
-            if(strlen($error_msg)>0){
-              $contentStr = $error_msg;
-              break;
-            }
-            $account = user_load_by_name($name);
-            if(!$account) {
-              $contentStr = "不存在用户名【".$name."】！";
-              break;
-            }else {
-              $profile = profile2_load_by_user($account);
-              $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
-              if(substr($tel, 7)!==$keywords[1]) {
-                $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！";
+              if (!isset($keywords[1])) {
+                $keywords = explode('？', $keyword);
+              }
+              $name = $keywords[0];
+              watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
+              if(strlen($keywords[1])!=4) {
+                $contentStr = "手机后四位信息【".$keywords[1]."】不正确\n 测试开发中～敬请期待！";
+                break;
+              }
+              $error_msg = user_validate_name($name);
+              if(strlen($error_msg)>0){
+                $contentStr = $error_msg;
+                break;
+              }
+              $account = user_load_by_name($name);
+              if(!$account) {
+                $contentStr = "不存在用户名【".$name."】！";
                 break;
               }else {
-                //if bind,or not
-                $uid = mp_service_is_bind($account->uid);
-                if($uid) {
-                  $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
+                $profile = profile2_load_by_user($account);
+                $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
+                if(substr($tel, 7)!==$keywords[1]) {
+                  $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！";
                   break;
                 }else {
-                  mp_service_bind_uid($FromUserName,$account->uid);
-                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
-                  break;
+                  //if bind,or not
+                  $uid = mp_service_is_bind($account->uid);
+                  if($uid) {
+                    $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
+                    break;
+                  }else {
+                    mp_service_bind_uid($FromUserName,$account->uid);
+                    $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
+                    break;
+                  }
+                  
                 }
-                
-              }
             }
           }
           break;
       }
-      $wechatObj->text($contentStr)->reply();      
-      break;  
+      $wechatObj->text($contentStr)->reply();
+      exit;
+      break;
     case Wechat::MSGTYPE_EVENT:
       $wechatObj->text("欢迎关注[Smile],我们将不定期发送永不止息最新动态给您~\n通过微信玩转永不止息？【回复00进入主菜单】\n所有功能测试开发中～敬请期待！")->reply();
       break;
     case Wechat::MSGTYPE_IMAGE:
       $wechatObj->text("已收到您发送的图片！")->reply();
       break;
+    default:
+      $wechatObj->text("【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！")->reply();
   }
+  $wechatObj->text($contentStr)->reply();
+  return;
+
+  //preg to get key_words
+  $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        //extract post data
+  if (!empty($postStr)) {
+    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
+    //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
+    //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
+    $fromUsername = $postObj->FromUserName;
+    $toUsername = $postObj->ToUserName;
+    $keyword = trim($postObj->Content);
+    $time = time();
+    switch ($postObj->MsgType) {
+        case 'text':
+            $field_mp_type = 1;
+            break;
+        
+        default:
+            $field_mp_type = 2;
+            break;
+    }
+    $textTpl = "<xml>
+      <ToUserName><![CDATA[%s]]></ToUserName>
+      <FromUserName><![CDATA[%s]]></FromUserName>
+      <CreateTime>%s</CreateTime>
+      <MsgType><![CDATA[%s]]></MsgType>
+      <Content><![CDATA[%s]]></Content>
+      <FuncFlag>0</FuncFlag>
+      </xml>";
+
+    //subscribe begin
+    if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
+      $contentStr = "欢迎关注[Smile],我们将不定期发送永不止息最新动态给您~\n通过微信玩转永不止息？【回复00进入主菜单】\n所有功能测试开发中～敬请期待！";
+      $msgType = "text";
+      $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+      if(!mp_get_uid_by_FromUserName($fromUsername)) {
+        //record the user in db
+      }
+      echo $resultStr;
+      exit;
+    }
+    //subscribe end
+    //
+    if(!empty( $keyword )) {
+      $msgType = "text";
+      switch ($keyword) {
+        case '00':
+          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！";
+          break;
+        case '1':
+          $contentStr ="如果您在永不止息注册过，请回复9绑定后更多玩法。通过微信玩转永不止息？\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹【回复00进入主菜单】\n 测试开发中～敬请期待！";
+          break;
+        case '2':
+          $contentStr = "【20】发布照片\n【21】想对你说(写给喜欢的人)\n【22】无主情话(随便说点情话)\n【23】时光隧道(分享我的过去)\n【24】独居生活(记录现在的生活)\n【回复00进入主菜单】\n 测试开发中～敬请期待！";
+          break;
+        case '3':
+          $contentStr =  "【3】查看最近活跃的弟兄姊妹有：【回复00进入主菜单】\n 测试开发中～敬请期待！";
+          break;
+        default:
+            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
+          break;
+      }
+      $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+        //生成本站订单begin
+
+        // $node = new stdClass();
+        // $node->title = $postObj->MsgId;
+        // $node->type = 'mp_receive';
+        // node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+        // $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+        // //todo:
+        // //bind user
+        // //mp_respone
+        // //get_uid_by_FormUserName('oNAD2jlAk0ZGHkgezd_MnQbGrBPM');
+        // $node->uid = 1;
+        // $node->status = 1; //(1 or 0): published or not
+        // $node->promote = 0; //(1 or 0): promoted to front page
+        // $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
+        // $node->path['pathauto'] = false;
+        // $node->body[$node->language][0]['value']   = $postObj->Content . print_r($postObj,true);
+        // $node->body[$node->language][0]['summary'] = text_summary($postObj->Content);
+        // $node->body[$node->language][0]['format']  = 'filtered_html';
+
+        // $node->field_mp_type['und'][0]['value'] = $field_mp_type;
+        // $node->field_mp_fromusername['und'][0]['value'] = $postObj->FromUserName;
+        // if($node = node_submit($node)) { // Prepare node for saving
+        //     node_save($node);
+        //     watchdog('mp-add mp-receive node', "Node with nid " . $node->nid . " saved!\n", array(), WATCHDOG_NOTICE, 'link');
+        // }
+        echo $resultStr;
+        exit;
+
+    }else{
+      echo "Input something...";
+      exit;
+    }
+
+    }else {
+      echo "";
+      exit;
+    }
+
 }
 
-
 function mp_service_get_uid_by_FromUserName($FromUserName) {
-	$uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
-	if($uid === FALSE) {
-		$result = db_insert('mp_service')
-			->fields(array(
-			  'uid' => 0,
-			  'fromusername' => $FromUserName,
-			  'created' => REQUEST_TIME,
-			))
-			->execute();
-		return 0;
-	}
-	return $uid;
+  $uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
+  if($uid === FALSE) {
+    $result = db_insert('mp_service')
+      ->fields(array(
+        'uid' => 0,
+        'fromusername' => $FromUserName,
+        'created' => REQUEST_TIME,
+      ))
+      ->execute();
+    return 0;
+  }
+  return $uid;
 }
 function mp_service_is_bind($uid) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchField();
