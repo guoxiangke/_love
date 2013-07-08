@@ -82,7 +82,7 @@ function mp_service_response() {
             $name = $keywords[0];
             watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
             if(strlen($keywords[1])!=4) {
-              $contentStr = "手机后四位信息【".$keywords[1]."】不正确\n 测试开发中～敬请期待！";
+              $contentStr = "手机后四位信息【".$keywords[1]."】不正确！";
               // break;
             }
             $error_msg = user_validate_name($name);
@@ -106,11 +106,11 @@ function mp_service_response() {
 
                 watchdog('var_dump-uid', var_dump($uid), array(), WATCHDOG_NOTICE, 'link');
                 if($uid) {
-                  $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
+                  $contentStr = "您的账户【$account->name】已绑定过！如需帮助，请回复【000】";
                   // break;
                 }else {
                   mp_service_bind_uid($FromUserName,$account->uid);
-                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
+                  $contentStr = "恭喜您，【$account->name】绑定成功！！";
                   // break;
                 }
               }
@@ -254,6 +254,7 @@ function mp_service_get_uid_by_FromUserName($FromUserName) {
 }
 function mp_service_is_bind($uid) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchField();
+  watchdog('mp_service_is_bind-uid', var_dump($uid), array(), WATCHDOG_NOTICE, 'link');
   return $uid;
 }
 
@@ -267,4 +268,5 @@ function mp_service_bind($FromUserName,$bindUid) {
     ))
     ->condition('fromusername', $FromUserName)
     ->execute();
+    watchdog('mp_service_bind-uid-'.$FromUserName, var_dump($bindUid), array(), WATCHDOG_NOTICE, 'link');
 }
