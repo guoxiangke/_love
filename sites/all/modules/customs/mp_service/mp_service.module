@@ -72,6 +72,7 @@ function mp_service_response() {
           $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单，回复【00】返回主菜单";
           break;
         default:
+            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
             if(substr($keyword, 0,2)=='91') {//9,1,13812345678
               // str_replace('91', '', $keyword);
               $keyword = substr($keyword, 2);
@@ -110,8 +111,6 @@ function mp_service_response() {
                   
                 }
               }
-
-              $contentStr = t('prepare binding!')."\n 测试开发中～敬请期待！";
             }
           break;
       }
