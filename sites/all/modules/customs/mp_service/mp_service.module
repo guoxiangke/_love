@@ -122,17 +122,14 @@ function mp_service_response() {
             }
           }
           break;
-          ///////
+      }      
       break;  
-
-    }
     case Wechat::MSGTYPE_EVENT:
       $wechatObj->text("欢迎关注[Smile],我们将不定期发送永不止息最新动态给您~\n通过微信玩转永不止息？【回复00进入主菜单】\n所有功能测试开发中～敬请期待！")->reply();
       break;
     case Wechat::MSGTYPE_IMAGE:
       $wechatObj->text("已收到您发送的图片！")->reply();
       break;
-
   }
 }
 
