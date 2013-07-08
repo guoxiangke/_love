@@ -44,7 +44,6 @@ function mp_service_response() {
   $wechatObj = new Wechat($options);
   // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
-watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
      
@@ -74,7 +73,6 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
         default:
             $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
             if(substr($keyword, 0,2)=='91') {
-            watchdog('mp_service91', 'message', array(), WATCHDOG_NOTICE, 'link');
             $keyword = substr($keyword, 2);
             $keywords = explode('?', $keyword);
 
@@ -105,6 +103,8 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
               }else {
                 //if bind,or not
                 $uid = mp_service_is_bind($account->uid);
+
+                watchdog('var_dump-uid', var_dump($uid), array(), WATCHDOG_NOTICE, 'link');
                 if($uid) {
                   $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
                   // break;
@@ -113,7 +113,6 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
                   $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
                   // break;
                 }
-                
               }
             }
           }
