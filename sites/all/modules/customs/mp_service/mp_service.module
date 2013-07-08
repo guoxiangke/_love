@@ -80,7 +80,6 @@ function mp_service_response() {
               $keywords = explode('？', $keyword);
             }
             $name = $keywords[0];
-            dvm($keywords[1]);
             if(strlen($keywords[1])!=4) {
               $contentStr = "手机后四位信息【".$keywords[1]."】不正确！";
               // break;
@@ -103,13 +102,11 @@ function mp_service_response() {
               }else {
                 //if bind,or not
                 $uid = mp_service_is_bind($account->uid);
-
-                watchdog('var_dump-uid', var_dump($uid), array(), WATCHDOG_NOTICE, 'link');
                 if($uid) {
                   $contentStr = "您的账户【$account->name】已绑定过！如需帮助，请回复【000】";
                   // break;
                 }else {
-                  mp_service_bind_uid($FromUserName,$account->uid);
+                  // mp_service_bind_uid($FromUserName,$account->uid);
                   $contentStr = "恭喜您，【$account->name】绑定成功！！";
                   // break;
                 }
