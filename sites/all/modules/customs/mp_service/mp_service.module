@@ -84,6 +84,7 @@ function mp_service_response() {
               $keywords = explode('？', $keyword);
             }
             $name = $keywords[0];
+            watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
             if(strlen($keywords[1])!=4) {
               $contentStr = "手机后四位信息【".$keywords[1]."】不正确\n 测试开发中～敬请期待！";
               $wechatObj->text($contentStr)->reply();
@@ -125,7 +126,8 @@ function mp_service_response() {
             }
           }
           break;
-      }      
+      }
+      $wechatObj->text($contentStr)->reply();      
       break;  
     case Wechat::MSGTYPE_EVENT:
       $wechatObj->text("欢迎关注[Smile],我们将不定期发送永不止息最新动态给您~\n通过微信玩转永不止息？【回复00进入主菜单】\n所有功能测试开发中～敬请期待！")->reply();
