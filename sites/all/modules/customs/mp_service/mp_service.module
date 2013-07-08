@@ -50,7 +50,7 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
      
       $keyword =  trim($wechatObj->getRevContent());
       switch ($keyword) {
-         case '00':
+        case '00':
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！";
           break;
         case '1':
@@ -63,60 +63,16 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
           $contentStr =  "【3】查看最近活跃的弟兄姊妹有：【回复00进入主菜单】\n 测试开发中～敬请期待！";
           break;
         case '9':
-          $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息";
+          $contentStr =  "就要绑定，请回复‘91昵称?四位数字’ 比如：91昵称?1407\n 9b后面的为您在永不止息的昵称。\n 注意用?后面的为手机号后四位\n【90】如何查看用户昵称\n【91】在哪里找您填写手机号信息？";
           break;
-        case '900':
-          $contentStr =  "Q:如何查看用户昵称？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+        case '90':
+          $contentStr =  "Q:如何查看用户id？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
           break;
-        case '901':
-          $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+        case '91':
+          $contentStr =  "Q:在哪里填写手机号信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单，回复【00】返回主菜单";
           break;
         default:
             $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
-            if(substr($keyword, 0,2)=='91') { 
-              // str_replace('91', '', $keyword);
-              $keyword = substr($keyword, 2);
-              $keywords = explode('?', $keyword);
-
-              if (!isset($keywords[1])) {
-                $keywords = explode('？', $keyword);
-              }
-              $name = $keywords[0];
-              watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
-              if(strlen($keywords[1])!=4) {
-                $contentStr = "手机后四位信息【".$keywords[1]."】不正确\n 测试开发中～敬请期待！";
-                break;
-              }
-              $error_msg = user_validate_name($name);
-              if(strlen($error_msg)>0){
-                $contentStr = $error_msg;
-                break;
-              }
-              $account = user_load_by_name($name);
-              if(!$account) {
-                $contentStr = "不存在用户名【".$name."】！";
-                break;
-              }else {
-                $profile = profile2_load_by_user($account);
-                $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
-                if(substr($tel, 7)!==$keywords[1]) {
-                  $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！";
-                  break;
-                }else {
-                  //if bind,or not
-                  $uid = mp_service_is_bind($account->uid);
-                  if($uid) {
-                    $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
-                    break;
-                  }else {
-                    mp_service_bind_uid($FromUserName,$account->uid);
-                    $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
-                    break;
-                  }
-                  
-                }
-            }
-          }
           break;
       }
       $wechatObj->text($contentStr)->reply();
@@ -131,7 +87,6 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
     default:
       $wechatObj->text("【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！")->reply();
   }
-  $wechatObj->text($contentStr)->reply();
   return;
 
   //preg to get key_words
@@ -237,6 +192,8 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
     }
 
 }
+
+
 
 function mp_service_get_uid_by_FromUserName($FromUserName) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
