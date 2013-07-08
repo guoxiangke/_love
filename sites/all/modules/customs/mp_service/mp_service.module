@@ -113,7 +113,6 @@ function mp_service_response() {
 
               $contentStr = t('prepare binding!')."\n 测试开发中～敬请期待！";
             }
-            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
           break;
       }
       $wechatObj->text($contentStr)->reply();
