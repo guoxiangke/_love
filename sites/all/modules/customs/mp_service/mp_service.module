@@ -87,39 +87,33 @@ function mp_service_response() {
             watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
             if(strlen($keywords[1])!=4) {
               $contentStr = "手机后四位信息【".$keywords[1]."】不正确\n 测试开发中～敬请期待！";
-              $wechatObj->text($contentStr)->reply();
-              return;
+              break;
             }
             $error_msg = user_validate_name($name);
             if(strlen($error_msg)>0){
               $contentStr = $error_msg;
-              $wechatObj->text($contentStr)->reply();
-              return;
+              break;
             }
             $account = user_load_by_name($name);
             if(!$account) {
               $contentStr = "不存在用户名【".$name."】！";
-              $wechatObj->text($contentStr)->reply();
-              return;
+              break;
             }else {
               $profile = profile2_load_by_user($account);
               $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
               if(substr($tel, 7)!==$keywords[1]) {
                 $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！";
-                $wechatObj->text($contentStr)->reply();
-                return;
+                break;
               }else {
                 //if bind,or not
                 $uid = mp_service_is_bind($account->uid);
                 if($uid) {
                   $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
-                  $wechatObj->text($contentStr)->reply();
-                  return;
+                  break;
                 }else {
                   mp_service_bind_uid($FromUserName,$account->uid);
                   $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
-                  $wechatObj->text($contentStr)->reply();
-                  return;
+                  break;
                 }
                 
               }
