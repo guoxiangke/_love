@@ -103,11 +103,11 @@ function mp_service_response() {
                 //if bind,or not
                 $uid = mp_service_is_bind($account->uid);
                 if($uid) {
-                  $contentStr = "您的账户【$account->name】已绑定过！如需帮助，请回复【000】";
+                  $contentStr = "您的账户【".$account->name."】已绑定过！如需帮助，请回复【000】";
                   // break;
                 }else {
                   // mp_service_bind_uid($FromUserName,$account->uid);
-                  $contentStr = "恭喜您，【$account->name】绑定成功！！";
+                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！";
                   // break;
                 }
               }
