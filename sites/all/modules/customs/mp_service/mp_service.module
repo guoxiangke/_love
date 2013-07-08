@@ -80,7 +80,7 @@ function mp_service_response() {
               $keywords = explode('？', $keyword);
             }
             $name = $keywords[0];
-            watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
+            dvm($keywords[1]);
             if(strlen($keywords[1])!=4) {
               $contentStr = "手机后四位信息【".$keywords[1]."】不正确！";
               // break;
@@ -254,7 +254,6 @@ function mp_service_get_uid_by_FromUserName($FromUserName) {
 }
 function mp_service_is_bind($uid) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchField();
-  watchdog('mp_service_is_bind-uid', var_dump($uid), array(), WATCHDOG_NOTICE, 'link');
   return $uid;
 }
 
@@ -268,5 +267,4 @@ function mp_service_bind($FromUserName,$bindUid) {
     ))
     ->condition('fromusername', $FromUserName)
     ->execute();
-    watchdog('mp_service_bind-uid-'.$FromUserName, var_dump($bindUid), array(), WATCHDOG_NOTICE, 'link');
 }
