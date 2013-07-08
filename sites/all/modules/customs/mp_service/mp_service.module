@@ -45,9 +45,12 @@ function mp_service_response() {
 	// $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
   $FromUserName =  $wechatObj->getRev()->getRevFrom();
+  watchdog('FromUserName', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
+  watchdog('type', $type, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
+      watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
       switch ($keyword) {
         case '00':
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！";
