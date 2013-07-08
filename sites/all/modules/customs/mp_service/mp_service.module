@@ -255,7 +255,7 @@ function mp_service_is_bind($uid) {
 }
 
 // and bind!
-function mp_service_bind($FromUserName,$bindUid) {
+function mp_service_bind_uid($FromUserName,$bindUid) {
   $result = db_update('mp_service')
     ->fields(array(
       'uid' => $bindUid,
