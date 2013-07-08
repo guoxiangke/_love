@@ -18,6 +18,24 @@ function mp_service_menu() {
   );
   return $items;
 }
+
+function my_module_function($last_reply_code=0) {
+  global $user;
+  $my_data = &drupal_static(__FUNCTION__);
+  if (!isset($my_data)) {
+    if ($cache = cache_get('mp_service_'.$user->uid)) {
+      $my_data = $cache->data;
+    }
+    else {
+      // Do your expensive calculations here, and populate $my_data
+      // with the correct stuff..
+      // cache_set('my_module_data', $my_data, 'cache');
+      cache_set('mp_service_'.$user->uid, $my_data, 'cache_mp_service', time() + 60);//1分钟内回复有效
+    }
+  }
+  return $my_data;
+}
+
 function mp_service_response() {
 	module_load_include('inc', 'mp_service', 'mp_service');
   $options = array(
@@ -44,7 +62,25 @@ watchdog('mp_service-type', $type, array(), WATCHDOG_NOTICE, 'link');
         case '3':
           $contentStr =  "【3】查看最近活跃的弟兄姊妹有：【回复00进入主菜单】\n 测试开发中～敬请期待！";
           break;
+        case '9':
+          $contentStr =  "就要绑定，请回复‘91昵称?四位数字’ 比如：91昵称?1407\n 9b后面的为您在永不止息的昵称。\n 注意用?后面的为手机号后四位\n【90】如何查看用户昵称\n【91】在哪里找您填写手机号信息？";
+          break;
+        case '90':
+          $contentStr =  "Q:如何查看用户id？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+          break;
+        case '91':
+          $contentStr =  "Q:在哪里填写手机号信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+          break;
         default:
+            if(substr($keyword, 0,1)=='9') {//9,1,13812345678
+              $keywords = explode(',', $keyword);
+              $keywords2 = array();
+              foreach ($keywords as $key => $value) {
+                $keywords2 += explode('，', $value);
+              }
+
+              $contentStr = t('prepare binding!')."\n 测试开发中～敬请期待！";
+            }
             $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
           break;
       }

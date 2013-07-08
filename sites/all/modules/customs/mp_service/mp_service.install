@@ -38,6 +38,7 @@ function mp_service_schema() {
       ),
     'primary key' => array('fromusername'),
   );
+  $schema['cache_mp_service'] = drupal_get_schema_unprocessed('system', 'cache');
   return $schema;
 }
 
