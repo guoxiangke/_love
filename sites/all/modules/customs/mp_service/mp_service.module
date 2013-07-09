@@ -89,15 +89,23 @@ function mp_service_response() {
           $news[] = $img;
           $wechatObj->news($news)->reply();
           break;
-       case 'music':
+        case 'music':
           $title = '喜乐的心   七月九日';
-          $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt0709.mp3';
-          $desc = '「看哪，你的一锭银子在这里，我把它包在手巾里存着。」（路十九20）
-        手巾应当是用来擦拭操劳所流的汗水，而不当用来包裹人的聪明才智。教会能否蓬勃成长，不是取决于那些拥有五分或十分聪明才智的人是否投入服事。教会成长的责任乃放在那些只有一分才智的人肩头上。如果只有一分才智的人能蒙重用，他的灵命成长,整个教会也会跟着长进。假设他们把才智埋没起来，那么整个教会也跟着停滞不前了。
-        所以我们只有一个盼望，就是希望每个教会都把其注意力，不放在那些特别有恩赐的人身上，而是放在那些被人轻看、较无恩赐的人身上。应该告诉他们:神称许他们为主诚实工作，辛苦流汗;因为没有他们的工作，神的工就无法做成。';
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl = '')->reply();
+          $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
+          http://media.haomuren.org/dev/joy/joyhrt0709.mp3
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-
+        case 'hmgq'//http://media.haomuren.org/dev/ev/evn0709.mp3
+        // 荒漠甘泉乐侣
+          $title = '荒漠甘泉乐侣';
+          $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
+          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
 
         default:
             $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
