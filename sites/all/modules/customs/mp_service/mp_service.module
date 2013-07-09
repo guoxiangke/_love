@@ -68,7 +68,7 @@ function mp_service_response() {
           $contentStr =  "【40】喜乐的心\n【41】荒漠甘泉乐侣\n【42】静夜亮光\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【50】长夜的牵引\n【51】灵命日粮\n【52】拥抱每一天\n【53】恋爱季节\n【54】拥抱每一天\n【54】欢乐卡洽碰\n【55】书香园地*\n【56】晨曦讲座\n【57】生活无国界\n【58】亲情不断电*\n【59】幸福满家园\n回复【00】进入主菜单\n加*节目为周一到周五\n";
+          $contentStr =  "【50】长夜的牵引\n【51】灵命日粮\n【52】拥抱每一天\n【530】恋爱季节\n【531】幸福满家园\n【532】亲情不断电*\n【54】欢乐卡洽碰\n【55】书香园地*\n【56】晨曦讲座\n【57】生活无国界\n回复【00】进入主菜单\n加*节目为周一到周五\n";
           break;
         case '9':
           $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息";
@@ -143,13 +143,27 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-        case '53':
+        case '530':
           $title = '恋爱季节';
           $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;        
+          break; 
+        case '531':
+          $title = '幸福满家园';
+          $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;    
+        case '532':
+          $title = '亲情不断电';
+          $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;   
         case '54':
           $title = '欢乐卡洽碰';
           $musicurl = 'http://liangyou.nissigz.com/media/hg/hg'.date('ymd').'.mp3';
@@ -174,20 +188,6 @@ function mp_service_response() {
         case '57':
           $title = '生活无国界';
           $musicurl = 'http://liangyou.nissigz.com/media/gv/gv'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '58':
-          $title = '亲情不断电';
-          $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '59':
-          $title = '幸福满家园';
-          $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
