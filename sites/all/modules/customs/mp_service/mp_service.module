@@ -81,7 +81,7 @@ function mp_service_response() {
           break;
 
         case '911':
-          $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单";
+          $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
         case '110':
           $img = array(
