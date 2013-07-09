@@ -256,11 +256,11 @@ function mp_service_response() {
               $menukey = substr($keyword, 0, 3);//201-204
               $keyword = substr($keyword, 3);
               if(strlen($keyword) < 10 ) {
-                $contentStr = "对不起，内容不能少于10字！";
+                $contentStr = "内容不能少于10字！";
               }else{
                 $uid = mp_service_get_uid_by_name($FromUserName);
                 if(!$uid) {
-                  $contentStr = "对不起，您还没有与网站帐号绑定！";
+                  $contentStr = "您还没有与网站帐号绑定！\n回复【9】查看绑定帮助";
                 }else{
                   $node = new stdClass();
                   $node->title = $keyword.'【来自微信】';
