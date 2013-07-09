@@ -84,6 +84,8 @@ function mp_service_response() {
           );
           $news[] = $img; 
           $news[] = $img; 
+          $news[] = $img; 
+          $news[] = $img; 
           $wechatObj->news($news)->reply();
           break;
         default:
