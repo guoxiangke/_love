@@ -83,6 +83,7 @@ function mp_service_response() {
             'Url'=>'http://yongbuzhixi.com'
           );
           $news[] = $img; 
+          $news[] = $img; 
           $wechatObj->news($news)->reply();
           break;
         default:
