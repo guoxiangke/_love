@@ -97,7 +97,7 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-        case 'hmgq'//http://media.haomuren.org/dev/ev/evn0709.mp3
+        case 'hmgq'://http://media.haomuren.org/dev/ev/evn0709.mp3
         // 荒漠甘泉乐侣
           $title = '荒漠甘泉乐侣';
           $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
