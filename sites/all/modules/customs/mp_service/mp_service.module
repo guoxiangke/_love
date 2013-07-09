@@ -77,9 +77,9 @@ function mp_service_response() {
           break;
         case '110':
           $img = array(
-            'Title'=>'hello content with pic',
-            'Description'=>'summary text',
-            'PicUrl'=>'http://www.baidu.com/img/bdlogo.gif',
+            'Title'=>'我很烦，你是谁啊！',
+            'Description'=>'图文测试第一副图片',
+            'PicUrl'=>'http://farm8.staticflickr.com/7362/9235198550_1f5973d4ec.jpg',
             'Url'=>'http://yongbuzhixi.com'
           );
           $news[] = $img; 
