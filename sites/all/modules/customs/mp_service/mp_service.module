@@ -44,7 +44,7 @@ function mp_service_response() {
   $wechatObj = new Wechat($options);
   // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
-  watchdog('Wechat::MSGTYPE_EVENT', Wechat::MSGTYPE_EVENT, array(), WATCHDOG_NOTICE, 'link');
+  watchdog('WechatMSGTYPE_EVENT', Wechat::MSGTYPE_EVENT, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
