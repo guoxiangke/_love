@@ -306,7 +306,20 @@ class Wechat
         $this->Message($msg);
         return $this;
     }
-
+    public function textEvent($text = '') {
+        $FuncFlag = $this->_funcflag ? 1 : 0;
+        $msg = array(
+            'ToUserName' => $this->getRevFrom(),
+            'FromUserName' => $this->getRevTo(),
+            'MsgType' => self::MSGTYPE_EVENT,
+            'Content' => $text,
+            'CreateTime' => time(),
+            'FuncFlag' => $FuncFlag
+        );
+        watchdog('text', '<pre>'.print_r($msg,true), array(), WATCHDOG_NOTICE, 'link');
+        $this->Message($msg);
+        return $this;
+    }
     /**
      * 设置回复音乐
      * @param string $title
