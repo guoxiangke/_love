@@ -62,7 +62,7 @@ function mp_service_response() {
           $contentStr = "【20】发布照片\n【21】想对你说(写给喜欢的人)\n【22】无主情话(随便说点情话)\n【23】时光隧道(分享我的过去)\n【24】独居生活(记录现在的生活)\n回复【00】进入主菜单\n本功能测试开发中,coming soon！";//(写给喜欢的人)//(随便说点情话)//(分享我的过去)//(记录现在的生活)
           break;
         case '3':
-          $contentStr =  "【3】查看最近活跃的弟兄姊妹有：\n侯星光\n韩富军\n王露\n畅卢涛\n畅卢涛\n...\n回复【00】进入主菜单\n 本功能测试开发中～敬请期待！";
+          $contentStr =  "【3】最近活跃的弟兄姊妹有：\n\t侯星光\n\t韩富军\n\t王露\n\t畅卢涛\n...\n回复【00】进入主菜单\n 本功能测试开发中～敬请期待！";
           break;
         case '4':
           $contentStr =  "【40】喜乐的心\n【41】荒漠甘泉乐侣\n【42】静夜亮光\n回复【00】进入主菜单\n回复【5】良友广播\n";
@@ -74,7 +74,7 @@ function mp_service_response() {
           $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息";
           break;
         case '900':
-          $contentStr =  "Q:如何查看用户昵称？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+          $contentStr =  "Q:如何查看用户昵称？\n A:首页右侧个人头像下面的就是！\n回复【9】返回绑定菜单，回复【00】返回主菜单";
           break;
         case '901':
           $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单\n回复【00】返回主菜单";
@@ -193,7 +193,7 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         default:
-            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
+            $contentStr = "如需帮助，请加永不止息会员QQ群：322-1989-01\n测试开发中～敬请期待！";
             if(substr($keyword, 0,2)=='91') {
             $keyword = substr($keyword, 2);
             $keywords = explode('?', $keyword);
@@ -250,7 +250,7 @@ function mp_service_response() {
       $wechatObj->text("已收到您发送的图片！")->reply();
       break;
     default:
-      $wechatObj->text("【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！")->reply();
+      $wechatObj->text("如需帮助，请加永不止息会员QQ群：322-1989-01\n测试开发中～敬请期待！")->reply();
   }
   return;
 
@@ -293,9 +293,9 @@ function mp_service_focus() {
     <Content><![CDATA[%s]]></Content>
     <FuncFlag>0</FuncFlag>
     </xml>";   
-    //subscribe begin
+    //subscribe begin我们将不定期发送永不止息最新动态给您~\n
     if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
-      $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】快速进入良友广播电台\n我们将不定期发送永不止息最新动态给您~\n除广播内容外，所有功能测试开发中～敬请期待！";
+      $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】进入良友广播\n除广播内容外，所有功能测试开发中～敬请期待！";
       $msgType = "text";
       $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
       echo $resultStr;
