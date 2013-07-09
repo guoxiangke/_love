@@ -193,7 +193,7 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         default:
-            $contentStr = "回复【00】进入主菜单\n回复【5】进入良友广播\n如需帮助，请回复【911】\n或加永不止息会员QQ群：322-1989-01\n测试开发中～敬请期待！";
+            $contentStr = "回复【00】进入主菜单\n回复【5】进入良友广播\n如需帮助，请回复【911】\n或加永不止息会员QQ群：322-1989-01\n进入官网：http://yongbuzhixi.com \n测试开发中～敬请期待！";
             if(substr($keyword, 0,2)=='91') {
             $keyword = substr($keyword, 2);
             $keywords = explode('?', $keyword);
