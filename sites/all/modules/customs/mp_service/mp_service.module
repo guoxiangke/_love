@@ -75,6 +75,16 @@ function mp_service_response() {
         case '911':
           $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单";
           break;
+        case '110':
+          $img = array(
+            'Title'=>'hello content with pic',
+            'Description'=>'summary text',
+            'PicUrl'=>'http://www.baidu.com/img/bdlogo.gif',
+            'Url'=>'http://yongbuzhixi.com'
+          );
+          $news[] = $img; 
+          $wechatObj->news($contentStr)->reply();
+          break;
         default:
             $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
             if(substr($keyword, 0,2)=='91') {
