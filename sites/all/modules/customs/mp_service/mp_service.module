@@ -239,7 +239,7 @@ function mp_service_response() {
       break;
     case Wechat::MSGTYPE_EVENT:
       watchdog('MSGTYPE_EVENT', $type, array(), WATCHDOG_NOTICE, 'link');
-      $wechatObj->text("欢迎关注/::),我们将不定期发送永不止息最新动态给您~\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】快速进入良友广播电台\n所有功能测试开发中～敬请期待！")->reply();
+      $wechatObj->text("欢迎关注\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】快速进入良友广播电台\n我们将不定期发送永不止息最新动态给您~\n所有功能测试开发中～敬请期待！")->reply();
       break;
     case Wechat::MSGTYPE_IMAGE:
       $wechatObj->text("已收到您发送的图片！")->reply();
