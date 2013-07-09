@@ -46,197 +46,6 @@ function mp_service_response() {
   $type = $wechatObj->getRev()->getRevType();
   watchdog('WechatMSGTYPE_EVENT', Wechat::MSGTYPE_EVENT, array(), WATCHDOG_NOTICE, 'link');
   switch($type) {
-    case Wechat::MSGTYPE_TEXT:
-      $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      $keyword =  trim($wechatObj->getRevContent());
-      switch ($keyword) {
-        case '00':
-          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n【4】灵修广播\n【5】良友广播\n测试开发中～敬请期待！";
-          break;
-        case '1':
-          $contentStr ="通过微信玩转永不止息？\n如果您有永不止息帐号\n请回复【9】绑定后更多玩法。\n回复【00】进入主菜单\n 测试开发中～敬请期待！";
-          break;
-        case '2':
-          $contentStr = "【20】发布照片\n【21】想对你说(写给喜欢的人)\n【22】无主情话(随便说点情话)\n【23】时光隧道(分享我的过去)\n【24】独居生活(记录现在的生活)\n回复【00】进入主菜单\n 测试开发中～敬请期待！";
-          break;
-        case '3':
-          $contentStr =  "【3】查看最近活跃的弟兄姊妹有：\n回复【00】进入主菜单\n 测试开发中～敬请期待！";
-          break;
-        case '4':
-          $contentStr =  "【40】喜乐的心\n【41】荒漠甘泉乐侣\n【42】静夜亮光\n回复【00】进入主菜单\n回复【5】更多广播\n 测试开发中～敬请期待！";
-          break;
-        case '5':
-          $contentStr =  "【50】长夜的牵引\n【51】灵命日粮\n【52】拥抱每一天\n【53】恋爱季节\n【54】拥抱每一天\n【54】欢乐卡洽碰\n【55】书香园地*\n【56】晨曦讲座\n【57】生活无国界\n【58】亲情不断电*\n【59】幸福满家园\n回复【00】进入主菜单 加*节目为周一到周五\n 测试开发中～敬请期待！";
-          break;
-        case '9':
-          $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息";
-          break;
-        case '900':
-          $contentStr =  "Q:如何查看用户昵称？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
-          break;
-        case '901':
-          $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单\n回复【00】返回主菜单";
-          break;
-
-        case '911':
-          $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单";
-          break;
-        case '110':
-          $img = array(
-            'Title'=>'hellohellohello',
-            'Description'=>'hellohellohellohellohellohellohellohellohellohellohellohello',
-            'PicUrl'=>'http://farm8.staticflickr.com/7362/9235198550_1f5973d4ec.jpg',
-            'Url'=>'http://yongbuzhixi.com'
-          );
-          //单图文 标题15字 摘要60字
-          //多图文 1标题16字 2标题15字
-          $news[] = $img; 
-          $news[] = $img; 
-          $news[] = $img;
-          $wechatObj->news($news)->reply();
-          break;
-        case '40':
-          $title = '喜乐的心';
-          $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
-          http://media.haomuren.org/dev/joy/joyhrt0709.mp3
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '41'://http://media.haomuren.org/dev/ev/evn0709.mp3
-        // 荒漠甘泉乐侣
-          $title = '荒漠甘泉乐侣';
-          $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
-          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '42':
-          $title = '静夜亮光';
-          $musicurl = 'http://media.haomuren.org/dev/ev/evn'.date('md').'.mp3';
-          //http://media.haomuren.org/dev/ev/evn0709.mp3
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '50':
-          $title = '长夜的牵引';
-          $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '51':
-          $title = '灵命日粮';
-          $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '52':
-          $title = '拥抱每一天';
-          $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '53':
-          $title = '恋爱季节';
-          $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;        
-        case '54':
-          $title = '欢乐卡洽碰';
-          $musicurl = 'http://liangyou.nissigz.com/media/hg/hg'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '55':
-          $title = '书香园地';
-          $musicurl = 'http://liangyou.nissigz.com/media/bc/bc'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '56':
-          $title = '晨曦讲座';
-          $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '57':
-          $title = '生活无国界';
-          $musicurl = 'http://liangyou.nissigz.com/media/gv/gv'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '58':
-          $title = '亲情不断电';
-          $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '59':
-          $title = '幸福满家园';
-          $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        default:
-            $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
-            if(substr($keyword, 0,2)=='91') {
-            $keyword = substr($keyword, 2);
-            $keywords = explode('?', $keyword);
-
-            if (!isset($keywords[1])) {
-              $keywords = explode('？', $keyword);
-            }
-            $name = $keywords[0];
-            if(strlen($keywords[1])!=4) {
-              $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-              // break;
-            }
-            $error_msg = user_validate_name($name);
-            if(strlen($error_msg)>0){
-              $contentStr = $error_msg;
-              // break;
-            }
-            $account = user_load_by_name($name);
-            if(!$account) {
-              $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-              // break;
-            }else {
-              $profile = profile2_load_by_user($account);
-              $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
-              if(substr($tel, 7)!==$keywords[1]) {
-                $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-                // break;
-              }else {
-                //if bind,or not
-                $uid = mp_service_is_bind($account->uid);
-                if($uid) {
-                  $contentStr = "您的账户【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-                  // break;
-                }else {
-                  mp_service_bind_uid($FromUserName,$account->uid);
-                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
-                  // break;
-                }
-              }
-            }
-          }
-          break;
-      }
-      $wechatObj->text($contentStr)->reply();
-      break;
     case Wechat::MSGTYPE_EVENT:
       watchdog('type11', $type, array(), WATCHDOG_NOTICE, 'link');
       $contentStr = "欢迎关注\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】快速进入良友广播电台\n我们将不定期发送永不止息最新动态给您~\n所有功能测试开发中～敬请期待！";
@@ -245,6 +54,197 @@ function mp_service_response() {
     case Wechat::MSGTYPE_IMAGE:
       $wechatObj->text("已收到您发送的图片！")->reply();
       break;
+    // case Wechat::MSGTYPE_TEXT:
+    //   $FromUserName =  $wechatObj->getRev()->getRevFrom();
+    //   $keyword =  trim($wechatObj->getRevContent());
+    //   switch ($keyword) {
+    //     case '00':
+    //       $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n【4】灵修广播\n【5】良友广播\n测试开发中～敬请期待！";
+    //       break;
+    //     case '1':
+    //       $contentStr ="通过微信玩转永不止息？\n如果您有永不止息帐号\n请回复【9】绑定后更多玩法。\n回复【00】进入主菜单\n 测试开发中～敬请期待！";
+    //       break;
+    //     case '2':
+    //       $contentStr = "【20】发布照片\n【21】想对你说(写给喜欢的人)\n【22】无主情话(随便说点情话)\n【23】时光隧道(分享我的过去)\n【24】独居生活(记录现在的生活)\n回复【00】进入主菜单\n 测试开发中～敬请期待！";
+    //       break;
+    //     case '3':
+    //       $contentStr =  "【3】查看最近活跃的弟兄姊妹有：\n回复【00】进入主菜单\n 测试开发中～敬请期待！";
+    //       break;
+    //     case '4':
+    //       $contentStr =  "【40】喜乐的心\n【41】荒漠甘泉乐侣\n【42】静夜亮光\n回复【00】进入主菜单\n回复【5】更多广播\n 测试开发中～敬请期待！";
+    //       break;
+    //     case '5':
+    //       $contentStr =  "【50】长夜的牵引\n【51】灵命日粮\n【52】拥抱每一天\n【53】恋爱季节\n【54】拥抱每一天\n【54】欢乐卡洽碰\n【55】书香园地*\n【56】晨曦讲座\n【57】生活无国界\n【58】亲情不断电*\n【59】幸福满家园\n回复【00】进入主菜单 加*节目为周一到周五\n 测试开发中～敬请期待！";
+    //       break;
+    //     case '9':
+    //       $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息";
+    //       break;
+    //     case '900':
+    //       $contentStr =  "Q:如何查看用户昵称？\n A:首页点击右侧个人头像，进入个人页面，点击完善信息，在浏览器上看到一个数字就是你的ID，？\n回复【9】返回绑定菜单，回复【00】返回主菜单";
+    //       break;
+    //     case '901':
+    //       $contentStr =  "Q:如何查看手机信息？\n A:一般注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【9】返回绑定菜单\n回复【00】返回主菜单";
+    //       break;
+
+    //     case '911':
+    //       $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单";
+    //       break;
+    //     case '110':
+    //       $img = array(
+    //         'Title'=>'hellohellohello',
+    //         'Description'=>'hellohellohellohellohellohellohellohellohellohellohellohello',
+    //         'PicUrl'=>'http://farm8.staticflickr.com/7362/9235198550_1f5973d4ec.jpg',
+    //         'Url'=>'http://yongbuzhixi.com'
+    //       );
+    //       //单图文 标题15字 摘要60字
+    //       //多图文 1标题16字 2标题15字
+    //       $news[] = $img; 
+    //       $news[] = $img; 
+    //       $news[] = $img;
+    //       $wechatObj->news($news)->reply();
+    //       break;
+    //     case '40':
+    //       $title = '喜乐的心';
+    //       $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
+    //       http://media.haomuren.org/dev/joy/joyhrt0709.mp3
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '41'://http://media.haomuren.org/dev/ev/evn0709.mp3
+    //     // 荒漠甘泉乐侣
+    //       $title = '荒漠甘泉乐侣';
+    //       $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
+    //       // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '42':
+    //       $title = '静夜亮光';
+    //       $musicurl = 'http://media.haomuren.org/dev/ev/evn'.date('md').'.mp3';
+    //       //http://media.haomuren.org/dev/ev/evn0709.mp3
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '50':
+    //       $title = '长夜的牵引';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '51':
+    //       $title = '灵命日粮';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '52':
+    //       $title = '拥抱每一天';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '53':
+    //       $title = '恋爱季节';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;        
+    //     case '54':
+    //       $title = '欢乐卡洽碰';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/hg/hg'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '55':
+    //       $title = '书香园地';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/bc/bc'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '56':
+    //       $title = '晨曦讲座';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '57':
+    //       $title = '生活无国界';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/gv/gv'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '58':
+    //       $title = '亲情不断电';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     case '59':
+    //       $title = '幸福满家园';
+    //       $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
+    //       $desc = date('n月j日');
+    //       $hgmusicurl = $musicurl;
+    //       $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+    //       break;
+    //     default:
+    //         $contentStr = t('Thanks for your focus~,we will do our best for you!')."\n 测试开发中～敬请期待！";
+    //         if(substr($keyword, 0,2)=='91') {
+    //         $keyword = substr($keyword, 2);
+    //         $keywords = explode('?', $keyword);
+
+    //         if (!isset($keywords[1])) {
+    //           $keywords = explode('？', $keyword);
+    //         }
+    //         $name = $keywords[0];
+    //         if(strlen($keywords[1])!=4) {
+    //           $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+    //           // break;
+    //         }
+    //         $error_msg = user_validate_name($name);
+    //         if(strlen($error_msg)>0){
+    //           $contentStr = $error_msg;
+    //           // break;
+    //         }
+    //         $account = user_load_by_name($name);
+    //         if(!$account) {
+    //           $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+    //           // break;
+    //         }else {
+    //           $profile = profile2_load_by_user($account);
+    //           $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
+    //           if(substr($tel, 7)!==$keywords[1]) {
+    //             $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+    //             // break;
+    //           }else {
+    //             //if bind,or not
+    //             $uid = mp_service_is_bind($account->uid);
+    //             if($uid) {
+    //               $contentStr = "您的账户【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+    //               // break;
+    //             }else {
+    //               mp_service_bind_uid($FromUserName,$account->uid);
+    //               $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
+    //               // break;
+    //             }
+    //           }
+    //         }
+    //       }
+    //       break;
+    //   }
+    //   $wechatObj->text($contentStr)->reply();
+    //   break;
     default:
       $wechatObj->text("【1】玩法介绍\n【2】发布相片/心情\n【3】查看最近活跃的弟兄姊妹\n测试开发中～敬请期待！")->reply();
   }
