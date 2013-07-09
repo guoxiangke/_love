@@ -349,7 +349,7 @@ class Wechat
     public function news($newsData = array()) {
         $FuncFlag = $this->_funcflag ? 1 : 0;
         $count = count($newsData);
-
+        
         $msg = array(
             'ToUserName' => $this->getRevFrom(),
             'FromUserName' => $this->getRevTo(),

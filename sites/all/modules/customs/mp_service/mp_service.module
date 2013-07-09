@@ -77,11 +77,13 @@ function mp_service_response() {
           break;
         case '110':
           $img = array(
-            'Title'=>'我很烦你是我很烦你是我很烦你是我很烦你是',
-            'Description'=>'教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排教会的建立是神的安排',
+            'Title'=>'hellohellohello',
+            'Description'=>'hellohellohellohellohellohellohellohellohellohellohellohello',
             'PicUrl'=>'http://farm8.staticflickr.com/7362/9235198550_1f5973d4ec.jpg',
             'Url'=>'http://yongbuzhixi.com'
           );
+          //单图文 标题15字 摘要60字
+          //多图文 1标题16字 2标题15字
           $news[] = $img; 
           $news[] = $img; 
           $news[] = $img; 
