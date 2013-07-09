@@ -56,11 +56,15 @@ function mp_service_response() {
           $contentStr ="通过微信玩转永不止息？\n如果您有永不止息帐号，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n 测试开发中～敬请期待！";
           break;
         case '2':
-          $contentStr = "【20】发布照片\n【21】想对你说\n【22】无主情话\n【23】时光隧道\n【24】独居生活\n回复【200】更详细介绍\n 回复【00】进入主菜单\n回复【5】进入良友广播\n 本功能测试开发中！";//(写给喜欢的人)//(随便说点情话)//(分享我的过去)//(记录现在的生活)
+          $contentStr = "【20】发布照片\n【201】想对你说\n【202】无主情话\n【203】时光隧道\n【204】独居生活\n回复【200】更详细介绍\n 回复【00】进入主菜单\n回复【5】进入良友广播\n 本功能测试开发中！";//(写给喜欢的人)//(随便说点情话)//(分享我的过去)//(记录现在的生活)
           break;
         case '200':
-          $contentStr = "【20】发布照片\n【21】想对你说(写给喜欢的人)\n【22】无主情话(随便说点情话)\n【23】时光隧道(分享我的过去)\n【24】独居生活(记录现在的生活)\n回复【00】进入主菜单\n回复【5】进入良友广播\n本功能测试开发中,coming soon！";//(写给喜欢的人)//(随便说点情话)//(分享我的过去)//(记录现在的生活)
+          $contentStr = "【20】发布照片\n【201】想对你说(写给喜欢的人)\n【202】无主情话(随便说点情话)\n【203】时光隧道(分享我的过去)\n【204】独居生活(记录现在的生活)\n回复【00】进入主菜单\n回复【5】进入良友广播\n本功能测试开发中,coming soon！";
           break;
+        case '201':
+          $contentStr = "请回复【201+您想说的话】\n比如：【21今天天气好，心情不错，未来的你那里呢？】获得成功提示即可同步到网上\n注意：您的一切言行，你未来的另一半都可能看到哦！";//(写给喜欢的人)//(随便说点情话)//(分享我的过去)//(记录现在的生活)
+          break;
+
         case '3':
           $contentStr =  "最近活跃的弟兄姊妹有：\n\t\t侯星光\n\t\t韩富军\n\t\t王露\n\t\t畅卢涛...\n\n回复【00】进入主菜单\n回复【5】进入良友广播\n 本功能测试开发中～";
           break;
@@ -194,47 +198,115 @@ function mp_service_response() {
           break;
         default:
             $contentStr = "回复【00】进入主菜单\n回复【5】进入良友广播\n如需帮助，请回复【911】\n或加永不止息会员QQ群：322-1989-01\n进入官网：http://yongbuzhixi.com \n测试开发中～敬请期待！";
-            if(substr($keyword, 0,2)=='91') {
-            $keyword = substr($keyword, 2);
-            $keywords = explode('?', $keyword);
+            if(substr($keyword, 0,2) == '91') {
+              $keyword = substr($keyword, 2);
+              $keywords = explode('?', $keyword);
 
-            if (!isset($keywords[1])) {
-              $keywords = explode('？', $keyword);
-            }
-            $name = $keywords[0];
-            if(strlen($keywords[1])!=4) {
-              $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-              // break;
-            }
-            $error_msg = user_validate_name($name);
-            if(strlen($error_msg)>0){
-              $contentStr = $error_msg;
-              // break;
-            }
-            $account = user_load_by_name($name);
-            if(!$account) {
-              $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-              // break;
-            }else {
-              $profile = profile2_load_by_user($account);
-              $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
-              if(substr($tel, 7)!==$keywords[1]) {
-                $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+              if (!isset($keywords[1])) {
+                $keywords = explode('？', $keyword);
+              }
+              $name = $keywords[0];
+              if(strlen($keywords[1])!=4) {
+                $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                // break;
+              }
+              $error_msg = user_validate_name($name);
+              if(strlen($error_msg)>0){
+                $contentStr = $error_msg;
+                // break;
+              }
+              $account = user_load_by_name($name);
+              if(!$account) {
+                $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
                 // break;
               }else {
-                //if bind,or not
-                $uid = mp_service_is_bind($account->uid);
-                if($uid) {
-                  $contentStr = "您的账户【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                $profile = profile2_load_by_user($account);
+                $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
+                if(substr($tel, 7)!==$keywords[1]) {
+                  $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
                   // break;
                 }else {
-                  mp_service_bind_uid($FromUserName,$account->uid);
-                  $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
-                  // break;
+                  //if bind,or not
+                  $uid = mp_service_is_bind($account->uid);
+                  if($uid) {
+                    $contentStr = "您的账户【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                    // break;
+                  }else {
+                    mp_service_bind_uid($FromUserName,$account->uid);
+                    $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
+                    // break;
+                  }
                 }
               }
             }
-          }
+            //201+您想说的话
+            if (substr($keyword, 0,2) == '20') {
+              $menukey = substr($keyword, 0, 3);//201-204
+              $keyword = substr($keyword, 3);
+              if(strlen($keyword) < 10 ) {
+                $contentStr = "对不起，内容不能少于10字！";
+              }else{
+                $uid = mp_service_get_uid_by_name($FromUserName);
+                if(!$uid) {
+                  $contentStr = "对不起，您还没有与网站帐号绑定！";
+                }else{
+                  $node = new stdClass();
+                  $node->title = $keyword;
+                  $node->type = 'photo';
+                  node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+                  $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+                  $node->uid = $uid;
+                  $node->status = 1; //(1 or 0): published or not
+                  $node->promote = 0; //(1 or 0): promoted to front page
+                  $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
+                  $node->path['pathauto'] = false;
+                  // $node->body[$node->language][0]['value']   = $postObj->Content . print_r($postObj,true);
+                  // $node->body[$node->language][0]['summary'] = text_summary($postObj->Content);
+                  // $node->body[$node->language][0]['format']  = 'filtered_html';
+
+
+                  // 【201】无主情话(随便说点情话)-38
+                  // 【202】时光隧道(分享我的过去)-39
+                  // 【203】独居生活(记录现在的生活)-40
+                  // 【204】想对你说(写给喜欢的人)-41
+
+                  $node->field_status_topic[$node->language][0]['tid'] = $menukey-163;
+                  ////////begin @see love_layout_node_presave($node)
+                   // $pattern = '/#([^\\#|.]+)#|＃([^\\＃|.]+)＃/';
+                   // preg_match_all($pattern, $node->title, $matches, PREG_SET_ORDER);
+                   // $node->field_status_tags[LANGUAGE_NONE] = array();
+                   // foreach ($matches as $key => $value) {
+
+                   //    $term_name = $value[1];
+                   //    $term = taxonomy_get_term_by_name($term_name);
+                   //    //new one
+                   //    if(!count($term)){
+                   //     $term = new stdClass();
+                   //     $term->vid = 1;
+                   //     $term->name = $term_name;
+                   //     taxonomy_term_save($term);
+                   //     //$term = taxonomy_get_term_by_name($term_name);
+                   //     foreach ($term as $value) {
+                   //        //dpm($value,$key);
+                   //        $node->field_status_tags[LANGUAGE_NONE][$term->tid]['tid'] = $term->tid;
+                   //      }
+                   //    }else{
+                   //      foreach ($term as $tid => $value) {
+                   //        // dpm($value,$tid);
+                   //        $node->field_status_tags[LANGUAGE_NONE][$tid]['tid'] = $tid;
+                   //      }
+                   //    }
+                   // }
+                  ///////////end
+                  if($node = node_submit($node)) { // Prepare node for saving
+                      node_save($node);
+                      watchdog('mp-add mp-receive node', "Node with nid " . $node->nid . " saved!\n", array(), WATCHDOG_NOTICE, 'link');
+                      $contentStr = $node->title."\n发布成功！";
+                  }
+                }
+              }
+              # code...
+            }
           break;
       }
       $wechatObj->text($contentStr)->reply();
@@ -262,7 +334,10 @@ function mp_service_is_bind($uid) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchField();
   return $uid;
 }
-
+function mp_service_get_uid_by_name($FromUserName) {
+  $uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
+  return $uid;
+}
 // and bind!
 function mp_service_bind_uid($FromUserName,$bindUid) {
   $result = db_insert('mp_service')
