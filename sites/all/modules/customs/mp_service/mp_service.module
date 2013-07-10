@@ -440,9 +440,12 @@ function mp_service_response() {
             // $node->nid = 1;
             node_save($node);
             $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】";
-            // $wechatObj->text($contentStr)->reply();
-            mp_service_imageReplyText($contentStr);
+            $wechatObj->text($contentStr)->reply();
             watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
+            exit;
+
+            // $wechatObj->text($contentStr)->reply();
+            // mp_service_imageReplyText($contentStr);
           }
         }else {
           watchdog('4', 'message', array(), WATCHDOG_NOTICE, 'link');
@@ -527,11 +530,10 @@ function mp_service_imageReplyText($contentStr) {
   if (!empty($postStr)) {
     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
     watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
-    //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
-    //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
+    //SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1373499701 [MsgType] => image [PicUrl] => http://mmsns.qpic.cn/mmsns/ibiaMxQQytPZMjFUuLqe8eT1xibKw3apkMXqmCxqqTpmkGZQg7CnWoI5Q/0 [MsgId] => 5899136296960779666 [MediaId] => Gq6h5ZYJWPFtJkLuwryl5GNJOAdvnbwXOJFRGwItZbds_tHfNTxY3_x1A88f5vcd )
     $fromUsername = $postObj->FromUserName;
     $toUsername = $postObj->ToUserName;
-    $keyword = trim($postObj->Content);
+    //
     $time = time();
     $textTpl = "<xml>
     <ToUserName><![CDATA[%s]]></ToUserName>
@@ -540,8 +542,7 @@ function mp_service_imageReplyText($contentStr) {
     <MsgType><![CDATA[%s]]></MsgType>
     <Content><![CDATA[%s]]></Content>
     <FuncFlag>0</FuncFlag>
-    </xml>";   
-    //subscribe begin我们将不定期发送永不止息最新动态给您~\n
+    </xml>";
     if($postObj->MsgType == 'image') {
       $msgType = "text";
       $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
