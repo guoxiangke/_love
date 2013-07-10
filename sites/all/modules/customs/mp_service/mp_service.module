@@ -49,6 +49,7 @@ function mp_service_response() {
     case Wechat::MSGTYPE_TEXT:
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
       $uid = mp_service_get_uid_by_name($FromUserName);
+      watchdog('var_dump', var_dump($_SESSION), array(), WATCHDOG_NOTICE, 'link');
       if (isset($_SESSION["mp_service"]))
         watchdog('REQUEST_TIME&SESSION["mp_service"]', '<pre>'.print_r($_SESSION["mp_service"],TRUE), array(), WATCHDOG_NOTICE, 'link');
       if($uid && isset($_SESSION["mp_service"][$uid]) && ($_SESSION["mp_service"][$uid] - REQUEST_TIME <3600)) {
@@ -81,7 +82,7 @@ function mp_service_response() {
             $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
           }else{
             watchdog('mp_service-set session', $uid, array(), WATCHDOG_NOTICE, 'link');
-
+            session_start();
             $_SESSION["mp_service"][$uid] = REQUEST_TIME; 
             watchdog('set_SESSION', '<pre>'.print_r($_SESSION["mp_service"],TRUE), array(), WATCHDOG_NOTICE, 'link');
           }
