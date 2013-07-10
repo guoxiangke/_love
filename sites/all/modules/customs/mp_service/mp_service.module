@@ -62,6 +62,19 @@ function mp_service_response() {
           // 【203】独居生活(记录现在的生活)-40
           // 【204】想对你说(写给喜欢的人)-41
           break;
+        case '20':
+          $contentStr = "发布照片\n请回复:【2000】后，一分钟内发送您要发的相片,之后按提示添加照片分享感言。\n回复【9】查看绑定帮助";
+          $uid = mp_service_get_uid_by_name($FromUserName);
+          if(!$uid) {
+            $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
+          }else{
+            watchdog('mp_service-uid', $uid, array(), WATCHDOG_NOTICE, 'link');
+            $_SESSION['mp_service_'.$uid] = REQUEST_TIME; 
+            // if(isset($_SESSION['mp_service_'.$uid]) && ($_SESSION['mp_service_'.$uid] - REQUEST_TIME <3600)) {
+            //   //get image and upload.
+            // }
+          }
+          break;
         case '201':
           $contentStr = "(随便说点情话)请回复:【201+内容】\n比如：201今天天气好，心情不错，未来的你呢？\n即可发布【无主情话】\n回复【9】查看绑定帮助";
           break;
@@ -279,23 +292,6 @@ function mp_service_response() {
                   // 【202】时光隧道(分享我的过去)-39
                   // 【203】独居生活(记录现在的生活)-40
                   // 【204】想对你说(写给喜欢的人)-41
-                  switch ($menukey) {
-                    case '201':
-                      $tip = "【201】无主情话(随便说点情话)";
-                      break;
-                    case '202':
-                      $tip = "【202】时光隧道(分享我的过去)";
-                      break;
-                    case '203':
-                      $tip = "【203】独居生活(记录现在的生活)";
-                      break;                    
-                    case '204':
-                      $tip = "【204】想对你说(写给喜欢的人)";
-                      break;
-                    default:
-                      $tip = "";
-                      break;
-                  }
 
                   $node->field_status_topic[$node->language][0]['tid'] = $menukey-163;
                   ////////begin @see love_layout_node_presave($node)
@@ -345,7 +341,15 @@ function mp_service_response() {
       mp_service_focus();
       break;
     case Wechat::MSGTYPE_IMAGE:
-      $wechatObj->text("已收到您发送的图片！")->reply();
+      watchdog('mp_service-MSGTYPE_IMAGE', '已收到您发送的图片1！', array(), WATCHDOG_NOTICE, 'link');
+      $FromUserName =  $wechatObj->getRev()->getRevFrom();
+      $uid = mp_service_get_uid_by_name($FromUserName);
+      if(isset($_SESSION['mp_service_'.$uid]) && ($_SESSION['mp_service_'.$uid] - REQUEST_TIME <3600)) {
+        //get image and upload.
+        watchdog('mp_service-MSGTYPE_IMAGE', '已收到您发送的图片2！', array(), WATCHDOG_NOTICE, 'link');
+      }
+
+      // $wechatObj->text("已收到您发送的图片！")->reply();
       break;
     default:
       $wechatObj->text("如需帮助，请加永不止息会员QQ群：322-1989-01\n测试开发中～敬请期待！")->reply();
