@@ -48,9 +48,7 @@ function mp_service_response() {
     case Wechat::MSGTYPE_TEXT:
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
       $uid = mp_service_get_uid_by_name($FromUserName);
-      watchdog('mp_service-uid', $uid, array(), WATCHDOG_NOTICE, 'link');
-      watchdog('mp_service-FromUserName', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
-      watchdog('mp_service-REQUEST_TIME', REQUEST_TIME, array(), WATCHDOG_NOTICE, 'link');
+      watchdog('mp_service-REQUEST_TIME'.REQUEST_TIME, print_r($_SESSION,TRUE), array(), WATCHDOG_NOTICE, 'link');
       if(isset($_SESSION["mp_service_$uid"])) {
         watchdog('mp_service-get_SESSION', $_SESSION["mp_service_$uid"], array(), WATCHDOG_NOTICE, 'link');
         watchdog('mp_service--', $_SESSION["mp_service_$uid"] - REQUEST_TIME, array(), WATCHDOG_NOTICE, 'link');
@@ -65,7 +63,7 @@ function mp_service_response() {
       switch ($keyword) {
         case '00':
           if ($uid) {
-            unset($_SESSION['mp_service_'.$uid]);
+            // unset($_SESSION['mp_service_'.$uid]);
           }         
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播\n测试开发中～敬请期待！";
           break;
