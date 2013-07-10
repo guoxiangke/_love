@@ -52,10 +52,9 @@ function mp_service_response() {
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
         watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
-        if($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME <3600) {
+        if($mp_service_records['last_cmd_timestamp'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME >3600)) {
           $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
           $wechatObj->text($contentStr)->reply();
-          watchdog('mp_service请发送您要发的相片111', $uid, array(), WATCHDOG_NOTICE, 'link');
           exit;
         }
       }
@@ -63,6 +62,14 @@ function mp_service_response() {
       switch ($keyword) {
         case '00':     
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播\n测试开发中～敬请期待！";
+          if($uid) 
+            db_update('mp_service')
+              ->fields(array(
+                'last_cmd' => '00',
+                'last_cmd_timestamp' => REQUEST_TIME,
+              ))
+              ->condition('uid', $uid)
+              ->execute();
           break;
         case '1':
           $contentStr ="通过微信玩转永不止息？\n如果您有永不止息帐号，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n 测试开发中～敬请期待！";
