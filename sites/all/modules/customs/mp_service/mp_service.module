@@ -379,7 +379,7 @@ function mp_service_response() {
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
       $PicUrl =  $wechatObj->getRev()->getRevPic();
       $uid = mp_service_get_uid_by_name($FromUserName);
-      watchdog('PicUrl', $PicUrl, array(), WATCHDOG_NOTICE, 'link');
+      watchdog('PicUrl'.$uid, $PicUrl, array(), WATCHDOG_NOTICE, 'link');
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
         db_update('mp_service')
@@ -389,11 +389,13 @@ function mp_service_response() {
           ))
           ->condition('uid', $uid)
           ->execute();
+          watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
         if($mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] > 900)) {
           $contentStr = "指令已超时！\n请回复【2】查看帮助！";
           $wechatObj->text($contentStr)->reply();
           exit;
         }
+        watchdog('2', 'message', array(), WATCHDOG_NOTICE, 'link');
         if((REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] <= 900)) {
           if($mp_service_records['last_cmd'] != '20') {
             $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看指令帮助！";
