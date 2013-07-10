@@ -397,13 +397,15 @@ function mp_service_response() {
         }
         watchdog('2', 'message', array(), WATCHDOG_NOTICE, 'link');
         if((REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] <= 900)) {
+          watchdog('3', 'message', array(), WATCHDOG_NOTICE, 'link');
           if($mp_service_records['last_cmd'] != '20') {
+            watchdog('5', 'message', array(), WATCHDOG_NOTICE, 'link');
             $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看指令帮助！";
             $wechatObj->text($contentStr)->reply();
             exit;
           }else {
             $contentStr = "create node sucess!";
-
+            watchdog('6', 'message', array(), WATCHDOG_NOTICE, 'link');
             $node = new stdClass();
             $node->title = '【来自微信】';
             $node->type = 'photo';
@@ -442,6 +444,7 @@ function mp_service_response() {
             exit;
           }
         }else {
+          watchdog('4', 'message', array(), WATCHDOG_NOTICE, 'link');
           $contentStr = "指令超时！\n请回复【2】查看帮助！";
           $wechatObj->text($contentStr)->reply();
           exit;
