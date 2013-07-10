@@ -441,7 +441,7 @@ function mp_service_response() {
             node_save($node);
             $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】";
             // $wechatObj->text($contentStr)->reply();
-            mp_service_replyText($contentStr)
+            mp_service_replyText($contentStr);
             watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
           }
         }else {
