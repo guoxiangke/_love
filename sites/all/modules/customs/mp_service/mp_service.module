@@ -404,8 +404,6 @@ function mp_service_response() {
             $wechatObj->text($contentStr)->reply();
             exit;
           }else {
-            $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】";
-            $wechatObj->text($contentStr)->reply();
             $node = new stdClass();
             $node->title = '【来自微信】';
             $node->type = 'photo';
@@ -441,8 +439,10 @@ function mp_service_response() {
             watchdog('$node->field_photo', '<pre>'.print_r($node->field_photo,TRUE), array(), WATCHDOG_NOTICE, 'link');
             // $node->nid = 1;
             node_save($node);
+            $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】";
+            // $wechatObj->text($contentStr)->reply();
+            mp_service_replyText($contentStr)
             watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
-            exit;
           }
         }else {
           watchdog('4', 'message', array(), WATCHDOG_NOTICE, 'link');
@@ -514,6 +514,35 @@ function mp_service_focus() {
     //subscribe begin我们将不定期发送永不止息最新动态给您~\n
     if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
       $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】进入良友广播\n除广播内容外，所有功能测试开发中～敬请期待！";
+      $msgType = "text";
+      $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+      echo $resultStr;
+      exit;
+    }
+  }
+}
+
+function mp_service_replyText($contentStr) {
+  $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+  if (!empty($postStr)) {
+    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
+    //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
+    //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
+    $fromUsername = $postObj->FromUserName;
+    $toUsername = $postObj->ToUserName;
+    $keyword = trim($postObj->Content);
+    $time = time();
+    $textTpl = "<xml>
+    <ToUserName><![CDATA[%s]]></ToUserName>
+    <FromUserName><![CDATA[%s]]></FromUserName>
+    <CreateTime>%s</CreateTime>
+    <MsgType><![CDATA[%s]]></MsgType>
+    <Content><![CDATA[%s]]></Content>
+    <FuncFlag>0</FuncFlag>
+    </xml>";   
+    //subscribe begin我们将不定期发送永不止息最新动态给您~\n
+    if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
       $msgType = "text";
       $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
       echo $resultStr;
