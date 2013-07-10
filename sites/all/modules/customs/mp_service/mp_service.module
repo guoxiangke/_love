@@ -417,7 +417,7 @@ function mp_service_response() {
             $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
             $node->path['pathauto'] = FALSE;
 
-            $path = $PicUrl;
+            $path = $PicUrl.'.jpg';
             $filetitle = 'wechat';
             $filename = 'wechat-'.$uid.'-'.date("y-m-d").'.jpg';
             watchdog('6', 'message', array(), WATCHDOG_NOTICE, 'link');
