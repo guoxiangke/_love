@@ -421,7 +421,7 @@ function mp_service_response() {
             watchdog('6', 'message', array(), WATCHDOG_NOTICE, 'link');
             $file_temp = file_get_contents($path);//photos/
             watchdog('7', 'message', array(), WATCHDOG_NOTICE, 'link');
-            $file_temp = file_save_data($file_temp, 'public://' . $filename, FILE_EXISTS_RENAME);
+            $file_temp = file_save_data($file_temp, 'public://photos/'.$uid.'/wechat/'.$filename, FILE_EXISTS_RENAME);
             watchdog('8', 'message', array(), WATCHDOG_NOTICE, 'link');
 
             $node->field_photo = array(
