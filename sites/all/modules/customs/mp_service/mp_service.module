@@ -54,8 +54,8 @@ function mp_service_response() {
         $mp_service_records = mp_service_get_records($uid);
         // watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
         //15秒内回复任何字符都拒绝！
-        if($keyword != '000' && $mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
-          $contentStr = "请选择要发布的相片!\n回复【000】取消改指令！";
+        if($keyword != '88' && $mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
+          $contentStr = "请选择要发布的相片!\n回复【88】取消改指令！";
           $wechatObj->text($contentStr)->reply();
           exit;
         }
@@ -72,12 +72,12 @@ function mp_service_response() {
         case '00':     
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           break;        
-        case '000':     
+        case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           if($uid) 
             db_update('mp_service')
               ->fields(array(
-                'last_cmd' => '000',
+                'last_cmd' => '88',
                 'last_cmd_timestamp' => REQUEST_TIME,
               ))
               ->condition('uid', $uid)
