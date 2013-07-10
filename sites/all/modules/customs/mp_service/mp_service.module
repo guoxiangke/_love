@@ -52,7 +52,7 @@ function mp_service_response() {
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
         watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
-        if($mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME >3600)) {
+        if($mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 3600)) {
           $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
           $wechatObj->text($contentStr)->reply();
           exit;
