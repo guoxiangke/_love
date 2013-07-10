@@ -51,9 +51,11 @@ function mp_service_response() {
       watchdog('mp_service-uid', $uid, array(), WATCHDOG_NOTICE, 'link');
       watchdog('mp_service-FromUserName', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
       watchdog('mp_service-REQUEST_TIME', REQUEST_TIME, array(), WATCHDOG_NOTICE, 'link');
-      if (isset($_SESSION['mp_service_'.$uid]))
-        watchdog('mp_service-_SESSION', $_SESSION['mp_service_'.$uid], array(), WATCHDOG_NOTICE, 'link');
-      if($uid && isset($_SESSION['mp_service_'.$uid]) && ($_SESSION['mp_service_'.$uid] - REQUEST_TIME <3600)) {
+      if(isset($_SESSION["mp_service_$uid"])) {
+        watchdog('mp_service-get_SESSION', $_SESSION["mp_service_$uid"], array(), WATCHDOG_NOTICE, 'link');
+        watchdog('mp_service--', $_SESSION["mp_service_$uid"] - REQUEST_TIME, array(), WATCHDOG_NOTICE, 'link');
+      }
+      if($uid && isset($_SESSION["mp_service_$uid"]) && ($_SESSION["mp_service_$uid"] - REQUEST_TIME <3600)) {
         $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
         $wechatObj->text($contentStr)->reply();
         watchdog('mp_service请发送您要发的相片111', $uid, array(), WATCHDOG_NOTICE, 'link');
@@ -82,8 +84,9 @@ function mp_service_response() {
           if(!$uid) {
             $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
           }else{
-            watchdog('mp_service-uid', $uid, array(), WATCHDOG_NOTICE, 'link');
-            $_SESSION['mp_service_'.$uid] = REQUEST_TIME; 
+            watchdog('mp_service-set session', $uid, array(), WATCHDOG_NOTICE, 'link');
+            $_SESSION["mp_service_$uid"] = REQUEST_TIME; 
+            watchdog('set_SESSION', $_SESSION["mp_service_$uid"], array(), WATCHDOG_NOTICE, 'link');
           }
           break;
         case '201':
