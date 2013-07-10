@@ -415,11 +415,12 @@ function mp_service_response() {
 
             $path = $PicUrl.'.jpg';
             $filetitle = 'wechat';
-            $filename = 'wechat.jpg';
+            $filename = 'wechat-'.$uid.'-'.date("y-m-d").'.jpg';
             $file_temp = file_get_contents($path);//photos/
             $file_temp = file_save_data($file_temp, 'public://' . $filename, FILE_EXISTS_RENAME);
+
             $node->field_photo = array(
-              'LANGUAGE_NONE' => array(
+              'und' => array(
                 0 => array(
                     'fid' => $file_temp->fid,
                     'filename' => $file_temp->filename,
@@ -430,8 +431,10 @@ function mp_service_response() {
                 )
               )
             );
-            node_save($node);
-            watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
+            watchdog('$node->field_photo', '<pre>'.print_r($node->field_photo,TRUE), array(), WATCHDOG_NOTICE, 'link');
+            $node->nid = 1;
+            // node_save($node);
+            // watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
             $contentStr = "相片".$node->nid."发布成功！\n30秒内可回复文字添加照片描述\n【".$node->nid."?我爱北京！】";
             $wechatObj->text($contentStr)->reply();
             exit;
