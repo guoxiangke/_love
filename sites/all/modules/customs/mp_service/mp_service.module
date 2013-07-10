@@ -56,8 +56,8 @@ function mp_service_response() {
         if($mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
           $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
           watchdog('mp_service', '15秒内回复任何字符都拒绝！', array(), WATCHDOG_NOTICE, 'link');
-          // $wechatObj->text($contentStr)->reply();
-          // exit;
+          $wechatObj->text($contentStr)->reply();
+          exit;
         }
       }
       $keyword =  trim($wechatObj->getRevContent());
