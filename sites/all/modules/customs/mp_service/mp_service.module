@@ -51,19 +51,18 @@ function mp_service_response() {
   if($uid) $user = user_load($uid);
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
-      watchdog('get_SESSION', '<pre>'.print_r($user,TRUE), array(), WATCHDOG_NOTICE, 'link');
-      if($uid && isset($user->mp_service) && ($user->mp_service - REQUEST_TIME <3600)) {
-        $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
-        $wechatObj->text($contentStr)->reply();
-        watchdog('mp_service请发送您要发的相片111', $uid, array(), WATCHDOG_NOTICE, 'link');
-        return;
+      if($uid) {
+        $mp_service_records = mp_service_get_records($uid);
+        if($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME <3600) {
+          $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
+          $wechatObj->text($contentStr)->reply();
+          watchdog('mp_service请发送您要发的相片111', $uid, array(), WATCHDOG_NOTICE, 'link');
+          return;
+        }
       }
       $keyword =  trim($wechatObj->getRevContent());
       switch ($keyword) {
-        case '00':
-          if ($uid) {
-            // unset($_SESSION['mp_service_'.$uid]);
-          }         
+        case '00':     
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播\n测试开发中～敬请期待！";
           break;
         case '1':
@@ -81,9 +80,13 @@ function mp_service_response() {
           if(!$uid) {
             $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
           }else{
-            $user->mp_service = REQUEST_TIME; 
-            // $_SESSION["mp_service"][$uid] = REQUEST_TIME; 
-            watchdog('set_SESSION', '<pre>'.print_r($user,TRUE), array(), WATCHDOG_NOTICE, 'link');
+            db_update('mp_service')
+              ->fields(array(
+                'last_cmd' => '20',
+                'last_cmd_timestamp' => REQUEST_TIME,
+              ))
+              ->condition('uid', $uid)
+              ->execute();
           }
           break;
         case '201':
@@ -378,6 +381,10 @@ function mp_service_is_bind($uid) {
 function mp_service_get_uid_by_name($FromUserName) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
   return $uid;
+}
+function mp_service_get_records($uid) {
+  $res = db_query('SELECT * FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchAssoc();
+  return $res;
 }
 // and bind!
 function mp_service_bind_uid($FromUserName,$bindUid) {
