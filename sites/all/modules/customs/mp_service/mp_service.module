@@ -54,7 +54,7 @@ function mp_service_response() {
         $mp_service_records = mp_service_get_records($uid);
         // watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
         //15秒内回复任何字符都拒绝！
-        if($keyword != '88' && $mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
+        if($keyword != '88' && $mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] < 900)) {
           $contentStr = "请选择要发布的相片!\n回复【88】取消改指令！";
           $wechatObj->text($contentStr)->reply();
           exit;
@@ -393,8 +393,51 @@ function mp_service_response() {
           $contentStr = "指令已超时！\n请回复【2】查看帮助！";
           $wechatObj->text($contentStr)->reply();
           exit;
+        }
+        if((REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] <= 900)) {
+          if($mp_service_records['last_cmd'] != '20') {
+            $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看指令帮助！";
+            $wechatObj->text($contentStr)->reply();
+            exit;
+          }else {
+            $contentStr = "create node sucess!";
+
+            $node = new stdClass();
+            $node->title = '【来自微信】';
+            $node->type = 'photo';
+            node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+            $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+            $node->uid = $uid;
+            $node->status = 1; //(1 or 0): published or not
+            $node->promote = 0; //(1 or 0): promoted to front page
+            $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
+            $node->path['pathauto'] = FALSE;
+
+            $path = $PicUrl.'.jpg';
+            $filetitle = 'wechat';
+            $filename = 'wechat.jpg';
+            $file_temp = file_get_contents($path);//photos/
+            $file_temp = file_save_data($file_temp, 'public://' . $filename, FILE_EXISTS_RENAME);
+            $node->field_photo = array(
+              'LANGUAGE_NONE' => array(
+                0 => array(
+                    'fid' => $file_temp->fid,
+                    'filename' => $file_temp->filename,
+                    'filemime' => $file_temp->filemime,
+                    'uid' => $uid,
+                    'uri' => $file_temp->uri,
+                    'status' => 1
+                )
+              )
+            );
+            node_save($node);
+            watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
+            $contentStr = "相片".$node->nid."发布成功！\n30秒内可回复文字添加照片描述\n【".$node->nid."?我爱北京！】";
+            $wechatObj->text($contentStr)->reply();
+            exit;
+          }
         }else {
-          $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看指令帮助！";
+          $contentStr = "指令超时！\n请回复【2】查看帮助！";
           $wechatObj->text($contentStr)->reply();
           exit;
         }
