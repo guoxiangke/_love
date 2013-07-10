@@ -47,23 +47,30 @@ function mp_service_response() {
   $type = $wechatObj->getRev()->getRevType();
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
+      $keyword =  trim($wechatObj->getRevContent());
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
       $uid = mp_service_get_uid_by_name($FromUserName);
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
         watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
         //15秒内回复任何字符都拒绝！
-        if($mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
-          $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
-          watchdog('mp_service', '15秒内回复任何字符都拒绝！', array(), WATCHDOG_NOTICE, 'link');
+        if($keyword != '00' && $mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
+          $contentStr = "请选择要发布的相片!\n回复【00】取消发送！";
           $wechatObj->text($contentStr)->reply();
           exit;
         }
       }
-      $keyword =  trim($wechatObj->getRevContent());
+      //以20开头的，发布内如的，如果没有绑定，直接回绝！
+      if(substr($keyword, 0,2) == '20') {
+        if(!$uid) {
+          $contentStr = "您还没有与网站帐号绑定！暂不能发送20开头的发布指定！\n回复【9】查看绑定帮助";
+          $wechatObj->text($contentStr)->reply();
+          exit;
+        }
+      }
       switch ($keyword) {
         case '00':     
-          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播\n测试开发中～敬请期待！";
+          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           if($uid) 
             db_update('mp_service')
               ->fields(array(
@@ -84,10 +91,11 @@ function mp_service_response() {
           // 【204】想对你说(写给喜欢的人)-41
           break;
         case '20':
-          if(!$uid) {
-            $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
-          }else{
-            $contentStr = "一分钟内发送您要发的相片\n";
+          // if(!$uid) {
+          //   $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
+          // }else
+          {
+            $contentStr = "请选择您要发布的相片(15秒内发送)\n测试开发中～敬请期待！";
             db_update('mp_service')
               ->fields(array(
                 'last_cmd' => '20',
