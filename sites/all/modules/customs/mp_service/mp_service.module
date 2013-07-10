@@ -421,7 +421,7 @@ function mp_service_response() {
             watchdog('6', 'message', array(), WATCHDOG_NOTICE, 'link');
             $file_temp = file_get_contents($path);//photos/
             watchdog('7', 'message', array(), WATCHDOG_NOTICE, 'link');
-            $file_temp = file_save_data($file_temp, 'public://photos/'.$uid.'/wechat/'.$filename, FILE_EXISTS_RENAME);
+            $file_temp = file_save_data($file_temp, 'public://photos/'.$uid.'/'.$filename, FILE_EXISTS_RENAME);
             watchdog('8', 'message', array(), WATCHDOG_NOTICE, 'link');
 
             $node->field_photo = array(
@@ -441,7 +441,7 @@ function mp_service_response() {
             node_save($node);
             $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】";
             // $wechatObj->text($contentStr)->reply();
-            mp_service_replyText($contentStr);
+            mp_service_imageReplyText($contentStr);
             watchdog('node_save', $node->nid, array(), WATCHDOG_NOTICE, 'link');
           }
         }else {
@@ -522,7 +522,7 @@ function mp_service_focus() {
   }
 }
 
-function mp_service_replyText($contentStr) {
+function mp_service_imageReplyText($contentStr) {
   $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
   if (!empty($postStr)) {
     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -542,7 +542,7 @@ function mp_service_replyText($contentStr) {
     <FuncFlag>0</FuncFlag>
     </xml>";   
     //subscribe begin我们将不定期发送永不止息最新动态给您~\n
-    if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
+    if($postObj->MsgType == 'image') {
       $msgType = "text";
       $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
       echo $resultStr;
