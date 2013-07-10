@@ -52,10 +52,10 @@ function mp_service_response() {
       $uid = mp_service_get_uid_by_name($FromUserName);
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
-        watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
+        // watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
         //15秒内回复任何字符都拒绝！
-        if($keyword != '00' && $mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
-          $contentStr = "请选择要发布的相片!\n回复【00】取消发送！";
+        if($keyword != '000' && $mp_service_records['last_cmd'] == '20' && ($mp_service_records['last_cmd_timestamp'] - REQUEST_TIME < 900)) {
+          $contentStr = "请选择要发布的相片!\n回复【000】取消改指令！";
           $wechatObj->text($contentStr)->reply();
           exit;
         }
@@ -71,10 +71,13 @@ function mp_service_response() {
       switch ($keyword) {
         case '00':     
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
+          break;        
+        case '000':     
+          $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           if($uid) 
             db_update('mp_service')
               ->fields(array(
-                'last_cmd' => '00',
+                'last_cmd' => '000',
                 'last_cmd_timestamp' => REQUEST_TIME,
               ))
               ->condition('uid', $uid)
@@ -95,7 +98,7 @@ function mp_service_response() {
           //   $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
           // }else
           {
-            $contentStr = "请选择您要发布的相片(15秒内发送)\n测试开发中～敬请期待！";
+            $contentStr = "请选择您要发布的相片\n(15秒内发送)\n测试开发中～敬请期待！";
             db_update('mp_service')
               ->fields(array(
                 'last_cmd' => '20',
@@ -371,14 +374,38 @@ function mp_service_response() {
       mp_service_focus();
       break;
     case Wechat::MSGTYPE_IMAGE:
-      watchdog('mp_service-MSGTYPE_IMAGE', '已收到您发送的图片1！', array(), WATCHDOG_NOTICE, 'link');
-      $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      $uid = mp_service_get_uid_by_name($FromUserName);
-      if(isset($_SESSION['mp_service_'.$uid]) && ($_SESSION['mp_service_'.$uid] - REQUEST_TIME <3600)) {
-        //get image and upload.
-        watchdog('mp_service-MSGTYPE_IMAGE', '已收到您发送的图片2！', array(), WATCHDOG_NOTICE, 'link');
-      }
+      watchdog('mp_service-MSGTYPE_IMAGE', '已收到您发送的图片！', array(), WATCHDOG_NOTICE, 'link');
 
+      $FromUserName =  $wechatObj->getRev()->getRevFrom();
+      $PicUrl =  $wechatObj->getRev()->getRevPic();
+      $uid = mp_service_get_uid_by_name($FromUserName);
+      watchdog('PicUrl', $PicUrl, array(), WATCHDOG_NOTICE, 'link');
+      if($uid) {
+        $mp_service_records = mp_service_get_records($uid);
+        db_update('mp_service')
+          ->fields(array(
+            'last_cmd' => 'image',
+            'last_cmd_timestamp' => REQUEST_TIME,
+          ))
+          ->condition('uid', $uid)
+          ->execute();
+        if($mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] > 900)) {
+          $contentStr = "指令已超时！\n请回复【2】查看帮助！";
+          $wechatObj->text($contentStr)->reply();
+          exit;
+        }else {
+          $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看指令帮助！";
+          $wechatObj->text($contentStr)->reply();
+          exit;
+        }
+        // create node
+        watchdog('create node', 'create node', array(), WATCHDOG_NOTICE, 'link');
+
+      }else {
+        $contentStr = "您还没有与网站帐号绑定！暂不能发送图片！\n回复【9】查看绑定帮助";
+        $wechatObj->text($contentStr)->reply();
+        exit;
+      }
       // $wechatObj->text("已收到您发送的图片！")->reply();
       break;
     default:
