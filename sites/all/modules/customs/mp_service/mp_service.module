@@ -37,6 +37,7 @@ function my_module_function($last_reply_code=0) {
 }
 
 function mp_service_response() {
+  session_start();
   module_load_include('inc', 'mp_service', 'mp_service');
   $options = array(
     'token'=> variable_get('mp_service_token', 'ybzx'),//填写你设定的key
@@ -83,7 +84,7 @@ function mp_service_response() {
             $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
           }else{
             watchdog('mp_service-set session', $uid, array(), WATCHDOG_NOTICE, 'link');
-            session_start();
+
             $_SESSION["mp_service_$uid"] = REQUEST_TIME; 
             watchdog('set_SESSION', $_SESSION["mp_service_$uid"], array(), WATCHDOG_NOTICE, 'link');
           }
