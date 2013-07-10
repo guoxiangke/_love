@@ -45,13 +45,14 @@ function mp_service_response() {
   $wechatObj = new Wechat($options);
   // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
+  global $user;
+  $FromUserName =  $wechatObj->getRev()->getRevFrom();
+  $uid = mp_service_get_uid_by_name($FromUserName);
+  if($uid) $user = user_load($uid);
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
-      $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      $uid = mp_service_get_uid_by_name($FromUserName);
-      if (isset($_SESSION["mp_service"]))
-        watchdog('REQUEST_TIME&SESSION["mp_service"]', '<pre>'.print_r($_SESSION["mp_service"],TRUE), array(), WATCHDOG_NOTICE, 'link');
-      if($uid && isset($_SESSION["mp_service"][$uid]) && ($_SESSION["mp_service"][$uid] - REQUEST_TIME <3600)) {
+      watchdog('get_SESSION', '<pre>'.print_r($user,TRUE), array(), WATCHDOG_NOTICE, 'link');
+      if($uid && isset($user->mp_service) && ($user->mp_service - REQUEST_TIME <3600)) {
         $contentStr = "请发送您要发的相片\n回复【00】取消发送，进入主菜单！";
         $wechatObj->text($contentStr)->reply();
         watchdog('mp_service请发送您要发的相片111', $uid, array(), WATCHDOG_NOTICE, 'link');
@@ -80,10 +81,9 @@ function mp_service_response() {
           if(!$uid) {
             $contentStr = "您还没有与网站帐号绑定！暂时不能发相片！\n回复【9】查看绑定帮助";
           }else{
-            watchdog('mp_service-set session', $uid, array(), WATCHDOG_NOTICE, 'link');
-
-            $_SESSION["mp_service"][$uid] = REQUEST_TIME; 
-            watchdog('set_SESSION', '<pre>'.print_r($_SESSION["mp_service"],TRUE), array(), WATCHDOG_NOTICE, 'link');
+            $user->mp_service = REQUEST_TIME; 
+            // $_SESSION["mp_service"][$uid] = REQUEST_TIME; 
+            watchdog('set_SESSION', '<pre>'.print_r($user,TRUE), array(), WATCHDOG_NOTICE, 'link');
           }
           break;
         case '201':
