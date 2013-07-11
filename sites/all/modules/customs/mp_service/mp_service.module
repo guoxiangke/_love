@@ -292,6 +292,7 @@ Your browser does not support the audio element.
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          $wechatObj->text($title)->reply();
           break;
         case '525':
           $title = '真道分解-每日灵修';
