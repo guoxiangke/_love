@@ -177,7 +177,7 @@ Your browser does not support the audio element.
           }
 
           $img = array(
-            'Title'=>'登录【永不止息】',
+            'Title'=>'用手机，登录【永不止息】^_^',
             'Description'=>'单图文 标题15字 摘要60字',
             'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
             'Url'=>'http://yongbuzhixi.com'
