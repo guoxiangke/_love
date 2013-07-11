@@ -127,13 +127,16 @@ function mp_service_response() {
           $contentStr =  "最近活跃的弟兄姊妹有：\n\t\t侯星光\n\t\t韩富军\n\t\t王露\n\t\t畅卢涛...\n\n回复【00】进入主菜单\n回复【5】进入良友广播\n 本功能测试开发中～";
           break;
         case '4':
-          $contentStr =  "【400】喜乐的心\n【401】荒漠甘泉乐侣\n【402】静夜亮光\n【403】在天父怀中\n【404】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
+          $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【404】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【00】进入主菜单\n回复【51】进入下一页\n加*节目为周一到周五\n";
+          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n加*节目为周一到周五\n";
           break;
         case '51':
-          $contentStr =  "【510】无限飞行号\n【511】真道分解\n回复【5】进入上一页\n回复【00】进入主菜单\n加*节目为周一到周五\n";
+          $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n加*节目为周一到周五\n";
+          break;
+        case '52':
+          $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n【525】真道分解\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '9':
           $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息\n【5】进入良友广播\n";
@@ -167,38 +170,6 @@ Your browser does not support the audio element.
           $news[] = $img;
           $wechatObj->news($news)->reply();
           break;
-        case '400':
-          $title = '喜乐的心';
-          $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
-          http://media.haomuren.org/dev/joy/joyhrt0709.mp3
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '401'://http://media.haomuren.org/dev/ev/evn0709.mp3
-        // 荒漠甘泉乐侣
-          $title = '荒漠甘泉乐侣';
-          $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
-          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '402':
-          $title = '静夜亮光';
-          $musicurl = 'http://media.haomuren.org/dev/ev/evn'.date('md').'.mp3';
-          //http://media.haomuren.org/dev/ev/evn0709.mp3
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '403':
-          $title = '在天父怀中';
-          $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_'.date('ymd').'.mp3';
-          $desc = date('n月j日');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '500':
           $title = '长夜的牵引';
           $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
@@ -206,7 +177,7 @@ Your browser does not support the audio element.
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-        case '404':
+        case '524':
         case '501':
           $title = '灵命日粮';
           $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
@@ -278,6 +249,51 @@ Your browser does not support the audio element.
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '511':
+          $title = 'i-radio爱广播';
+          $musicurl = 'http://liangyou.nissigz.com/media/ir/ir'.date('ymd').'.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
+        case '512':
+          $title = 'i关怀心磁场';
+          $musicurl = 'http://liangyou.nissigz.com/media/im/im'.date('ymd').'.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
+        case '513':
+          $title = '真理之光';
+          $musicurl = 'http://liangyou.nissigz.com/media/th/th'.date('ymd').'.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
+        case '521'://http://media.haomuren.org/dev/ev/evn0709.mp3
+        // 荒漠甘泉乐侣
+          $title = '荒漠甘泉乐侣';
+          $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
+          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
+        case '522':
+          $title = '静夜亮光';
+          $musicurl = 'http://media.haomuren.org/dev/ev/evn'.date('md').'.mp3';
+          //http://media.haomuren.org/dev/ev/evn0709.mp3
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
+        case '523':
+          $title = '在天父怀中';
+          $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_'.date('ymd').'.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
+        case '525':
           $title = '真道分解-每日灵修';
           $musicurl = 'http://media.biblexpo.net/biblexpo/daily/Daily_'.date('ymd').'.mp3';
           $desc = date('n月j日');
