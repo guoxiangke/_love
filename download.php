@@ -37,8 +37,8 @@ $program=array(
 				'eg'=>'英语世界',
 				);
 foreach($program as $key=>$value){
-	$mp3 = array('se','ws');
-	$extend = '.wma';
+	$mp3 = array('se','ws','up');
+	$extend = '.mp3';
 	if(in_array($key, $mp3)) {
 		$extend = '.mp3';
 	}
