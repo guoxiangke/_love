@@ -157,17 +157,34 @@ Your browser does not support the audio element.
 </audio>";
           break;
         case '110':
+          $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
+          $items = $html->find('#links', 0);
+          foreach ($items->children as $key => $html) {
+            $link = $html->find('a', 0);
+            $Url = $link->attr['href'];
+            $Title = trim($html->find('h2', 0)->plaintext);
+            $Description = trim($html->find('p', 0)->plaintext);
+
+            $picture = $html->find('img', 0);
+            $PicUrl = $picture->attr['src'];
+            $img = array(
+              'Title'=> $Title,
+              'Description'=>$Description,
+              'PicUrl'=>$PicUrl,
+              'Url'=>$Url
+            );
+            $news[] = $img; 
+          }
+
           $img = array(
-            'Title'=>'hellohellohello',
-            'Description'=>'hellohellohellohellohellohellohellohellohellohellohellohello',
+            'Title'=>'多图文 1标题16字 2标题15字',
+            'Description'=>'单图文 标题15字 摘要60字',
             'PicUrl'=>'http://farm8.staticflickr.com/7362/9235198550_1f5973d4ec.jpg',
             'Url'=>'http://yongbuzhixi.com'
           );
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
           $news[] = $img; 
-          $news[] = $img; 
-          $news[] = $img;
           $wechatObj->news($news)->reply();
           break;
         case '500':
@@ -292,7 +309,6 @@ Your browser does not support the audio element.
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          $wechatObj->text($title)->reply();
           break;
         case '525':
           $title = '真道分解-每日灵修';
