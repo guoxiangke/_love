@@ -302,9 +302,9 @@ function love_fm_block() {//<?php echo date("ymd");? >
           .'
           <div class="player"><embed type="application/x-shockwave-flash" width="208" height="24" src="'.('http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')).'/player.swf?soundFile=http://liangyou.nissigz.com/media/se/se'.(date("ymd")).'.mp3&amp;bg=0xCDDFF3&amp;leftbg=0x357DCE&amp;lefticon=0xF2F2F2&amp;rightbg=0x357DCE&amp;rightbghover=0x4499EE&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x357DCE&amp;slider=0x357DCE&amp;track=0xFFFFFF&amp;border=0xFFFFFF&amp;loader=0x8EC2F4&amp;autostart=no&amp;loop=no" wmode="transparent" quality="high">
           <div class="fm-on">其他：
-<a href="http://audio.liangyou.net/download.php?t=2&c=bc&f=bc'.(date("ymd")).'.wma" id="book-radio">书香园地</a>
+<a href="http://audio.liangyou.net/download.php?t=2&c=bc&f=bc'.(date("ymd")).'.mp3" id="book-radio">书香园地</a>
 <strong>'.l('灵命日粮','ybreads').'</strong>
-<a href="http://audio.liangyou.net/download.php?t=2&c=bf&f=bf'.(date("ymd")).'.wma" id="radio-home">幸福满家园</a>  </div>
+<a href="http://audio.liangyou.net/download.php?t=2&c=bf&f=bf'.(date("ymd")).'.mp3" id="radio-home">幸福满家园</a>  </div>
 </div>';
 }
 

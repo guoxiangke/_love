@@ -400,7 +400,7 @@ function mp_service_response() {
           watchdog('3', 'message', array(), WATCHDOG_NOTICE, 'link');
           if($mp_service_records['last_cmd'] != '20') {
             watchdog('5', 'message', array(), WATCHDOG_NOTICE, 'link');
-            $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看指令帮助！";
+            $contentStr = "您发的图片想干什么呢？!\n请回复【2】查看帮助！";
             $wechatObj->text($contentStr)->reply();
             exit;
           }else {
@@ -453,8 +453,6 @@ function mp_service_response() {
           $wechatObj->text($contentStr)->reply();
           exit;
         }
-        // create node
-        watchdog('create node', 'create node', array(), WATCHDOG_NOTICE, 'link');
 
       }else {
         $contentStr = "您还没有与网站帐号绑定！暂不能发送图片！\n回复【9】查看绑定帮助";
