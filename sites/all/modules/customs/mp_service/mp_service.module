@@ -146,7 +146,9 @@ function mp_service_response() {
           $contentStr =  "我很忙，但很愿意为您服务，请加bluesky_still把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
         case '119':
-          $contentStr =  "我很忙，但很愿意为您服务，请加<a href='http://baidu.com'>bluesky_still</a>把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
+          $contentStr =  "我很忙，但很愿意为您服务，请加<a href='http://baidu.com'>bluesky_still</a>把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播\n<audio src='http://audio1.liangyou.net/files/media/ly_daily/2013Daily_130711.mp3" controls="controls'>
+Your browser does not support the audio element.
+</audio>";
           break;
         case '110':
           $img = array(
