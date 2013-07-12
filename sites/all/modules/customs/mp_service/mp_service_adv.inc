@@ -471,9 +471,11 @@ class Wechat {
 		$postfields["username"] = $this->wechatOptions['account'];
 		$postfields["pwd"] = md5($this->wechatOptions['password']);
 		$postfields["f"] = "json";
+		watchdog('login-postfields', '<pre>'.print_r($postfields,true), array(), WATCHDOG_NOTICE, 'link');
 		$postfieldss = "username=".urlencode($this->wechatOptions['account'])."&pwd=".urlencode(md5($this->wechatOptions['password']))."&f=json";
 		$response = $this->post($url, $postfields, $this->protocol."://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN");
 		$result = json_decode($response, true);
+		watchdog('login-result', '<pre>'.print_r($result,true), array(), WATCHDOG_NOTICE, 'link');
 		if ($result['ErrCode']=="65201"||$result['ErrCode']=="65202"||$result['ErrCode']=="0")
 		{
 			preg_match('/&token=([\d]+)/i', $result['ErrMsg'],$match);
