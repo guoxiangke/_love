@@ -38,10 +38,16 @@ function my_module_function($last_reply_code=0) {
 
 function mp_service_response() {
   drupal_session_start();
-  module_load_include('inc', 'mp_service', 'mp_service');
+  module_load_include('inc', 'mp_service', 'mp_service_adv');
   $options = array(
     'token'=> variable_get('mp_service_token', 'ybzx'),//填写你设定的key
   );
+  $options = array(
+    'token'=>'ybzx',
+    'account'=>'1@1.com',
+    'password'=>'******'
+  );
+  // $this->wechatObj = new Wechat($options);
   $wechatObj = new Wechat($options);
   // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
