@@ -48,7 +48,7 @@ class Wechat {
 		{
 			$this->wechatOptions = array_merge($this->wechatOptions, $option);
 		}
-		$this->setCookiefilepath("./app/Runtime", "wechatcookies".md5($this->wechatOptions['account']).".txt");
+		$this->setCookiefilepath("data", "wechatcookies".md5($this->wechatOptions['account']).".txt");
 		if ($this->webtokenStoragefile) {
 			$this->webtoken = (string)file_get_contents($this->webtokenStoragefile);
 		}
