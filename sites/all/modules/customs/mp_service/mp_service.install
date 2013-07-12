@@ -44,6 +44,20 @@ function mp_service_schema() {
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
+      ),      
+      'fakeid' => array(
+        'description' => '',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ), 
+      'groupid' => array(
+        'description' => '',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
       ),
     ),
     'indexes' => array(
@@ -80,5 +94,26 @@ function mp_service_update_7100() {
       'default' => 0,
     );
     db_add_field('mp_service', 'last_cmd_timestamp', $new_field);
+  }
+}
+function mp_service_update_7101() {
+  // Check because D6 installs may already have added this.
+  if (!db_field_exists('mp_service', 'mp_service')) {
+    $new_field = array(
+        'description' => '',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      );
+    db_add_field('mp_service', 'fakeid', $new_field);
+    $new_field = array(
+        'description' => '',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      );
+    db_add_field('mp_service', 'groupid', $new_field);
   }
 }

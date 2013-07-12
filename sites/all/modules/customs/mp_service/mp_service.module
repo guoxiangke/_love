@@ -553,6 +553,11 @@ function mp_service_get_records($uid) {
   $res = db_query('SELECT * FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchAssoc();
   return $res;
 }
+function mp_service_get_nofakeid() {
+  $res = db_query('SELECT * FROM {mp_service} WHERE fakeid = 0')->fetchAssoc();
+  return $res;
+}
+
 // and bind!
 function mp_service_bind_uid($FromUserName,$bindUid) {
   $result = db_insert('mp_service')
