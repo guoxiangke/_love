@@ -37,17 +37,15 @@ function my_module_function($last_reply_code=0) {
 }
 
 function mp_service_response() {
-  drupal_session_start();
   module_load_include('inc', 'mp_service', 'mp_service_adv');
   $options = array(
     'token'=> variable_get('mp_service_token', 'ybzx'),//填写你设定的key
   );
   $options = array(
     'token'=>'ybzx',
-    'account'=>'1@1.com',
-    'password'=>'******'
+    'account'=>'xiangkeguo@gmail.com',
+    'password'=>'mjk5nj'
   );
-  // $this->wechatObj = new Wechat($options);
   $wechatObj = new Wechat($options);
   // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
@@ -554,8 +552,8 @@ function mp_service_get_records($uid) {
   return $res;
 }
 function mp_service_get_nofakeid() {
-  $res = db_query('SELECT * FROM {mp_service} WHERE fakeid = 0')->fetchAssoc();
-  return $res;
+  $res = db_query('SELECT * FROM {mp_service} WHERE fakeid = 0')->fetchAll();
+  return (array)$res;
 }
 
 // and bind!

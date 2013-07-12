@@ -694,10 +694,11 @@ class Wechat {
      public function getfakeid($callback)
      {
      		// 获取没有绑定的用户信息
-     	
+
          // $subscribeusersModel = D("Subscribeusers");
          // $data = $subscribeusersModel->where(' `fakeid` IS NULL and `unsubscribed`=0')->select();
-         $data=array();
+         $data = mp_service_get_nofakeid();
+         dpm($data);
          if (!is_array($data))
          {
              die("none data");
