@@ -681,7 +681,11 @@ class Wechat {
          if (preg_match('%<script id="json-friendList" type="json/text">([\s\S]*?)</script>%', $response, $match)) {
              $tmp = json_decode($match[1], true);
          }
-
+				// 1 (Array, 4 elements)
+				// fakeId (String, 10 characters ) 1271605583
+				// nickName (String, 6 characters ) 泽仁
+				// remarkName (String, 0 characters )
+				// groupId (String, 1 characters ) 0
          return empty($tmp)?false:$tmp;
          
      }
