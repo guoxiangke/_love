@@ -10,8 +10,8 @@ function ybread_page(){
   $now = date('d',time());
   $hour = date('G',time());
   $last = date('d',$result->created);
-
-  if(1) {
+  
+  if($now - $last == 1 && $hour >= 7) {
 	  $html = file_get_html('http://simplified-odb.org/');
 		// get title
 		$node = new stdClass();
@@ -26,8 +26,8 @@ function ybread_page(){
 	 	// Try to set your custom field
 	  $html = file_get_html('http://ya-mi.org/');
 
-	  // $picture = $html->find('#featured-section .entry img', 0);
-	  // $pic_url = $picture->attr['src'];
+	  $picture = $html->find('#featured-section .entry img', 0);
+	  $pic_url = $picture->attr['src'];
 
 		// $keys = parse_url($pic_url); // parse the url
 		// $path = explode("/", $keys['path']); // splitting the path
@@ -40,6 +40,7 @@ function ybread_page(){
 
 	 //  $node->field_ybread_img[LANGUAGE_NONE][0]['value'] = objectToArray($file);
 	  //'<div class="ybread-img"><img src ="'.$pic_url.'"/></div>'.
+	  $node->body[LANGUAGE_NONE][0]['value'] = '<div class="ybread-img"><img src ="'.$pic_url.'"/></div>'.$node->body[LANGUAGE_NONE][0]['value']
 	  // $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'];
 	  $node->body[LANGUAGE_NONE][0]['format'] = 'full_html';
 	  
