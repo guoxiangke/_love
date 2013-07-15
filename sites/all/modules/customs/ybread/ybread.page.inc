@@ -10,8 +10,8 @@ function ybread_page(){
   $now = date('d',time());
   $hour = date('G',time());
   $last = date('d',$result->created);
-  
-  if($now - $last == 1 && $hour >= 7) {
+
+  if($now - $last >= 1 && $hour >= 7) {dpm('tr');
 	  $html = file_get_html('http://simplified-odb.org/');
 		// get title
 		$node = new stdClass();
@@ -49,13 +49,16 @@ function ybread_page(){
   	$nid = $result->nid;
 	$node = node_load($nid);
   }
+  dpm($node);
   // <div style="padding:10px;background-color:yellow;margin-bottom:10px;">版权关系，灵命日粮 文字内容请百度“<a href="http://www.baidu.com/s?wd=%C1%E9%C3%FC%C8%D5%C1%B8">灵命日粮</a>”到官方网站阅读，给您带来不便，敬请谅解。</div>
-  $player ='<div class="ybread-player"><embed src="http://audio.liangyou.net/download.php?t=2&c=bv&f=bv'.date("ymd").'.wma" width="430" height="50" type="application/x-mplayer2" autostart="1" showstatusbar="1" showdisplay="0" showcontrols="1" loop="-1" style="margin:0px auto;"></embed></div><div><p style="font-size:14px;"> 收听帮助: </p>
+  $player ='<div class="ybread-player"><embed src="http://audio.liangyou.net/download.php?t=2&c=bv&f=bv'.date("ymd").'.mp3" width="430" height="50" type="application/x-mplayer2" autostart="1" showstatusbar="1" showdisplay="0" showcontrols="1" loop="-1" style="margin:0px auto;"></embed></div><div><p style="font-size:14px;">'."<p><audio src='http://liangyou.nissigz.com/media/bv/bv".date("ymd").".mp3' controls='controls'>
+Your browser does not support the audio element.
+</audio></p>".' 收听帮助: </p>
 				<p> 
 					选择 “开始-&gt;控制面板-&gt;添加删除程序-&gt;设定程序和访问默认值-&gt;双击 自定义-&gt;
 					往下拉找到 选择一个媒体播放器-&gt;选择window media player 确定”
 				</p>
-				<p style="color:#666">下载收听:<a href="http://liangyou.nissigz.com/media/bv/bv'.date("ymd").'.wma" >今日节目</a> &nbsp;&nbsp;音频来源：良友电台&nbsp;liangyou.net &nbsp;&nbsp;文字来源： http://simplified-odb.org </p></div>';
+				<p style="color:#666">下载收听:<a href="http://liangyou.nissigz.com/media/bv/bv'.date("ymd").'.mp3" >今日节目</a> &nbsp;&nbsp;音频来源：良友电台&nbsp;liangyou.net &nbsp;&nbsp;文字来源： http://simplified-odb.org </p></div>';
 
   $node_view = node_view($node); //drupal_render($node_view).;
   return drupal_render($node_view).$player;
