@@ -134,16 +134,16 @@ function mp_service_response() {
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【404】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n加*节目为周一到周五\n";
+          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n加*节目为周一到周五\n加^节目为15分钟\n";
           break;
         case '51':
-          $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n加*节目为周一到周五\n";
+          $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n加*节目为周一到周五\n加^节目为15分钟\n";
           break;
         case '52':
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n【525】真道分解\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '9':
-          $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n【900】如何查看用户昵称\n【901】如何查看手机信息\n【5】进入良友广播\n";
+          $contentStr =  "就要绑定，请回复\n【91昵称?手机后四位】 \n》比如：91活水泉?1407\n》91后面的为您的昵称。\n》昵称后面的？号不能少哦！\n【900】如何查看用户昵称\n【901】如何查看手机信息\n【5】进入良友广播\n";
           break;
         case '900':
           $contentStr =  "Q:如何查看用户昵称？\n A:登录http://yongbuzhxi.com查看。\n回复【9】返回绑定菜单，回复【00】返回主菜单\n【5】进入良友广播\n";
@@ -312,6 +312,15 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
+        case '520':
+        // http://media.haomuren.org/dev/joy/joyhrt0716.mp3
+          $title = '喜乐的心';
+          $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
+          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;        
         case '521'://http://media.haomuren.org/dev/ev/evn0709.mp3
         // 荒漠甘泉乐侣
           $title = '荒漠甘泉乐侣';
@@ -344,7 +353,6 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         default:
-            $contentStr = "回复【00】进入主菜单\n回复【5】进入良友广播\n如需帮助，请回复【911】\n或加永不止息会员QQ群：322-1989-01\n进入官网：http://yongbuzhixi.com \n";
             if(substr($keyword, 0,2) == '91') {
               $keyword = substr($keyword, 2);
               $keywords = explode('?', $keyword);
@@ -352,42 +360,45 @@ function mp_service_response() {
               if (!isset($keywords[1])) {
                 $keywords = explode('？', $keyword);
               }
-              $name = $keywords[0];
-              if(strlen($keywords[1])!=4) {
-                $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-                // break;
-              }
-              $error_msg = user_validate_name($name);
-              if(strlen($error_msg)>0){
-                $contentStr = $error_msg;
-                // break;
-              }
-              $account = user_load_by_name($name);
-              if(!$account) {
-                $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
-                // break;
-              }else {
-                $profile = profile2_load_by_user($account);
-                $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
-                if(substr($tel, 7)!==$keywords[1]) {
-                  $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+              if (!isset($keywords[1])) {
+                $contentStr = "昵称后面缺少问号！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+              }else{
+                $name = $keywords[0];
+                if(strlen($keywords[1])!=4) {
+                  $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                  // break;
+                }
+                $error_msg = user_validate_name($name);
+                if(strlen($error_msg)>0){
+                  $contentStr = $error_msg;
+                  // break;
+                }
+                $account = user_load_by_name($name);
+                if(!$account) {
+                  $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
                   // break;
                 }else {
-                  //if bind,or not
-                  $uid = mp_service_is_bind($account->uid);
-                  if($uid) {
-                    $contentStr = "用户名【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                  $profile = profile2_load_by_user($account);
+                  $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
+                  if(substr($tel, 7)!==$keywords[1]) {
+                    $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
                     // break;
                   }else {
-                    mp_service_bind_uid($FromUserName,$account->uid);
-                    $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
-                    // break;
+                    //if bind,or not
+                    $uid = mp_service_is_bind($account->uid);
+                    if($uid) {
+                      $contentStr = "用户名【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                      // break;
+                    }else {
+                      mp_service_bind_uid($FromUserName,$account->uid);
+                      $contentStr = "恭喜您，【".$account->name."】绑定成功！！\n回复【00】进入主菜单";
+                      // break;
+                    }
                   }
                 }
-              }
-            }
+              } 
+            } elseif (substr($keyword, 0,2) == '20') {
             //201+您想说的话
-            if (substr($keyword, 0,2) == '20') {
               $menukey = substr($keyword, 0, 3);//201-204
               $keyword = substr($keyword, 3);
               if(strlen($keyword) < 10 ) {
@@ -450,6 +461,9 @@ function mp_service_response() {
                 }
               }
               # code...
+            }else {
+              $wechatObj->setFuncFlag(TRUE);
+              $contentStr = "对不起，机器人还在努力学习，暂能识别您发的这条指令\n如需帮助，请回复【911】\n或加永不止息会员QQ群：322-1989-01\n回复【00】进入主菜单\n回复【5】进入良友广播\n进入官网：http://yongbuzhixi.com \n";
             }
           break;
       }
@@ -463,8 +477,6 @@ function mp_service_response() {
       mp_service_focus();
       break;
     case Wechat::MSGTYPE_IMAGE:
-      watchdog('mp_service-MSGTYPE_IMAGE', '已收到您发送的图片！', array(), WATCHDOG_NOTICE, 'link');
-
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
       $PicUrl =  $wechatObj->getRev()->getRevPic();
       $uid = mp_service_get_uid_by_name($FromUserName);
