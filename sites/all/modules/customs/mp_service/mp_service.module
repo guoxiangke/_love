@@ -645,7 +645,7 @@ function mp_service_focus() {
   $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
   if (!empty($postStr)) {
     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-    watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
+    // watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
     //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
     //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
     $fromUsername = $postObj->FromUserName;
