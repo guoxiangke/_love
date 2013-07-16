@@ -232,8 +232,6 @@ function mp_service_response() {
           break;
         case '502':
         case '５０２':
-          # code...
-          break;
           $title = '拥抱每一天';
           $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
           $desc = date('n月j日');
@@ -250,9 +248,9 @@ function mp_service_response() {
           break; 
         case '5030':
         case '５０３０':
-          $title = '恋爱季节-0716';
+          $title = '婚姻很珍贵，婚前要预备';
           $musicurl = 'http://liangyou.nissigz.com/media/se/se130716.mp3';
-          $desc = date('0716');
+          $desc = "解读网络社交与圣经婚恋价值观";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break; 
