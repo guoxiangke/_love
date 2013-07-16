@@ -190,6 +190,7 @@ function mp_service_response() {
           $wechatObj->news($news)->reply();
           break;
         case '500':
+        case '５００':
           $title = '长夜的牵引';
           $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
           $desc = date('n月j日');
@@ -198,6 +199,8 @@ function mp_service_response() {
           break;
         case '524':
         case '501':
+        case '５２４':
+        case '５０１':
           $title = '灵命日粮';
           $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
           $desc = date('n月j日');
@@ -205,29 +208,25 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '5010':
+        case '５０１０':
           // $title = '灵命日粮';
           $html = file_get_html('http://simplified-odb.org/');
           //get title
           $Title = trim($html->find('h1.entry-title', 0)->plaintext);
-          watchdog('Title', $Title, array(), WATCHDOG_NOTICE, 'link');
           // get body
           $Description = trim($html->find('.entry-content', 0)->plaintext);
-          watchdog('Description', $Description, array(), WATCHDOG_NOTICE, 'link');
           // Try to set your custom field
           $html = file_get_html('http://ya-mi.org/category/devotionals/odb/');
           $picture = $html->find('.homepost .thumb img', 0);
 
           $PicUrl = $picture->attr['src'];
-          watchdog('PicUrl', $PicUrl, array(), WATCHDOG_NOTICE, 'link');
-           $img = array(
-              'Title'=> $Title,
-              'Description'=>$Description,
-              'PicUrl'=>$PicUrl,
-              'Url'=> 'http://simplified-odb.org'
-            );
-
-          watchdog('img', '<pre>'.print_r($img,TRUE), array(), WATCHDOG_NOTICE, 'link');
-          $news[] = $img; 
+          $img = array(
+            'Title'=> $Title,
+            'Description'=>$Description,
+            'PicUrl'=>$PicUrl,
+            'Url'=> 'http://simplified-odb.org'
+          );
+          $news[] = $img;
           $wechatObj->news($news)->reply();
           break;
         case '502':
