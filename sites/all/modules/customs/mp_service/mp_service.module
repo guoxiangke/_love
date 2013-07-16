@@ -487,6 +487,19 @@ function mp_service_response() {
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp]代祷事项已收到，主耶稣教导我们与哀哭的人同哭，愿照主的心意成就在你身上，阿门！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+            } elseif (substr($keyword, 0,3) == '900') {
+              // $keyword = '900 gxk@mail.com name';
+              $keywords = explode(' ', $keyword);
+              if (!isset($keywords[2])) {
+                 $contentStr = "内测申请格式不正确！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              }elseif(!valid_email_address($keywords[1])){
+                $contentStr = "邮箱不正确！\n回复【900 个人邮箱 姓名】申请内测,注意中间空格\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              }elseif(!user_load_by_mail($keywords[1])){
+                $contentStr = "该邮箱已注册！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              }else{
+                $wechatObj->setFuncFlag(TRUE);
+                $contentStr = "内测申请已收到，管理员审核后，请耐心等待永不止息下一轮内测！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
+              }
             } else {
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习ing\n暂不能识别本指令\n请耐心等待客服响应\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n回复【911+意见建议内容】给我\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
