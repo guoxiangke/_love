@@ -373,7 +373,7 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         default:
-            if(substr($keyword, 0,2) == '91') {
+            if(substr($keyword, 0,2) == '91' && substr($keyword, 0,3) != '911') {
               $keyword = substr($keyword, 2);
               $keywords = explode('?', $keyword);
 
