@@ -215,7 +215,7 @@ function mp_service_response() {
           watchdog('Description', $Description, array(), WATCHDOG_NOTICE, 'link');
           // Try to set your custom field
           $html = file_get_html('http://ya-mi.org/category/devotionals/odb/');
-          $picture = $html->find('.homepost .thumb img', -1);
+          $picture = $html->find('.homepost .thumb img', 0);
 
           $PicUrl = $picture->attr['src'];
           watchdog('PicUrl', $PicUrl, array(), WATCHDOG_NOTICE, 'link');
