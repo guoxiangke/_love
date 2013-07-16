@@ -74,7 +74,7 @@ function mp_service_response() {
       }
       switch ($keyword) {
         case '00':     
-          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n回复【5010】获得灵命日粮文字版new";
+          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【5010】获得灵命日粮文字版new";
           break;        
         case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
@@ -88,7 +88,7 @@ function mp_service_response() {
               ->execute();
           break;
         case '1':
-          $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定微信后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】获得灵命日粮文字版\n注意事项：\n1.请使用半角输入指令\n例如：\n半角502\n全角５０２\n2.指令请尽量使用英文输入法\n例如：\n中文问号???\n英文问号？？？ ";
+          $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n注意事项：\n1.请使用半角输入指令\n例如：\n半角502\n全角５０２\n2.指令请使用英文输入法\n例如：\n英文问号???\n中文问号？？？ ";
           break;
         case '2':
           $contentStr = "表达爱的心语,遥寄未来的TA!\n【20】发布照片\n【201】无主情话\n【202】时光隧道\n【203】独居生活\n【204】想对你说\n回复获得更详细发布说明\n 回复【00】进入主菜单\n回复【5】进入良友广播";
@@ -481,9 +481,15 @@ function mp_service_response() {
                 }
               }
               # code...
-            }else {
+            } elseif (substr($keyword, 0,3) == '911') {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习ing\n暂不能识别本指令\n请耐心等待客服响应\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n进入官网：http://yongbuzhixi.com \n";
+              $contentStr = "[Joyful]谢谢您的反馈，我们将慎重考虑您的意见和建议，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+            }  elseif (substr($keyword, 0,3) == '119') {
+              $wechatObj->setFuncFlag(TRUE);
+              $contentStr = "代祷事项已收到，主耶稣教导我们与哀哭的人同哭[Sob]，愿照主的心意成就在你身上，阿门！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+            } else {
+              $wechatObj->setFuncFlag(TRUE);
+              $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习ing\n暂不能识别本指令\n请耐心等待客服响应\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n回复【911+意见建议内容】给我\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
           break;
       }
