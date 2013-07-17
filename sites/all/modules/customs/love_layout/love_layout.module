@@ -674,7 +674,7 @@ function love_layout_node_view($node, $view_mode, $langcode) {
   }
   if($node->type == 'photo') {
     // drupal_set_message(t('For now, you can see the comment page! will go the front page!'), 'status', FALSE);
-    drupal_goto('<front>');
+    // drupal_goto('<front>');
   }
 }
 /**
@@ -687,12 +687,17 @@ function love_layout_views_pre_build(&$view) {
     module_load_include('inc', 'love_layout', 'love_layout.customs');  
     $form['add_status'] = _node_add4love('status');
     $view->attachment_before = drupal_render($form['add_status']);
-  }elseif($view->name == 'index'){
+  }
 
-    // module_load_include('inc', 'node', 'node.pages'); 
-    // module_load_include('inc', 'love_layout', 'love_layout.customs');  
-    // $form['add_status'] = _node_add4love('photo');
-    // $view->attachment_before = drupal_render($form['add_status']);
+  if($view->name == 'index' && $view->current_display == 'page_image'){
+    drupal_add_js(drupal_get_path('module', 'love_layout').'/wookmark/libs/jquery.imagesloaded.js');
+    drupal_add_js(drupal_get_path('module', 'love_layout').'/wookmark/jquery.wookmark.js');
+    drupal_add_js(drupal_get_path('module', 'love_layout').'/js/index-photo-image.js');
+
+    drupal_add_js(drupal_get_path('module', 'love_layout').'/wookmark/libs/jquery.colorbox-min.js');
+    drupal_add_css(drupal_get_path('module', 'love_layout').'/wookmark/example-lightbox/css/colorbox.css');
+
+    drupal_add_css(drupal_get_path('module', 'love_layout').'/css/index-photo-image.css');
   }
 }
 

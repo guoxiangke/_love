@@ -12,11 +12,11 @@ lang : {
 	cssDirection: 'ltr',
 	loadingText : '',//加载中...
 	loadingTitle : '取消',
-	focusTitle : 'Click to bring to front',
-	fullExpandTitle : '查看da图',//Expand to actual size (f)
+	focusTitle : '',//Click to bring to front
+	fullExpandTitle : '查看大图',//Expand to actual size (f)
 	creditsText : '',//Powered by <i>Highslide JS</i>
 	creditsTitle : '',//Go to the Highslide JS homepage
-	restoreTitle : '点击关闭,点击+拖拽图片。Use arrow keys for next and previous.'
+	restoreTitle : ''//点击关闭,点击+拖拽图片。Use arrow keys for next and previous.
 },
 // See http://highslide.com/ref for examples of settings  
 graphicsDir : 'highslide/graphics/',

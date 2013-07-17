@@ -108,9 +108,15 @@ function love_preprocess_views_view(&$vars) {
     drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
     drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
     drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
+    drupal_add_js(drupal_get_path('module', 'love') .'/js/highslide-cfg.js');
+    
+    drupal_add_js(drupal_get_path('module', 'love').'/js/views-photo-index.js');
+  }
+
+   if($view->name == 'index' && $view->current_display == 'page_image'){    
+    drupal_add_js(drupal_get_path('module', 'love').'/js/views-photo-image.js');
   }
 }
-
 /**
  * when a user invite by love group member,
  * let it join the love group too.
