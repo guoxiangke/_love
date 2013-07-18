@@ -520,37 +520,37 @@ position: relative;
 height: 0;
 }
 .module-selfInfo-inner .triangle_top {
-border-color: transparent transparent #FFF;
-border-style: solid;
-border-width: 10px;
-font-size: 0;
-left: 30px;
-position: absolute;
-text-align: center;
-top: -30px;
+	border-color: transparent transparent #FFF;
+	border-style: solid;
+	border-width: 10px;
+	font-size: 0;
+	left: 30px;
+	position: absolute;
+	text-align: center;
+	top: -30px;
 }
 
 .module-selfInfo-title {
-padding: 2px 0 5px;
-overflow: hidden;
-zoom: 1;
+	padding: 2px 0 5px;
+	overflow: hidden;
+	zoom: 1;
 }
 .module-selfInfo-title h2 {
-font-size: 16px;
-font-family: Verdana;
-font-weight: bold;
-float: left;
- line-height: 0px;
+	font-size: 16px;
+	font-family: Verdana;
+	font-weight: bold;
+	display: inline;
+	line-height: 0px;
 }
 .module-selfInfo-setting {
-background: #F0F7FF;
-padding: 15px 15px;
+	background: #F0F7FF;
+	padding: 15px 15px;
 }
 /**user-info-block*/
 .user-total .t-focus,.user-total .t-follow,.user-total .t-nodes, .user-total .t-friends{
 	display:inline-block;
-		width: 23%;
-		text-align:center;
+	width: 23%;
+	text-align:center;
 }
 .user-total .t-follow{
 	border-left: 1px solid rgba(100, 100, 100, 0.4); 

@@ -39,24 +39,24 @@ function love_block_user_info() {
                   <b class="triangle_top"></b>
                </div>
                <div class="module-selfInfo-title">
-                  <h2><a class="link-mt" data-log="nickname" target="_blank" href="/601017">'.$account->name.'</a></h2>
+                  昵称：<h2>'.l($account->name,'user/'.$account->uid).'</h2>
                </div>
                <div id="selfInfo" class="module-selfInfo-setting">
                       <div class="user-total">
                       <div class="t-focus"> 
-                        <div class="num"><a href="javascript:void(0);" title="现在还不可以点">'. $focus_num .'</a></div>
+                        <div class="num">'.l($focus_num,'focus').'</div>
                         <div>关注</div>
                        </div>
                       <div class="t-follow">
-                        <div class="num"><a href="javascript:void(0);" title="以后可以点">'. $follow_num .'</a></div>
+                        <div class="num">'.l($follow_num,'follow').'</div>
                         <div>粉丝</div>
                       </div>
                       <div class="t-nodes">
-                        <div class="num"><a href="javascript:void(0);" title="敬请期待">'. count($photo_nodes).'</a></div>
+                        <div class="num">'.l(count($photo_nodes),'timeline').'</div>
                         <div>照片</div>
                       </div>
                       <div class="t-friends">
-                        <div class="num"><a href="javascript:void(0);" title="^_^还没做完">'. $friends_num .'</a></div>
+                        <div class="num">'.l($friends_num,'friends').'</div>
                         <div>熟人</div>
                       </div>
                     </div>

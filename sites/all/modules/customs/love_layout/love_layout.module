@@ -292,10 +292,32 @@ function love_layout_menu() {
   $items['welcome'] = array(
     'title' => 'Welcome,Please login first!',
     'page callback'    => 'love_anonymous_welcome',
-    'access callback' => 'user_is_anonymous',
+    'access arguments' => array('user_is_anonymous'),
     'type' => MENU_NORMAL_ITEM,
     'file' => 'love_layout.pages.inc',
 
+  );
+
+  $items['focus'] = array(
+    'title' => 'My focus',
+    'page callback'    => 'love_layout_my_focus',
+    'access arguments' => array('access user profiles'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'love_layout.pages.inc',
+  );
+  $items['follow'] = array(
+    'title' => 'Follow me',
+    'page callback'    => 'love_layout_my_focus',
+    'access arguments' => array('access user profiles'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'love_layout.pages.inc',
+  );
+  $items['friends'] = array(
+    'title' => 'My friends',
+    'page callback'    => 'love_layout_my_focus',
+    'access arguments' => array('access user profiles'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'love_layout.pages.inc',
   );
   return $items;
 }
