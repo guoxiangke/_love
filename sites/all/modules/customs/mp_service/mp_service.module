@@ -504,7 +504,7 @@ function mp_service_response() {
       //preg to get key_words
       $Event =  $wechatObj->getRev()->getRevEvent();
       watchdog('mp_service', '<pre>'.print_r($Event,TRUE), array(), WATCHDOG_NOTICE, 'link');
-      if(is_array($event)) {
+      if(is_array($Event)) {
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
         $uid = mp_service_get_uid_by_name($FromUserName);
         if($Event['event'] == 'subscribe') {
