@@ -19,23 +19,6 @@ function mp_service_menu() {
   return $items;
 }
 
-function my_module_function($last_reply_code=0) {
-  global $user;
-  $my_data = &drupal_static(__FUNCTION__);
-  if (!isset($my_data)) {
-    if ($cache = cache_get('mp_service_'.$user->uid)) {
-      $my_data = $cache->data;
-    }
-    else {
-      // Do your expensive calculations here, and populate $my_data
-      // with the correct stuff..
-      // cache_set('my_module_data', $my_data, 'cache');
-      cache_set('mp_service_'.$user->uid, $my_data, 'cache_mp_service', time() + 60);//1分钟内回复有效
-    }
-  }
-  return $my_data;
-}
-
 function mp_service_response() {
   module_load_include('inc', 'mp_service', 'mp_service_adv');
   $options = array(
@@ -74,7 +57,7 @@ function mp_service_response() {
       }
       switch ($keyword) {
         case '00':     
-          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n【5030】恋爱季节为您解读网络社交与圣经婚恋价值观\n广播指令为纯数字，请勿带*号。号和中括号\n";
+          $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n";
           break;        
         case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
@@ -88,7 +71,7 @@ function mp_service_response() {
               ->execute();
           break;
         case '1':
-          $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n回复【5030】恋爱季节为您解读网络社交与圣经婚恋价值观\n回复【110】推荐帮助-如何推荐给好友？";
+          $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n回复回复【110】推荐帮助-如何推荐给好友？";
           break;
         case '2':
           $contentStr = "表达爱的心语,遥寄未来的TA!\n【20】发布照片\n【201】无主情话\n【202】时光隧道\n【203】独居生活\n【204】想对你说\n回复获得更详细发布说明\n 回复【00】返回主菜单\n回复【5】进入良友广播";
@@ -134,7 +117,7 @@ function mp_service_response() {
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带*号。号和【】中括号\n回复【5030】恋爱季节为您解读网络社交与圣经婚恋价值观\n回复【110】推荐给好友";
+          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带*号。号和【】中括号\n回复回复【110】推荐给好友";
           break;
         case '51':
           $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n带*节目为周一到周五\n带^节目为15分钟\n回复【110】推荐给好友\n";
@@ -227,7 +210,7 @@ function mp_service_response() {
           $Title = trim($html->find('h1.entry-title', 0)->plaintext);
           // get body
           $Description = trim($html->find('.entry-content', 0)->plaintext);
-          $Description .= "【5030】恋爱季节为您解读网络社交与圣经婚恋价值观";
+          
           // Try to set your custom field
           $html = file_get_html('http://ya-mi.org/category/devotionals/odb/');
           $picture = $html->find('.homepost .thumb img', 0);
@@ -257,15 +240,7 @@ function mp_service_response() {
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break; 
-        case '5030':
-        case '５０３０':
-          $title = '婚姻很珍贵，婚前要预备';
-          $musicurl = 'http://liangyou.nissigz.com/media/se/se130716.mp3';
-          $desc = "解读网络社交与圣经婚恋价值观";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break; 
+          break;
         case '504':
         case '５０４':
           $title = '幸福满家园';
@@ -502,7 +477,7 @@ function mp_service_response() {
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[Joyful]谢谢您的反馈，我们将慎重考虑您的意见和建议，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n【5030】恋爱季节为您解读网络社交与圣经婚恋价值观\n";
+              $contentStr = "[Joyful]谢谢您的反馈，我们将慎重考虑您的意见和建议，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp]代祷事项已收到，主耶稣教导我们与哀哭的人同哭，愿照主的心意成就在你身上，阿门！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
@@ -522,7 +497,7 @@ function mp_service_response() {
               }
             } else {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习中,暂不能识别本指令，广播指令为纯数字，请勿带*号。号和中括号\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n回复【5030】恋爱季节为您解读网络社交与圣经婚恋价值观\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习中,暂不能识别本指令，广播指令为纯数字，请勿带*号。号和中括号\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n回复永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
           break;
       }
