@@ -516,7 +516,7 @@ function mp_service_response() {
           }
           mp_service_text_reply($contentStr);
         }elseif($Event['event'] == 'unsubscribe') {
-          mp_service_unsubscribe();
+          mp_service_unsubscribe($FromUserName);
           $contentStr = '怎么走了呢？';
         }
       }
