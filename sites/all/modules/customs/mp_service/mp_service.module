@@ -657,6 +657,7 @@ function mp_service_add_user($FromUserName,$last_cmd='subscribe') {
     ->fields(array(
       'fromusername' => $FromUserName,
       'last_cmd' => $last_cmd,
+      'unsubscribe' => 0,
       'last_cmd_timestamp' => REQUEST_TIME,
       'created' => REQUEST_TIME,
     ))
@@ -673,6 +674,7 @@ function mp_service_unsubscribe($FromUserName) {
     ->execute();
 }
 function mp_service_resubscribe($FromUserName) {
+  watchdog('mp_service_resubscribe', 'mp_service_resubscribe', array(), WATCHDOG_NOTICE, 'link');
   db_update('mp_service')
     ->fields(array(
       'unsubscribe' => 0,
