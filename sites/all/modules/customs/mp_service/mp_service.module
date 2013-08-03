@@ -36,7 +36,11 @@ function mp_service_response() {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
+      if(!mp_service_exsit_records($FromUserName)) {
+        mp_service_add_user($FromUserName,$last_cmd='old_user');
+      }
       $uid = mp_service_get_uid_by_name($FromUserName);
+
       //default msg
       $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n";
       if($uid) {
@@ -627,6 +631,11 @@ function mp_service_get_records($uid) {
   $res = db_query('SELECT * FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchAssoc();
   return $res;
 }
+
+function mp_service_exsit_records($FromUserName) {
+  $res = db_query('SELECT * FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchAssoc();
+  return $res;
+}
 function mp_service_get_nofakeid() {
   $res = db_query('SELECT * FROM {mp_service} WHERE fakeid = 0')->fetchAll();
   return (array)$res;
@@ -644,11 +653,11 @@ function mp_service_bind_uid($FromUserName,$bindUid) {
     ->execute();
 }
 // and a wechat user!
-function mp_service_add_user($FromUserName) {
+function mp_service_add_user($FromUserName,$last_cmd='subscribe') {
   $result = db_insert('mp_service')
     ->fields(array(
       'fromusername' => $FromUserName,
-      'last_cmd' => 'subscribe',
+      'last_cmd' => $last_cmd,
       'last_cmd_timestamp' => REQUEST_TIME,
       'created' => REQUEST_TIME,
     ))
@@ -703,36 +712,6 @@ function mp_service_text_reply($contentStr='error~') {
     echo $resultStr;
     exit;
 
-  }
-}
-
-function mp_service_focus() {
-  $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-  if (!empty($postStr)) {
-    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-    // watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
-    //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
-    //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
-    $fromUsername = $postObj->FromUserName;
-    $toUsername = $postObj->ToUserName;
-    $keyword = trim($postObj->Content);
-    $time = time();
-    $textTpl = "<xml>
-    <ToUserName><![CDATA[%s]]></ToUserName>
-    <FromUserName><![CDATA[%s]]></FromUserName>
-    <CreateTime>%s</CreateTime>
-    <MsgType><![CDATA[%s]]></MsgType>
-    <Content><![CDATA[%s]]></Content>
-    <FuncFlag>0</FuncFlag>
-    </xml>";   
-    //subscribe begin我们将不定期发送永不止息最新动态给您~\n
-    if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
-      $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
-      $msgType = "text";
-      $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-      echo $resultStr;
-      exit;
-    }
   }
 }
 
