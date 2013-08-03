@@ -62,13 +62,7 @@ function mp_service_response() {
         case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           if($uid) 
-            db_update('mp_service')
-              ->fields(array(
-                'last_cmd' => '88',
-                'last_cmd_timestamp' => REQUEST_TIME,
-              ))
-              ->condition('uid', $uid)
-              ->execute();
+            mp_service_update_cmd('88',$uid);
           break;
         case '1':
           $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n回复回复【110】推荐帮助-如何推荐给好友？";
@@ -117,7 +111,7 @@ function mp_service_response() {
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带*号。号和【】中括号\n回复回复【110】推荐给好友";
+          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】晨曦讲座\n【509】生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带特殊符号\n回复回复【110】推荐给好友";
           break;
         case '51':
           $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n带*节目为周一到周五\n带^节目为15分钟\n回复【110】推荐给好友\n";
@@ -510,10 +504,21 @@ function mp_service_response() {
       //preg to get key_words
       $Event =  $wechatObj->getRev()->getRevEvent();
       watchdog('mp_service', '<pre>'.print_r($Event,TRUE), array(), WATCHDOG_NOTICE, 'link');
-      if(1){
-        mp_service_focus();  
-      }else{
-        // mp_service_unfocus();  
+      if(is_array($event)) {
+        $FromUserName =  $wechatObj->getRev()->getRevFrom();
+        $uid = mp_service_get_uid_by_name($FromUserName);
+        if($Event['event'] == 'subscribe') {
+          if($uid) {
+            $contentStr = "欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
+          }else {
+            $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊符号\n除广播内容外，所有功能测试开发中～敬请期待！";
+            mp_service_add_user($FromUserName);
+          }
+          mp_service_text_reply($contentStr);
+        }elseif($Event['event'] == 'unsubscribe') {
+          mp_service_unsubscribe();
+          $contentStr = '怎么走了呢？';
+        }
       }
       
       break;
@@ -524,13 +529,7 @@ function mp_service_response() {
       watchdog('PicUrl'.$uid, $PicUrl, array(), WATCHDOG_NOTICE, 'link');
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
-        db_update('mp_service')
-          ->fields(array(
-            'last_cmd' => 'image',
-            'last_cmd_timestamp' => REQUEST_TIME,
-          ))
-          ->condition('uid', $uid)
-          ->execute();
+        mp_service_update_cmd('image',$uid);
           watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
         if($mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] > 900)) {
           $contentStr = "指令已超时！\n请回复【2】查看帮助！";
@@ -641,6 +640,59 @@ function mp_service_bind_uid($FromUserName,$bindUid) {
     ))
     ->execute();
 }
+// and a wechat user!
+function mp_service_add_user($FromUserName) {
+  $result = db_insert('mp_service')
+    ->fields(array(
+      'fromusername' => $FromUserName,
+      'last_cmd' => 'subscribe',
+      'last_cmd_timestamp' => REQUEST_TIME,
+      'created' => REQUEST_TIME,
+    ))
+    ->execute();
+}
+function mp_service_unsubscribe($FromUserName) {
+  db_update('mp_service')
+    ->fields(array(
+      'unsubscribe' => 1,
+      'last_cmd' => 'unsubscribe',
+      'last_cmd_timestamp' => REQUEST_TIME,
+      'created' => REQUEST_TIME,
+    ))
+    ->condition('fromusername', $FromUserName)
+    ->execute();
+}
+function mp_service_text_reply($contentStr='error~') {
+  $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+  if (!empty($postStr)) {
+    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    // watchdog('mp-postObj', print_r($postObj,true), array(), WATCHDOG_NOTICE, 'link');
+    //focus::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372159280 [MsgType] => event [Event] => subscribe [EventKey] => SimpleXMLElement Object ( ) )
+    //receive::SimpleXMLElement Object ( [ToUserName] => gh_e7d44148423c [FromUserName] => oNAD2jlAk0ZGHkgezd_MnQbGrBPM [CreateTime] => 1372158829 [MsgType] => text [Content] => 看来 [MsgId] => 5893377295572656705 )
+    $fromUsername = $postObj->FromUserName;
+    $toUsername = $postObj->ToUserName;
+    $keyword = trim($postObj->Content);
+    $time = time();
+    $textTpl = "<xml>
+    <ToUserName><![CDATA[%s]]></ToUserName>
+    <FromUserName><![CDATA[%s]]></FromUserName>
+    <CreateTime>%s</CreateTime>
+    <MsgType><![CDATA[%s]]></MsgType>
+    <Content><![CDATA[%s]]></Content>
+    <FuncFlag>0</FuncFlag>
+    </xml>";   
+    //subscribe begin我们将不定期发送永不止息最新动态给您~\n
+    // if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
+      
+    // }
+    // $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
+    $msgType = "text";
+    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+    echo $resultStr;
+    exit;
+
+  }
+}
 
 function mp_service_focus() {
   $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
@@ -663,7 +715,7 @@ function mp_service_focus() {
     </xml>";   
     //subscribe begin我们将不定期发送永不止息最新动态给您~\n
     if($postObj->MsgType == 'event' && $postObj->Event == 'subscribe') {
-      $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】进入良友广播\n广播指令为纯数字，请勿带*号。号和中括号\n除广播内容外，所有功能测试开发中～敬请期待！";
+      $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
       $msgType = "text";
       $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
       echo $resultStr;
@@ -697,4 +749,14 @@ function mp_service_imageReplyText($contentStr) {
       exit;
     }
   }
+}
+
+function mp_service_update_cmd($last_cmd,$uid) {
+  db_update('mp_service')
+    ->fields(array(
+      'last_cmd' => $last_cmd,
+      'last_cmd_timestamp' => REQUEST_TIME,
+    ))
+    ->condition('uid', $uid)
+    ->execute();
 }
