@@ -511,6 +511,7 @@ function mp_service_response() {
         if($Event['event'] == 'subscribe') {
           if($uid) {
             $contentStr = "欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
+            mp_service_resubscribe($FromUserName);
           }else {
             $contentStr = "欢迎关注[Smile]\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【5】收听良友广播\n广播指令为纯数字，请勿带特殊符号\n除广播内容外，所有功能测试开发中～敬请期待！";
             mp_service_add_user($FromUserName);
@@ -638,7 +639,6 @@ function mp_service_bind_uid($FromUserName,$bindUid) {
       'uid' => $bindUid,
       'last_cmd' => '91bind',
       'last_cmd_timestamp' => REQUEST_TIME,
-      'created' => REQUEST_TIME,
     ))
     ->condition('fromusername', $FromUserName)
     ->execute();
@@ -660,7 +660,16 @@ function mp_service_unsubscribe($FromUserName) {
       'unsubscribe' => 1,
       'last_cmd' => 'unsubscribe',
       'last_cmd_timestamp' => REQUEST_TIME,
-      'created' => REQUEST_TIME,
+    ))
+    ->condition('fromusername', $FromUserName)
+    ->execute();
+}
+function mp_service_resubscribe($FromUserName) {
+  db_update('mp_service')
+    ->fields(array(
+      'unsubscribe' => 0,
+      'last_cmd' => 'resubscribe',
+      'last_cmd_timestamp' => REQUEST_TIME,
     ))
     ->condition('fromusername', $FromUserName)
     ->execute();
