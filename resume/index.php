@@ -238,9 +238,9 @@ DruEdu - Next generation education solutions for schools based on Drupal. And I 
 <img src="http://switchy.samabox.com/images/icon-128.png" alt="switchy" width="32px"/>switchy!
 <img src="http://developer.android.com/assets/images/dac_logo.png" alt="" /><br/>
 <span id="sae"><a href="http://sae.sina.com.cn" target="_blank" alt="SAE">SAE</a></span>
-<img src="http://bkarak.wizhut.com/blog/wp-content/uploads/2012/01/app_engine-64.png" alt="switchy"/>
+<!-- <img src="http://bkarak.wizhut.com/blog/wp-content/uploads/2012/01/app_engine-64.png" alt="switchy"/> -->
 <img src="http://symfony.com/images/common/logo/logo_symfony_header.png" alt="switchy"/>
-<img src="http://www.phonegap.cn/wp-content/uploads/2011/07/phonegap2.png" alt="" />
+<!-- <img src="http://www.phonegap.cn/wp-content/uploads/2011/07/phonegap2.png" alt="" /> -->
 <p>
 <li itemprop="itemListElement">godaddy、bluehost、万网、西部数码等vps生产环境配置</li>
 <li itemprop="itemListElement">Win2003服务器维护配置</li>
