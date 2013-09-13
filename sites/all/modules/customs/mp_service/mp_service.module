@@ -395,6 +395,7 @@ function mp_service_response() {
           $week_day = date('N', time());
           $tus = date('d')+(2-$week_day);
           $string = date('ym',time()).$tus;
+          // $musicurl = 'http://liangyou.nissigz.com/media/eg/eg'.$string.'.mp3';
           $musicurl = 'http://liangyou.nissigz.com/media/eg/eg'.$string.'.mp3';
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
