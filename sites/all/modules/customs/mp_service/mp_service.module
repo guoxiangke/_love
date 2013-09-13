@@ -396,8 +396,8 @@ function mp_service_response() {
           $tus = date('d')+(2-$week_day);
           $string = date('ym',time()).$tus;
           // $musicurl = 'http://liangyou.nissigz.com/media/eg/eg'.$string.'.mp3';
-          $musicurl = 'http://liangyou.nissigz.com/media/eg/eg'.$string.'.mp3';
-          $desc = date('n月j日');
+          $musicurl = 'http://audio2.liangyou.net/files/media/program_live/eg/eg'.$string.'.mp3';
+          $desc = date("n月$tus日");
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
