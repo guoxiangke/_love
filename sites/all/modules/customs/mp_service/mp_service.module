@@ -394,7 +394,7 @@ function mp_service_response() {
           $title = '英语世界';
           $week_day = date('N', time());
           $tus = date('d')+(2-$week_day);
-          $string = date('ym',time());
+          $string = date('ym',time()).$tus;
           $musicurl = 'http://liangyou.nissigz.com/media/eg/eg'.$string.'.mp3';
           $desc = date('n月j日');
           $hgmusicurl = $musicurl;
