@@ -144,6 +144,25 @@ function mp_service_response() {
         case '119':
           $contentStr =  "我很忙，但很愿意为您服务，请微信加bluesky_still\n把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
+        case 'ee'
+          $html = file_get_html('http://blog.sina.cn/dpool/blog/articlelist_1356034001.html');
+          $items = $html->find('#pl-blog-list .cont-txt-tit-ls li');
+          foreach ($items->children as $key => $html) {
+            $link = $html->find('.pic-tit-lk', 0);
+            $Url = $link->attr['href'];
+            $Title = trim($html->find('h2', 0)->plaintext);
+            $Description = trim($html->find('.desc', 0)->plaintext);
+
+            $picture = $html->find('.pic', 0);
+            $PicUrl = $picture->attr['data-img'];
+            $img = array(
+              'Title'=> $Title,
+              'Description'=>$Description,
+              'PicUrl'=>$PicUrl,
+              'Url'=>$Url
+            );
+            $news[] = $img; 
+          }
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
           // $items = $html->find('#links', 0);
