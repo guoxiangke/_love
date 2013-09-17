@@ -144,7 +144,7 @@ function mp_service_response() {
         case '119':
           $contentStr =  "我很忙，但很愿意为您服务，请微信加bluesky_still\n把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
-        case 'ee'
+        case 'ee':
           $html = file_get_html('http://blog.sina.cn/dpool/blog/articlelist_1356034001.html');
           $items = $html->find('#pl-blog-list .cont-txt-tit-ls li');
           foreach ($items->children as $key => $html) {
