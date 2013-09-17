@@ -162,7 +162,8 @@ function mp_service_response() {
               'Url'=>$Url
             );
             $news[] = $img; 
-          }
+          } 
+          $wechatObj->news($news)->reply();
           break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
