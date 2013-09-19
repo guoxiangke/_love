@@ -144,6 +144,14 @@ function mp_service_response() {
         case '119':
           $contentStr =  "我很忙，但很愿意为您服务，请微信加bluesky_still\n把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
+        case 'Y':
+        case 'y':
+          $contentStr =  "恭喜您，您的手机看来比我的好，祝您中秋快乐！";
+          break;
+        case 'N':
+        case 'n':
+          $contentStr =  "呜呜，我们同命相连啊，可能的是新浪博客搞怪啦！我会努力再做一个新的，祝中秋快乐！";
+          break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
           // $items = $html->find('#links', 0);
@@ -391,6 +399,7 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case 'eg':
+        case 'Eg':
           $title = '英语世界';
           $week_day = date('N', time());
           $tus = date('d')+(2-$week_day);
