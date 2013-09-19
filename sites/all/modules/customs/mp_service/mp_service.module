@@ -542,7 +542,7 @@ function mp_service_response() {
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[Joyful]谢谢您的反馈，我们将慎重考虑您的意见和建议，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp]代祷事项已收到，主耶稣教导我们与哀哭的人同哭，愿照主的心意成就在你身上，阿门！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
