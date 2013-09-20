@@ -146,11 +146,11 @@ function mp_service_response() {
           break;
         case 'Y':
         case 'y':
-          $contentStr =  "恭喜您，您的手机看来比我的好，祝您中秋快乐！";
+          $contentStr =  "恭喜您，您的手机看来比我的好\n好像昨天没发月饼,回复YB获得月饼一块！";
           break;
         case 'N':
         case 'n':
-          $contentStr =  "呜呜，我们同命相连啊，可能的是新浪博客搞怪啦！我会努力再做一个新的，祝中秋快乐！";
+          $contentStr =  "呜呜，我们同命相连啊，可能的是新浪博客搞怪啦！我会努力再做一个新的!\n好像昨天没发月饼,回复YB获得月饼一块！";
           break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
@@ -398,6 +398,10 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
+        case '114':
+          $contentStr = "网上报名：请登录 http://119.57.53.19/kjdstq/enroll/info.aspx \n您还不是会员，暂无法获得短信报名方式和单身团契QQ群号码。\n如何成为永不止息微信会员，敬请关注我们近期的活动。\n";
+          $wechatObj->text($contentStr)->reply();
+          break;
         case 'eg':
         case 'Eg':
           $title = '英语世界';
@@ -542,7 +546,7 @@ function mp_service_response() {
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n昨天忘记给大家发月饼,群主失职，回复YB获得月饼一块！";
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp]代祷事项已收到，主耶稣教导我们与哀哭的人同哭，愿照主的心意成就在你身上，阿门！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
@@ -676,7 +680,7 @@ function mp_service_response() {
       // $wechatObj->text("已收到您发送的图片！")->reply();
       break;
     default:
-      $wechatObj->text("如需帮助，请加永不止息会员QQ群：322-1989-01\n测试开发中～敬请期待！")->reply();
+      $wechatObj->text("如需帮助，请加永不止息会员QQ群：?????\n测试开发中～敬请期待！")->reply();
   }
   return;
 
