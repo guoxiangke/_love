@@ -404,6 +404,7 @@ function mp_service_response() {
           break;
         case 'eg':
         case 'Eg':
+        case 'EG':
           $title = '英语世界';
           $week_day = date('N', time());
           $tus = date('d')+(2-$week_day);
