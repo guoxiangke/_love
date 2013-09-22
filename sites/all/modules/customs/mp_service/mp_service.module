@@ -417,6 +417,22 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
+        case 'wa':
+        case 'Wa':
+        case 'WA':
+          $title = '天路导向';
+          $week_day = date('N', time());
+          $add = 1;
+          if(date('d')/2) $add = -1;
+          $tus = date('d')+(6-$week_day) + $add;
+          $string = date('ym',time()).$tus;
+          // $musicurl = 'http://liangyou.nissigz.com/media/eg/eg'.$string.'.mp3';
+          $musicurl = 'http://audio2.liangyou.net/files/media/program_live/wa/wa'.$string.'.mp3';
+          $desc = date("n月");
+          $desc .= $tus."日";
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
         case 'ee':
           $html = file_get_html('http://blog.sina.cn/dpool/blog/articlelist_1356034001.html');
           $items = $html->find('#pl-blog-list .cont-txt-tit-ls li');
