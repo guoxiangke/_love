@@ -146,11 +146,11 @@ function mp_service_response() {
           break;
         case 'Y':
         case 'y':
-          $contentStr =  "恭喜您，您的手机看来比我的好\n好像昨天没发月饼,回复YB获得月饼一块！";
+          $contentStr =  "谢谢反馈！";
           break;
         case 'N':
         case 'n':
-          $contentStr =  "呜呜，我们同命相连啊，可能的是新浪博客搞怪啦！我会努力再做一个新的!\n好像昨天没发月饼,回复YB获得月饼一块！";
+          $contentStr =  "谢谢反馈！";
           break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
@@ -399,7 +399,7 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '114':
-          $contentStr = "网上报名：请登录 http://119.57.53.19/kjdstq/enroll/info.aspx \n您还不是会员，暂无法获得短信报名方式和单身团契QQ群号码。\n如何成为永不止息微信会员，敬请关注我们近期的活动。\n";
+          $contentStr = "网上报名十一十渡游\n请登录 http://119.57.53.19/kjdstq/enroll/info2.aspx \n您还不是会员，暂无法获得短信报名方式和单身团契QQ群号码。\n如何成为永不止息微信会员，敬请关注我们近期的活动。\n";
           $wechatObj->text($contentStr)->reply();
           break;
         case 'eg':
