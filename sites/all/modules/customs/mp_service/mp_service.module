@@ -408,7 +408,7 @@ function mp_service_response() {
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '114':
-          $contentStr = "网上报名十一十渡游\n请登录 http://119.57.53.19/kjdstq/enroll/info2.aspx \n您还不是会员，暂无法获得短信报名方式和单身团契QQ群号码。\n如何成为永不止息微信会员，敬请关注我们近期的活动。\n";
+          $contentStr = "盟约婚恋建造班3期电话: 13601038137\n如何成为永不止息微信会员，敬请关注我们近期的活动。\n";
           $wechatObj->text($contentStr)->reply();
           break;
         case 'eg':
