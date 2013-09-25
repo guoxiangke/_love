@@ -295,7 +295,7 @@ function mp_service_response() {
         case '5080':
         case '５０８０':
           $title = '晨曦讲座-体验版';
-          $musicurl = 'http://liangyou.u.qiniudn.com/ds130925.mp3';
+          $musicurl = 'http://liangyou.u.qiniudn.com/0ds130925.mp3';
           $desc = date('9月25日');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
