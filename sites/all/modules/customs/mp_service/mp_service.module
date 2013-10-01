@@ -206,6 +206,14 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
+
+        case 'test':
+          $title = '长夜的牵引';
+          $musicurl = 'http://audio.liangyou.net/download.php?t=1&c=ws&f=ws131001.mp3';
+          $desc = date('n月j日');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
         case '524':
         case '501':
         case '５２４':
