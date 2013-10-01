@@ -608,7 +608,7 @@ function mp_service_response() {
                 );
               if(is_numeric($before) && is_numeric($which) && in_array($which, array_keys($radio_list))) {
                 if($before>1) {
-                  $contentStr = '对不起，非会员只可以收听过去1天的节目。\n如何成为会员，敬请关注近期活动。'."/调皮";
+                  $contentStr = "对不起，非会员只可以收听过去1天的节目。\n如何成为会员，敬请关注近期活动。/调皮";
                   $wechatObj->text($contentStr)->reply();
                   return;
                 }
