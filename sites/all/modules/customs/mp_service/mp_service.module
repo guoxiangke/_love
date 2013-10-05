@@ -606,7 +606,7 @@ function mp_service_response() {
               if (isset($keywords[1])) {
                 $error_msg = user_validate_name($keywords[1]);
                 if(is_null($error_msg)){
-                  $nick_name =  $keywords[1];
+                  $nickname =  $keywords[1];
                   $level = mp_service_get_user_level($FromUserName);
                   if($level != 0) {
                     $contentStr = "您已有昵称，请勿重复绑定！\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
