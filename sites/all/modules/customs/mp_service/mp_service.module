@@ -195,6 +195,18 @@ function mp_service_response() {
           //多图文 1标题16字 2标题15字
           $wechatObj->news($news)->reply();
           break;
+         case '2010':
+          $img = array(
+              'Title'=> '永不止息教您玩转微信',
+              'Description'=>'查看您的奇葩昵称',
+              'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/modules/customs/love_layout/weichat_qr.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000340&itemidx=1&sign=a51084f905a80d28350a54feeac1f8ef&uin=Mzc3MzQxNQ%3D%3D&key=291fe541d5ac1faaeabbba46cdfa80317dbe7859a9f0633c59437a9a8af49bc01dca5176c5bc463d6969ddadd640368b&devicetype=android-16&version=25000104&lang=zh_CN'
+            );
+            $news[] = $img; 
+          //单图文 标题15字 摘要60字
+          //多图文 1标题16字 2标题15字
+          $wechatObj->news($news)->reply();
+          break;
         case '500':
         case '５００':
           $title = '长夜的牵引';
@@ -591,6 +603,29 @@ function mp_service_response() {
                 watchdog('911', '<pre>'.print_r($keywords,TRUE), array(), WATCHDOG_NOTICE, 'link');
                 $contentStr = "内测申请已收到，管理员审核后，请耐心等待永不止息下一轮内测！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
+            } elseif (substr($keyword, 0,3) == '201') {
+              // $keyword = '201?天空蔚蓝?bluesky_still';
+              $keywords= preg_split( "/(?|？)/", $keyword );
+              if (isset($keywords[1])) {
+                $error_msg = user_validate_name($keywords[1]);
+                if(is_null($error_msg)){
+                  $nick_name =  $keywords[1];
+                  $level = mp_service_get_user_level($FromUserName);
+                  if($level != 0) {
+                    $contentStr = "您已有昵称，请勿重复绑定！\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                  }else{
+                    mp_service_bind_nickname($FromUserName,$nickname);
+                    $contentStr = "恭喜您，【".$nickname."】绑定成功！！\n赶快回复【501-3】试试吧!";                    
+                  }
+                }else {
+                 $contentStr = "对不起，小夕还不能识别您的奇葩昵称！\n格式不正确！请确认输入格式为【201?天空蔚蓝】 \n请修改下您的微信名字再试一次\n回复【2010】获得帮助\n帮助:$error_msg\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+
+                }
+              }else{
+                $wechatObj->setFuncFlag(TRUE);
+                watchdog('level_errors', '<pre>'.$keyword, array(), WATCHDOG_NOTICE, 'link');
+                $contentStr = "对不起，格式不正确！\n请确认输入格式为【201?天空蔚蓝】\n回复【2010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
+              }
             } elseif(strlen($keyword) == 5) {
               $before = abs(strstr($keyword, '-'));
               $which = substr($keyword, 0,3);
@@ -606,9 +641,16 @@ function mp_service_response() {
                 '508' => 'ds',
                 '509' => 'gv',
                 );
+
+              $level = mp_service_get_user_level($FromUserName);
               if(is_numeric($before) && is_numeric($which) && in_array($which, array_keys($radio_list))) {
-                if($before>1) {
-                  $contentStr = "对不起，非会员只可以收听过去1天的节目。\n如何成为会员，敬请关注近期活动。/调皮";
+                if($before>1 && $level == 0) {
+                  $contentStr = "对不起，非会员只可以收听过去1天的节目。\n如何成为会员，回复【2010】3秒搞定会员。/调皮";
+                  $wechatObj->text($contentStr)->reply();
+                  return;
+                }
+                if($before>3) {
+                  $contentStr = "对不起，初级会员只可以收听过去3天的节目。\n如何成为高级会员，敬请关注近期活动。/调皮";
                   $wechatObj->text($contentStr)->reply();
                   return;
                 }
@@ -616,7 +658,7 @@ function mp_service_response() {
                 $string = date('ymd',time()-$before*24*60*60);
                 $musicurl = 'http://audio2.liangyou.net/files/media/program_live/'.$which.'/'.$which.''.$string.'.mp3';
                 $desc = date('m月d日',time()-$before*24*60*60);
-                $title = $string;
+                $title = $which.$string;
                 $hgmusicurl = $musicurl;
                 $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
               }else{
@@ -764,11 +806,29 @@ function mp_service_exsit_records($FromUserName) {
   $res = db_query('SELECT * FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchAssoc();
   return $res;
 }
+
+function mp_service_get_user_level($FromUserName) {
+  $res = db_query('SELECT * FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchAssoc();
+  // if(isset($res->uid)) return 1;
+  if($res['wxid']) return 2;
+  if($res['nickname']) return 3;
+  return 0;
+}
 function mp_service_get_nofakeid() {
   $res = db_query('SELECT * FROM {mp_service} WHERE fakeid = 0')->fetchAll();
   return (array)$res;
 }
-
+// and bind!
+function mp_service_bind_nickname($FromUserName,$nickname) {
+  db_update('mp_service')
+    ->fields(array(
+      'nickname' => $nickname,
+      'last_cmd' => '201',
+      'last_cmd_timestamp' => REQUEST_TIME,
+    ))
+    ->condition('fromusername', $FromUserName)
+    ->execute();
+}
 // and bind!
 function mp_service_bind_uid($FromUserName,$bindUid) {
   db_update('mp_service')

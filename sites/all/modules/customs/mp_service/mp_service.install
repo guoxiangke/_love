@@ -58,12 +58,32 @@ function mp_service_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0
-      ),      
+      ),
+      'nickname' => array(
+        'description' => 'nickname',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => ''
+       ),
+      'wxid' => array(
+        'description' => 'wxid',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => ''
+       ),        
       'unsubscribe' => array(
         'description' => 'Boolean indicating whether or not user unsubscribe',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
+      ),
+      'picture' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Foreign key: {file_managed}.fid of user's picture.",
       ),
     ),
     'indexes' => array(
@@ -146,5 +166,27 @@ function mp_service_update_7103() {
         'default' => 0,
       );
     db_add_field('mp_service', 'unsubscribe', $new_field);
+  }
+}
+/**
+ * add user pic & wxid for wechat user
+ */
+function mp_service_update_7104() {
+  if (!db_field_exists('mp_service', 'mp_service')) {
+    $new_field = array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Foreign key: {file_managed}.fid of user's picture.",
+      );
+    db_add_field('mp_service', 'picture', $new_field);
+    $new_field = array(
+        'description' => 'wxid',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      );
+    db_add_field('mp_service', 'wxid', $new_field);
   }
 }
