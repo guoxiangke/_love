@@ -117,7 +117,7 @@ function mp_service_response() {
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】ws长夜的牵引\n【501】bv灵命日粮\n【502】ee拥抱每一天\n【503】se恋爱季节\n【504】bf幸福满家园^\n【505】up亲情不断电*\n【506】hg欢乐卡洽碰\n【507】bc书香园地*\n【508】ds晨曦讲座\n【509】gv生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带特殊符号\n回复【110】推荐给好友\n想听昨天的节目，回复【501-1试试 】/调皮";
+          $contentStr =  "【500】ws长夜的牵引\n【501】bv灵命日粮\n【502】ee拥抱每一天\n【503】se恋爱季节\n【504】bf幸福满家园^\n【505】up亲情不断电*\n【506】hg欢乐卡洽碰\n【507】bc书香园地*\n【508】ds晨曦讲座\n【509】gv生活无国界\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带特殊符号\n回复【110】推荐给好友\n";//想听昨天的节目，回复【501-1】试试 /调皮
           break;     
         case '51':
           $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n带*节目为周一到周五\n带^节目为15分钟\n回复【110】推荐给好友\n";
@@ -136,10 +136,6 @@ function mp_service_response() {
           break;
         case '901':
           $contentStr =  "Q:如何查看手机信息？\n A:注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【900 个人邮箱 姓名】申请内测,注意中间空格\n回复【9】返回绑定菜单\n回复【00】返回主菜单\n回复【5】进入良友广播\n";
-          break;
-
-        case '911':
-          $contentStr =  "我很忙，但很愿意为您服务，请weibo加@bluesky_still\n把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播\n";
           break;
         case '119':
           $contentStr =  "我很忙，但很愿意为您服务，请weibo加@bluesky_still\n把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
@@ -195,12 +191,12 @@ function mp_service_response() {
           //多图文 1标题16字 2标题15字
           $wechatObj->news($news)->reply();
           break;
-         case '2010':
+         case '9010':
           $img = array(
               'Title'=> '永不止息教您玩转微信',
               'Description'=>'查看您的奇葩昵称',
               'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/modules/customs/love_layout/weichat_qr.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000340&itemidx=1&sign=a51084f905a80d28350a54feeac1f8ef&uin=Mzc3MzQxNQ%3D%3D&key=291fe541d5ac1faaeabbba46cdfa80317dbe7859a9f0633c59437a9a8af49bc01dca5176c5bc463d6969ddadd640368b&devicetype=android-16&version=25000104&lang=zh_CN'
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000340&itemidx=1&sign=a51084f905a80d28350a54feeac1f8ef&uin=Mzc3MzQxNQ%3D%3D&key=291fe541d5ac1faac792a76b1585f1a429e62c0fa60342488df232cbfcfac6cc1a780725498e18cddf6c03e3252da886&devicetype=android-16&version=25000104&lang=zh_CN'
             );
             $news[] = $img; 
           //单图文 标题15字 摘要60字
@@ -483,11 +479,11 @@ function mp_service_response() {
                 $keywords = explode('？', $keyword);
               }
               if (!isset($keywords[1])) {
-                $contentStr = "昵称后面缺少问号！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                $contentStr = "昵称后面缺少问号！\n回复【9】查看绑定帮助\n如需帮助，请回复【119】";
               }else{
                 $name = $keywords[0];
                 if(strlen($keywords[1])!=4) {
-                  $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                  $contentStr = "手机后四位信息【".$keywords[1]."】不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【119】";
                   // break;
                 }
                 $error_msg = user_validate_name($name);
@@ -497,19 +493,19 @@ function mp_service_response() {
                 }
                 $account = user_load_by_name($name);
                 if(!$account) {
-                  $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                  $contentStr = "不存在用户名【".$name."】！\n回复【9】查看绑定帮助\n如需帮助，请回复【119】";
                   // break;
                 }else {
                   $profile = profile2_load_by_user($account);
                   $tel = $profile['main']->field_telephone[LANGUAGE_NONE][0]['value'];
                   if(substr($tel, 7)!==$keywords[1]) {
-                    $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                    $contentStr = "手机后四位信息【".$keywords[1]."】匹配不正确！\n回复【9】查看绑定帮助\n如需帮助，请回复【119】";
                     // break;
                   }else {
                     //if bind,or not
                     $uid = mp_service_is_bind($account->uid);
                     if($uid) {
-                      $contentStr = "用户名【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【911】";
+                      $contentStr = "用户名【".$account->name."】已绑定过！\n回复【9】查看绑定帮助\n如需帮助，请回复【119】";
                       // break;
                     }else {
                       mp_service_bind_uid($FromUserName,$account->uid);
@@ -585,25 +581,25 @@ function mp_service_response() {
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n昨天忘记给大家发月饼,群主失职，回复YB获得月饼一块！";
+              $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n昨天忘记给大家发月饼,群主失职，回复YB获得月饼一块！";
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[TearingUp][TearingUp][TearingUp]代祷暂时关闭，因为没人愿意加入~请先为我们代祷吧\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "[TearingUp][TearingUp][TearingUp]代祷暂时关闭，因为没人愿意加入~请先为我们代祷吧\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             } elseif (substr($keyword, 0,3) == '900') {
               // $keyword = '900 gxk@mail.com name';
               $keywords = explode(' ', $keyword);
               if (!isset($keywords[2])) {
-                 $contentStr = "内测申请格式不正确！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                 $contentStr = "内测申请格式不正确！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
               }elseif(!valid_email_address($keywords[1])){
-                $contentStr = "邮箱不正确！\n回复【900 个人邮箱 姓名】申请内测,注意中间空格\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                $contentStr = "邮箱不正确！\n回复【900 个人邮箱 姓名】申请内测,注意中间空格\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
               }elseif(isset(user_load_by_mail($keywords[1])->uid)){
-                $contentStr = "该邮箱已注册！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                $contentStr = "该邮箱已注册！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
               }else{
                 $wechatObj->setFuncFlag(TRUE);
-                watchdog('911', '<pre>'.print_r($keywords,TRUE), array(), WATCHDOG_NOTICE, 'link');
-                $contentStr = "内测申请已收到，管理员审核后，请耐心等待永不止息下一轮内测！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
+                watchdog('119', '<pre>'.print_r($keywords,TRUE), array(), WATCHDOG_NOTICE, 'link');
+                $contentStr = "内测申请已收到，管理员审核后，请耐心等待永不止息下一轮内测！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
-            } elseif (substr($keyword, 0,3) == '201') {
+            } elseif (substr($keyword, 0,4) == '9010') {
               // $keyword = '201?天空蔚蓝?bluesky_still';
               $keywords= preg_split( "/(?|？)/", $keyword );
               if (isset($keywords[1])) {
@@ -618,7 +614,7 @@ function mp_service_response() {
                     $contentStr = "恭喜您，【".$nickname."】绑定成功！！\n赶快回复【501-3】试试吧!";                    
                   }
                 }else {
-                 $contentStr = "对不起，小夕还不能识别您的奇葩昵称！\n格式不正确！请确认输入格式为【201?天空蔚蓝】 \n请修改下您的微信名字再试一次\n回复【2010】获得帮助\n帮助:$error_msg\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                 $contentStr = "对不起，小夕还不能识别您的奇葩昵称！\n格式不正确！请确认输入格式为【9010?天空蔚蓝】 \n请修改下您的微信名字再试一次\n回复【9010】获得帮助\n帮助:$error_msg\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
 
                 }
               }else{
@@ -667,7 +663,7 @@ function mp_service_response() {
 
             }else {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习中,暂不能识别本指令，广播指令为纯数字，请勿带*号。号和中括号\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【911】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n回复永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "[TearingUp]对不起，我是机器人，还在努力学习中,暂不能识别本指令，广播指令为纯数字，请勿带*号。号和中括号\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n回复永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
           break;
       }
