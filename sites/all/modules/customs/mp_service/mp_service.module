@@ -622,6 +622,7 @@ function mp_service_response() {
                 watchdog('level_errors', '<pre>'.$keyword, array(), WATCHDOG_NOTICE, 'link');
                 $contentStr = "对不起，格式不正确！\n请确认输入格式为【201?天空蔚蓝】\n回复【2010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
+              $wechatObj->text($contentStr)->reply();
             } elseif(strlen($keyword) == 5) {
               $before = abs(strstr($keyword, '-'));
               $which = substr($keyword, 0,3);
