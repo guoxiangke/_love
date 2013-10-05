@@ -194,7 +194,7 @@ function mp_service_response() {
          case '9010':
           $img = array(
               'Title'=> '永不止息教您玩转微信',
-              'Description'=>'查看您的奇葩昵称',
+              'Description'=>'查看您的奇葩昵称后按照说明发送指令即可成为会员',
               'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/modules/customs/love_layout/weichat_qr.jpg',
               'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000340&itemidx=1&sign=a51084f905a80d28350a54feeac1f8ef&uin=Mzc3MzQxNQ%3D%3D&key=291fe541d5ac1faac792a76b1585f1a429e62c0fa60342488df232cbfcfac6cc1a780725498e18cddf6c03e3252da886&devicetype=android-16&version=25000104&lang=zh_CN'
             );
@@ -601,6 +601,7 @@ function mp_service_response() {
               }
             } elseif (substr($keyword, 0,4) == '9010') {
               // $keyword = '201?天空蔚蓝?bluesky_still';
+              watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
               $keywords= preg_split( "/(?|？)/", $keyword );
               if (isset($keywords[1])) {
                 $error_msg = user_validate_name($keywords[1]);
@@ -620,8 +621,9 @@ function mp_service_response() {
               }else{
                 $wechatObj->setFuncFlag(TRUE);
                 watchdog('level_errors', '<pre>'.$keyword, array(), WATCHDOG_NOTICE, 'link');
-                $contentStr = "对不起，格式不正确！\n请确认输入格式为【201?天空蔚蓝】\n回复【2010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
+                $contentStr = "对不起，格式不正确！\n请确认输入格式为【201?天空蔚蓝】\n回复【9010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
+              watchdog('contentStr', $contentStr, array(), WATCHDOG_NOTICE, 'link');
               $wechatObj->text($contentStr)->reply();
             } elseif(strlen($keyword) == 5) {
               $before = abs(strstr($keyword, '-'));
@@ -642,7 +644,7 @@ function mp_service_response() {
               $level = mp_service_get_user_level($FromUserName);
               if(is_numeric($before) && is_numeric($which) && in_array($which, array_keys($radio_list))) {
                 if($before>1 && $level == 0) {
-                  $contentStr = "对不起，非会员只可以收听过去1天的节目。\n如何成为会员，回复【2010】3秒搞定会员。/调皮";
+                  $contentStr = "对不起，非会员只可以收听过去1天的节目。\n如何成为会员，回复【9010】3秒搞定会员。/调皮";
                   $wechatObj->text($contentStr)->reply();
                   return;
                 }
