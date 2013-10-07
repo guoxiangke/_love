@@ -617,7 +617,7 @@ function mp_service_response() {
                 $contentStr = "内测申请已收到，管理员审核后，请耐心等待永不止息下一轮内测！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
             } elseif (substr($keyword, 0,4) == '9010') {
-              // $keyword = '201?天空蔚蓝?bluesky_still';
+              // $keyword = '9010?天空蔚蓝?bluesky_still';
               // watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
               $keywords= preg_split( "/(?|？)/", $keyword );
               if (isset($keywords[1])) {
@@ -638,7 +638,7 @@ function mp_service_response() {
               }else{
                 $wechatObj->setFuncFlag(TRUE);
                 // watchdog('level_errors', '<pre>'.$keyword, array(), WATCHDOG_NOTICE, 'link');
-                $contentStr = "对不起，格式不正确！\n请确认输入格式为【201?天空蔚蓝】\n回复【9010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
+                $contentStr = "对不起，格式不正确！\n请确认输入格式为【9010?天空蔚蓝】\n回复【9010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
               // watchdog('contentStr', $contentStr, array(), WATCHDOG_NOTICE, 'link');
               $wechatObj->text($contentStr)->reply();
