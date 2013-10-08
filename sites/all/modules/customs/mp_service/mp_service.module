@@ -411,6 +411,15 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
+        case '528':
+        case '５２８': 
+          $title = '每日读经';
+          $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'DBR.m4a';
+          $desc = date('n月j日-圣经广播网');
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;          
+
         case '530':
           $title = '绝妙当家';
           $musicurl = 'http://liangyou.nissigz.com/media/yu/yu'.date('ymd').'.mp3';
@@ -598,6 +607,7 @@ function mp_service_response() {
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
               $wechatObj->setFuncFlag(TRUE);
+              watchdog('mp_service-911', $keyword, array(), WATCHDOG_NOTICE, 'link');
               $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
