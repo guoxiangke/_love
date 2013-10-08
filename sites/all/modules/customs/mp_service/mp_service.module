@@ -398,7 +398,7 @@ function mp_service_response() {
         case '526':
         case '５２６': 
           $title = '祷告良辰 周1-5';
-          $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'SD.m4a';
+          $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'PT.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
