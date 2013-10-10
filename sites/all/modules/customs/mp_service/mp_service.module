@@ -117,7 +117,7 @@ function mp_service_response() {
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】ws长夜的牵引\n【501】bv灵命日粮\n【502】ee拥抱每一天\n【503】se恋爱季节\n【504】bf幸福满家园^\n【505】up亲情不断电*\n【506】hg欢乐卡洽碰\n【507】bc书香园地*\n【508】ds晨曦讲座\n【509】gv生活无国界\n【528】每日读经*new*\n回复【51】进入下一页\n回复【52】进入灵修版\n回复【00】进入主菜单\n广播指令为纯数字，请勿带特殊符号\n想听昨天节目，回复【502-1】试试 /调皮\n回复【110】推荐给好友\n";
+          $contentStr =  "【500】ws长夜的牵引\n【501】bv灵命日粮\n【502】ee拥抱每一天\n【507】bc书香园地*\n【509】gv生活无国界\n广播指令为纯数字，请勿带特殊符号\n想听前天节目，回复【502-2】试试 /调皮\n回复【9010】推荐给好友\n";//回复【51】进入下一页\n回复【52】进入灵修版\n 【508】ds晨曦讲座\n 【528】每日读经*new*\n【503】se恋爱季节\n【504】bf幸福满家园^\n【505】up亲情不断电*\n【506】hg欢乐卡洽碰\n\n回复【00】进入主菜单
           break;     
         case '51':
           $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n带*节目为周一到周五\n带^节目为15分钟\n回复【110】推荐给好友\n";
@@ -193,10 +193,10 @@ function mp_service_response() {
           break;
          case '9010':
           $img = array(
-              'Title'=> '永不止息教您玩转微信',
-              'Description'=>'查看您的奇葩昵称后按照说明发送指令即可成为会员',
-              'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/modules/customs/love_layout/weichat_qr.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000340&itemidx=1&sign=a51084f905a80d28350a54feeac1f8ef&uin=Mzc3MzQxNQ%3D%3D&key=291fe541d5ac1faa0bb16f5e99d0650cef0160b1f5c6a57c0d4fbfca0425646d50be1a2c8638c7f6ca8cfcbcfe491d4c&devicetype=android-16&version=25000104&lang=zh_CN'
+              'Title'=> '玩转永不止息,良友一起来！',
+              'Description'=>'永不止息时光机，会员尊贵待遇！',
+              'PicUrl'=>'http://mmsns.qpic.cn/mmsns/0fV5QBhibUJh4BDj8puTVpBPibdMnlp7YYX5ibib87W7KACey1qpTmN0Rw/0.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000352&itemidx=1&sign=f99612d4cfd626d8649dbe6a59faff75#wechat_redirect'
             );
             $news[] = $img; 
           //单图文 标题15字 摘要60字
@@ -452,7 +452,7 @@ function mp_service_response() {
           $contentStr = "You're so clever!";
           $title = '单身者的福音(2)-麦克牧师';
           $musicurl = 'http://liangyou.u.qiniudn.com/2013100301%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('十一跨教会单身团契十渡之旅:谁的荣耀？');
+          $desc = date('谁的荣耀？');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;    
@@ -676,18 +676,20 @@ function mp_service_response() {
                   $level = mp_service_get_user_level($FromUserName);
                   if($level != 0) {
                     $contentStr = "您已有昵称，请勿重复绑定！\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
-                  }else{
+                  }elseif(!mp_service_distinct_nickname($nickname)){
                     mp_service_bind_nickname($FromUserName,$nickname);
-                    $contentStr = "恭喜您，【".$nickname."】绑定成功！！\n赶快回复【502-3】试试吧!";                    
+                    $contentStr = "恭喜您，【".$nickname."】绑定成功！！\n赶快回复【502-3】试试吧!\n如果您没有转发和推荐永不止息，小心查到你封号哦！\n回复【9010】分享推荐给好友还不晚哦！";                    
+                  }else{                    
+                    $contentStr = "该昵称已被使用！请尝试新的昵称，谢谢！\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
                   }
                 }else {
-                 $contentStr = "对不起，小夕还不能识别您的奇葩昵称！\n格式不正确！请确认输入格式为【9010?天空蔚蓝】 \n请修改下您的微信名字再试一次\n回复【9010】获得帮助\n帮助:$error_msg\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                 $contentStr = "对不起，小夕还不能识别您的奇葩昵称！\n格式不正确！请确认输入格式为【9010?奇葩昵称】\n帮助:$error_msg\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
 
                 }
               }else{
                 $wechatObj->setFuncFlag(TRUE);
                 // watchdog('level_errors', '<pre>'.$keyword, array(), WATCHDOG_NOTICE, 'link');
-                $contentStr = "对不起，格式不正确！\n请确认输入格式为【9010?天空蔚蓝】\n回复【9010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
+                $contentStr = "对不起，格式不正确！\n请确认输入格式为【9010?奇葩昵称】\n回复【9010】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";                
               }
               // watchdog('contentStr', $contentStr, array(), WATCHDOG_NOTICE, 'link');
               $wechatObj->text($contentStr)->reply();
@@ -869,6 +871,14 @@ function mp_service_get_records($uid) {
 
 function mp_service_exsit_records($FromUserName) {
   $res = db_query('SELECT * FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchAssoc();
+  return $res;
+}
+/**
+ * False mean you can bind!
+ * or please choose another nickname!
+ */
+function mp_service_distinct_nickname($nickname) {
+  $res = db_query('SELECT * FROM {mp_service} WHERE nickname = :nickname', array(':nickname' => $nickname))->fetchAssoc();
   return $res;
 }
 
