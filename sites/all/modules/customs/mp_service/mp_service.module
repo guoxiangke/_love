@@ -668,7 +668,7 @@ function mp_service_response() {
             } elseif (substr($keyword, 0,4) == '9010') {
               // $keyword = '9010?天空蔚蓝?bluesky_still';
               // watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
-              $keywords= preg_split( "/(?|？)/", $keyword );
+              $keywords = preg_split("/[？?]+/",$keyword);//preg_split( "/(?|？)/", $keyword);
               if (isset($keywords[1])) {
                 $error_msg = user_validate_name($keywords[1]);
                 if(is_null($error_msg)){
@@ -680,7 +680,7 @@ function mp_service_response() {
                     mp_service_bind_nickname($FromUserName,$nickname);
                     $contentStr = "恭喜您，【".$nickname."】绑定成功！！\n赶快回复【502-3】试试吧!\n如果您没有转发和推荐永不止息，小心查到你封号哦！\n回复【9010】分享推荐给好友还不晚哦！";                    
                   }else{                    
-                    $contentStr = "该昵称已被使用！请尝试新的昵称，谢谢！\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+                    $contentStr = "该昵称已被使用！\n请尝试新的昵称，谢谢！\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
                   }
                 }else {
                  $contentStr = "对不起，小夕还不能识别您的奇葩昵称！\n格式不正确！请确认输入格式为【9010?奇葩昵称】\n帮助:$error_msg\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
