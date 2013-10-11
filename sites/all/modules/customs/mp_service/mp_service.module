@@ -250,7 +250,7 @@ function mp_service_response() {
           $title = '拥抱每一天';
           $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
           $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
-          $desc = date("n月j日\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!");
+          $desc = "永不止息，需要有你！";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -710,6 +710,7 @@ function mp_service_response() {
               $wechatObj->text($contentStr)->reply();
             } elseif(strlen($keyword) == 5) {
               $before = abs(strstr($keyword, '-'));
+              if(!$before) $before = abs(strstr($keyword, '-'));
               $which = substr($keyword, 0,3);
               $radio_list = array(
                 '500' => 'ws',
