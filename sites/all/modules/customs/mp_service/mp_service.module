@@ -361,11 +361,11 @@ function mp_service_response() {
           break;        
         case '521':
         // 荒漠甘泉乐侣
-          $title = '荒漠甘泉乐侣';
+          $title = '荒漠甘泉乐侣-圣经广播网';
           // $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'SD.m4a';
           // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
-          $desc = date('n月j日-圣经广播网');
+          $desc = date('n月j日-搜索永不止息或love_yongbuzhixi,关注更多精彩');
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;          
@@ -458,27 +458,27 @@ function mp_service_response() {
           break;    
         case '103':
           $contentStr = "You're so clever!";
-          $title = '单身者的福音(3)-麦克牧师';
+          $title = '单身者的福音(3)-麦克牧师:如何明白神的旨意与择偶条件';
           $musicurl = 'http://liangyou.u.qiniudn.com/2013100302%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6(1).MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音');
+          $desc = date('十一跨教会单身团契十渡之旅 录音 搜索永不止息或love_yongbuzhixi,关注更多精彩!');
           $hgmusicurl = $musicurl;
-          // $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;    
         case '104':
           $contentStr = "You're so clever!";
-          $title = '单身者的福音(4)-麦克牧师';
+          $title = '单身者的福音(4)-麦克牧师:如何明白神的旨意与择偶条件';
           $musicurl = 'http://liangyou.u.qiniudn.com/2013100302%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音');
+          $desc = date('十一跨教会单身团契十渡之旅 录音 搜索永不止息或love_yongbuzhixi,关注更多精彩!');
           $hgmusicurl = $musicurl;
-          // $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;    
         case '105':
           $contentStr = "You're so clever!";
-          $title = '单身者的福音(5)-麦克牧师';
+          $title = '单身者的福音(5)-麦克牧师:如何明白神的旨意与择偶条件';
           $musicurl = 'http://liangyou.u.qiniudn.com/2013100303%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音');
+          $desc = date('十一跨教会单身团契十渡之旅 录音 搜索永不止息或love_yongbuzhixi,关注更多精彩!');
           $hgmusicurl = $musicurl;
-          // $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '114':
           $contentStr = "盟约婚恋建造班3期电话: 13601038137\n如何成为永不止息微信会员，敬请关注我们近期的活动。\n";
