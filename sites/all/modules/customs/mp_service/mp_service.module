@@ -216,7 +216,7 @@ function mp_service_response() {
         case '５２４':
         case '５０１':
           $title = '灵命日粮';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -248,7 +248,7 @@ function mp_service_response() {
         case '502':
         case '５０２':
           $title = '拥抱每一天';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -257,7 +257,7 @@ function mp_service_response() {
         case '503':
         case '５０３':
           $title = '恋爱季节';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -266,7 +266,7 @@ function mp_service_response() {
         case '504':
         case '５０４':
           $title = '幸福满家园';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -275,7 +275,7 @@ function mp_service_response() {
         case '505':
         case '５０５':
           $title = '亲情不断电 周1-5';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -284,7 +284,7 @@ function mp_service_response() {
         case '506':
         case '５０６':
           $title = '欢乐卡洽碰';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/hg/hg'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -293,7 +293,7 @@ function mp_service_response() {
         case '507':
         case '５０７':
           $title = '书香园地 周1-5';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/bc/bc'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -302,7 +302,7 @@ function mp_service_response() {
         case '508':
         case '５０８':
           $title = '晨曦讲座';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/ds/ds'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -311,7 +311,7 @@ function mp_service_response() {
         case '509':
         case '５０９':
           $title = '生活无国界';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/gv/gv'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -320,7 +320,7 @@ function mp_service_response() {
         case '510':
         case '５１０':
           $title = '无限飞行号';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/ib/ib'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -329,7 +329,7 @@ function mp_service_response() {
         case '511':
         case '５１１':
           $title = 'i-radio爱广播';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/ir/ir'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -338,7 +338,7 @@ function mp_service_response() {
         case '512':
         case '５１２':
           $title = 'i关怀心磁场';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/im/im'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -347,7 +347,7 @@ function mp_service_response() {
         case '513':
         case '５１３':
           $title = '真理之光';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/th/th'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -357,7 +357,7 @@ function mp_service_response() {
         case '５２０':
         // http://media.haomuren.org/dev/joy/joyhrt0716.mp3
           $title = '喜乐的心';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
           // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
@@ -387,7 +387,7 @@ function mp_service_response() {
         case '523':
         case '５２３':
           $title = '在天父怀中';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -396,7 +396,7 @@ function mp_service_response() {
         case '525':
         case '５２５':
           $title = '真道分解-每日灵修';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://media.biblexpo.net/biblexpo/daily/Daily_'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -406,7 +406,7 @@ function mp_service_response() {
         case '526':
         case '５２６': 
           $title = '祷告良辰 周1-5';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'PT.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
@@ -415,7 +415,7 @@ function mp_service_response() {
         case '527':
         case '５２７': 
           $title = '每周一歌';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'WS.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
@@ -424,7 +424,7 @@ function mp_service_response() {
         case '528':
         case '５２８': 
           $title = '每日读经';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'DBR.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
@@ -433,7 +433,7 @@ function mp_service_response() {
 
         case '530':
           $title = '绝妙当家';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/yu/yu'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -441,7 +441,7 @@ function mp_service_response() {
           break;
         case '531':
           $title = '彩虹桥';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/tr/tr'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -449,7 +449,7 @@ function mp_service_response() {
           break;
         case '532':
           $title = '现代人的希望';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/gn/gn'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,更多精彩内容";
           $hgmusicurl = $musicurl;
@@ -464,7 +464,7 @@ function mp_service_response() {
         case 'EG':
         case 'eG':
           $title = '英语世界';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $week_day = date('N', time());
           $tus = date('d')+(2-$week_day);
           $string = date('ym',time()).$tus;
@@ -479,7 +479,7 @@ function mp_service_response() {
         case 'Wa':
         case 'WA':
           $title = '天路导向';
-          $title = "$title-".date('ymd')."\n";
+          $title = "$title-".date('ymd');
           $week_day = date('N', time());
           $add = 1;
           if(date('d')/2) $add = 2;
