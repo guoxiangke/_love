@@ -117,7 +117,7 @@ function mp_service_response() {
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【524】灵命日粮\n回复【00】进入主菜单\n回复【5】良友广播\n";
           break;
         case '5':
-          $contentStr =  "【500】ws长夜的牵引\n【501】bv灵命日粮\n【502】ee拥抱每一天\n【507】bc书香园地*\n【509】gv生活无国界\n注意：广播指令为纯数字\n【501-1】昨日节目/调皮\n【9010】推荐给好友\n【103】单身者福音(3)";//回复【51】进入下一页\n回复【52】进入灵修版\n 【508】ds晨曦讲座\n 【528】每日读经*new*\n【503】se恋爱季节\n【504】bf幸福满家园^\n【505】up亲情不断电*\n【506】hg欢乐卡洽碰\n\n回复【00】进入主菜单
+          $contentStr =  "【500】ws长夜的牵引\n【501】bv灵命日粮\n【502】ee拥抱每一天\n【507】bc书香园地*\n【509】gv生活无国界\n注意：广播指令为纯数字\n【501-1】昨日节目/调皮\n【9010】推荐给好友\n";//回复【51】进入下一页\n回复【52】进入灵修版\n 【508】ds晨曦讲座\n 【528】每日读经*new*\n【503】se恋爱季节\n【504】bf幸福满家园^\n【505】up亲情不断电*\n【506】hg欢乐卡洽碰\n\n回复【00】进入主菜单
           break;     
         case '51':
           $contentStr =  "【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n带*节目为周一到周五\n带^节目为15分钟\n回复【110】推荐给好友\n";
@@ -138,7 +138,7 @@ function mp_service_response() {
           $contentStr =  "Q:如何查看手机信息？\n A:注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【900 个人邮箱 姓名】申请内测,注意中间空格\n回复【9】返回绑定菜单\n回复【00】返回主菜单\n回复【5】进入良友广播\n";
           break;
         case '119':
-          $contentStr =  "我很忙，但很愿意为您服务，请weibo加@bluesky_still\n把您使用到的问题发给我。\n回复【00】返回主菜单\n回复【5】进入良友广播";
+          $contentStr =  "请加个人帐号：yongbuzhixi_love与我们更进一步交流\n把您使用到的问题发给我们\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
         case 'Y':
         case 'y':
@@ -205,9 +205,9 @@ function mp_service_response() {
           break;
         case '500':
         case '５００':
-          $title = "长夜的牵引\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "长夜的牵引\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -216,9 +216,9 @@ function mp_service_response() {
         case '５２４':
         case '５０１':
           $title = '灵命日粮';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -248,108 +248,108 @@ function mp_service_response() {
         case '502':
         case '５０２':
           $title = '拥抱每一天';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '503':
         case '５０３':
           $title = '恋爱季节';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '504':
         case '５０４':
           $title = '幸福满家园';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;    
         case '505':
         case '５０５':
           $title = '亲情不断电 周1-5';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '506':
         case '５０６':
           $title = '欢乐卡洽碰';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/hg/hg'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '507':
         case '５０７':
           $title = '书香园地 周1-5';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/bc/bc'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '508':
         case '５０８':
           $title = '晨曦讲座';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/ds/ds'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '509':
         case '５０９':
           $title = '生活无国界';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/gv/gv'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '510':
         case '５１０':
           $title = '无限飞行号';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/ib/ib'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '511':
         case '５１１':
           $title = 'i-radio爱广播';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/ir/ir'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '512':
         case '５１２':
           $title = 'i关怀心磁场';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/im/im'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '513':
         case '５１３':
           $title = '真理之光';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/th/th'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -357,17 +357,17 @@ function mp_service_response() {
         case '５２０':
         // http://media.haomuren.org/dev/joy/joyhrt0716.mp3
           $title = '喜乐的心';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://media.haomuren.org/dev/joy/joyhrt'.date('md').'.mp3';
           // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;        
         case '521':
         // 荒漠甘泉乐侣
           $title = '荒漠甘泉乐侣-圣经广播网';
-          $title = "$title\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title\nhttp://yongbuzhixi.com";
           // $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'SD.m4a';
           // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
@@ -380,25 +380,25 @@ function mp_service_response() {
           $title = '静夜亮光';
           $musicurl = 'http://media.haomuren.org/dev/ev/evn'.date('md').'.mp3';
           //http://media.haomuren.org/dev/ev/evn0709.mp3
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '523':
         case '５２３':
           $title = '在天父怀中';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '525':
         case '５２５':
           $title = '真道分解-每日灵修';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://media.biblexpo.net/biblexpo/daily/Daily_'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -406,7 +406,7 @@ function mp_service_response() {
         case '526':
         case '５２６': 
           $title = '祷告良辰 周1-5';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'PT.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
@@ -415,7 +415,7 @@ function mp_service_response() {
         case '527':
         case '５２７': 
           $title = '每周一歌';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'WS.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
@@ -424,7 +424,7 @@ function mp_service_response() {
         case '528':
         case '５２８': 
           $title = '每日读经';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'DBR.m4a';
           $desc = date('n月j日-圣经广播网');
           $hgmusicurl = $musicurl;
@@ -433,63 +433,25 @@ function mp_service_response() {
 
         case '530':
           $title = '绝妙当家';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/yu/yu'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '531':
           $title = '彩虹桥';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/tr/tr'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '532':
           $title = '现代人的希望';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $musicurl = 'http://liangyou.nissigz.com/media/gn/gn'.date('ymd').'.mp3';
-          $desc = "永不止息，需要有你！";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;       
-        case '101':          
-          $title = "单身者的福音(1)-麦克牧师:如何明白神的旨意与择偶条件\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
-          $musicurl = 'http://liangyou.u.qiniudn.com/2013100201%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;    
-        case '102':           
-          $title = "单身者的福音(2)-麦克牧师:如何明白神的旨意与择偶条件\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
-          $musicurl = 'http://liangyou.u.qiniudn.com/2013100301%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('谁的荣耀？');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;    
-        case '103':
-          $contentStr = "You're so clever!";
-          $title = "单身者的福音(3)-麦克牧师:如何明白神的旨意与择偶条件\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
-          $musicurl = 'http://liangyou.u.qiniudn.com/2013100302%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6(1).MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音 搜索永不止息或love_yongbuzhixi,关注更多精彩!');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;    
-        case '104':
-          $contentStr = "You're so clever!";
-          $title = "单身者的福音(4)-麦克牧师:如何明白神的旨意与择偶条件\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
-          $musicurl = 'http://liangyou.u.qiniudn.com/2013100302%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音');
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;    
-        case '105':
-          $contentStr = "You're so clever!";
-          $title = "单身者的福音(5)-麦克牧师:如何明白神的旨意与择偶条件\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
-          $musicurl = 'http://liangyou.u.qiniudn.com/2013100303%E5%A6%82%E4%BD%95%E6%98%8E%E7%99%BD%E7%A5%9E%E7%9A%84%E6%97%A8%E6%84%8F%E4%B8%8E%E6%8B%A9%E5%81%B6%E6%9D%A1%E4%BB%B6.MP3';
-          $desc = date('十一跨教会单身团契十渡之旅 录音');
+          $desc = "公众号:love_yongbuzhixi";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -502,7 +464,7 @@ function mp_service_response() {
         case 'EG':
         case 'eG':
           $title = '英语世界';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $week_day = date('N', time());
           $tus = date('d')+(2-$week_day);
           $string = date('ym',time()).$tus;
@@ -517,7 +479,7 @@ function mp_service_response() {
         case 'Wa':
         case 'WA':
           $title = '天路导向';
-          $title = "$title-".date('ymd')."\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+          $title = "$title-".date('ymd')."\nhttp://yongbuzhixi.com";
           $week_day = date('N', time());
           $add = 1;
           if(date('d')/2) $add = 2;
@@ -711,7 +673,7 @@ function mp_service_response() {
             } elseif(strlen($keyword) == 5) {
               $before = abs(strstr($keyword, '-'));
               if(!$before) $before = abs(strstr($keyword, '-'));
-              $which = substr($keyword, 0,3);
+              $radio_cmd = substr($keyword, 0,3);
               $radio_list = array(
                 '500' => 'ws',
                 '501' => 'bv',
@@ -723,10 +685,11 @@ function mp_service_response() {
                 '507' => 'bc',
                 '508' => 'ds',
                 '509' => 'gv',
+                '523' => 'gv',
                 );
 
               $level = mp_service_get_user_level($FromUserName);
-              if(is_numeric($before) && is_numeric($which) && in_array($which, array_keys($radio_list))) {
+              if(is_numeric($before) && is_numeric($radio_cmd) && in_array($radio_cmd, array_keys($radio_list))) {
                 if($before>1 && $level == 0) {
                   $contentStr = "对不起，非会员只可以收听过去1天的节目。\n如何成为会员，回复【9010】3秒搞定会员。/调皮";
                   $wechatObj->text($contentStr)->reply();
@@ -737,14 +700,17 @@ function mp_service_response() {
                   $wechatObj->text($contentStr)->reply();
                   return;
                 }
-                $which = $radio_list[$which];
+                $which = $radio_list[$radio_cmd];
                 $string = date('ymd',time()-$before*24*60*60);
                 $musicurl = 'http://audio2.liangyou.net/files/media/program_live/'.$which.'/'.$which.''.$string.'.mp3';
+                if($radio_cmd == '523') {
+                  $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_'.$string.'.mp3';
+                }
                 $desc = date('m月d日',time()-$before*24*60*60);
                 $title = $which.$string;
-                $title = "$title-$desc\n微信搜索永不止息或love_yongbuzhixi,关注更多精彩!";
+                $title = "$title-$desc\nhttp://yongbuzhixi.com";
                 $hgmusicurl = $musicurl;
-                $desc = "永不止息，需要有你！";
+                $desc = "公众号:love_yongbuzhixi";
                 $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
               }else{
                 $contentStr = 'error input!';
@@ -752,7 +718,7 @@ function mp_service_response() {
 
             }else {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "[TearingUp]对不起，小永还在努力学习中,暂不能识别本指令，广播指令为纯数字，请勿带*号。号和【】\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "[TearingUp]对不起，小永还在努力学习中\n暂不识别您的指令！如需要更高级服务，请微信添加 yongbuzhixi_love\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
           break;
       }
@@ -866,7 +832,7 @@ function mp_service_response() {
       // $wechatObj->text("已收到您发送的图片！")->reply();
       break;
     default:
-      $wechatObj->text("如需帮助，请加永不止息会员QQ群：?????\n测试开发中～敬请期待！")->reply();
+      $wechatObj->text("如需帮助，请回复【119】\n测试开发中～敬请期待！")->reply();
   }
   return;
 
