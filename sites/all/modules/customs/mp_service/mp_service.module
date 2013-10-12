@@ -708,7 +708,7 @@ function mp_service_response() {
                 }
                 $desc = date('m月d日',time()-$before*24*60*60);
                 $title = $which.$string;
-                $title = "$title-$desc\n";
+                $title = "$title-$desc";
                 $hgmusicurl = $musicurl;
                 $desc = "关注love_yongbuzhixi 公众号,更多精彩内容等你来";
                 $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
