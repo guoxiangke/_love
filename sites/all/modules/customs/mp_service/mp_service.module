@@ -431,7 +431,6 @@ function mp_service_response() {
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-
         case '526':
         case '５２６': 
           $title = '祷告良辰-圣经广播网';
