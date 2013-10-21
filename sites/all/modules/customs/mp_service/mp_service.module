@@ -427,7 +427,7 @@ function mp_service_response() {
           $title = '真道分解';
           $title = "$title-".date('ymd');
           $musicurl = 'http://media.biblexpo.net/biblexpo/daily/Daily_'.date('ymd').'.mp3';
-          $desc = "关注love_yongbuzhixi公众号，每日更新"
+          $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
