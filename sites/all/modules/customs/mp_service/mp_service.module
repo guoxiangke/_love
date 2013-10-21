@@ -306,7 +306,7 @@ function mp_service_response() {
           $title = '亲情不断电';
           $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
-          $desc = "周1-5 关注love_yongbuzhixi 公众号,更多精彩内容等你来";
+          $desc = "关注love_yongbuzhixi公众号,周1-5";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -324,7 +324,7 @@ function mp_service_response() {
           $title = '书香园地';
           $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/bc/bc'.date('ymd').'.mp3';
-          $desc = "周1-5 关注love_yongbuzhixi 公众号,更多精彩内容等你来";
+          $desc = "关注love_yongbuzhixi公众号,周1-5";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
@@ -427,35 +427,35 @@ function mp_service_response() {
           $title = '真道分解';
           $title = "$title-".date('ymd');
           $musicurl = 'http://media.biblexpo.net/biblexpo/daily/Daily_'.date('ymd').'.mp3';
-          $desc = "关注love_yongbuzhixi公众号，每日更新";
+          $desc = "关注love_yongbuzhixi公众号，每日更新"
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
 
         case '526':
         case '５２６': 
-          $title = '祷告良辰';
+          $title = '祷告良辰-圣经广播网';
           $title = "$title-".date('ymd');
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'PT.m4a';
-          $desc = '周1-5 n月j日-圣经广播网';
+          $desc = '周1-5关注love_yongbuzhixi公众号';
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '527':
         case '５２７': 
-          $title = '每周一歌';
+          $title = '每周一歌-圣经广播网';
           $title = "$title-".date('ymd');
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'WS.m4a';
-          $desc = "圣经广播网";
+          $desc = '关注love_yongbuzhixi公众号';
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '528':
         case '５２８': 
-          $title = '每日读经';
+          $title = '每日读经-圣经广播网';
           $title = "$title-".date('ymd');
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'DBR.m4a';
-          $desc = date('n月j日-圣经广播网');
+          $desc = '关注love_yongbuzhixi公众号';
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;          
