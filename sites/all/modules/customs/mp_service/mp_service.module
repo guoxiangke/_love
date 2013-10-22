@@ -154,17 +154,17 @@ function mp_service_response() {
 
         case '114':
           $img = array(
-              'Title'=> '关于永不止息',
-              'Description'=>'你良友的啥关系？',
-              'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/themes/love/family_1.png',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000220&itemidx=2&sign=62a8888bdb56bc268f255c020e024434'
+              'Title'=> '炼爱-真爱挑战40天',
+              'Description'=>'我们的心灵渴望爱，就象我们的身体需要氧气',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000311&itemidx=1&sign=68ba37452de8968121010831e3f45d43&scene=1#wechat_redirect'
             );
           $news[] = $img;
           $img = array(
-              'Title'=> '如何推荐给好友？',
+              'Title'=> '炼爱-真爱挑战40天',
               'Description'=>'转给你的好友吧',
-              'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/themes/love/family_2.png',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000220&itemidx=2&sign=62a8888bdb56bc268f255c020e024434'
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000311&itemidx=1&sign=68ba37452de8968121010831e3f45d43&scene=1#wechat_redirect'
             );
             $news[] = $img;  
           // $img = array(
