@@ -40,7 +40,7 @@ function mp_service_response() {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
-
+      //http://betternewlife.u.qiniudn.com/newlife-01.mp3
       //default msg
       $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n";
       if($uid) {
@@ -151,10 +151,24 @@ function mp_service_response() {
         case 'n':
           $contentStr =  "谢谢反馈！";
           break;
+          // $img = array(
+          //     'Title'=> '第一天 爱是恒久忍耐',
+          //     'Description'=>'',
+          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+          //     'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000311&itemidx=1&sign=68ba37452de8968121010831e3f45d43&scene=1#wechat_redirect'
+          //   );
+          // $news[] = $img;
 
         case '114':
           $img = array(
-              'Title'=> '第一天 爱是恒久忍耐',
+              'Title'=> '第2天 爱是恩慈',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000319&itemidx=1&sign=492d39866bd5cb63444e8efb36a1fca8&scene=1#wechat_redirect'
+            );
+          $news[] = $img;
+          $img = array(
+              'Title'=> '第1天 爱是恒久忍耐',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000311&itemidx=1&sign=68ba37452de8968121010831e3f45d43&scene=1#wechat_redirect'
