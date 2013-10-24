@@ -791,8 +791,9 @@ function mp_service_response() {
                   if($Msg['content'] == $wechatObj->getRevContent()) {
                     $fakeId = $Msg['fakeid'];
                     $data = $wechat->getInfo($fakeId);
-                    $wechat_name = $data['Username'];
-                    $wechat_nickname = $data['NickName'];
+                    mp_service_update($FromUserName,'fakeid', $fakeId);
+                    mp_service_update($FromUserName,'wxid', $data['Username']);
+                    mp_service_update($FromUserName,'wxnickname', $data['NickName']);
                   }
                 }
               } else {
