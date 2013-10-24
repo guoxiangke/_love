@@ -143,6 +143,9 @@ function mp_service_response() {
         case '119':
           $contentStr =  "请加个人帐号：yongbuzhixi_love与我们更进一步交流\n把您使用到的问题发给我们\n回复【00】返回主菜单\n回复【5】进入良友广播";
           break;
+        case '911':
+          $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+          break;
         case 'Y':
         case 'y':
           $contentStr =  "谢谢反馈！";
@@ -160,42 +163,45 @@ function mp_service_response() {
           // $news[] = $img;
 
         case '114':
-          $img = array(
-              'Title'=> '第3天 爱是不自私',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第2天 爱是恩慈',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/02'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第1天 爱是恒久忍耐',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/01'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/node/15'
-            );
-            $news[] = $img;  
+
+          $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+          
           // $img = array(
-          //   'Title'=>'用手机，登录【永不止息】^_^',
-          //   'Description'=>'单图文 标题15字 摘要60字',
-          //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
-          //   'Url'=>'http://yongbuzhixi.com'
-          // );
-          //单图文 标题15字 摘要60字
-          //多图文 1标题16字 2标题15字
-          $wechatObj->news($news)->reply();
+          //     'Title'=> '第3天 爱是不自私',
+          //     'Description'=>'',
+          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+          //     'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
+          //   );
+          // $news[] = $img;
+          // $img = array(
+          //     'Title'=> '第2天 爱是恩慈',
+          //     'Description'=>'',
+          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+          //     'Url'=>'http://love.yongbuzhixi.org/love40/02'
+          //   );
+          // $news[] = $img;
+          // $img = array(
+          //     'Title'=> '第1天 爱是恒久忍耐',
+          //     'Description'=>'',
+          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+          //     'Url'=>'http://love.yongbuzhixi.org/love40/01'
+          //   );
+          // // $news[] = $img;
+          // $img = array(
+          //     'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
+          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+          //     'Url'=>'http://love.yongbuzhixi.org/node/15'
+          //   );
+          //   $news[] = $img;  
+          // // $img = array(
+          // //   'Title'=>'用手机，登录【永不止息】^_^',
+          // //   'Description'=>'单图文 标题15字 摘要60字',
+          // //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
+          // //   'Url'=>'http://yongbuzhixi.com'
+          // // );
+          // //单图文 标题15字 摘要60字
+          // //多图文 1标题16字 2标题15字
+          // $wechatObj->news($news)->reply();
           break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
@@ -666,9 +672,76 @@ function mp_service_response() {
               }
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
-              $wechatObj->setFuncFlag(TRUE);
-              watchdog('mp_service-911', $keyword, array(), WATCHDOG_NOTICE, 'link');
-              $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              if(strlen($keyword)<6) {
+                 $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+               }else {                
+                $wechatObj->setFuncFlag(TRUE);
+
+                module_load_include('inc', 'mp_service', 'config');  
+                $options = array(
+                  'account'=>'love_yongbuzhixi',
+                  'password'=>'mjk5nj',
+                  'datapath'=>'./data/cookie_' ,
+                    'debug'=>FALSE,
+                    'logcallback'=>'logdebug' 
+                );
+                $wechat = new Wechatext($options);
+                //$wechat
+                if ($wechat->checkValid()) {    
+                  $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
+                  foreach ($getMsg as $key => $Msg) {
+                    if($Msg['content'] == $wechatObj->getRevContent()) {
+                      $fakeId = $Msg['fakeid'];
+                      $data = $wechat->getInfo($fakeId);
+                      mp_service_update($FromUserName,'fakeid', $fakeId);
+                      mp_service_update($FromUserName,'wxid', $data['Username']);
+                      mp_service_update($FromUserName,'wxnickname', $data['NickName']);
+                    }
+                  }
+                } else {
+                  watchdog('login error', "login error wx", array(), WATCHDOG_NOTICE, 'link');
+                }
+
+
+          $img = array(
+              'Title'=> '第3天 爱是不自私',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
+            );
+          $news[] = $img;
+          $img = array(
+              'Title'=> '第2天 爱是恩慈',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/02'
+            );
+          $news[] = $img;
+          $img = array(
+              'Title'=> '第1天 爱是恒久忍耐',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/01'
+            );
+          // $news[] = $img;
+          $img = array(
+              'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/node/15'
+            );
+            $news[] = $img;  
+          // $img = array(
+          //   'Title'=>'用手机，登录【永不止息】^_^',
+          //   'Description'=>'单图文 标题15字 摘要60字',
+          //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
+          //   'Url'=>'http://yongbuzhixi.com'
+          // );
+          //单图文 标题15字 摘要60字
+          //多图文 1标题16字 2标题15字
+          $wechatObj->news($news)->reply();
+
+                // $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+               }
             }  elseif (substr($keyword, 0,3) == '119') {
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp][TearingUp][TearingUp]代祷暂时关闭，因为没人愿意加入~请先为我们代祷吧\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
@@ -775,32 +848,6 @@ function mp_service_response() {
               }
 
             }else {
-              module_load_include('inc', 'mp_service', 'config');  
-              $options = array(
-                'account'=>'love_yongbuzhixi',
-                'password'=>'mjk5nj',
-                'datapath'=>'./data/cookie_' ,
-                  'debug'=>FALSE,
-                  'logcallback'=>'logdebug' 
-              );
-              $wechat = new Wechatext($options);
-              //$wechat
-              if ($wechat->checkValid()) {    
-                $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
-                foreach ($getMsg as $key => $Msg) {
-                  if($Msg['content'] == $wechatObj->getRevContent()) {
-                    $fakeId = $Msg['fakeid'];
-                    $data = $wechat->getInfo($fakeId);
-                    mp_service_update($FromUserName,'fakeid', $fakeId);
-                    mp_service_update($FromUserName,'wxid', $data['Username']);
-                    mp_service_update($FromUserName,'wxnickname', $data['NickName']);
-                  }
-                }
-              } else {
-                watchdog('login error', "login error wx", array(), WATCHDOG_NOTICE, 'link');
-              }
-
-
               $wechatObj->setFuncFlag(TRUE);
               $contentStr = "[TearingUp]对不起，小永还在努力学习中\n暂不识别您的指令！如需要更高级服务，请微信添加 yongbuzhixi_love\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
