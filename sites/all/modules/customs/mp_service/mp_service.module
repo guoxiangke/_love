@@ -769,8 +769,7 @@ function mp_service_response() {
 
             }else {
               watchdog('1config', 'message', array(), WATCHDOG_NOTICE, 'link');
-              module_load_include('inc', 'mp_service', 'wechat/test/config');
-watchdog('2config', 'message', array(), WATCHDOG_NOTICE, 'link');
+              module_load_include('inc', 'mp_service', 'config');
               $wechat = new Wechatext($options);
               watchdog('3config', 'message', array(), WATCHDOG_NOTICE, 'link');
               if ($wechat->checkValid()) {    
