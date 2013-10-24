@@ -66,7 +66,7 @@ function mp_service_schema() {
         'not null' => TRUE,
         'default' => ''
        ),
-      'wxid' => array(
+      'wxid' => array(//wx_username
         'description' => 'wxid',
         'type' => 'varchar',
         'length' => 64,
@@ -85,6 +85,13 @@ function mp_service_schema() {
         'default' => 0,
         'description' => "Foreign key: {file_managed}.fid of user's picture.",
       ),
+      'wxnickname' => array(
+        'description' => 'wxnickname',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => ''
+       ),
     ),
     'indexes' => array(
       'uid' => array('uid'),
@@ -188,5 +195,20 @@ function mp_service_update_7104() {
         'default' => ''
       );
     db_add_field('mp_service', 'wxid', $new_field);
+  }
+}
+/**
+ * add user wxnickname for wechat user
+ */
+function mp_service_update_7105() {
+  if (!db_field_exists('mp_service', 'mp_service')) {
+    $new_field = array(
+        'description' => 'wxnickname',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => ''
+      );
+    db_add_field('mp_service', 'wxnickname', $new_field);
   }
 }

@@ -161,19 +161,26 @@ function mp_service_response() {
 
         case '114':
           $img = array(
+              'Title'=> '第3天 爱是不自私',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第2天 爱是恩慈',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000319&itemidx=1&sign=492d39866bd5cb63444e8efb36a1fca8&scene=1#wechat_redirect'
+              'Url'=>'http://love.yongbuzhixi.org/love40/02'
             );
           $news[] = $img;
           $img = array(
               'Title'=> '第1天 爱是恒久忍耐',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000311&itemidx=1&sign=68ba37452de8968121010831e3f45d43&scene=1#wechat_redirect'
+              'Url'=>'http://love.yongbuzhixi.org/love40/01'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
@@ -786,8 +793,6 @@ function mp_service_response() {
                     $data = $wechat->getInfo($fakeId);
                     $wechat_name = $data['Username'];
                     $wechat_nickname = $data['NickName'];
-                    watchdog('mp_service', "$wechat_nickname wechat_nickname", array(), WATCHDOG_NOTICE, 'link');
-                    watchdog('mp_service', "$wechat_name wechat_name", array(), WATCHDOG_NOTICE, 'link');
                   }
                 }
               } else {
@@ -916,6 +921,17 @@ function mp_service_response() {
 
 
 
+}
+
+function mp_service_update($FromUserName,$filed,$value) {
+  db_update('mp_service')
+    ->fields(array(
+      $filed => $value,
+      'last_cmd' => "update $filed",
+      'last_cmd_timestamp' => REQUEST_TIME,
+    ))
+    ->condition('fromusername', $FromUserName)
+    ->execute();
 }
 
 function mp_service_is_bind($uid) {
