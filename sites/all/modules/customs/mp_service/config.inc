@@ -1,22 +1,22 @@
 <?php
 /**
  * 微信扩展接口测试
- */	watchdog('01config', 'message', array(), WATCHDOG_NOTICE, 'link');
+ */
 	include("wechatext.class.php");
-		watchdog('02config', 'message', array(), WATCHDOG_NOTICE, 'link');
+	
 	function logdebug($text){
 		file_put_contents('data/log.txt',$text."\n",FILE_APPEND);		
 	};
-	watchdog('03config', 'message', array(), WATCHDOG_NOTICE, 'link');
-	// $options = array(
-	// 	'account'=>'love_yongbuzhixi',
-	// 	'password'=>'mjk5nj',
-	// 	'datapath'=>'./data/cookie_' ,
-	// 		'debug'=>true,
-	// 		'logcallback'=>'logdebug'	
-	// ); 
+	
+	$options = array(
+		'account'=>'love_yongbuzhixi',
+		'password'=>'mjk5nj',
+		'datapath'=>'./data/cookie_' ,
+			'debug'=>FALSE,
+			'logcallback'=>'logdebug'	
+	); 
 
-	// $wechat = new Wechatext($options);
+	$wechat = new Wechatext($options);
 	// if ($wechat->checkValid()) {
 	// 	// 获取用户信息
 	// 	$data = $wechat->getInfo('3773415');
