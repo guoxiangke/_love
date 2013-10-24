@@ -165,7 +165,7 @@ function mp_service_response() {
         case '114':
 
           $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
-          
+
           // $img = array(
           //     'Title'=> '第3天 爱是不自私',
           //     'Description'=>'',
@@ -711,7 +711,7 @@ function mp_service_response() {
             );
           $news[] = $img;
           $img = array(
-              'Title'=> '第2天 爱是恩慈',
+              'Title'=> '第2天 欢迎您来挑战'.$data['NickName'],
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/02'
