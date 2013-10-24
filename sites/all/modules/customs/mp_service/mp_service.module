@@ -768,7 +768,15 @@ function mp_service_response() {
               }
 
             }else {
-              module_load_include('inc', 'mp_service', 'config');
+              module_load_include('inc', 'mp_service', 'config');  
+              $options = array(
+                'account'=>'love_yongbuzhixi',
+                'password'=>'mjk5nj',
+                'datapath'=>'./data/cookie_' ,
+                  'debug'=>FALSE,
+                  'logcallback'=>'logdebug' 
+              );
+              $wechat = new Wechatext($options);
               //$wechat
               if ($wechat->checkValid()) {    
                 $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;

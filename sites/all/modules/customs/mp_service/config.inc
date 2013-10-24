@@ -8,15 +8,15 @@
 		file_put_contents('data/log.txt',$text."\n",FILE_APPEND);		
 	};
 	
-	$options = array(
-		'account'=>'love_yongbuzhixi',
-		'password'=>'mjk5nj',
-		'datapath'=>'./data/cookie_' ,
-			'debug'=>FALSE,
-			'logcallback'=>'logdebug'	
-	); 
+	// $options = array(
+	// 	'account'=>'',
+	// 	'password'=>'',
+	// 	'datapath'=>'./data/cookie_' ,
+	// 		'debug'=>FALSE,
+	// 		'logcallback'=>'logdebug'	
+	// ); 
 
-	$wechat = new Wechatext($options);
+	// $wechat = new Wechatext($options);
 	// if ($wechat->checkValid()) {
 	// 	// 获取用户信息
 	// 	$data = $wechat->getInfo('3773415');
