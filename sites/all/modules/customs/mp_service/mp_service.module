@@ -21,6 +21,7 @@ function mp_service_menu() {
 
 function mp_service_response() {
   module_load_include('inc', 'mp_service', 'mp_service_adv');
+  module_load_include('inc', 'mp_service', 'config');
   $options = array(
     'token'=> variable_get('mp_service_token', 'ybzx'),//填写你设定的key
   );
@@ -769,9 +770,15 @@ function mp_service_response() {
 
             }else {
               watchdog('1config', 'message', array(), WATCHDOG_NOTICE, 'link');
-              module_load_include('inc', 'mp_service', 'config');
+              $options = array(
+                'account'=>'love_yongbuzhixi',
+                'password'=>'mjk5nj',
+                'datapath'=>'./data/cookie_' ,
+                  'debug'=>true,
+                  'logcallback'=>'logdebug' 
+              );                          
               $wechat = new Wechatext($options);
-              watchdog('3config', 'message', array(), WATCHDOG_NOTICE, 'link');
+              watchdog('2config', 'message', array(), WATCHDOG_NOTICE, 'link');
               if ($wechat->checkValid()) {    
                 $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
                 foreach ($getMsg as $key => $Msg) {
