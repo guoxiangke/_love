@@ -696,12 +696,13 @@ function mp_service_response() {
                       mp_service_update($FromUserName,'fakeid', $fakeId);
                       mp_service_update($FromUserName,'wxid', $data['Username']);
                       mp_service_update($FromUserName,'wxnickname', $data['NickName']);
+
+                      watchdog('wechat_log', $data['Username'].' '.$data['NickName'].' '.$fakeId.' '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
                     }
                   }
                 } else {
                   watchdog('login error', "login error wx", array(), WATCHDOG_NOTICE, 'link');
                 }
-
 
           $img = array(
               'Title'=> '第3天 爱是不自私',
