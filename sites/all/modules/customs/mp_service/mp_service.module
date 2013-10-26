@@ -163,45 +163,59 @@ function mp_service_response() {
           // $news[] = $img;
 
         case '114':
-
-          $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
-
-          // $img = array(
-          //     'Title'=> '第3天 爱是不自私',
-          //     'Description'=>'',
-          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-          //     'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
-          //   );
+        case '114+5':
+          // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+          $img = array(
+              'Title'=> '第5天 爱是不粗鲁',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/05'
+            );
+          $news[] = $img;
+          $img = array(
+              'Title'=> '第4天 爱是恩慈',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/04'
+            );
+          $news[] = $img;
+          $img = array(
+              'Title'=> '第3天 爱是不自私',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
+            );
           // $news[] = $img;
-          // $img = array(
-          //     'Title'=> '第2天 爱是恩慈',
-          //     'Description'=>'',
-          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-          //     'Url'=>'http://love.yongbuzhixi.org/love40/02'
-          //   );
+          $img = array(
+              'Title'=> '第2天 爱是恩慈',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/02'
+            );
           // $news[] = $img;
+          $img = array(
+              'Title'=> '第1天 爱是恒久忍耐',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/01'
+            );
+          // $news[] = $img;
+          $img = array(
+              'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/node/15'
+            );
+            // $news[] = $img;  
+
           // $img = array(
-          //     'Title'=> '第1天 爱是恒久忍耐',
-          //     'Description'=>'',
-          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-          //     'Url'=>'http://love.yongbuzhixi.org/love40/01'
-          //   );
-          // // $news[] = $img;
-          // $img = array(
-          //     'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
-          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-          //     'Url'=>'http://love.yongbuzhixi.org/node/15'
-          //   );
-          //   $news[] = $img;  
-          // // $img = array(
-          // //   'Title'=>'用手机，登录【永不止息】^_^',
-          // //   'Description'=>'单图文 标题15字 摘要60字',
-          // //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
-          // //   'Url'=>'http://yongbuzhixi.com'
-          // // );
-          // //单图文 标题15字 摘要60字
-          // //多图文 1标题16字 2标题15字
-          // $wechatObj->news($news)->reply();
+          //   'Title'=>'用手机，登录【永不止息】^_^',
+          //   'Description'=>'单图文 标题15字 摘要60字',
+          //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
+          //   'Url'=>'http://yongbuzhixi.com'
+          // );
+          //单图文 标题15字 摘要60字
+          //多图文 1标题16字 2标题15字
+          $wechatObj->news($news)->reply();
           break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
@@ -697,7 +711,7 @@ function mp_service_response() {
                       mp_service_update($FromUserName,'wxid', $data['Username']);
                       mp_service_update($FromUserName,'wxnickname', $data['NickName']);
 
-                      watchdog('wechat_log', $data['Username'].'  '.$data['NickName'].'  '.$fakeId.'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+                      watchdog('wechat_log', $data['Username'].'  '.$data['NickName'].'  '.$fakeId.'  '.  $wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
                     }
                   }
                 } else {
@@ -705,38 +719,25 @@ function mp_service_response() {
                 }
 
           $img = array(
+              'Title'=> '第5天 爱是不粗鲁',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/05'
+            );
+          $news[] = $img;
+          $img = array(
+              'Title'=> '第4天 爱是恩慈',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/04'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第3天 爱是不自私',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
             );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '欢迎您【'.$data['NickName'].'】来挑战->第2天 爱是恩慈',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/02'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第1天 爱是恒久忍耐',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/01'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/node/15'
-            );
-            $news[] = $img;  
-          // $img = array(
-          //   'Title'=>'用手机，登录【永不止息】^_^',
-          //   'Description'=>'单图文 标题15字 摘要60字',
-          //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
-          //   'Url'=>'http://yongbuzhixi.com'
-          // );
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
           $wechatObj->news($news)->reply();
