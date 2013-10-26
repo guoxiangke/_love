@@ -711,7 +711,7 @@ function mp_service_response() {
                       mp_service_update($FromUserName,'wxid', $data['Username']);
                       mp_service_update($FromUserName,'wxnickname', $data['NickName']);
 
-                      watchdog('wechat_log', $data['Username'].'  '.$data['NickName'].'  '.$fakeId.'  '.  $wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+                      watchdog('wechat_log', $fakeId.'  '.$data['Username'].'  '.$data['NickName'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
                     }
                   }
                 } else {
@@ -871,9 +871,9 @@ function mp_service_response() {
                       $data = $wechat->getInfo($fakeId);
                       mp_service_update($FromUserName,'fakeid', $fakeId);
                       mp_service_update($FromUserName,'wxid', $data['Username']);
-                      mp_service_update($FromUserName,'wxnickname', $data['NickName']);
+                      mp_service_update($FromUserName,'wxnickname', $data['NickName']);                      
 
-                      watchdog('wechat_log-others', $data['Username'].'  '.$data['NickName'].'  '.$fakeId.'  '.  $wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+                      watchdog('wechat_log', $fakeId.'  '.$data['Username'].'  '.$data['NickName'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
                     }
                   }
                 } else {
