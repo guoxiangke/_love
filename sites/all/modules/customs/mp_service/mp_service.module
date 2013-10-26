@@ -183,7 +183,7 @@ function mp_service_response() {
               'Title'=> '第3天 爱是不自私',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
+              'Url'=>'http://love.yongbuzhixi.org/love40/03'
             );
           $news[] = $img;
           $img = array(
@@ -736,7 +736,7 @@ function mp_service_response() {
               'Title'=> '第3天 爱是不自私',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000326&itemidx=1&sign=b7209edb8a2e45bd84bde95fde2cb177&scene=1#wechat_redirect'
+              'Url'=>'http://love.yongbuzhixi.org/love40/03'
             );
           $news[] = $img;
           //单图文 标题15字 摘要60字
