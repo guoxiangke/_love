@@ -165,7 +165,7 @@ function mp_service_response() {
             $img = array(
               'Title'=> '恩典365',
               'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/Screenshot_2013-10-21-05-44-31.png',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
               'Url'=>'http://love.yongbuzhixi.org/'
             );
           $news[] = $img;          
