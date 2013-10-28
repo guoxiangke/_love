@@ -873,7 +873,7 @@ function mp_service_response() {
                       mp_service_update($FromUserName,'wxid', $data['Username']);
                       mp_service_update($FromUserName,'wxnickname', $data['NickName']);                      
 
-                      watchdog('wechat_log', $fakeId.'  '.$data['Username'].'  '.$data['NickName'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+                      watchdog('wechat_log-1028', $fakeId.'  '.$data['Username'].'  '.$data['NickName'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
                     }
                   }
                 } else {
