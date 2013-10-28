@@ -320,7 +320,7 @@ function mp_service_response() {
           $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
-          $contentStr ="小永今天要罢工，发句勉励的话召唤一下他吧！"
+          $contentStr ="小永今天要罢工，发句勉励的话召唤一下他吧！";
           break;
         case '503':
         case '５０３':
@@ -328,8 +328,7 @@ function mp_service_response() {
           $title = "$title-".date('ymd');
           $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          $contentStr ="小永今天要罢工，发句勉励的话召唤一下他吧！";
           break;
         case '504':
         case '５０４':
