@@ -278,7 +278,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/ws/ws'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '524':
         case '501':
@@ -289,7 +289,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/bv/bv'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '5010':
         case '５０１０':
@@ -321,7 +321,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/ee/ee'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '503':
         case '５０３':
@@ -330,7 +330,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/se/se'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '504':
         case '５０４':
@@ -339,7 +339,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/bf/bf'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;    
         case '505':
         case '５０５':
@@ -348,7 +348,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/up/up'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,周1-5";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '506':
         case '５０６':
@@ -357,7 +357,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/hg/hg'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '507':
         case '５０７':
@@ -366,7 +366,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/bc/bc'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号,周1-5";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '508':
         case '５０８':
@@ -375,7 +375,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/ds/ds'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '509':
         case '５０９':
@@ -384,7 +384,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/gv/gv'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '510':
         case '５１０':
@@ -393,7 +393,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/ib/ib'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '511':
         case '５１１':
@@ -402,7 +402,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/ir/ir'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '512':
         case '５１２':
@@ -411,7 +411,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/im/im'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '513':
         case '５１３':
@@ -420,7 +420,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/th/th'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '520':
         case '５２０':
@@ -431,7 +431,7 @@ function mp_service_response() {
           // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;        
         case '521':
         // 荒漠甘泉乐侣
@@ -442,7 +442,7 @@ function mp_service_response() {
           // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;          
         case '522':
         case '５２２':
@@ -451,7 +451,7 @@ function mp_service_response() {
           //http://media.haomuren.org/dev/ev/evn0709.mp3
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '523':
         case '５２３':
@@ -460,7 +460,7 @@ function mp_service_response() {
           $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '525':
         case '５２５':
@@ -469,7 +469,7 @@ function mp_service_response() {
           $musicurl = 'http://media.biblexpo.net/biblexpo/daily/Daily_'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '526':
         case '５２６': 
@@ -478,7 +478,7 @@ function mp_service_response() {
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'PT.m4a';
           $desc = '周1-5关注love_yongbuzhixi公众号';
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '527':
         case '５２７': 
@@ -487,7 +487,7 @@ function mp_service_response() {
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'WS.m4a';
           $desc = '关注love_yongbuzhixi公众号';
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '528':
         case '５２８': 
@@ -496,7 +496,7 @@ function mp_service_response() {
           $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'DBR.m4a';
           $desc = '关注love_yongbuzhixi公众号';
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;          
 
         case '530':
@@ -505,7 +505,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/yu/yu'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '531':
           $title = '彩虹桥';
@@ -513,7 +513,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/tr/tr'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case '532':
           $title = '现代人的希望';
@@ -521,7 +521,7 @@ function mp_service_response() {
           $musicurl = 'http://liangyou.nissigz.com/media/gn/gn'.date('ymd').'.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case 'eg':
         case 'Eg':
@@ -537,7 +537,7 @@ function mp_service_response() {
           $desc = date("n月");
           $desc .= $tus."日";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case 'wa':
         case 'Wa':
@@ -554,7 +554,7 @@ function mp_service_response() {
           $desc = date("n月");
           $desc .= $tus."日";
           $hgmusicurl = $musicurl;
-          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+          $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
           break;
         case 'ee':
           $html = file_get_html('http://blog.sina.cn/dpool/blog/articlelist_1356034001.html');
@@ -845,7 +845,7 @@ function mp_service_response() {
                 $title = "$title-$desc";
                 $hgmusicurl = $musicurl;
                 $desc = "关注love_yongbuzhixi公众号，每日更新";
-                $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";
+                $contentStr ="小永昨晚给大家整理恩典365文字版，快要壮烈牺牲了\n今天要罢工，发句勉励的话召唤一下他吧！\n文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";
               }else{
                 $contentStr = 'error input!';
               }
@@ -880,7 +880,7 @@ function mp_service_response() {
                   watchdog('login error', "login error wx", array(), WATCHDOG_NOTICE, 'link');
                 }
 
-              $contentStr = "谢谢您鼓励，我们一起来召唤小永归来！\n恩典365文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容";//"[TearingUp]对不起，小永还在努力学习中\n暂不识别您的指令！如需要更高级服务，请微信添加 yongbuzhixi_love\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
+              $contentStr = "谢谢您鼓励，我们一起来召唤小永归来！\n恩典365文字版请关注\nhttp://love.yongbuzhixi.org第3页的后内容\n点击read more查看全文";//"[TearingUp]对不起，小永还在努力学习中\n暂不识别您的指令！如需要更高级服务，请微信添加 yongbuzhixi_love\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【911+意见建议内容】\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
           break;
       }
