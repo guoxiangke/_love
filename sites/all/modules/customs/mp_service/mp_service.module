@@ -174,10 +174,10 @@ function mp_service_response() {
 
         case '366':
         $img = array(
-              'Title'=> '恩典365',
+              'Title'=> '每周一歌',
               'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-              'Url'=>'http://www.tudou.com/programs/view/abxi5w61gQw/?autoplay=false'
+              'PicUrl'=>'http://farm4.staticflickr.com/3751/10548523705_dd68a9a7ab.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000425&itemidx=1&sign=385c90e542dd462034da500068eef29c#wechat_redirect'
             );
           $news[] = $img;          
           $wechatObj->news($news)->reply();
