@@ -1002,13 +1002,15 @@ function mp_service_update_user_info($wechatObj) {
       if($Msg['content'] == $wechatObj->getRevContent()) {
         $fakeId = $Msg['fakeid'];
         $data = $wechat->getInfo($fakeId);
-        mp_service_update($FromUserName,'fakeid', $fakeId);
-        mp_service_update($FromUserName,'wxid', $data['user_name']);
-        mp_service_update($FromUserName,'wxnickname', $data['nick_name']);                      
+
 
         watchdog('get user', $fakeId.'  '.$data['user_name'].'  '.$data['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
         unset($data['groups']);
         watchdog('mp_service_user_data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
+        
+        mp_service_update($FromUserName,'fakeid', $fakeId);
+        mp_service_update($FromUserName,'wxid', $data['user_name']);
+        mp_service_update($FromUserName,'wxnickname', $data['nick_name']);                      
       }
     }
   } else {
