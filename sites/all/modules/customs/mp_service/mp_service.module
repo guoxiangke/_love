@@ -1003,14 +1003,22 @@ function mp_service_update_user_info($wechatObj) {
         $fakeId = $Msg['fakeid'];
         $data = $wechat->getInfo($fakeId);
 
-
-        // watchdog('get user', $fakeId.'  '.$data['user_name'].'  '.$data['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+        watchdog('get user', $fakeId.'  '.$data['contact_info']['user_name'].'  '.$data['contact_info']['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
         // unset($data['groups']);
-        watchdog('mp_service_user_data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
-
-        mp_service_update($FromUserName,'fakeid', $fakeId);
-        mp_service_update($FromUserName,'wxid', $data['contact_info']['user_name']);
-        mp_service_update($FromUserName,'wxnickname', $data['contact_info']['nick_name']);                      
+        // watchdog('mp_service_user_data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
+        db_update('mp_service')
+          ->fields(array(
+            'fakeid' => $fakeId,
+            'wxid' =>  $data['contact_info']['user_name'],
+            'wxnickname' => $data['contact_info']['nick_name'],
+            'last_cmd' => "update new",
+            'last_cmd_timestamp' => REQUEST_TIME,
+          ))
+          ->condition('fromusername', $FromUserName)
+          ->execute();
+        // mp_service_update($FromUserName,'fakeid', $fakeId);
+        // mp_service_update($FromUserName,'wxid', $data['contact_info']['user_name']);
+        // mp_service_update($FromUserName,'wxnickname', $data['contact_info']['nick_name']);                      
       }
     }
   } else {
@@ -1019,14 +1027,7 @@ function mp_service_update_user_info($wechatObj) {
 }
 
 function mp_service_update($FromUserName,$filed,$value) {
-  db_update('mp_service')
-    ->fields(array(
-      $filed => $value,
-      'last_cmd' => "update $filed",
-      'last_cmd_timestamp' => REQUEST_TIME,
-    ))
-    ->condition('fromusername', $FromUserName)
-    ->execute();
+
 }
 
 function mp_service_is_bind($uid) {
