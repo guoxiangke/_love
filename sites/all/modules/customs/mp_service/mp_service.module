@@ -64,6 +64,7 @@ function mp_service_response() {
       switch ($keyword) {
         case '00':     
           $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n回复【365】恩典365\n广播指令为纯数字，请勿带*号。号和中括号\n";
+            mp_service_update_user_info($wechatObj);
           break;        
         case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
@@ -72,9 +73,11 @@ function mp_service_response() {
           break;
         case '1':
           $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n回复【110】推荐帮助-如何推荐给好友？\n回复【365】恩典365";
+            mp_service_update_user_info($wechatObj);
           break;
         case '2':
           $contentStr = "表达爱的心语,遥寄未来的TA!\n【20】发布照片\n【201】无主情话\n【202】时光隧道\n【203】独居生活\n【204】想对你说\n回复获得更详细发布说明\n 回复【00】返回主菜单\n回复【5】进入良友广播";
+            mp_service_update_user_info($wechatObj);
           // 【201】无主情话(随便说点情话)-38
           // 【202】时光隧道(分享我的过去)-39
           // 【203】独居生活(记录现在的生活)-40
@@ -94,30 +97,37 @@ function mp_service_response() {
               ->condition('uid', $uid)
               ->execute();
           }
+            mp_service_update_user_info($wechatObj);
           break;
         case '201':
           $contentStr = "(随便说点情话)请回复:【201+内容】\n比如：201今天天气好，心情不错，未来的你呢？\n即可发布【无主情话】\n回复【9】查看绑定帮助\n回复【2】返回上级菜单";
+            mp_service_update_user_info($wechatObj);
           break;
 
         case '202':
           $contentStr = "(分享我的过去)请回复:【202+内容】\n比如：202记得大三那年，还没到夏至，我在湖边的操场上～\n即可发布【时光隧道】\n回复【9】查看绑定帮助\n回复【2】返回上级菜单";
+            mp_service_update_user_info($wechatObj);
           break;
 
         case '203':
           $contentStr = "(记录现在的生活)请回复:【203+内容】\n比如：203明天开始，要去丰台跑市场了\n即可发布【独居生活】\n回复【9】查看绑定帮助\n回复【2】返回上级菜单";
+            mp_service_update_user_info($wechatObj);
           break;
 
         case '204':
           $contentStr = "(写给喜欢的人)请回复:【204+内容】\n比如：204这个世界很浮躁，内心的需要早已被人们忽略掉！\n即可发布【想对你说】\n回复【9】查看绑定帮助\n回复【2】返回上级菜单";
+            mp_service_update_user_info($wechatObj);
           break;
         case '3':
           $contentStr =  "最近活跃的弟兄姊妹有：\n\t\t侯星光\n\t\t韩富军\n\t\t王露\n\t\t畅卢涛...\n\n回复【00】进入主菜单\n回复【5】进入良友广播\n 本功能测试开发中～";
+            mp_service_update_user_info($wechatObj);
           break;
         case '4':
         case '6':
         case '7':
         case '8':
           $contentStr =  "本菜单开发中\n回复【00】进入主菜单\n回复【5】良友广播\n";
+          mp_service_update_user_info($wechatObj);
           break;
         case '5':
           $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节*new*\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】ds晨曦讲座\n 【509】生活无国界\n注意：广播指令为纯数字\n【528】每日读经\n【365】恩典365*new*\n【9010】推荐给好友\n【501-1】昨日节目/调皮\n【51】【52】【53】进入下一页";
@@ -136,15 +146,19 @@ function mp_service_response() {
           break;
         case '900':
           $contentStr =  "Q:如何查看用户昵称？\n A:登录http://yongbuzhxi.com查看。\n回复【900 个人邮箱 姓名】申请内测\n注意中间空格\n【9】返回绑定菜单\n【00】返回主菜单\n【5】进入良友广播\n";
+            mp_service_update_user_info($wechatObj);
           break;
         case '901':
           $contentStr =  "Q:如何查看手机信息？\n A:注册的时候填写的\n如果在注册时没有填写，您可以到个人页面，点击：编辑->基本信息。\n回复【900 个人邮箱 姓名】申请内测,注意中间空格\n回复【9】返回绑定菜单\n回复【00】返回主菜单\n回复【5】进入良友广播\n";
+            mp_service_update_user_info($wechatObj);
           break;
         case '119':
           $contentStr =  "请加个人帐号：yongbuzhixi_love与我们更进一步交流\n把您使用到的问题发给我们\n回复【00】返回主菜单\n回复【5】进入良友广播";
+            mp_service_update_user_info($wechatObj);
           break;
         case '911':
           $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+            mp_service_update_user_info($wechatObj);
           break;
         case 'Y':
         case 'y':
@@ -291,6 +305,7 @@ function mp_service_response() {
           // );
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
+          mp_service_update_user_info($wechatObj);
           $wechatObj->news($news)->reply();
           break;
          case '9010':
@@ -303,6 +318,7 @@ function mp_service_response() {
             $news[] = $img; 
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
+          mp_service_update_user_info($wechatObj);
           $wechatObj->news($news)->reply();
           break;
         case '500':
@@ -611,6 +627,7 @@ function mp_service_response() {
           $wechatObj->news($news)->reply();
           break;
         default:
+            mp_service_update_user_info($wechatObj);
             if(substr($keyword, 0,2) == '91' && substr($keyword, 0,3) != '911') {
               $keyword = substr($keyword, 2);
               $keywords = explode('?', $keyword);
@@ -724,33 +741,6 @@ function mp_service_response() {
                }else {                
                 $wechatObj->setFuncFlag(TRUE);
 
-                module_load_include('inc', 'mp_service', 'config');  
-                $options = array(
-                  'account'=>'love_yongbuzhixi',
-                  'password'=>'mjk5nj',
-                  'datapath'=>'./data/cookie_' ,
-                    'debug'=>FALSE,
-                    'logcallback'=>'logdebug' 
-                );
-                $wechat = new Wechatext($options);
-                //$wechat
-                if ($wechat->checkValid()) {    
-                  $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
-                  foreach ($getMsg as $key => $Msg) {
-                    if($Msg['content'] == $wechatObj->getRevContent()) {
-                      $fakeId = $Msg['fakeid'];
-                      $data = $wechat->getInfo($fakeId);
-                      mp_service_update($FromUserName,'fakeid', $fakeId);
-                      mp_service_update($FromUserName,'wxid', $data['Username']);
-                      mp_service_update($FromUserName,'wxnickname', $data['NickName']);
-
-                      watchdog('wechat_log-911', $fakeId.'  '.$data['Username'].'  '.$data['NickName'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
-                    }
-                  }
-                } else {
-                  watchdog('login error', "login error wx", array(), WATCHDOG_NOTICE, 'link');
-                }
-
                 $contentStr = "[Joyful]谢谢您的吐槽，请为本平台祷告，当然要给我祷告哦！\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【365】恩典365*new*\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
                }
             }  elseif (substr($keyword, 0,3) == '119') {
@@ -860,8 +850,6 @@ function mp_service_response() {
 
             }else {
               $wechatObj->setFuncFlag(TRUE);
-              mp_service_update_user_info($wechatObj);
-
               $contentStr = "[TearingUp]对不起，小永还在努力学习中\n暂不识别您的指令！如需要更高级服务，请微信添加 yongbuzhixi_love\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【119】获得帮助\n回复【110】推荐给好友？\n回复【365】恩典365\n回复【911+意见建议内容】\n永不止息，需要有你！\n官网：http://yongbuzhixi.com \n";
             }
           break;
