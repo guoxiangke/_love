@@ -1004,13 +1004,13 @@ function mp_service_update_user_info($wechatObj) {
         $data = $wechat->getInfo($fakeId);
 
 
-        watchdog('get user', $fakeId.'  '.$data['user_name'].'  '.$data['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
-        unset($data['groups']);
+        // watchdog('get user', $fakeId.'  '.$data['user_name'].'  '.$data['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+        // unset($data['groups']);
         watchdog('mp_service_user_data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
-        
+
         mp_service_update($FromUserName,'fakeid', $fakeId);
-        mp_service_update($FromUserName,'wxid', $data['user_name']);
-        mp_service_update($FromUserName,'wxnickname', $data['nick_name']);                      
+        mp_service_update($FromUserName,'wxid', $data['contact_info']['user_name']);
+        mp_service_update($FromUserName,'wxnickname', $data['contact_info']['nick_name']);                      
       }
     }
   } else {
