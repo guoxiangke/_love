@@ -1011,14 +1011,12 @@ function mp_service_update_user_info($wechatObj) {
             'fakeid' => $fakeId,
             'wxid' =>  $data['contact_info']['user_name'],
             'wxnickname' => $data['contact_info']['nick_name'],
+            'contact_info' => serialize($data['contact_info']),
             'last_cmd' => "update new",
             'last_cmd_timestamp' => REQUEST_TIME,
           ))
           ->condition('fromusername', $FromUserName)
-          ->execute();
-        // mp_service_update($FromUserName,'fakeid', $fakeId);
-        // mp_service_update($FromUserName,'wxid', $data['contact_info']['user_name']);
-        // mp_service_update($FromUserName,'wxnickname', $data['contact_info']['nick_name']);                      
+          ->execute();                      
       }
     }
   } else {
