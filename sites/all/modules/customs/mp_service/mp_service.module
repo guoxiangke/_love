@@ -203,6 +203,7 @@ function mp_service_response() {
           $wechatObj->news($news)->reply();
           break;
         case '114':
+        case '40':
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
               'Title'=> '第10天 爱是无条件的',
