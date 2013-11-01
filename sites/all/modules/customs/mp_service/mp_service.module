@@ -218,7 +218,7 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/09'
             );
-          // $news[] = $img;
+          $news[] = $img;
            $img = array(
               'Title'=> '第8天 爱是不嫉妒',
               'Description'=>'',
