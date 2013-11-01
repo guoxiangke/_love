@@ -181,6 +181,13 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
               'Url'=>'http://www.tudou.com/programs/view/oI2YZnQvHiY/'
             );
+          $news[] = $img;   
+            $img = array(
+              'Title'=> '恩典365 '.date('m月01日'),
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/grace365/1101'
+            );
           $news[] = $img;          
           $wechatObj->news($news)->reply();
           break;
