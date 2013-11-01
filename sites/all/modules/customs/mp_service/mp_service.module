@@ -179,7 +179,7 @@ function mp_service_response() {
               'Title'=> '恩典365',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/'
+              'Url'=>'http://www.tudou.com/programs/view/oI2YZnQvHiY/'
             );
           $news[] = $img;          
           $wechatObj->news($news)->reply();
@@ -198,26 +198,47 @@ function mp_service_response() {
         case '114':
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
+              'Title'=> '第10天 爱是无条件的',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/09'
+            );
+          $news[] = $img;
+           $img = array(
+              'Title'=> '第9天 爱是制造好印象',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/09'
+            );
+          $news[] = $img;
+           $img = array(
+              'Title'=> '第8天 爱是不嫉妒',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/08'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第7天 爱相信最美好的',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/07'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第6天 爱是不轻易动怒',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/06'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第5天 爱是不粗鲁',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/05'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第4天 爱是恩慈',
               'Description'=>'',
