@@ -1267,7 +1267,7 @@ function invite_form_submit($form, &$form_state) {
     }
 
     $invite->data = array('subject' => trim($form_state['values']['subject']), 'message' => token_replace($form_state['values']['message'], invite_token_data($invite)));
-
+drupal_set_message("如果是QQ邮箱的话，请把链接 ".  url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=')."invite/accept/$invite->reg_code 复制发送给你的朋友$invite->email", 'status', FALSE);//dale
     if (invite_send($invite, !$show_only)) {
       $num_succeeded++;
       $processed_invites[] = $invite;
@@ -1301,7 +1301,7 @@ function invite_form_submit($form, &$form_state) {
     drupal_set_message($message, 'error');
   }
   elseif (!$show_only && user_access('track invitations') && $user->uid) {
-    $form_state['redirect'] = "user/$user->uid/invites/pending";
+    $form_state['redirect'] = "<front>"; //user/$user->uid/invites/pending //dale
   }
 }
 
