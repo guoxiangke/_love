@@ -194,14 +194,16 @@ function mp_service_response() {
               'Title'=> '恩典365 '.date('m月d日'),
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-              'Url'=>'http://www.tudou.com/programs/view/oI2YZnQvHiY/'
+              'Url'=>'http://t.cn/zRNB2pW'
             );
           $news[] = $img;   
+          $date = date('md',time()-24*60*60);
             $img = array(
               'Title'=> '恩典365 '.date('m月01日'),
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/grace365/1101'
+
+              'Url'=>'http://love.yongbuzhixi.org/grace365/'.$date;
             );
           $news[] = $img;          
           $wechatObj->news($news)->reply();
