@@ -194,12 +194,12 @@ function mp_service_response() {
               'Title'=> '恩典365 '.date('m月d日'),
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-              'Url'=>'http://t.cn/zRNB2pW'
+              'Url'=>'http://love.yongbuzhixi.org/grace365',
             );
           $news[] = $img;   
           $date = date('md',time()-24*60*60);
             $img = array(
-              'Title'=> '恩典365 '.date('m月01日'),
+              'Title'=> '恩典365 '.$date,
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
 
@@ -223,10 +223,24 @@ function mp_service_response() {
         case '40':
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
+              'Title'=> '第12天 爱是谦让',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/12'
+            );
+          $news[] = $img;
+           $img = array(
+              'Title'=> '第11天 爱是珍惜',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/11'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第10天 爱是无条件的',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/09'
+              'Url'=>'http://love.yongbuzhixi.org/love40/10'
             );
           $news[] = $img;
            $img = array(
@@ -235,7 +249,7 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/09'
             );
-          $news[] = $img;
+          // $news[] = $img;
            $img = array(
               'Title'=> '第8天 爱是不嫉妒',
               'Description'=>'',
