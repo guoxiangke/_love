@@ -203,7 +203,7 @@ function mp_service_response() {
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
 
-              'Url'=>'http://love.yongbuzhixi.org/grace365/'.$date;
+              'Url'=>'http://love.yongbuzhixi.org/grace365/'.$date,
             );
           $news[] = $img;          
           $wechatObj->news($news)->reply();
