@@ -380,6 +380,14 @@ function mp_service_response() {
           mp_service_update_user_info($wechatObj);
           $wechatObj->news($news)->reply();
           break;
+ 
+        case 'test':
+          $title = "听听90后";
+          $musicurl = 'http://audio.liangyou.net/download.php?t=1&c=em&f=em131103.mp3';
+          $desc = "关注love_yongbuzhixi公众号，每日更新";
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
         case '500':
         case '５００':
           $title = "长夜的牵引";
