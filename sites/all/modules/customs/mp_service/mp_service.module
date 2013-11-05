@@ -112,7 +112,6 @@ function mp_service_response() {
               ->condition('uid', $uid)
               ->execute();
           }
-            mp_service_update_user_info($wechatObj);
           break;
         case '201':
           $contentStr = "(随便说点情话)请回复:【201+内容】\n比如：201今天天气好，心情不错，未来的你呢？\n即可发布【无主情话】\n回复【9】查看绑定帮助\n回复【2】返回上级菜单";
@@ -221,6 +220,14 @@ function mp_service_response() {
           break;
         case '114':
         case '40':
+          // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+          $img = array(
+              'Title'=> '第13天 爱是公平地争吵',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/13'
+            );
+          $news[] = $img;
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
               'Title'=> '第12天 爱是谦让',
