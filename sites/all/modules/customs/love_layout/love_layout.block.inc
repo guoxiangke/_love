@@ -385,6 +385,7 @@ function love_user_timeline() {
 
   $output = '<script>
   (function ($) {
+    $(document).bind("contextmenu",function(e){return false; });
     $(function(){
       $().timelinr({
         orientation:  "vertical",
