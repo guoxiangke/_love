@@ -979,7 +979,7 @@ function mp_service_response() {
             $wechatObj->text($contentStr)->reply();
             exit;
           }else {
-            $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】";
+            $contentStr = "发布成功！\n30秒内可回复文字添加照片描述\n如：【我爱北京！】该功能开发中~请代祷！";
             $wechatObj->text($contentStr)->reply();
             $node = new stdClass();
             $node->title = '【来自微信】';
