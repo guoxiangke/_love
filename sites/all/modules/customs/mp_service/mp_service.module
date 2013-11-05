@@ -389,8 +389,9 @@ function mp_service_response() {
           break;
  
         case 'test':
-          $title = "听听90后";
-          $musicurl = 'http://audio.liangyou.net/download.php?t=1&c=em&f=em131103.mp3';
+          $title = "婚姻与家庭";
+          $musicurl = 'http://audio.liangyou.net/download.php?t=1&c=vmf&f=vmf131101.mp3';
+          //http://audio.liangyou.net/download.php?t=1&c=vmf&f=vmf131101.mp3
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
