@@ -223,6 +223,13 @@ function mp_service_response() {
         case '40':
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
+              'Title'=> '第14天 爱是公平地争吵',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/14'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第13天 爱是公平地争吵',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
