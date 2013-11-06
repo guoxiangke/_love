@@ -62,7 +62,7 @@ function mp_service_response() {
         }
       }
       $prefix_uri = 'http://audio2.liangyou.net/files/media/program_live/';
-      $prefix_uri = 'http://liangyou.nissigz.com/media/';
+      // $prefix_uri = 'http://liangyou.nissigz.com/';
        $radio_list = array(
                 '500' => 'ws',
                 '501' => 'bv',
@@ -250,14 +250,14 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/11'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第10天 爱是无条件的',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/10'
             );
-          $news[] = $img;
+          // $news[] = $img;
            $img = array(
               'Title'=> '第9天 爱是制造好印象',
               'Description'=>'',
@@ -271,7 +271,7 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/08'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第7天 爱相信最美好的',
               'Description'=>'',
@@ -326,7 +326,7 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/node/15'
             );
-            // $news[] = $img;  
+            $news[] = $img;  
 
           // $img = array(
           //   'Title'=>'用手机，登录【永不止息】^_^',
