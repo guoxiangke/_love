@@ -61,7 +61,8 @@ function mp_service_response() {
           exit;
         }
       }
-      $prefix_uri = 'http://audio2.liangyou.net/files/media/program_live/';//'http://liangyou.nissigz.com/media/ws/ws'
+      $prefix_uri = 'http://audio2.liangyou.net/files/media/program_live/';
+      $prefix_uri = 'http://liangyou.nissigz.com/media/ws/ws';
        $radio_list = array(
                 '500' => 'ws',
                 '501' => 'bv',
