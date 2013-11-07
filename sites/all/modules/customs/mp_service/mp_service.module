@@ -139,10 +139,17 @@ function mp_service_response() {
           break;
         case '4':
         case '6':
-        case '7':
         case '8':
           $contentStr =  "本菜单开发中\n回复【00】进入主菜单\n回复【5】良友广播\n";
           mp_service_update_user_info($wechatObj);
+          break;
+        case '7':
+          $title = 'FM 77.7-云上的爱';
+          $title = "欢迎收听及推荐";
+          $musicurl = 'http://fm77.u.qiniudn.com/fm11.mp3';
+          $desc = "关注love_yongbuzhixi公众号，每日更新";
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '5':
           $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节*new*\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】ds晨曦讲座\n 【509】生活无国界\n注意：广播指令为纯数字\n【528】每日读经\n【365】恩典365*new*\n【9010】推荐给好友\n【501-1】昨日节目/调皮\n【51】【52】【53】进入下一页";
@@ -207,14 +214,6 @@ function mp_service_response() {
             );
           $news[] = $img;          
           $wechatObj->news($news)->reply();
-          break;
-        case '7':
-          $title = 'FM 77.7-云上的爱';
-          $title = "欢迎收听及推荐";
-          $musicurl = 'http://fm77.u.qiniudn.com/fm11.mp3';
-          $desc = "关注love_yongbuzhixi公众号，每日更新";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '366':
         $img = array(
