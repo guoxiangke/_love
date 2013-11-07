@@ -230,6 +230,13 @@ function mp_service_response() {
         case '40':
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
+              'Title'=> '第15天 爱是敬重对方',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/15'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第14天 爱是公平地争吵',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
@@ -242,7 +249,7 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/13'
             );
-          $news[] = $img;
+          // $news[] = $img;
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
               'Title'=> '第12天 爱是谦让',
@@ -250,7 +257,7 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/12'
             );
-          $news[] = $img;
+          // $news[] = $img;
            $img = array(
               'Title'=> '第11天 爱是珍惜',
               'Description'=>'',
