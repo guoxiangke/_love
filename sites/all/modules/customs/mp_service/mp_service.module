@@ -145,7 +145,6 @@ function mp_service_response() {
           break;
         case '7':
           $title = 'FM 77.7-云上的爱';
-          $title = "欢迎收听及推荐";
           $musicurl = 'http://fm77.u.qiniudn.com/fm11.mp3';
           $desc = "关注love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
