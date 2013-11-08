@@ -1759,3 +1759,7 @@ font-size: 14px;
 	font-style: normal;
 	color: #0088cc;
 }
+
+.node-type-topic .comment-wrapper .field-name-comment-body .field-item{
+	padding: 5px 0 0 15px;
+};
