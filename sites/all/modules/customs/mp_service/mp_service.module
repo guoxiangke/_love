@@ -846,10 +846,11 @@ function mp_service_response() {
                   $comment->cid = 0; // leave it as is
                   $comment->pid = 0; // parent comment id, 0 if none 
                   $comment->uid = 0; // user's id, who left the comment
+                  watchdog('mp_service', '<pre>'.print_r($wechat_user_info,true), array(), WATCHDOG_NOTICE, 'link');
                   // watchdog('get user', $fakeId.'  '.$data['contact_info']['user_name'].'  '.$data['contact_info']['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
-                  $comment->mail = $data['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
+                  $comment->mail = $wechat_user_info['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
                   //a:10:{s:7:"fake_id";i:2553430760;s:9:"nick_name";s:6:"麦青";s:9:"user_name";s:10:"maiqing-py";s:9:"signature";s:31:"在心中修篱种菊..........";s:4:"city";s:6:"昆明";s:8:"province";s:6:"云南";s:7:"country";s:6:"中国";s:6:"gender";i:2;s:11:"remark_name";s:0:"";s:8:"group_id";i:108;}
-                  $comment->name = $data['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
+                  $comment->name = $wechat_user_info['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
                   // $comment->thread = '01/'; // OPTIONAL. If you need comments to be threaded you can fill this value. Otherwise omit it.
                   $comment->hostname = $_SERVER['REMOTE_ADDR'] ;// OPTIONAL. You can log poster's ip here
                   $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
@@ -857,8 +858,12 @@ function mp_service_response() {
                   $comment->homepage = ''; // you can add homepage URL here
                   $comment->status = COMMENT_NOT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
                   $comment->language = LANGUAGE_NONE; // The same as for a node
-                  $comment->subject = $keyword.'【来自微信】'; 
-                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
+                  $comment->subject = substr($keyword, 2).'【来自微信】'; 
+                  
+                  $comment->signature = $wechat_user_info['contact_info']['signature'] ;
+                  
+                  $comment->signature_format = 'filtered_html'; 
+                  $comment->comment_body[$comment->language][0]['value'] = substr($keyword, 2).'【来自微信】'; // Everything here is pretty much like with a node
                   $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
                   // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
 
@@ -866,7 +871,7 @@ function mp_service_response() {
                   ///////////end
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
-                      $contentStr = "恭喜【您的脱光感言】\n已经成功发布，查看已发布内容：http://www.yongbuzhixi.com/topic/您想飘过，还是脱光？双十一，脱光型动！";
+                      $contentStr = "恭喜【您的脱光感言】\n已经成功发布，查看已发布内容：http://www.yongbuzhixi.com/topic/11";
                   }
                 }
               }
