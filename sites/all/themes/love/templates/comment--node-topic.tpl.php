@@ -4,7 +4,6 @@
     <p class="submitted">
       <?php print $picture; ?>
       <?php print $submitted; ?>
-      <?php print $permalink; ?>
     </p>
   <?php
     // We hide the comments and links now so that we can render them later.
