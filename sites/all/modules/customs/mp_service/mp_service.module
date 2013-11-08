@@ -36,7 +36,7 @@ function mp_service_response() {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      if(!mp_service_get_record_by_form($FromUserName)) {
+      if(!mp_service_get_record($FromUserName)) {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
@@ -44,7 +44,7 @@ function mp_service_response() {
       //default msg
       $contentStr = "【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n【5】良友今日广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n";
       if($uid) {
-        $mp_service_records = mp_service_get_records($uid);
+        $mp_service_records = mp_service_get_record($FromUserName);
         // watchdog('mp_service_records', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
         //15秒内回复任何字符都拒绝！
         if($keyword != '88' && $mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] < 900)) {
@@ -842,9 +842,9 @@ function mp_service_response() {
               if(strlen($keyword) < 10 ) {
                 $contentStr = "内容不能少于3字！";
               }else{
-                $mp_service_records = mp_service_get_record_by_form($FromUserName);
+                $mp_service_records = mp_service_get_record($FromUserName);
                 watchdog('mp_service', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
-                if($mp_service_records->last_cmd == '11') {
+                if($mp_service_records['last_cmd'] == '11') {
                   $contentStr = "您今天已经参与过了，请明天再来！\n回复【52】听听广播吧！";
                 }else{
                   mp_service_update_cmd('11',$FromUserName);
@@ -1017,7 +1017,7 @@ function mp_service_response() {
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
         $uid = mp_service_get_uid_by_name($FromUserName);
         if($Event['event'] == 'subscribe') {
-          if(mp_service_get_record_by_form($FromUserName)) {
+          if(mp_service_get_record($FromUserName)) {
             $contentStr = "欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【52】收听广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
             mp_service_resubscribe($FromUserName);
           }else {
@@ -1038,7 +1038,7 @@ function mp_service_response() {
       $uid = mp_service_get_uid_by_name($FromUserName);
       watchdog('PicUrl'.$uid, $PicUrl, array(), WATCHDOG_NOTICE, 'link');
       if($uid) {
-        $mp_service_records = mp_service_get_records($uid);
+        $mp_service_records = mp_service_get_record($FromUserName);
         mp_service_update_cmd('image',$FromUserName);
           watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
         if($mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] > 900)) {
@@ -1177,12 +1177,8 @@ function mp_service_get_uid_by_name($FromUserName) {
   $uid = db_query('SELECT uid FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchField();
   return $uid;
 }
-function mp_service_get_records($uid) {
-  $res = db_query('SELECT * FROM {mp_service} WHERE uid = :uid', array(':uid' => $uid))->fetchAssoc();
-  return $res;
-}
 
-function mp_service_get_record_by_form($FromUserName) {
+function mp_service_get_record($FromUserName) {
   $res = db_query('SELECT * FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchAssoc();
   return $res;
 }
