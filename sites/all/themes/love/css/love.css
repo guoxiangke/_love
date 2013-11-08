@@ -1763,3 +1763,7 @@ font-size: 14px;
 .node-type-topic .comment-wrapper .field-name-comment-body .field-item{
 	padding: 5px 0 0 15px;
 };
+#page-wrapper article {
+	background-color: #FFF;
+	padding: 0 20px 10px 20px;
+ }
