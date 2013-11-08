@@ -213,8 +213,8 @@ function open_weibo_comment_insert($comment) {
 	//1.2 同步类型匹配
 	//2.节点form设置同步 
 	//3.session过期提示
-	dpm($comment,'$comment');
-	if($comment->open_weibo['synch']) {
+	// dpm($comment,'$comment');
+	if(isset($comment->open_weibo['synch'])) {
 		if(open_weibo_synch($comment->subject?$comment->subject:$comment->comment_body[LANGUAGE_NONE][0]['value'],t('Comments'),comment_uri($comment))){
 			drupal_set_message(t('Synch to weibo sucess!'),'status');
 		}else{
