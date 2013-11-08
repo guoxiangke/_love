@@ -1,4 +1,4 @@
-<article class="<?php print $classes . ' ' . $zebra; ?>"<?php print $attributes; ?>>
+<article class="clearfix <?php print $classes . ' ' . $zebra; ?>"<?php print $attributes; ?>>
   
   <header>
     <div class="submitted">

@@ -1741,3 +1741,7 @@ font-size: 14px;
 	font-size: 14px;
 	font-weight: normal;
 }
+
+.node-type-topic .comment-wrapper .user-picture img{
+	width: 30px;
+}
