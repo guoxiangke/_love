@@ -1745,3 +1745,8 @@ font-size: 14px;
 .node-type-topic .comment-wrapper .user-picture img{
 	width: 30px;
 }
+.node-type-topic .comment-wrapper article {
+	border-bottom: 1px dotted #999;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
