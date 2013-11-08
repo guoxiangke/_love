@@ -843,11 +843,11 @@ function mp_service_response() {
                 $contentStr = "内容不能少于3字！";
               }else{
                 $mp_service_records = mp_service_get_record($FromUserName);
-                // watchdog('mp_service', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
-                if($mp_service_records['last_cmd'] == '12') {
+                watchdog('mp_service', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
+                if($mp_service_records['last_cmd'] == '1111') {
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【52】听听广播吧！";
                 }else{
-                  mp_service_update_cmd('12',$FromUserName);
+                  mp_service_update_cmd('1111',$FromUserName);
                   ///////
                   $comment = new stdClass();
 
@@ -1330,4 +1330,5 @@ function mp_service_update_cmd($last_cmd,$FromUserName) {
     ))
     ->condition('fromusername', $FromUserName)
     ->execute();
+    watchdog('mp_service'.$last_cmd, $FromUserName, array(), WATCHDOG_NOTICE, 'link');
 }
