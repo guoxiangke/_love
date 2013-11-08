@@ -36,7 +36,7 @@ function mp_service_response() {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      if(!mp_service_exsit_records($FromUserName)) {
+      if(!mp_service_get_record_by_form($FromUserName)) {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
@@ -722,7 +722,7 @@ function mp_service_response() {
           $wechatObj->news($news)->reply();
           break;
         default:
-            mp_service_update_user_info($wechatObj);
+            $wechat_user_info = mp_service_update_user_info($wechatObj);
             if(substr($keyword, 0,2) == '91' && substr($keyword, 0,3) != '911') {
               $keyword = substr($keyword, 2);
               $keywords = explode('?', $keyword);
@@ -826,6 +826,47 @@ function mp_service_response() {
                   if($node = node_submit($node)) { // Prepare node for saving
                       node_save($node);//\n".$tip."
                       $contentStr = "恭喜您【".$keyword."】\n已经成功发布，查看已发布内容：http://www.yongbuzhixi.com";
+                  }
+                }
+              }
+              # code...
+            } elseif (substr($keyword, 0,2) == '脱光') {
+            //201+您想说的话
+              if(strlen($keyword) < 10 ) {
+                $contentStr = "内容不能少于3字！";
+              }else{
+                if($record->last_cmd == '脱光') {
+                  $contentStr = "您今天已经参与过了，请明天再来！\n回复【52】听听广播吧！";
+                }else{
+                  mp_service_update_cmd('脱光',$uid);
+                  ///////
+                  $comment = new stdClass();
+
+                  $comment->nid = 340; // nid of a node you want to attach a comment to
+                  $comment->cid = 0; // leave it as is
+                  $comment->pid = 0; // parent comment id, 0 if none 
+                  $comment->uid = 0; // user's id, who left the comment
+                  // watchdog('get user', $fakeId.'  '.$data['contact_info']['user_name'].'  '.$data['contact_info']['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+                  $comment->mail = $data['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
+                  //a:10:{s:7:"fake_id";i:2553430760;s:9:"nick_name";s:6:"麦青";s:9:"user_name";s:10:"maiqing-py";s:9:"signature";s:31:"在心中修篱种菊..........";s:4:"city";s:6:"昆明";s:8:"province";s:6:"云南";s:7:"country";s:6:"中国";s:6:"gender";i:2;s:11:"remark_name";s:0:"";s:8:"group_id";i:108;}
+                  $comment->name = $data['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
+                  // $comment->thread = '01/'; // OPTIONAL. If you need comments to be threaded you can fill this value. Otherwise omit it.
+                  $comment->hostname = $_SERVER['REMOTE_ADDR'] ;// OPTIONAL. You can log poster's ip here
+                  $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
+                  $comment->is_anonymous = 0; // leave it as is
+                  $comment->homepage = ''; // you can add homepage URL here
+                  $comment->status = COMMENT_NOT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
+                  $comment->language = LANGUAGE_NONE; // The same as for a node
+                  $comment->subject = $keyword.'【来自微信】'; 
+                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
+                  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
+                  // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
+
+                   // saving a comment
+                  ///////////end
+                  if($comment = comment_submit($comment)) { // Prepare node for saving                      
+                      comment_save($comment);
+                      $contentStr = "恭喜【您的脱光感言】\n已经成功发布，查看已发布内容：http://www.yongbuzhixi.com/topic/您想飘过，还是脱光？双十一，脱光型动！";
                   }
                 }
               }
@@ -962,7 +1003,7 @@ function mp_service_response() {
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
         $uid = mp_service_get_uid_by_name($FromUserName);
         if($Event['event'] == 'subscribe') {
-          if(mp_service_exsit_records($FromUserName)) {
+          if(mp_service_get_record_by_form($FromUserName)) {
             $contentStr = "欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【52】收听广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
             mp_service_resubscribe($FromUserName);
           }else {
@@ -1080,6 +1121,7 @@ function mp_service_update_user_info($wechatObj) {
   );
   $wechat = new Wechatext($options);
   //$wechat
+  $data = array();
   if ($wechat->checkValid()) {    
     $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
     foreach ($getMsg as $key => $Msg) {
@@ -1100,12 +1142,13 @@ function mp_service_update_user_info($wechatObj) {
             'last_cmd_timestamp' => REQUEST_TIME,
           ))
           ->condition('fromusername', $FromUserName)
-          ->execute();                      
+          ->execute();               
       }
     }
   } else {
     watchdog('login error', "login error wx", array(), WATCHDOG_NOTICE, 'link');
-  }
+  }      
+  return $data; 
 }
 
 function mp_service_update($FromUserName,$filed,$value) {
@@ -1125,7 +1168,7 @@ function mp_service_get_records($uid) {
   return $res;
 }
 
-function mp_service_exsit_records($FromUserName) {
+function mp_service_get_record_by_form($FromUserName) {
   $res = db_query('SELECT * FROM {mp_service} WHERE fromusername = :fromusername', array(':fromusername' => $FromUserName))->fetchAssoc();
   return $res;
 }
