@@ -85,7 +85,7 @@ function mp_service_response() {
         case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           if($uid) 
-            mp_service_update_cmd('88',$uid);
+            mp_service_update_cmd('88',$FromUserName);
           break;
         case '1':
           $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n回复【110】推荐帮助-如何推荐给好友？\n回复【365】恩典365";
@@ -845,7 +845,8 @@ function mp_service_response() {
                 if($record->last_cmd == '11') {
                   $contentStr = "您今天已经参与过了，请明天再来！\n回复【52】听听广播吧！";
                 }else{
-                  mp_service_update_cmd('11',$uid);
+                  $uid = mp_service_get_uid_by_name($FromUserName);
+                  mp_service_update_cmd('11',$FromUserName);
                   ///////
                   $comment = new stdClass();
 
@@ -878,7 +879,7 @@ function mp_service_response() {
                   ///////////end
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
-                      $contentStr = "恭喜【您的脱光感言】\n已经成功发布，查看已发布内容：http://www.yongbuzhixi.com/topic/11";
+                      $contentStr = "恭喜【您的脱光感言】\n已经成功发布，查看已发布内容：http://www.yongbuzhixi.com/topic/11 \n11月11日有惊喜哦！";
                   }
                 }
               }
@@ -1037,7 +1038,7 @@ function mp_service_response() {
       watchdog('PicUrl'.$uid, $PicUrl, array(), WATCHDOG_NOTICE, 'link');
       if($uid) {
         $mp_service_records = mp_service_get_records($uid);
-        mp_service_update_cmd('image',$uid);
+        mp_service_update_cmd('image',$FromUserName);
           watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
         if($mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] > 900)) {
           $contentStr = "指令已超时！\n请回复【2】查看帮助！";
@@ -1318,12 +1319,12 @@ function mp_service_imageReplyText($contentStr) {
   }
 }
 
-function mp_service_update_cmd($last_cmd,$uid) {
+function mp_service_update_cmd($last_cmd,$FromUserName) {
   db_update('mp_service')
     ->fields(array(
       'last_cmd' => $last_cmd,
       'last_cmd_timestamp' => REQUEST_TIME,
     ))
-    ->condition('uid', $uid)
+    ->condition('fromusername', $FromUserName)
     ->execute();
 }
