@@ -1736,3 +1736,8 @@ font-size: 14px;
 #edit-field-status-tags,#edit-field-tags{
 	display: none;
 }
+
+.node-type-topic .comment-wrapper h3{
+	font-size: 14px;
+	font-weight: normal;
+}

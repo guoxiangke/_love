@@ -1,11 +1,11 @@
 <article class="<?php print $classes . ' ' . $zebra; ?>"<?php print $attributes; ?>>
   
   <header>
-    <p class="submitted">
+    <div class="submitted">
       <?php print $picture; ?>
       <?php print $submitted; ?>
       <?php print $permalink; ?>
-    </p>
+    </div>
 
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
@@ -24,7 +24,7 @@
   <?php
     // We hide the comments and links now so that we can render them later.
     hide($content['links']);
-    print render($content);
+    // print render($content);
   ?>
 
   <?php if ($signature): ?>
