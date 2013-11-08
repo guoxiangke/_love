@@ -844,10 +844,10 @@ function mp_service_response() {
               }else{
                 $mp_service_records = mp_service_get_record($FromUserName);
                 // watchdog('mp_service', '<pre>'.print_r($mp_service_records,TRUE), array(), WATCHDOG_NOTICE, 'link');
-                if($mp_service_records['last_cmd'] == '11') {
+                if($mp_service_records['last_cmd'] == '12') {
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【52】听听广播吧！";
                 }else{
-                  mp_service_update_cmd('11',$FromUserName);
+                  mp_service_update_cmd('12',$FromUserName);
                   ///////
                   $comment = new stdClass();
 
