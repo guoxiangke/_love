@@ -830,15 +830,15 @@ function mp_service_response() {
                 }
               }
               # code...
-            } elseif (substr($keyword, 0,4) == '脱光') {
+            } elseif (substr($keyword, 0,2) == '11') {
             //201+您想说的话
               if(strlen($keyword) < 10 ) {
                 $contentStr = "内容不能少于3字！";
               }else{
-                if($record->last_cmd == '脱光') {
+                if($record->last_cmd == '11') {
                   $contentStr = "您今天已经参与过了，请明天再来！\n回复【52】听听广播吧！";
                 }else{
-                  mp_service_update_cmd('脱光',$uid);
+                  mp_service_update_cmd('11',$uid);
                   ///////
                   $comment = new stdClass();
 
