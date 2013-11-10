@@ -887,7 +887,7 @@ function mp_service_response() {
                   $comment->signature = $wechat_user_info['contact_info']['signature'] ;
                   
                   $comment->signature_format = 'filtered_html'; 
-                  $comment->comment_body[$comment->language][0]['value'] = $keyword'【来自微信】'; // Everything here is pretty much like with a node
+                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
                   $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
                   // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
 
