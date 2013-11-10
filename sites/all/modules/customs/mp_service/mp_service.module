@@ -878,7 +878,7 @@ function mp_service_response() {
                   $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
                   $comment->is_anonymous = 0; // leave it as is
                   $comment->homepage = ''; // you can add homepage URL here
-                  $comment->status = COMMENT_NOT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
+                  $comment->status = COMMENT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
                   $comment->language = LANGUAGE_NONE; // The same as for a node
                   $comment->subject = substr($keyword, 2,15).'【来自微信】'; 
                   
@@ -893,7 +893,7 @@ function mp_service_response() {
                   ///////////end
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
-                      $contentStr = "恭喜【您的脱光感言】已发布、待审核\n查看千余主内佳人分享您的爱情观点：http://www.yongbuzhixi.com/topic/11 \n11月11日有惊喜哦！";
+                      $contentStr = "恭喜，信息已发布，您是第$comment->cid人\n第1111名发布者获得特等奖哦！没人每天一条，限活动当天。活动地址：http://www.yongbuzhixi.com/topic/11 \n11月11,永不止息，需要有你！";
                   }
                 }
               }
