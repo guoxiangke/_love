@@ -228,6 +228,13 @@ function mp_service_response() {
         case '40':
           // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
           $img = array(
+              'Title'=> '第19天 爱是不可思议',
+              'Description'=>'',
+              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+              'Url'=>'http://love.yongbuzhixi.org/love40/19'
+            );
+          $news[] = $img;
+          $img = array(
               'Title'=> '第18天 爱寻求理解',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
@@ -247,21 +254,21 @@ function mp_service_response() {
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/16'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第15天 爱是敬重对方',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/15'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第14天 爱是公平地争吵',
               'Description'=>'',
               'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
               'Url'=>'http://love.yongbuzhixi.org/love40/14'
             );
-          $news[] = $img;
+          // $news[] = $img;
           $img = array(
               'Title'=> '第13天 爱是公平地争吵',
               'Description'=>'',
@@ -858,10 +865,10 @@ function mp_service_response() {
               }else{
                 $mp_service_records = mp_service_get_record($FromUserName);
                 
-                if($mp_service_records['last_cmd'] == '1111') {
+                if($mp_service_records['last_cmd'] == '1112') {
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【52】听听广播吧！";
                 }else{
-                  mp_service_update_cmd('1111',$FromUserName);
+                  mp_service_update_cmd('1112',$FromUserName);
                   ///////
                   $comment = new stdClass();
 
@@ -895,7 +902,7 @@ function mp_service_response() {
                   ///////////end
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
-                      $contentStr = "恭喜，信息已发布,您是第".$comment->nid."位\n第1111名发布者是特等奖哦！\n每人每天限发一条，限活动当天。\n活动地址：http://www.yongbuzhixi.com/topic/11 \n11月11,永不止息，需要有你！";
+                      $contentStr = "恭喜，消息已发布,您是第".$comment->cid."位！\n\n每人每天限发一条\n活动地址：http://www.yongbuzhixi.com/topic/11 \n11月11,永不止息，需要有你！";
                   }
                 }
               }
