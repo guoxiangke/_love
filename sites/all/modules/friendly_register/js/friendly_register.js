@@ -33,7 +33,7 @@
         if (data.available == 'incomplete') {
           $('#edit-mail-check').remove();
           return;
-        } 
+        }
         var message;
         if (data.available) {
           message = email.avail;
@@ -60,14 +60,14 @@
       var userName = new Object();
       userName.oldValue = '';
       userName.ajaxPath = Drupal.settings.basePath + 'ajax/check-user/';
-      userName.field = $('#user-register-form #edit-name', context);
+      userName.field = $('.friendly-register-name', context);
       userName.avail = Drupal.t('This username is available.');
       userName.notAvail = Drupal.t('This username is not available.');
 
       var email = new Object();
       email.oldValue = '';
       email.ajaxPath = Drupal.settings.basePath + 'ajax/check-email/';
-      email.field = $('#user-register-form #edit-mail', context);
+      email.field = $('.friendly-register-mail', context);
       email.avail = Drupal.t('This email address has not been used.');
       email.notAvail = Drupal.t('This email address is already in use, please <a href="@login">try logging in</a> with that email address or <a href="@reset">resetting your password</a>.', {'@login': loginURL, '@reset': resetURL});
 
