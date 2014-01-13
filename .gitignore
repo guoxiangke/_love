@@ -2,9 +2,13 @@
 sites/*/settings*.php
 
 # Ignore paths that contain user-generated content.
-sites/*/files/styles
+.htaccess
+.settings
+sites/default/files/styles/
+sites/default/files/languages
+sites/default/files/js
+sites/*/files
 sites/*/private
-
-temp
-data/backup_migrate/scheduled/
-sites/default/files/languages/
+sites/default/default.settings.php
+temp/
+.gitignore
