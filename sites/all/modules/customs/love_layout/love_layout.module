@@ -496,36 +496,36 @@ function love_layout_form_alter(&$form, &$form_state, $form_id) {
 
 }
 
-/**
- * @see asaf_register_needed_files()
- */
-function _ajax_register_needed_files(&$form_state, array $files) {
-  if (!isset($form_state['build_info']['files'])) {
-    $form_state['build_info']['files'] = array();
-  }
+// /**
+//  * @see asaf_register_needed_files()
+//  */
+// function _ajax_register_needed_files(&$form_state, array $files) {
+//   if (!isset($form_state['build_info']['files'])) {
+//     $form_state['build_info']['files'] = array();
+//   }
 
-  foreach ($files as $file) {
-    if ((is_array($file) && isset($file['module']) || (is_string($file) && file_exists($file)))) {
-      $form_state['build_info']['files'][] = $file;
-    }
-    elseif (is_string($file) && module_exists($file)) {
-      // Loading all includes of the module
-      $path = drupal_get_path('module', $file);
-      $destination = DRUPAL_ROOT . '/' . $path;
+//   foreach ($files as $file) {
+//     if ((is_array($file) && isset($file['module']) || (is_string($file) && file_exists($file)))) {
+//       $form_state['build_info']['files'][] = $file;
+//     }
+//     elseif (is_string($file) && module_exists($file)) {
+//       // Loading all includes of the module
+//       $path = drupal_get_path('module', $file);
+//       $destination = DRUPAL_ROOT . '/' . $path;
 
-      $pattern ='/.inc$/';
-      $matches = array_keys(file_scan_directory($destination, $pattern));
-      if (is_array($matches)) {
-        foreach ($matches as $inc) {
-          $parts = explode(DRUPAL_ROOT . '/', $inc);
-          if (isset($parts[1]) && $parts[1]) {
-            $form_state['build_info']['files'][] = $parts[1];
-          }
-        }
-      }
-    }
-  }
-}
+//       $pattern ='/.inc$/';
+//       $matches = array_keys(file_scan_directory($destination, $pattern));
+//       if (is_array($matches)) {
+//         foreach ($matches as $inc) {
+//           $parts = explode(DRUPAL_ROOT . '/', $inc);
+//           if (isset($parts[1]) && $parts[1]) {
+//             $form_state['build_info']['files'][] = $parts[1];
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 // when the bug of i18n + og_field   resolve ,can user below.
 //http://drupal.org/project/issues/og?text=i18n&status=All&priorities=All&categories=All&version=7.x&component=All
 /**

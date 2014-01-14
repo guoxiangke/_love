@@ -98,7 +98,6 @@ function mp_service_schema() {
         'size' => 'big',
         'not null' => FALSE,
         'serialize' => TRUE,
-        'default' => ''
        ),
     ),
     'indexes' => array(
