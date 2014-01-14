@@ -58,9 +58,11 @@ class wechatCallbackapiTest
 				if(!empty( $keyword ))
                 {
               		$msgType = "text";
-                	$contentStr = "Welcome to wechat world!";
+                	$contentStr = t('Thanks for your focus~,we will do our best for you!');
                 	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                	
+                	if(!mp_get_uid_by_FromUserName($fromUsername)) {
+                        
+                    }
                     //生成本站订单begin
 
                     $node = new stdClass();
@@ -68,6 +70,10 @@ class wechatCallbackapiTest
                     $node->type = 'mp_receive';
                     node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
                     $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+                    //todo:
+                    //bind user
+                    //mp_respone
+                    //get_uid_by_FormUserName('oNAD2jlAk0ZGHkgezd_MnQbGrBPM');
                     $node->uid = 1;
                     $node->status = 1; //(1 or 0): published or not
                     $node->promote = 0; //(1 or 0): promoted to front page

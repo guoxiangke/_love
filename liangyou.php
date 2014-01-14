@@ -19,7 +19,8 @@
 			'hg'=>'欢乐卡洽碰',
 			'ws'=>'长夜的牵引',
 			'se'=>'恋爱季节',
-			'eg'=>'英语世界',
+			// 'eg'=>'英语世界',
+			'up'=>'亲情不断电',
 		);
 		foreach($types as $key=>$value){
 			?>
@@ -27,8 +28,8 @@
 				<h3><?php echo $value;?></h3>
 				<ul>
 					<?php
-							$mp3 = array('se','ws');
-							$media_type = 'wma';
+							$mp3 = array('se','ws','up');
+							$media_type = 'mp3';
 							if(in_array($key, $mp3)) {
 								$media_type = 'mp3';
 							}
@@ -41,7 +42,7 @@
 									$str = date('y').date('m').$day.'.'.$media_type;
 									if($key=='ba'&&date('w',mktime(0,0,0,date('m'),$i,date('Y')))!=0) continue;
 									if($key=='bc'&&(date('w',mktime(0,0,0,date('m'),$day,date('Y')))==0||date('w',mktime(0,0,0,date('m'),$day,date('Y')))==6)) continue;
-									echo "<li>http://liangyou.nissigz.com/media/$key/$key$str</li>";
+									echo "<li>http://liangyou2.nissigz.com:15200/$key/$key$str</li>";
 									//echo "<li><a href='http://liangyou.nissigz.com/media/$key/$key$str'>".date('md')."</a></li>";
 								}
 							}		
@@ -51,6 +52,15 @@
 			
 			<?php
 		}
+					for	($i=1;$i<=$days;$i++){
+								
+								$day = str_pad($i, 2, "0", STR_PAD_LEFT);
+									$str = date('y').date('m').$day.'.mp3';
+									echo "<li>http://audio1.liangyou.net/files/media/ly_daily/2013Daily_$str</li>";
+									//http://audio1.liangyou.net/files/media/ly_daily/2013Daily_130624.mp3 
+							}	
+
+		
 	?>	
 </body>
 </html>

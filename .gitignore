@@ -9,6 +9,16 @@ sites/default/files/languages
 sites/default/files/js
 sites/*/files
 sites/*/private
+<<<<<<< HEAD
 sites/default/default.settings.php
 temp/
 .gitignore
+=======
+sites/default/files/cdn/
+sites/default/files/css/
+sites/default/files/data/
+
+temp
+data/backup_migrate/scheduled/
+sites/default/files/languages/
+>>>>>>> b0a698c4a9340323e9f378cb90a0ecfa6fa630c6

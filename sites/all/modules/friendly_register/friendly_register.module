@@ -51,9 +51,35 @@ function friendly_register_cron() {
 }
 
 /**
- * Implements hook_FORM_form_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
 function friendly_register_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+  foreach (array('name', 'mail') as $field) {
+    $class = 'friendly-register-' . $field;
+    if (isset($form['account'][$field]['#attributes']['class'])) {
+      $form['account'][$field]['#attributes']['class'][] = $class;
+    }
+    elseif (isset($form['account'][$field]['#attributes'])) {
+      $form['account'][$field]['#attributes']['class'] = array(
+        $class,
+      );
+    }
+    else {
+      $form['account'][$field]['#attributes'] = array(
+        'class' => array(
+          $class,
+        ),
+      );
+    }
+  }
+
+  friendly_register_load_resources();
+}
+
+/**
+ * Utility function for load required resources.
+ */
+function friendly_register_load_resources() {
   $path = drupal_get_path('module', 'friendly_register');
   drupal_add_js($path . '/js/friendly_register.js', 'file');
   drupal_add_css($path . '/css/friendly_register.css');

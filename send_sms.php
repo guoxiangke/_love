@@ -1,4 +1,10 @@
 <?php
+// security check.
+// if(!isset($_REQUEST['md5'])) {
+// 	return;
+// }elseif($_REQUEST['md5']!='21dad337d94e4c3e9de2b356d11bec9c'){
+// 	return;
+// }
 
 /**
  * @file
@@ -22,20 +28,14 @@
 define('DRUPAL_ROOT', getcwd());
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-watchdog('2013', '<pre>'.print_r($_REQUEST,TRUE), array(), WATCHDOG_NOTICE, 'link');
 if(isset($_REQUEST['mobile'])) {
-
-$phone_nums = $_REQUEST['mobile'];
-
+	$phone_nums = $_REQUEST['mobile'];
 }
 if(isset($_REQUEST['msg'])) {
-$msg =$_REQUEST['msg'];
-	
+	$msg =$_REQUEST['msg'];
 }
 
 if(isset($phone_nums)) {
-	watchdog('2013', '<pre>'.print_r($msg,TRUE), array(), WATCHDOG_NOTICE, 'link');
-	watchdog('2013','<pre>'.print_r( $phone_nums,TRUE), array(), WATCHDOG_NOTICE, 'link');
 	send_sms_form_submit($phone_nums,$msg);
 }
 function send_sms_form_submit($phone_nums,$msg) {
@@ -59,8 +59,10 @@ function send_sms_form_submit($phone_nums,$msg) {
 	  	$sae_sms_text=array('text'=>$msg);
 	  	drupal_write_record('sae_sms_text',$sae_sms_text);
 	  	$mobiles = array_unique($number_right);
-			// drupal_set_message('本次发送信息'.count($mobiles).'条:','status');
-			// drupal_set_message('信息内容：<br/>【'.$msg.'】','status');
+			 // drupal_set_message('本次发送信息'.count($mobiles).'条:','status');
+			 // drupal_set_message('信息内容：<br/>【'.$msg.'】','status');
+	  	$return = '本次发送信息'.count($mobiles).'条:'.'信息内容：<br/>【'.$msg.'】';
+			watchdog('send_sms',$return.print_r($mobiles,TRUE));
 			$text_id = db_query('select text_id from sae_sms_text order by text_id desc limit 0,1')->fetchField();
 			
 	  	foreach ($mobiles as $key => $mobile) {

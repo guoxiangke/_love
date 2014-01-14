@@ -44,7 +44,7 @@ foreach($program as $key=>$value){
 	}
 	echo "<div class='program'>
 	<span> $value</span>
-	<span><a href='http://liangyou.nissigz.com/media/$key/$key".$date.$extend."'>线路一</a> </span>
+	<span><a href='http://liangyou2.nissigz.com:15200/$key/$key".$date.$extend."'>线路一</a> </span>
 	<span><a href='http://audio.liangyou.net/files/media/program_live/$key/$key".$date.$extend."'>线路二</a></span>
 	<span><a href='http://audio2.liangyou.net/files/media/program_live/$key/$key".$date.$extend."'>线路三</a></span>
 	<span><a href='http://audio.liangyou.net/download.php?t=2&c=$key&f=$key".$date.$extend."'>线路4</a></span>

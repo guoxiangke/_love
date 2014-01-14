@@ -1,0 +1,9 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function bibles_install() {
+	//how to read sql file and execute.
+	//how to expect other css in specific page?
+	//
+}
