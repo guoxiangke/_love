@@ -35,7 +35,7 @@ class Wechatext
 	private $_cookieexpired = 3600;
 	private $_account;
 	private $_password;
-	private $_datapath = './data/cookie_';
+	private $_datapath = '/home/wwwroot/love.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_';
 	private $debug;
 	private $_logcallback;
 	private $_token;

@@ -94,9 +94,10 @@ function mp_service_schema() {
        ),
       'contact_info' => array(
         'description' => 'contact_info',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'serialize' => TRUE,
         'default' => ''
        ),
     ),
@@ -108,7 +109,6 @@ function mp_service_schema() {
   $schema['cache_mp_service'] = drupal_get_schema_unprocessed('system', 'cache');
   return $schema;
 }
-
 /**
  * Implements hook_uninstall().
  */
@@ -226,11 +226,30 @@ function mp_service_update_7106() {
   if (!db_field_exists('mp_service', 'mp_service')) {
     $new_field = array(
         'description' => 'contact_info',
-        'type' => 'varchar',
-        'length' => 2550,
+        'type' => 'blob',
+        'size' => 'big',
         'not null' => TRUE,
         'default' => ''
       );
     db_add_field('mp_service', 'contact_info', $new_field);
   }
 }
+
+/**
+ * add user wxnickname for wechat user
+ */
+function mp_service_update_7107() {
+  if (!db_field_exists('mp_service', 'mp_service')) {
+    // $new_field = array(
+    //     'description' => 'contact_info',
+    //     'type' => 'blob',
+    //     'size' => 'big',
+    //     'not null' => FALSE,
+    //     'serialize' => TRUE
+    //     'default' => ''
+    //   );
+    db_change_field('mp_service', 'contact_info', 'contact_info',
+  array('type' => 'blob', 'not null' => FALSE,'size' => 'big','serialize' => TRUE));
+
+  }
+}        
