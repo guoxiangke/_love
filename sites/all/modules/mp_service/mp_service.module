@@ -533,13 +533,7 @@ $notice = "\n
             'PicUrl'=>"http://t1.baidu.com/it/u=2408335515,2522544091&fm=23&gp=0.jpg",
             'Url'=> $Url
           );
-          $news[] = $img;
-          // $img = array(
-          //     'Title'=> "▌回复【31】【32】收听良友广播\n▌吗哪是要每早晨拾取的哦！",
-          //     'PicUrl'=>'',
-          //     'Url'=>''
-          //   );
-          // $news[] = $img;       
+          $news[] = $img;         
           $wechatObj->news($news)->reply();
           break;
         case '366':
