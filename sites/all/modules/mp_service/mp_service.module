@@ -524,8 +524,9 @@ $notice = "\n
           $html = file_get_html('http://v.tudou.com/_114352882/');
           //get title $('[code]').attr('code')
           $Title = trim($html->find('[code]', 0)->plaintext);
+          $Title = str_replace('查看','',$Title);
           $Url =' http://www.tudou.com/programs/view/'.$html->find('[code]', 0)->attr['code'];
-          $Description = "点击进入土豆播放，小永提醒您，请注意流量哦！\n全新的一年 全新的一天 與您分享一年365天, 每一天從神話語而來的祝福與恩典";
+          $Description = "点击查看全文进入土豆播放\n小永提醒您，请注意流量哦！\n全新的一年 全新的一天 \n與您分享一年365天, \n每一天從神話語而來的祝福與恩典\n每日更新，请每日回复【365】获取链接，欢迎分享给你的肢体。";
           $img = array(
             'Title'=> $Title,
             'Description'=>$Description,
