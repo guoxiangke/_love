@@ -723,12 +723,12 @@ $notice = "\n
             );
           $news[] = $img;
           $img = array(
-              'Title'=> '如何推荐给好友？',
+              'Title'=> '▌如何推荐给好友？',
               'Description'=>'转给你的好友吧',
-              'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/themes/love/family_2.png',
+              'PicUrl'=>'',//http://www.yongbuzhixi.com/sites/all/themes/love/family_2.png
               'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000220&itemidx=2&sign=62a8888bdb56bc268f255c020e024434'
             );
-            $news[] = $img;  
+            $news[] = $img;
           // $img = array(
           //   'Title'=>'用手机，登录【永不止息】^_^',
           //   'Description'=>'单图文 标题15字 摘要60字',
