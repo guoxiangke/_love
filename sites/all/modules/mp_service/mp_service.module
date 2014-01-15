@@ -521,22 +521,18 @@ $notice = "\n
           //   );
           // $news[] = $img;
         case '365':
-            $img = array(
-              'Title'=> '恩典365 '.date('m月d日'),
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/grace365',
-            );
-          $news[] = $img;   
-          $date = date('md',time()-24*60*60);
-            $img = array(
-              'Title'=> '恩典365 '.$date,
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/grace365/0.jpg',
-
-              'Url'=>'http://love.yongbuzhixi.org/grace365/'.$date,
-            );
-          $news[] = $img;          
+          $html = file_get_html('http://v.tudou.com/_114352882/');
+          //get title $('[code]').attr('code')
+          $Title = trim($html->find('[code]', 0)->plaintext);
+          $Url =' http://www.tudou.com/programs/view/'.$html->find('[code]', 0)->attr['code'];
+          $Description = "点击进入土豆播放，小永提醒您，请注意流量哦！\n全新的一年 全新的一天 與您分享一年365天, 每一天從神話語而來的祝福與恩典";
+          $img = array(
+            'Title'=> $Title,
+            'Description'=>$Description,
+            'PicUrl'=>"http://t1.baidu.com/it/u=2408335515,2522544091&fm=23&gp=0.jpg",
+            'Url'=> $Url
+          );
+          $news[] = $img;         
           $wechatObj->news($news)->reply();
           break;
         case '366':
