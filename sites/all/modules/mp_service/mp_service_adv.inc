@@ -354,6 +354,7 @@ class Wechat {
 		$xml    = "<{$root}{$attr}>";
 		$xml   .= self::data_to_xml($data, $item, $id);
 		$xml   .= "</{$root}>";
+		watchdog('xml_encode-xml', '<pre>'.print_r($xml,true), array(), WATCHDOG_NOTICE, 'link');
 		return $xml;
 	}
 
