@@ -341,7 +341,7 @@ class Wechat {
 	 * @return string
 	 */
 	public function xml_encode($data, $root='xml', $item='item', $attr='', $id='id', $encoding='utf-8') {
-		watchdog('data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
+		watchdog('xml_encode-data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
 		if(is_array($attr)){
 			$_attr = array();
 			foreach ($attr as $key => $value) {
@@ -451,7 +451,9 @@ class Wechat {
 		{
 			$msg = $this->_msg;
 		}
+		watchdog('msg-reply', '<pre>'.print_r($msg,true), array(), WATCHDOG_NOTICE, 'link');
 		$xmldata=  $this->xml_encode($msg);
+		watchdog('xmldata-reply', '<pre>'.print_r($xmldata,true), array(), WATCHDOG_NOTICE, 'link');
 		$this->log($xmldata);
 
 		watchdog('xmldata', '<pre>'.print_r($xmldata,true), array(), WATCHDOG_NOTICE, 'link');
