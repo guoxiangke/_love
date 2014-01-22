@@ -341,6 +341,7 @@ class Wechat {
 	 * @return string
 	 */
 	public function xml_encode($data, $root='xml', $item='item', $attr='', $id='id', $encoding='utf-8') {
+		watchdog('data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
 		if(is_array($attr)){
 			$_attr = array();
 			foreach ($attr as $key => $value) {
