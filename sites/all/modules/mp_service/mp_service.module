@@ -471,7 +471,9 @@ $notice = "\n
           $desc = "我的爱不改变";
           $hgmusicurl = $musicurl;
           $ThumbMediaId = '100125467';
+          watchdog('12377', 'message', array(), WATCHDOG_NOTICE, 'link');
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          watchdog('12388', 'message', array(), WATCHDOG_NOTICE, 'link');
           break;
         case '5': 
         case '51':
