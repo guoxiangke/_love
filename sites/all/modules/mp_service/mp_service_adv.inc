@@ -400,6 +400,7 @@ class Wechat {
 				),
 				'FuncFlag'=>$FuncFlag
 		);
+		watchdog('msg1', '<pre>'.print_r($msg,true), array(), WATCHDOG_NOTICE, 'link');
 		$this->Message($msg);
 		return $this;
 	}
@@ -451,6 +452,8 @@ class Wechat {
 		}
 		$xmldata=  $this->xml_encode($msg);
 		$this->log($xmldata);
+
+		watchdog('xmldata', '<pre>'.print_r($xmldata,true), array(), WATCHDOG_NOTICE, 'link');
 		if ($return)
 		{
 			return $xmldata;
