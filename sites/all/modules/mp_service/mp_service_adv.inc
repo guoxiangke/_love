@@ -382,8 +382,9 @@ class Wechat {
 	 * @param string $desc
 	 * @param string $musicurl
 	 * @param string $hgmusicurl
+	 * $thumbmediaid = '100125467';
 	 */
-	public function music($title,$desc,$musicurl,$hgmusicurl='') {
+	public function music($title,$desc,$musicurl,$hgmusicurl='',$thumbmediaid='100125467') {
 		$FuncFlag = $this->_funcflag ? 1 : 0;
 		$msg = array(
 				'ToUserName' => $this->getRevFrom(),
@@ -395,6 +396,7 @@ class Wechat {
 						'Description'=>$desc,
 						'MusicUrl'=>$musicurl,
 						'HQMusicUrl'=>$hgmusicurl
+						'ThumbMediaId'=>$thumbmediaid
 				),
 				'FuncFlag'=>$FuncFlag
 		);

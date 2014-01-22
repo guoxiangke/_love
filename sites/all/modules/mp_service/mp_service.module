@@ -470,6 +470,7 @@ $notice = "\n
           $musicurl = 'http://fm77.u.qiniudn.com/77/wodeaiybb.mp3';
           $desc = "我的爱不改变";
           $hgmusicurl = $musicurl;
+          $ThumbMediaId = 100125467;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '5': 
