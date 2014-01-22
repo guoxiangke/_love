@@ -395,8 +395,8 @@ class Wechat {
 						'Title'=>$title,
 						'Description'=>$desc,
 						'MusicUrl'=>$musicurl,
-						'HQMusicUrl'=>$hgmusicurl
-						'ThumbMediaId'=>$thumbmediaid
+						'HQMusicUrl'=>$hgmusicurl,
+						'ThumbMediaId'=>$thumbmediaid,
 				),
 				'FuncFlag'=>$FuncFlag
 		);
