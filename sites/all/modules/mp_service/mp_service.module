@@ -470,10 +470,7 @@ $notice = "\n
           $musicurl = 'http://fm77.u.qiniudn.com/77/wodeaiybb.mp3';
           $desc = "我的爱不改变";
           $hgmusicurl = $musicurl;
-          $ThumbMediaId = '100125467';
-          watchdog('12377', 'message', array(), WATCHDOG_NOTICE, 'link');
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          watchdog('12388', 'message', array(), WATCHDOG_NOTICE, 'link');
           break;
         case '5': 
         case '51':
@@ -917,6 +914,7 @@ $notice = "\n
           $title = "$title".date('md');
           // $y = data('y')-1;
           $str = date('md');
+          watchdog('$str', $str, array(), WATCHDOG_NOTICE, 'link');
           //http://audio1.liangyou.net/files/media/ly_daily/2013Daily_130114.mp3
           $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_13'.$str.'.mp3';
           $desc = "love_yongbuzhixi公众号，每日更新";
