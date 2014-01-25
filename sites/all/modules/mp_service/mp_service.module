@@ -34,6 +34,23 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
   $wechatObj->valid();
   $type = $wechatObj->getRev()->getRevType();
   if($name == 'duoenjiawizbee'){
+    $default_text = "多恩佳Wizbee英语是一家为青少年提供'英语口语'培训的机构
+
+培训模式：真人外教通过网络在线视频1对1上课，孩子天天在家跟外教面对面上课
+
+适合年龄：6-18岁学生
+
+学习教材：根据每个学生的英语水平和学习目标配置个性化教材，例如：Wizbee口语教材，新概念英语，剑桥少儿英语，绿色通道，中美学校的同步教材等
+
+上课时间：自由，根据学员时间而定
+
+学习目标：提高英语交流能力，培养学习兴趣，让英语成为“第二母语”
+
+优势：科学有效的语言教学模式，便捷
+
+今日免费送出几个试听名额
+请拨打4006997101咨询
+或回复“姓名+手机+QQ”申请";
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
         $keyword =  trim($wechatObj->getRevContent());
@@ -61,25 +78,11 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
             # 
             break;
           case '1':
+            $wechatObj->text($default_text)->reply();
+            break;
           default:
-            $wechatObj->text("多恩佳Wizbee英语是一家为青少年提供'英语口语'培训的机构
-
-培训模式：真人外教通过网络在线视频1对1上课，孩子天天在家跟外教面对面上课
-
-适合年龄：6-18岁学生
-
-学习教材：根据每个学生的英语水平和学习目标配置个性化教材，例如：Wizbee口语教材，新概念英语，剑桥少儿英语，绿色通道，中美学校的同步教材等
-
-上课时间：自由，根据学员时间而定
-
-学习目标：提高英语交流能力，培养学习兴趣，让英语成为“第二母语”
-
-优势：科学有效的语言教学模式，便捷
-
-今日免费送出几个试听名额
-请拨打4006997101咨询
-或回复“姓名+手机+QQ”申请")->reply();
-            # 
+            wx_comment('376');
+            $wechatObj->text($default_text)->reply();
             break;
         }
           exit;
@@ -1940,3 +1943,40 @@ function mp_service_update_cmd($last_cmd,$FromUserName) {
 
 //http://www.jiduzhijia.com/yinpin/tllc/index.htm
 //http://www.jiduzhijia.com/book/madl.htm
+
+function wx_comment($nid) {//,$wechat_user_info
+  ///////
+                  $comment = new stdClass();
+
+                  // $comment->nid = 1; // nid of a node you want to attach a comment to
+                  $comment->cid = 0; // leave it as is
+                  $comment->pid = 0; // parent comment id, 0 if none 
+                  $comment->uid = 0; // user's id, who left the comment
+                  
+                  $comment->mail = 'anno@duownjia.com';//$wechat_user_info['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
+                  //a:10:{s:7:"fake_id";i:2553430760;s:9:"nick_name";s:6:"麦青";s:9:"user_name";s:10:"maiqing-py";s:9:"signature";s:31:"在心中修篱种菊..........";s:4:"city";s:6:"昆明";s:8:"province";s:6:"云南";s:7:"country";s:6:"中国";s:6:"gender";i:2;s:11:"remark_name";s:0:"";s:8:"group_id";i:108;}
+                  $comment->name = 'weixin';//$wechat_user_info['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
+                  // $comment->thread = '01/'; // OPTIONAL. If you need comments to be threaded you can fill this value. Otherwise omit it.
+                  $comment->hostname = $_SERVER['REMOTE_ADDR'] ;// OPTIONAL. You can log poster's ip here
+                  $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
+                  $comment->is_anonymous = 0; // leave it as is
+                  $comment->homepage = ''; // you can add homepage URL here
+                  $comment->status = COMMENT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
+                  $comment->language = LANGUAGE_NONE; // The same as for a node
+                  $keyword = substr($keyword, 2);
+                  $subject = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
+                  $comment->subject = $subject.'【来自微信】'; 
+                  
+                  $comment->signature = '';//$wechat_user_info['contact_info']['signature'] ;
+                  
+                  $comment->signature_format = 'filtered_html'; 
+                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
+                  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
+                  // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
+
+                   // saving a comment
+                  ///////////end
+                  if($comment = comment_submit($comment)) { // Prepare node for saving                      
+                      comment_save($comment);
+                  }
+}
