@@ -105,6 +105,7 @@ class Wechat
 	public function valid($return=false)
     {
         $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"]: '';
+        watchdog('echoStr', 'message:'.$echoStr, array(), WATCHDOG_NOTICE, 'link');
         if ($return) {
         		if ($echoStr) {
         			if ($this->checkSignature()) 
