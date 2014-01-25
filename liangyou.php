@@ -28,7 +28,7 @@
 				<ul>
 					<?php
 							$mp3 = array('se','ws');
-							$media_type = 'wma';
+							$media_type = 'mp3';
 							if(in_array($key, $mp3)) {
 								$media_type = 'mp3';
 							}
