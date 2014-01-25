@@ -57,12 +57,12 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
           case '13':
           case '15':
           case '18':
-            $weObj->text("感谢您的申请，我们会给您尽快安排！\n我们使用skype软件上课，请您提前安装，如果您有skype账号请留下，便于外教联系，谢谢！")->reply();
+            $wechatObj->text("感谢您的申请，我们会给您尽快安排！\n我们使用skype软件上课，请您提前安装，如果您有skype账号请留下，便于外教联系，谢谢！")->reply();
             # 
             break;
           case '1':
           default:
-            $weObj->text("多恩佳Wizbee英语是一家为青少年提供'英语口语'培训的机构
+            $wechatObj->text("多恩佳Wizbee英语是一家为青少年提供'英语口语'培训的机构
 
 培训模式：真人外教通过网络在线视频1对1上课，孩子天天在家跟外教面对面上课
 
@@ -85,30 +85,30 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
           exit;
           break;
         case Wechat::MSGTYPE_EVENT:
-          $weObj->text("感谢您的关注<a href='weixin://contacts/profile/duoenjiawizbee'>多恩佳wizbee英语</a>，精彩内容天天与您分享！\n回复 1 获得公司和课程信息\n回复 姓名+手机+QQ 获得今日送出的真人外教一对一免费课程[微笑]\n-----新年快乐-----")->reply();
+          $wechatObj->text("感谢您的关注<a href='weixin://contacts/profile/duoenjiawizbee'>多恩佳wizbee英语</a>，精彩内容天天与您分享！\n回复 1 获得公司和课程信息\n回复 姓名+手机+QQ 获得今日送出的真人外教一对一免费课程[微笑]\n-----新年快乐-----")->reply();
           break;
         case Wechat::MSGTYPE_IMAGE:
-          $weObj->text("暂时不支持图片响应！")->reply();
+          $wechatObj->text("暂时不支持图片响应！")->reply();
           break;
         default:
-          $weObj->text("这是什么？")->reply();
+          $wechatObj->text("这是什么？")->reply();
     }
   }
 
   if($wx_mp_id == 'gh_b945c807e7ec'){
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
-          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
+          $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           exit;
           break;
         case Wechat::MSGTYPE_EVENT:
-          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
+          $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           break;
         case Wechat::MSGTYPE_IMAGE:
-          $weObj->text("暂时不支持图片响应！")->reply();
+          $wechatObj->text("暂时不支持图片响应！")->reply();
           break;
         default:
-          $weObj->text("这是什么？")->reply();
+          $wechatObj->text("这是什么？")->reply();
     }
   }
 }
