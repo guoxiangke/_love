@@ -33,8 +33,8 @@ function wx_response($user, $wx_mp_id = 'gh_a1f2569abd7f') {
   $weObj = new Wechat($options);
   $weObj->valid();
   $type = $weObj->getRev()->getRevType();
-  watchdog('user-wx_mp_id', $user.'-'.$wx_mp_id, array(), WATCHDOG_NOTICE, 'link');
-  if($user == 'duoenjiawizbee'){//gh_e92ba695a32e
+  watchdog('user-wx_mp_id', $user->name.'-'.$wx_mp_id, array(), WATCHDOG_NOTICE, 'link');
+  if($user->name == 'duoenjiawizbee'){//gh_e92ba695a32e
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
         $keyword =  trim($wechatObj->getRevContent());
