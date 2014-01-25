@@ -54,7 +54,6 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
         $keyword =  trim($wechatObj->getRevContent());
-        $keyword = strtolower($keyword);
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
         switch ($keyword) {
           case '给女儿的画':
@@ -94,7 +93,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
           $wechatObj->text("暂时不支持图片响应！")->reply();
           break;
         default:
-          $wechatObj->text("这是什么？")->reply();
+          $wechatObj->text($default_text)->reply();
     }
   }
 
@@ -1963,14 +1962,14 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   $comment->homepage = ''; // you can add homepage URL here
                   $comment->status = COMMENT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
                   $comment->language = LANGUAGE_NONE; // The same as for a node
-                  $keyword = substr($keyword, 2);
+                  // $keyword = substr($keyword, 2);
                   $subject = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
                   $comment->subject = $subject.'【来自微信】'; 
                   
-                  $comment->signature = '';//$wechat_user_info['contact_info']['signature'] ;
+                  // $comment->signature = '';//$wechat_user_info['contact_info']['signature'] ;
                   
-                  $comment->signature_format = 'filtered_html'; 
-                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
+                  // $comment->signature_format = 'filtered_html'; 
+                  $comment->comment_body[$comment->language][0]['value'] = $keyword; // Everything here is pretty much like with a node
                   $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
                   // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
 
