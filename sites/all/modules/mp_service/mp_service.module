@@ -33,13 +33,15 @@ function wx_response($user, $wx_mp_id = 'gh_a1f2569abd7f') {
   $weObj = new Wechat($options);
   $weObj->valid();
   $type = $weObj->getRev()->getRevType();
+  if($wx_mp_id == 'gh_b945c807e7ec')
   switch($type) {
       case Wechat::MSGTYPE_TEXT:
-        $weObj->text("hello, I'm wechat")->reply();
+
+        $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----</a>\n<a href='weixin://contacts/profile/love_yongbuzhixi'>wizbee和小永一起学英语</a>\n<a href='weixin://contacts/profile/love_yongbuzhixi'>-----需要有你-----</a>\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----")->reply();
         exit;
         break;
       case Wechat::MSGTYPE_EVENT:
-        $weObj->text("您好，欢迎关注癌症新视角，\n爱喜与您一起，探讨21世纪最伟大的话题！")->reply();
+        $weObj->text("您好，欢迎关注，\n")->reply();
         break;
       case Wechat::MSGTYPE_IMAGE:
         $weObj->text("暂时不支持图片响应！")->reply();
@@ -386,6 +388,18 @@ $notice = "\n
       }
 
       switch ($keyword) {
+        case '0':     
+          $contentStr = "【365】恩典365*new*\n
+【31】【32】微信听广播\n<a href='weixin://contacts/profile/duoenjiawizbee'>-----永不止息-----</a>\n<a href='weixin://contacts/profile/duoenjiawizbee'>wizbee和小永一起学英语</a>\n<a href='weixin://contacts/profile/duoenjiawizbee'>-----需要有你-----</a>\n【080】wizbee外教试听\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----";
+            mp_service_update_user_info($wechatObj);
+          break; 
+        case '080':
+          $title = 'wizbee试听';
+          $desc = '外教一对一 Tandy';
+          $musicurl = 'http://fm77.u.qiniudn.com/egTandy_01-13-14_joan.mp3';
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;
         case '00':     
           $contentStr = $notice;//."\n此期间,可访问指令为\n【52】今日广播\n【523】在天父怀中";//广播指令为纯数字，请勿带*号。号和中括号\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】每日灵修广播\n
             mp_service_update_user_info($wechatObj);
@@ -897,13 +911,6 @@ $notice = "\n
           $title = "$title-".date('ymd');
           $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
           $desc = "love_yongbuzhixi公众号，每日更新";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case 'wizbee':
-          $title = 'wizbee试听';
-          $desc = '外教一对一 Tandy';
-          $musicurl = 'http://fm77.u.qiniudn.com/egTandy_01-13-14_joan.mp3';
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
