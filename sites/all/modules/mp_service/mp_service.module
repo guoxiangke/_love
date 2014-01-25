@@ -37,11 +37,11 @@ function wx_response($user, $wx_mp_id = 'gh_a1f2569abd7f') {
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
       watchdog('MSGTYPE_TEXT', 'MSGTYPE_TEXT', array(), WATCHDOG_NOTICE, 'link');
-          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----</a>\n<a href='weixin://contacts/profile/love_yongbuzhixi'>wizbee和小永一起学英语</a>\n<a href='weixin://contacts/profile/love_yongbuzhixi'>-----需要有你-----</a>\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----")->reply();
+          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请关注主帐号love_yongbuzhixi\n-----需要有你-----</a>\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           exit;
           break;
         case Wechat::MSGTYPE_EVENT:
-          $weObj->text("您好，欢迎关注，\n<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----</a>\n<a href='weixin://contacts/profile/love_yongbuzhixi'>wizbee和小永一起学英语</a>\n<a href='weixin://contacts/profile/love_yongbuzhixi'>-----需要有你-----</a>\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----")->reply();
+          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请关注主帐号love_yongbuzhixi\n-----需要有你-----</a>\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           break;
         case Wechat::MSGTYPE_IMAGE:
           $weObj->text("暂时不支持图片响应！")->reply();
