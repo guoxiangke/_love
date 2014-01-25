@@ -41,7 +41,7 @@
 									$str = date('y').date('m').$day.'.'.$media_type;
 									if($key=='ba'&&date('w',mktime(0,0,0,date('m'),$i,date('Y')))!=0) continue;
 									if($key=='bc'&&(date('w',mktime(0,0,0,date('m'),$day,date('Y')))==0||date('w',mktime(0,0,0,date('m'),$day,date('Y')))==6)) continue;
-									echo "<li>http://liangyou.nissigz.com/media/$key/$key$str</li>";
+									echo "<li>http://audio.liangyou.net/files/media/program_live/$key/$key$str</li>";
 									//echo "<li><a href='http://liangyou.nissigz.com/media/$key/$key$str'>".date('md')."</a></li>";
 								}
 							}		
