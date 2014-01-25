@@ -33,22 +33,7 @@ function wx_response($user, $wx_mp_id = 'gh_a1f2569abd7f') {
   $weObj = new Wechat($options);
   $weObj->valid();
   $type = $weObj->getRev()->getRevType();
-  if($wx_mp_id == 'gh_b945c807e7ec'){
-    switch($type) {
-        case Wechat::MSGTYPE_TEXT:
-          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
-          exit;
-          break;
-        case Wechat::MSGTYPE_EVENT:
-          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
-          break;
-        case Wechat::MSGTYPE_IMAGE:
-          $weObj->text("暂时不支持图片响应！")->reply();
-          break;
-        default:
-          $weObj->text("这是什么？")->reply();
-    }
-  }
+  watchdog('user-wx_mp_id', $user.'-'.$wx_mp_id, array(), WATCHDOG_NOTICE, 'link');
   if($user == 'duoenjiawizbee'){//gh_e92ba695a32e
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
@@ -111,6 +96,22 @@ function wx_response($user, $wx_mp_id = 'gh_a1f2569abd7f') {
     }
   }
 
+  if($wx_mp_id == 'gh_b945c807e7ec'){
+    switch($type) {
+        case Wechat::MSGTYPE_TEXT:
+          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
+          exit;
+          break;
+        case Wechat::MSGTYPE_EVENT:
+          $weObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
+          break;
+        case Wechat::MSGTYPE_IMAGE:
+          $weObj->text("暂时不支持图片响应！")->reply();
+          break;
+        default:
+          $weObj->text("这是什么？")->reply();
+    }
+  }
 }
 
 function mp_service_response() {
