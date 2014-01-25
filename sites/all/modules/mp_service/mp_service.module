@@ -81,7 +81,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
             $wechatObj->text($default_text)->reply();
             break;
           default:
-            wx_comment('376');
+            wx_comment('376',$keyword);
             $wechatObj->text($default_text)->reply();
             break;
         }
@@ -1944,11 +1944,11 @@ function mp_service_update_cmd($last_cmd,$FromUserName) {
 //http://www.jiduzhijia.com/yinpin/tllc/index.htm
 //http://www.jiduzhijia.com/book/madl.htm
 
-function wx_comment($nid) {//,$wechat_user_info
+function wx_comment($nid,$keyword) {//,$wechat_user_info
   ///////
                   $comment = new stdClass();
 
-                  // $comment->nid = 1; // nid of a node you want to attach a comment to
+                  $comment->nid = $nid; // nid of a node you want to attach a comment to
                   $comment->cid = 0; // leave it as is
                   $comment->pid = 0; // parent comment id, 0 if none 
                   $comment->uid = 0; // user's id, who left the comment
