@@ -100,7 +100,13 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
   if($wx_mp_id == 'gh_b945c807e7ec'){
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
-          $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
+        $keyword =  trim($wechatObj->getRevContent());
+        $FromUserName =  $wechatObj->getRev()->getRevFrom();
+        if (substr($keyword, 0,4) == '0325') {
+            $reply = wx_node_create(substr($keyword, 4));
+            $wechatObj->text($reply)->reply();
+        }
+         $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           exit;
           break;
         case Wechat::MSGTYPE_EVENT:
@@ -1978,4 +1984,60 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
                   }
+}
+
+function wx_node_create($keyword,$nodetype='love-diary',$uid=1) {
+  $title = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
+
+  $node = new stdClass();
+  $node->title = $title.'【来自微信】';
+  $node->type = $nodetype;
+  node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+  $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+  $node->uid = $uid;
+  $node->status = 1; //(1 or 0): published or not
+  $node->promote = 0; //(1 or 0): promoted to front page
+  $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
+  $node->path['pathauto'] = false;
+  $node->body[$node->language][0]['value']   = $keyword;
+  $node->body[$node->language][0]['summary'] = text_summary($keyword);
+  $node->body[$node->language][0]['format']  = 'filtered_html';
+  // 【201】无主情话(随便说点情话)-38
+  // 【202】时光隧道(分享我的过去)-39
+  // 【203】独居生活(记录现在的生活)-40
+  // 【204】想对你说(写给喜欢的人)-41
+
+  // $node->field_status_topic[$node->language][0]['tid'] = $menukey-163;
+  ////////begin @see love_layout_node_presave($node)
+   // $pattern = '/#([^\\#|.]+)#|＃([^\\＃|.]+)＃/';
+   // preg_match_all($pattern, $node->title, $matches, PREG_SET_ORDER);
+   // $node->field_status_tags[LANGUAGE_NONE] = array();
+   // foreach ($matches as $key => $value) {
+
+   //    $term_name = $value[1];
+   //    $term = taxonomy_get_term_by_name($term_name);
+   //    //new one
+   //    if(!count($term)){
+   //     $term = new stdClass();
+   //     $term->vid = 1;
+   //     $term->name = $term_name;
+   //     taxonomy_term_save($term);
+   //     //$term = taxonomy_get_term_by_name($term_name);
+   //     foreach ($term as $value) {
+   //        //dpm($value,$key);
+   //        $node->field_status_tags[LANGUAGE_NONE][$term->tid]['tid'] = $term->tid;
+   //      }
+   //    }else{
+   //      foreach ($term as $tid => $value) {
+   //        // dpm($value,$tid);
+   //        $node->field_status_tags[LANGUAGE_NONE][$tid]['tid'] = $tid;
+   //      }
+   //    }
+   // }
+  ///////////end
+  if($node = node_submit($node)) { // Prepare node for saving
+      node_save($node);//\n".$tip."
+      $contentStr = "恭喜您【".$keyword."】\n发布成功，http://wx.yongbuzhixi.com/node/$node->nid";
+  }
+  return $contentStr;
 }
