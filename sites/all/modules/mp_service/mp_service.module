@@ -102,7 +102,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
         case Wechat::MSGTYPE_TEXT:
           $keyword =  trim($wechatObj->getRevContent());
           $FromUserName =  $wechatObj->getRev()->getRevFrom();
-          $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1)
+          $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
           if ($check_keyword == '今天') {
               $reply = wx_node_create(substr($keyword, 2));
               $wechatObj->text($reply)->reply();
