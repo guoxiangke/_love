@@ -1986,11 +1986,11 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   }
 }
 
-function wx_node_create($keyword,$nodetype='love_diary',$uid=1) {
+function wx_node_create($keyword, $nodetype = 'love_diary', $uid = 1) {
   $title = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
 
   $node = new stdClass();
-  $node->title = $title.'【来自微信】';
+  $node->title = $title;
   $node->type = $nodetype;
   node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
   $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
@@ -1999,11 +1999,11 @@ function wx_node_create($keyword,$nodetype='love_diary',$uid=1) {
   $node->promote = 0; //(1 or 0): promoted to front page
   $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
   $node->path['pathauto'] = false;
-  $node->body[$node->language][0]['value']   = $keyword;
+  $node->body[$node->language][0]['value']   = $keyword.'<div class="love-source"><span class="ll-date-details">'.date('l H:i').'</span> 【微信发布】</div>';
   // $node->body[$node->language][0]['summary'] = text_summary($keyword);
   $node->body[$node->language][0]['format']  = 'full_html';
   if($nodetype == 'love_diary') {
-    $node->field_date[LANGUAGE_NONE][0]['value'] = now();    
+    $node->field_date[LANGUAGE_NONE][0]['value'] =  date('Y-m-d H:i:s', strtotime('now'));
   }
 
   // 【201】无主情话(随便说点情话)-38
