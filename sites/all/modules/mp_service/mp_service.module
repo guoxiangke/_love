@@ -102,8 +102,8 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
         case Wechat::MSGTYPE_TEXT:
         $keyword =  trim($wechatObj->getRevContent());
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
-        if (substr($keyword, 0,4) == '0325') {
-            $reply = wx_node_create(substr($keyword, 4));
+        if (substr($keyword, 0,2) == '今天') {
+            $reply = wx_node_create(substr($keyword, 2));
             $wechatObj->text($reply)->reply();
         }
          $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
@@ -1986,7 +1986,7 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   }
 }
 
-function wx_node_create($keyword,$nodetype='love-diary',$uid=1) {
+function wx_node_create($keyword,$nodetype='love_diary',$uid=1) {
   $title = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
 
   $node = new stdClass();
@@ -2000,8 +2000,12 @@ function wx_node_create($keyword,$nodetype='love-diary',$uid=1) {
   $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
   $node->path['pathauto'] = false;
   $node->body[$node->language][0]['value']   = $keyword;
-  $node->body[$node->language][0]['summary'] = text_summary($keyword);
-  $node->body[$node->language][0]['format']  = 'filtered_html';
+  // $node->body[$node->language][0]['summary'] = text_summary($keyword);
+  $node->body[$node->language][0]['format']  = 'full_html';
+  if($nodetype == 'love_diary') {
+    $node->field_date[LANGUAGE_NONE][0]['value'] = now();    
+  }
+
   // 【201】无主情话(随便说点情话)-38
   // 【202】时光隧道(分享我的过去)-39
   // 【203】独居生活(记录现在的生活)-40
@@ -2037,7 +2041,7 @@ function wx_node_create($keyword,$nodetype='love-diary',$uid=1) {
   ///////////end
   if($node = node_submit($node)) { // Prepare node for saving
       node_save($node);//\n".$tip."
-      $contentStr = "恭喜您【".$keyword."】\n发布成功，http://wx.yongbuzhixi.com/node/$node->nid";
+      $contentStr = "恭喜您【".$keyword."】\n发布成功，http://wx.dev.camplus.hk/node/$node->nid";
   }
   return $contentStr;
 }
