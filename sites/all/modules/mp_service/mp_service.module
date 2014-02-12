@@ -2008,6 +2008,7 @@ function wx_node_create($keyword, $nodetype = 'love_diary', $uid = 1) {
   // $node->body[$node->language][0]['summary'] = text_summary($keyword);
   $node->body[$node->language][0]['format']  = 'full_html';
   if($nodetype == 'love_diary') {
+    $title = date('n月j日');
     $last_diary = db_query("SELECT node.created AS node_created, node.nid AS nid
 FROM 
 {node} node
