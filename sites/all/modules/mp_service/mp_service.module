@@ -2020,7 +2020,7 @@ LIMIT 10 OFFSET 0")->fetchAssoc();
       $node->body[$node->language][0]['value']   .= '<div class="ll-diary-added"><br/></div>'.$keyword.'<div class="love-source"><span class="ll-date-details">'.date('l H:i').'</span> 【微信发布】</div>';
     }
     node_save($node);//\n".$tip."
-    return $contentStr = "恭喜您【".$keyword."】\n日志更新成功，http://wx.dev.camplus.hk/node/$node->nid";
+    return $contentStr = "恭喜您【".$node->title."】\n日志更新成功，http://wx.dev.camplus.hk/node/$node->nid";
 
     $node->field_date[LANGUAGE_NONE][0]['value'] =  date('Y-m-d H:i:s', strtotime('now'));
   }
