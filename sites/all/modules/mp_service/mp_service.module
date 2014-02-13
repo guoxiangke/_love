@@ -97,13 +97,17 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
     }
   }
 
-  if($wx_mp_id == 'gh_b945c807e7ec'){
+  if($name == '永不止息' || $wx_mp_id == 'gh_b945c807e7ec') {
+    watchdog('name', $name, array(), WATCHDOG_NOTICE, 'link');
+    watchdog('wx_mp_id', $wx_mp_id, array(), WATCHDOG_NOTICE, 'link');
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
           $keyword =  trim($wechatObj->getRevContent());
           $FromUserName =  $wechatObj->getRev()->getRevFrom();
           $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
-          if ($check_keyword == '今天') {
+    watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
+    watchdog('FromUserName', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
+          if ($check_keyword == '天气') {
               $reply = wx_node_create($keyword);
               $wechatObj->text($reply)->reply();
           }
@@ -2012,10 +2016,11 @@ ORDER BY node_created DESC
 LIMIT 10 OFFSET 0")->fetchAssoc();
     if(date('Y-m-d', $last_diary['node_created']) == date('Y-m-d', strtotime('now'))) {
       $node = node_load($last_diary['nid']);
+      $node->title = date('n月j日');
       $node->body[$node->language][0]['value']   .= '<div class="ll-diary-added"><br/></div>'.$keyword.'<div class="love-source"><span class="ll-date-details">'.date('l H:i').'</span> 【微信发布】</div>';
     }
     node_save($node);//\n".$tip."
-    return $contentStr = "恭喜您【".$keyword."】\n日志更新成功，http://wx.dev.camplus.hk/node/$node->nid";
+    return $contentStr = "恭喜您【".$node->title."】\n日志更新成功，http://wx.dev.camplus.hk/node/$node->nid";
 
     $node->field_date[LANGUAGE_NONE][0]['value'] =  date('Y-m-d H:i:s', strtotime('now'));
   }
