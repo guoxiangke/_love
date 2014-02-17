@@ -75,3 +75,38 @@
 	}
 .love-calendar em:before{left:13px;}	
 .love-calendar em:after{right:13px;}	
+
+
+/*global css */
+@media all{
+	body{
+		/*,#container-boundingbox*/
+		background: url("../img/page-bg-tile.jpg") center;
+		-webkit-background-size:50px 50px;
+		-moz-background-size:50px 50px;
+		-o-background-size:50px 50px;
+		background-size:50px 50px;
+}
+.main-container #block-system-main {
+	background-color: #ffffff;
+	border-style: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin: 0 auto 0;
+	/*width: 672px;*/
+	-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	padding: 15px 20px 20px 30px;
+}
+
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx){
+	html:not(.ie8) body,html:not(.ie8) #container-boundingbox{
+		background: url("../img/page-bg-tile@2x.png") center;
+		-webkit-background-size:50px 50px;
+		-moz-background-size:50px 50px;
+		-o-background-size:50px 50px;
+		background-size:50px 50px;}
+}
