@@ -67,7 +67,7 @@ function ybzx_block_view($delta = '') {
 // Replace 'event' with the name of your CCK content type.
 function ybzx_preprocess_calendar_datebox(&$vars) {
   global $user;
-  $content_types = array('love_diary','blog');
+  $content_types = array('grace365','in_him');
   $types = node_type_get_types();
   foreach ($content_types as $key => $content_type) {
     $last_node = _ybzx_get_last_node($content_type);
