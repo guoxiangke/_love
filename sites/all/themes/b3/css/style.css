@@ -121,7 +121,7 @@
 
 #navbar {
 	position: fixed;
-	z-index: 1601;
+	z-index: 1599;
 	margin: 0;
 	top: 0;
 	text-align: center;
@@ -132,6 +132,6 @@
 }
 @media (max-width: 480px) { 
 	#page-header {
-		margin-top: 7px;
+		margin-top: 10px;
 	}
 }
