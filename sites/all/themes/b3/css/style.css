@@ -130,3 +130,8 @@
 #page-header {
 	margin-top: 40px;
 }
+@media (max-width: 480px) { 
+	#page-header {
+		margin-top: 8px;
+	}
+}
