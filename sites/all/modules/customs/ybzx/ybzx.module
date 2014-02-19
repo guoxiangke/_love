@@ -79,7 +79,7 @@ function ybzx_preprocess_calendar_datebox(&$vars) {
     }
     if($vars['day'] == $now && $now - $last >= 1) {
       if (user_access('create '.$content_type.' content', $user)) {
-          $vars['add_content_links'][] = l('+'.$types[$content_type]->name, 'node/add/'.$content_type);        
+          $vars['add_content_links'][] = l('+'.$types[$content_type]->name, 'node/add/'.str_replace('_', '-', $content_type));        
         }
     }  
   }
