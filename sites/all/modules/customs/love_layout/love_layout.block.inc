@@ -295,7 +295,7 @@ function love_block_about_us() {
 }
 
 function love_block_weichat_qr() {
-  return '永不止息动态早知道<br/><img src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/>';
+  return '点击or扫一扫<br/><a href="weixin://contacts/profile/love_yongbuzhixi"><img src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/></a>';
 }
 function love_fm_block() {//<?php echo date("ymd");? >
   return '恋爱季节:我们一起学习如何去爱吧！'//<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/'.drupal_get_path('module','love')? >
