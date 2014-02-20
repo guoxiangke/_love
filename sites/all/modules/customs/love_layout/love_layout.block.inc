@@ -295,8 +295,8 @@ function love_block_about_us() {
 }
 
 function love_block_weichat_qr() {
-  $web = '<div id="love_qr">扫一扫,快速关注<br/><img  src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/></div>';
-  $mobile = '<div id="love_qr">点击二维码,快速关注<br/><a href="weixin://contacts/profile/love_yongbuzhixi"><img src="/'.(drupal_get_path('module','love_layout').'/weichat_qr.jpg').'"/></a></div>';
+  $web = "<div id='love_qr'>扫一扫,快速关注<br/><img src='/".drupal_get_path('module','love_layout')."/weichat_qr.jpg'/></div>";
+  $mobile = "<div id='love_qr'>点击二维码,快速关注<br/><a href='weixin://contacts/profile/love_yongbuzhixi'><img src='/".drupal_get_path('module','love_layout')."/weichat_qr.jpg'/></a></div>";
   drupal_add_js('document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
 WeixinJSBridge.call("hideOptionMenu");
   (function ($) {$("#love_qr").replaceWith("'.$mobile.'"); }(jQuery));
