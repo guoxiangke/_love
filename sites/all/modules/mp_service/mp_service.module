@@ -130,13 +130,13 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
 function mp_service_response($wx_mp_id = 'gh_b945c807e7ec') {
   watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
   module_load_include('inc', 'mp_service', 'mp_service_adv');
+  // $options = array(
+  //   // 'token'=> variable_get('mp_service_token', $wx_mp_id),//填写你设定的key
+  //   'token'=> $wx_mp_id,//填写你设定的key
+  // );
   $options = array(
-    // 'token'=> variable_get('mp_service_token', $wx_mp_id),//填写你设定的key
-    'token'=> $wx_mp_id,//填写你设定的key
-  );
-  $options = array(
-    'token'=>'ybzx',
-    'account'=>'xiangkeguo@gmail.com',
+    'token'=>$wx_mp_id,
+    'account'=>'1556797870@qq.com',
     'password'=>'mjk5nj'
   );
   $wechatObj = new Wechat($options);
@@ -149,7 +149,7 @@ function mp_service_response($wx_mp_id = 'gh_b945c807e7ec') {
       $keyword = strtolower($keyword);
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
       watchdog('3', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
-      watchdog('3', $keyword, array(), WATCHDOG_NOTICE, 'link');
+      watchdog('4', $keyword, array(), WATCHDOG_NOTICE, 'link');
       if(!mp_service_get_record($FromUserName)) {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
