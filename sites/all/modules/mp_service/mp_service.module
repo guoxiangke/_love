@@ -111,6 +111,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
               $reply = wx_node_create($keyword);
               $wechatObj->text($reply)->reply();
           }
+         mp_service_response();
          $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           exit;
           break;
