@@ -90,3 +90,24 @@ function  _ybzx_get_last_node($content_type = 'article') {// get latest node.
   $query = "SELECT n.nid nid, n.created created FROM {node} n  WHERE n.type = :type order by n.created desc limit 0,1";
   return db_query($query, array(':type' => $content_type))->fetch();
 }
+
+
+function ybzx_get_default_image_field_value($bundle = 'grace365', $field_name = 'field_image', $type = 'default_image', $entity_type = 'node') {
+  $query = db_select('field_config_instance', 'fc');
+  $query->fields('fc', array('id'));
+  $query->condition('field_name', $field_name,'=');
+  $query->condition('bundle', $bundle,'=');
+  $query->condition('entity_type', $entity_type,'=');
+  $id = $query->execute()->fetchField();
+
+  $query = db_select('file_usage', 'fu');
+  $query->fields('fu', array('fid'));
+  $query->condition('type', $type,'=');
+  $query->condition('id', $id,'=');
+  $fid = $query->execute()->fetchField();
+  $img = file_load($fid);
+  
+  $img = $img->uri;
+  $img = file_create_url($img);
+  return $img;
+}
