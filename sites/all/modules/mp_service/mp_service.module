@@ -111,7 +111,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
               $reply = wx_node_create($keyword);
               $wechatObj->text($reply)->reply();
           }
-         mp_service_response();
+         // mp_service_response();
          $wechatObj->text("<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n时不时回复【0】获取小永最近分享的优秀公众号[微笑]\n-----新年快乐-----</a>")->reply();
           exit;
           break;
@@ -128,8 +128,8 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
 }
 
 function mp_service_response($wx_mp_id = 'gh_b945c807e7ec') {
-  watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
   module_load_include('inc', 'mp_service', 'mp_service_adv');
+  module_load_include('inc', 'mp_service', 'mp_service_fun');
   // $options = array(
   //   // 'token'=> variable_get('mp_service_token', $wx_mp_id),//填写你设定的key
   //   'token'=> $wx_mp_id,//填写你设定的key
@@ -142,18 +142,26 @@ function mp_service_response($wx_mp_id = 'gh_b945c807e7ec') {
   $wechatObj = new Wechat($options);
   $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
-  watchdog('2', 'message', array(), WATCHDOG_NOTICE, 'link');
+
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
-      $keyword = strtolower($keyword);
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      watchdog('3', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
-      watchdog('4', $keyword, array(), WATCHDOG_NOTICE, 'link');
       if(!mp_service_get_record($FromUserName)) {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
+
+      $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
+      if ($check_keyword == '天气') {
+          $reply = _mp_node_create($keyword);
+          $wechatObj->text($reply)->reply();
+      }
+      $keyword = strtolower($keyword);
+      if($keyword == '365') {
+        $news = _mp_get_mp_node($type = 'grace365', $counts = 1);
+        $wechatObj->news($news)->reply();        
+      }
       //http://betternewlife.u.qiniudn.com/newlife-01.mp3
       //default msg
       $contentStr = "【52】广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n以后再有什么问题，回复【11+您的祝福与感恩或建议内容】呼唤小永吧！";
@@ -1995,78 +2003,4 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
                   }
-}
-
-function wx_node_create($keyword, $nodetype = 'love_diary', $uid = 1) {
-  $title = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
-
-  $node = new stdClass();
-  $node->title = $title;
-  $node->type = $nodetype;
-  node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
-  $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
-  $node->uid = $uid;
-  $node->status = 1; //(1 or 0): published or not
-  $node->promote = 0; //(1 or 0): promoted to front page
-  $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
-  $node->path['pathauto'] = false;
-  $node->body[$node->language][0]['value']   = $keyword.'<div class="love-source"><span class="ll-date-details">'.date('l H:i').'</span> 【微信发布】</div>';
-  // $node->body[$node->language][0]['summary'] = text_summary($keyword);
-  $node->body[$node->language][0]['format']  = 'full_html';
-  if($nodetype == 'love_diary') {
-    $last_diary = db_query("SELECT node.created AS node_created, node.nid AS nid
-FROM 
-{node} node
-WHERE (( (node.status = '1') AND (node.type IN  ('love_diary')) ))
-ORDER BY node_created DESC
-LIMIT 10 OFFSET 0")->fetchAssoc();
-    if(date('Y-m-d', $last_diary['node_created']) == date('Y-m-d', strtotime('now'))) {
-      $node = node_load($last_diary['nid']);
-      $node->title = date('n月j日');
-      $node->body[$node->language][0]['value']   .= '<div class="ll-diary-added"><br/></div>'.$keyword.'<div class="love-source"><span class="ll-date-details">'.date('l H:i').'</span> 【微信发布】</div>';
-    }
-    node_save($node);//\n".$tip."
-    return $contentStr = "恭喜您【".$node->title."】\n日志更新成功，http://wx.dev.camplus.hk/node/$node->nid";
-
-    $node->field_date[LANGUAGE_NONE][0]['value'] =  date('Y-m-d H:i:s', strtotime('now'));
-  }
-
-  // 【201】无主情话(随便说点情话)-38
-  // 【202】时光隧道(分享我的过去)-39
-  // 【203】独居生活(记录现在的生活)-40
-  // 【204】想对你说(写给喜欢的人)-41
-
-  // $node->field_status_topic[$node->language][0]['tid'] = $menukey-163;
-  ////////begin @see love_layout_node_presave($node)
-   // $pattern = '/#([^\\#|.]+)#|＃([^\\＃|.]+)＃/';
-   // preg_match_all($pattern, $node->title, $matches, PREG_SET_ORDER);
-   // $node->field_status_tags[LANGUAGE_NONE] = array();
-   // foreach ($matches as $key => $value) {
-
-   //    $term_name = $value[1];
-   //    $term = taxonomy_get_term_by_name($term_name);
-   //    //new one
-   //    if(!count($term)){
-   //     $term = new stdClass();
-   //     $term->vid = 1;
-   //     $term->name = $term_name;
-   //     taxonomy_term_save($term);
-   //     //$term = taxonomy_get_term_by_name($term_name);
-   //     foreach ($term as $value) {
-   //        //dpm($value,$key);
-   //        $node->field_status_tags[LANGUAGE_NONE][$term->tid]['tid'] = $term->tid;
-   //      }
-   //    }else{
-   //      foreach ($term as $tid => $value) {
-   //        // dpm($value,$tid);
-   //        $node->field_status_tags[LANGUAGE_NONE][$tid]['tid'] = $tid;
-   //      }
-   //    }
-   // }
-  ///////////end
-  if($node = node_submit($node)) { // Prepare node for saving
-      node_save($node);//\n".$tip."
-      $contentStr = "恭喜您【".$keyword."】\n发布成功，http://wx.dev.camplus.hk/node/$node->nid";
-  }
-  return $contentStr;
 }
