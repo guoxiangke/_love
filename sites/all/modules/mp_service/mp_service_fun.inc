@@ -92,8 +92,8 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
   if(count($results))
     foreach ($results as $key => $value) {
       $node = node_load($value->nid);
-      $description = strip_tags(trim(truncate_utf8(decode_entities(check_markup($node->body[LANGUAGE_NONE][0]['value'])), 140, TRUE)));
-
+      $description = trim(strip_tags(truncate_utf8(decode_entities(check_markup($node->body[LANGUAGE_NONE][0]['value'])), 140, TRUE)));
+      
 
       if($node->field_image) {
         $default_uri = $node->field_image[LANGUAGE_NONE][0]['uri'];
@@ -103,7 +103,7 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
             'Title'=> $node->title,
             'Description'=>$description,
             'PicUrl'=>$default_image,
-            'Url'=> url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=').'node/'.$node->nid;
+            'Url'=> url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=').'node/'.$node->nid,
           );
         $news[] = $img;
     }
