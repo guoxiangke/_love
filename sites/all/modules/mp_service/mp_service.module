@@ -1534,9 +1534,9 @@ $notice = "\n
       if(is_array($Event)) {
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
         watchdog('FromUserName_subscribe', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
-        $res = mp_service_get_record($FromUserName);
-        watchdog('FromUserName_res', $res, array(), WATCHDOG_NOTICE, 'link');
-        if($res) return;
+        // $res = mp_service_get_record($FromUserName);
+        // watchdog('FromUserName_res', $res, array(), WATCHDOG_NOTICE, 'link');
+        // if($res) return;
 watchdog('FromUserName_res1', $res, array(), WATCHDOG_NOTICE, 'link');
         if($Event['event'] == 'subscribe') {
           if(mp_service_get_record($FromUserName)) {
