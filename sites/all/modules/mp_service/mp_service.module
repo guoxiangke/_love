@@ -147,21 +147,24 @@ function mp_service_response($wx_mp_id = 'gh_b945c807e7ec') {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
       $FromUserName =  $wechatObj->getRev()->getRevFrom();
+      watchdog('$keyword',  $keyword, array(), WATCHDOG_NOTICE, 'link');
+      watchdog('$FromUserName',  $FromUserName, array(), WATCHDOG_NOTICE, 'link');
+      if($keyword == '365') {
+        $news = _mp_get_mp_node($type = 'grace365', $counts = 1);
+        $wechatObj->news($news)->reply();        
+      }
+
       if(!mp_service_get_record($FromUserName)) {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
-
+watchdog('$uid',  $uid, array(), WATCHDOG_NOTICE, 'link');
       $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
       if ($check_keyword == '天气') {
           $reply = _mp_node_create($keyword);
           $wechatObj->text($reply)->reply();
       }
       $keyword = strtolower($keyword);
-      if($keyword == '365') {
-        $news = _mp_get_mp_node($type = 'grace365', $counts = 1);
-        $wechatObj->news($news)->reply();        
-      }
       //http://betternewlife.u.qiniudn.com/newlife-01.mp3
       //default msg
       $contentStr = "【52】广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n以后再有什么问题，回复【11+您的祝福与感恩或建议内容】呼唤小永吧！";
