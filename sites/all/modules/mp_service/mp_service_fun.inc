@@ -92,8 +92,10 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
   if(count($results))
     foreach ($results as $key => $value) {
       $node = node_load($value->nid);
-      $description = trim(strip_tags(truncate_utf8(decode_entities(check_markup($node->body[LANGUAGE_NONE][0]['value'])), 140, TRUE)));
 
+      $description = check_markup($node->body[LANGUAGE_NONE][0]['value']);
+      $description = strip_tags($description);
+      $description = truncate_utf8($description, 500, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);
 
       if($node->field_image) {
         $default_uri = $node->field_image[LANGUAGE_NONE][0]['uri'];
