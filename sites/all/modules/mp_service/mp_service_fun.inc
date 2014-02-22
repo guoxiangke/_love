@@ -93,9 +93,10 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
     foreach ($results as $key => $value) {
       $node = node_load($value->nid);
 
-      $description = check_markup($node->body[LANGUAGE_NONE][0]['value']);
-      $description = strip_tags($description);
-      $description = truncate_utf8($description, 500, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);
+      $des = decode_entities(check_markup($node->body[LANGUAGE_NONE][0]['value']));
+      $des = strip_tags($des);
+      $des = str_replace('&nbsp;',' ',$des);
+      $des = truncate_utf8($des, 300, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);
 
       if($node->field_image) {
         $default_uri = $node->field_image[LANGUAGE_NONE][0]['uri'];
@@ -103,7 +104,7 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
       }
         $img = array(
             'Title'=> $node->title,
-            'Description'=>$description,
+            'Description'=>$des,
             'PicUrl'=>$default_image,
             'Url'=> url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=').'node/'.$node->nid,
           );
