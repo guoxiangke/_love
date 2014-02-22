@@ -1537,7 +1537,7 @@ $notice = "\n
         // $res = mp_service_get_record($FromUserName);
         // watchdog('FromUserName_res', $res, array(), WATCHDOG_NOTICE, 'link');
         // if($res) return;
-watchdog('FromUserName_res1', $res, array(), WATCHDOG_NOTICE, 'link');
+// watchdog('FromUserName_res1', $res, array(), WATCHDOG_NOTICE, 'link');
         if($Event['event'] == 'subscribe') {
           if(mp_service_get_record($FromUserName)) {
             $contentStr = "所有功能测试开发中～敬请期待！<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【31】收听广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外</a>";
