@@ -1539,10 +1539,10 @@ $notice = "\n
 
         if($Event['event'] == 'subscribe') {
           if(mp_service_get_record($FromUserName)) {
-            $contentStr = "欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【31】收听广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外，所有功能测试开发中～敬请期待！";
+            $contentStr = "所有功能测试开发中～敬请期待！<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----\n欢迎回来[Smile]\n永不止息，需要有你!\n通过微信玩转永不止息？\n回复【00】进入主菜单\n回复【31】收听广播\n广播指令为纯数字，请勿带特殊括号\n除广播内容外</a>";
             mp_service_resubscribe($FromUserName);
           }else {
-            $contentStr = "欢迎关注[Smile]\n永不止息-主内婚恋网，是http://yongbuzhixi.com 旗下的微信公众帐号。该网站是@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。\n回复【31】收听良友广播\n广播指令为纯数字，请勿带特殊符号\n";//通过微信玩转永不止息？\n回复【00】进入主菜单\n
+            $contentStr = "欢迎关注[Smile]\n所有功能测试开发中～敬请期待！<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n请请您关注主帐号love_yongbuzhixi\n-----需要有你-----</a>\n永不止息-主内婚恋网，是http://yongbuzhixi.com 旗下的微信公众帐号。该网站是@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。\n回复【31】收听良友广播\n广播指令为纯数字，请勿带特殊符号\n";//通过微信玩转永不止息？\n回复【00】进入主菜单\n
             mp_service_add_user($FromUserName);
           }
           mp_service_text_reply($contentStr);

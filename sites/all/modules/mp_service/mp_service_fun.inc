@@ -95,6 +95,7 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
 
       $des = decode_entities(check_markup($node->body[LANGUAGE_NONE][0]['value']));
       $des = strip_tags($des);
+      $des = str_replace('&nbsp;&nbsp;',"\n",$des);
       $des = str_replace('&nbsp;',' ',$des);
       $des = truncate_utf8($des, 300, $wordsafe = FALSE, $add_ellipsis = TRUE, $min_wordsafe_length = 1);
 
