@@ -148,6 +148,21 @@
 	border-color: #bce8f1;
 }
 
+.node-teaser {
+	border-bottom: 2px dotted;
+  border-color: #269abc;
+}
+
+.content .field-name-body{
+	line-height: 2;
+}
+.content .field-name-body p {
+	text-indent: 2em;
+}
+.node .submitted {
+	border-bottom: 2px dotted;
+	border-color: #999;
+}
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
