@@ -104,6 +104,9 @@
 	#navbar{
 		max-width: 100%;
 	}
+	.node .content .field-name-body {
+		line-height: 2;		
+	}
 
 }
 @media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx){
