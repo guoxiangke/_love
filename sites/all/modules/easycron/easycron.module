@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * This module allows creating/managing a webcron job on easycron.com to run current site's cron.php
+ */
+
+/**
+ * Implements hook_help().
+ */
+function easycron_help($path, $arg) {
+  $output = '';
+  switch ($path) {
+    case 'admin/help#easycron':
+      $output = '<p>' . t("Create/manage a webcron job on easycron.com to run current site's cron.php") . '</p>';
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Implements hook_perm().
+ */
+function easycron_permission() {
+  return array(
+    'access easycron content' => array(
+      'title' => t('View easycron content'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function easycron_menu() {
+  $items = array();
+
+  $items['admin/settings/easycron'] = array(
+    'title' => 'Easy cron',
+    'description' => 'Description of your easycron settings page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('easycron_admin'),
+    'access arguments' => array('access administration pages'),
+    'file' => 'easycron.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+   );
+
+  return $items;
+}

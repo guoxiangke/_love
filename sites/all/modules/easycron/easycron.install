@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the easycron module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function easycron_uninstall() {
+  variable_del('easycron_status');
+  variable_del('easycron_token');
+  variable_del('easycron_cron_expression');
+  variable_del('easycron_email_me');
+  variable_del('easycron_log_output_length');
+  variable_del('easycron_cron_job_id');
+}

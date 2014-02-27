@@ -1,0 +1,10 @@
+name = EasyCron
+description = Allows creating/managing a webcron job on easycron.com to run current site's cron.php.
+core = 7.x
+files[] = easycron.module
+; Information added by  packaging script on 2013-11-26
+version = "7.x-1.11"
+core = "7.x"
+project = "easycron"
+datestamp = "1385483606"
+
