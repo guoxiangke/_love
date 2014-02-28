@@ -502,6 +502,7 @@ function druedu_qa_node_delete($node) {
  * @see statistics_exit()
  */
 function druedu_qa_exit() {
+  if(!module_exists('statistics')) return;
   global $user;
 
   // When serving cached pages with the 'page_cache_without_database'
@@ -526,6 +527,25 @@ function druedu_qa_exit() {
           ->expression('totalcount', 'totalcount + 1')
           ->execute();
     }
+  }
+  if (variable_get('statistics_enable_access_log', 0)) {
+    drupal_bootstrap(DRUPAL_BOOTSTRAP_SESSION);
+
+    // For anonymous users unicode.inc will not have been loaded.
+    include_once DRUPAL_ROOT . '/includes/unicode.inc';
+    // Log this page access.
+    db_insert('accesslog')
+      ->fields(array(
+        'title' => truncate_utf8(strip_tags(drupal_get_title()), 255),
+        'path' => truncate_utf8($_GET['q'], 255),
+        'url' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
+        'hostname' => ip_address(),
+        'uid' => $user->uid,
+        'sid' => session_id(),
+        'timer' => (int) timer_read('page'),
+        'timestamp' => REQUEST_TIME,
+      ))
+      ->execute();
   }
 }
 
