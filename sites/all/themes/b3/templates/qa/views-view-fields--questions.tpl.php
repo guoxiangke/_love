@@ -42,7 +42,7 @@
   //field_ask_anonymous
       // $q_author = $name;
     if($fields['field_ask_anonymous']->content == 1) {
-      $name = '<a href="#">匿名提问</a>';
+      $name = '<a href="###">匿名用户</a>';
     }  
   //user pic default
   if(!strlen($picture)) {
@@ -50,16 +50,14 @@
     $picture = variable_get('user_picture_default', '');
     $picture = theme('image_style',array('style_name' => 'profile_small', 'path' => $picture));
   }
-
-
-	$resolved = $field_mark_question_resolved?'open':'closed';
-	$resolved_alt = $field_mark_question_resolved?'已解决':'未解决';
+	$resolved = ($fields['field_mark_question_resolved']->content ==0)?'open':'closed';
+	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'已解决':'未解决';
 ?>
     <div class="love-qa-list row">
         <div class="qa-list-l col-md-2 col-sm-2">            
-        	<a href="node/1" title="查看详情">
+        	<a href="node/<?php echo $nid;?>" title="查看详情">
 	        	<div class="meta-answers" title="Number of Answers">
-	        		<span class="glyphicon glyphicon-comment"></span>
+	        		<span class="glyphicon glyphicon-question-sign"></span>
 	            	<span class="counts"><?php echo $field_computed_answers;?></span>               </div>
 	            
 	        	<div class="meta-votes" title="Number of Votes">
@@ -74,10 +72,18 @@
         <div class="qa-list-c col-md-10 col-sm-10">
             <div class="qa-list-title"><?php echo $title;?></div>
             <div class="qa-list-body-summary"><?php echo $body;?></div>
-            <div class="qa-list-contributes">Asked:<span class="qa-list-time"><?php echo $created;?></span>
-By	<span class="qa-list-author"><?php echo $name;?></span>
-In	<span class="qa-list-region">General</span>
-
+            <div class="qa-list-contributes">
+            	<div class="qa-list-author-img">
+            		<?php echo $picture ;?>
+            	</div>
+            	<div class="qa-list-author-info">
+            		<div class="qa-list-author-name">
+            		 	<?php echo $name;?>在<span class="qa-list-region">General</span>模块发布
+            		</div>
+	            	<div class="qa-list-time">
+	            		时间:<span><?php echo $created;?></span>            
+	            	</div>
+            	</div>
             </div>
             <div class="qa-list-tags">	
             	<span class="glyphicon glyphicon-tags"></span>

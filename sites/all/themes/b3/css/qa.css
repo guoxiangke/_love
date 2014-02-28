@@ -44,10 +44,10 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
     margin: 0 0 20px 0;
     text-indent: 2em;
 }
-.qa-list-time {
+.qa-list-time span, .qa-list-region{
     font-weight: bold;
 }
-.qa-list-contributes {
+.qa-list-time {
     font-size: 90%;
     line-height: 1.4;
     padding-left: 25px;
@@ -67,6 +67,15 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 	right: 20px;
 	width: 31px;
 	height: 31px;
+}
+.qa-list-author-img {
+	float: left;
+}
+.qa-list-author-info {
+	margin-left: 60px;
+}
+.sbq-qa-flag {
+	padding-left: 5px;
 }
 
 .view-questions .views-row {
