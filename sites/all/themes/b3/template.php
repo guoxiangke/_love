@@ -9,6 +9,11 @@ function b3_preprocess_page(&$vars, $hook) {
     // If the node type is "blog_madness" the template suggestion will be "page--blog-madness.tpl.php".
     $vars['theme_hook_suggestions'][] = 'page__'. $vars['node']->type;
   }
+
+  $detect = mobile_detect_get_object();  
+  if($detect->isMobile()) {
+    drupal_add_js(drupal_get_path('theme', 'b3').'/js/WeixinJSBridge.js');
+  }
 }
 /**
  * Overrides theme_menu_local_tasks().

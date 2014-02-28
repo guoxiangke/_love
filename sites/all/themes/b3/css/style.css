@@ -162,10 +162,18 @@
 .content .field-name-body p {
 	text-indent: 2em;
 }
-.node .submitted {
-	border-bottom: 2px dotted;
-	border-color: #999;
-}
+
+/*AUTHOR BOX */
+.authorbox {margin-bottom:15px; overflow:hidden; border-top:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0;}
+.authorbox a:hover {text-decoration:underline;}
+.authorleft {float:left; overflow:hidden; padding:15px 10px 15px 0;}
+.authorleft .authorimg {float:left; width:90px;}
+.authorleft .authorimg img {-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%; border:3px solid #e2e2e2;}
+.authorbio {line-height:170%; margin-left:113px; font-size: 15px;}
+.authorbio h4 {margin-bottom:0; font:600 18px "Proxima Nova Condensed Semibold",'Arial Narrow',Arial,sans-serif; text-transform:uppercase;}
+.authorbio h4 a {color:#000;}
+.authorbio .socialcircle {margin-top:5px; color: #999;}
+.authorbio .socialcircle li {float:left; margin-right:10px;}
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
