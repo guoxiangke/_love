@@ -71,7 +71,7 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 .qa-list-author-img {
 	float: left;
 }
-.qa-list-author-info {
+.qa-list-author-info ,.qa-list-tags{
 	margin-left: 60px;
 }
 .sbq-qa-flag {
