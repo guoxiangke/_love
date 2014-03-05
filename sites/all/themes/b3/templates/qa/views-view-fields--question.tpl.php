@@ -55,21 +55,22 @@
 ?>
     <div class="love-qa-list row">
         <div class="qa-list-l col-md-2 col-sm-2">            
-        	<a href="node/<?php echo $nid;?>" title="查看详情">
+          
 	        	<div class="meta-answers" title="Number of Answers">
 	        		<span class="glyphicon glyphicon-question-sign"></span>
 	            	<span class="counts"><?php echo $field_computed_answers;?></span>               </div>
 	            
 	        	<div class="meta-votes" title="Number of Votes">
 	        		<span class="glyphicon glyphicon-thumbs-up"></span>
-	            <span class="counts"><?php echo $value_1;?></span>                
-              <!-- <div class="votes pull-left"><?php print $value_1; ?></div> -->
+	            <?php echo $value_1;?>
+              <span class="glyphicon glyphicon-thumbs-down"></span>
             </div>
 	            
 	        	<div class="meta-views" title="Number of this Question views">
 	        		<span class="glyphicon glyphicon-eye-open"></span>
-	            	<span class="counts"><?php echo $totalcount;?></span>             </div>
-          </a>
+	            	<span class="counts"><?php echo $totalcount;?></span>             
+            </div>
+   
         </div>
         <div class="qa-list-c col-md-10 col-sm-10">
             <div class="qa-list-title"><?php echo $title;?></div>
@@ -118,18 +119,6 @@ foreach ( $view->result as $q_a_item) {//both for question & answers.
       <div class="q-feedback">
         <a class="comment_button btn btn-mini" data-trigger="click" data-placement='bottom'><i class="icon-comment icon-small"></i><?php echo t('comments');?></a>
       </div>
-
-       <!--  <div class="q-feedback">
-        <a class="fed_button btn btn-mini btn-link" data-trigger="click" data-content="<?php //print htmlentities($value_1); ?>"><i class="icon-pencil icon-small"></i>Feedback</a>
-        </div> 
- -->
-       <!-- <a class="fed_button btn btn-mini btn-link"   data-content="<?php //print htmlentities($value_1); ?>"><i class="icon-pencil icon-small"></i>sdf</a> -->
-
-
-<!--         <div class="feedback-wrapper">
-           <?//php print($value_1)?>
-        </div> -->
-
      </div>
      
     <div class="comment_textarea">

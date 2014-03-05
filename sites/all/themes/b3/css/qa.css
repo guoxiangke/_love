@@ -89,7 +89,7 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 .love-qa-list  a{
 	text-decoration:none;
 }
-.qa-list-l .counts {
+.qa-list-l .counts ,.qa-list-l .rate-widget {
 	background: #dfeaf4;
 	color: #538dc2;
 	-webkit-border-radius: 10px;
@@ -97,4 +97,8 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 	border-radius: 10px;
 	padding: 1px 8px;
 	font-family: 'Cambo', serif,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.qa-list-l .rate-button {
+	display: none;
 }
