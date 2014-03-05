@@ -99,6 +99,14 @@ function mp_service_schema() {
         'not null' => FALSE,
         'serialize' => TRUE,
        ),
+      //update 20140305
+      'mpid' => array(//mpid
+        'description' => 'mpid',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => ''
+       ), 
     ),
     'indexes' => array(
       'uid' => array('uid'),
@@ -171,7 +179,7 @@ function mp_service_update_7102() {
 }
 
 function mp_service_update_7103() {
-  if (!db_field_exists('mp_service', 'mp_service')) {
+  if (!db_field_exists('mp_service', 'unsubscribe')) {
     $new_field = array(
         'description' => 'Boolean indicating whether or not user unsubscribe',
         'type' => 'int',
@@ -185,7 +193,7 @@ function mp_service_update_7103() {
  * add user pic & wxid for wechat user
  */
 function mp_service_update_7104() {
-  if (!db_field_exists('mp_service', 'mp_service')) {
+  if (!db_field_exists('mp_service', 'wxid')) {
     $new_field = array(
         'type' => 'int',
         'not null' => TRUE,
@@ -207,7 +215,7 @@ function mp_service_update_7104() {
  * add user wxnickname for wechat user
  */
 function mp_service_update_7105() {
-  if (!db_field_exists('mp_service', 'mp_service')) {
+  if (!db_field_exists('mp_service', 'wxnickname')) {
     $new_field = array(
         'description' => 'wxnickname',
         'type' => 'varchar',
@@ -222,7 +230,7 @@ function mp_service_update_7105() {
  * add user wxnickname for wechat user
  */
 function mp_service_update_7106() {
-  if (!db_field_exists('mp_service', 'mp_service')) {
+  if (!db_field_exists('mp_service', 'contact_info')) {
     $new_field = array(
         'description' => 'contact_info',
         'type' => 'blob',
@@ -251,4 +259,21 @@ function mp_service_update_7107() {
   array('type' => 'blob', 'not null' => FALSE,'size' => 'big','serialize' => TRUE));
 
   }
-}        
+}     
+
+
+/**
+ * add mpid for wechat user
+ */
+function mp_service_update_7108() {
+  if (!db_field_exists('mp_service', 'mp_uid')) {
+    $new_field = array(
+        'description' => 'mp_uid',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      );
+    db_add_field('mp_service', 'mp_uid', $new_field);
+  }
+}

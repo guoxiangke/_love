@@ -31,36 +31,38 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
     'token'=> $wx_mp_id, //填写你设定的key
   );
   $wechatObj = new Wechat($options);
-  $wechatObj->valid();
+  // $wechatObj->valid();
   $type = $wechatObj->getRev()->getRevType();
   if($name == 'duoenjiawizbee'){
-    $default_text = "多恩佳Wizbee英语是一家为青少年提供'英语口语'培训的机构
-
-培训模式：真人外教通过网络在线视频1对1上课，孩子天天在家跟外教面对面上课
-
-适合年龄：6-18岁学生
-
-学习教材：根据每个学生的英语水平和学习目标配置个性化教材，例如：Wizbee口语教材，新概念英语，剑桥少儿英语，绿色通道，中美学校的同步教材等
-
-上课时间：自由，根据学员时间而定
-
-学习目标：提高英语交流能力，培养学习兴趣，让英语成为“第二母语”
-
-优势：科学有效的语言教学模式，便捷
-
-今日免费送出几个试听名额
-请拨打4006997101咨询
-或回复“姓名+手机+QQ”申请";
+    $default_text = "多恩佳Wizbee英语是一家提供'英语口语'培训的机构 
+培训模式：真人外教通过网络在线视频1对1上课，学生天天在家跟外教面对面上课 
+适合年龄：6-18岁学生及成人
+学习教材：根据每个学生的英语水平和学习目标配置个性化教材，例如：Wizbee口语教材，新概念英语，剑桥少儿英语，绿色通道，商务英语、出国口语、雅思托福口语等 
+上课时间：自由，根据学员时间而定 
+学习目标：提高英语交流能力，培养学习兴趣，让英语成为“第二母语” 
+今日免费送出几个试听名额 
+请拨打4006997101咨询 或回复“姓名+手机+QQ”申请";    
     switch($type) {
         case Wechat::MSGTYPE_TEXT:
         $keyword =  trim($wechatObj->getRevContent());
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
+        watchdog('FromUserName-keyword', $FromUserName.' - '.$keyword, array(), WATCHDOG_NOTICE, 'link');
+        if(strlen($keyword)>=11 && (stripos($keyword,'13')!== false || stripos($keyword,'15')!== false || stripos($keyword,'18')!== false)) {
+            wx_comment('376',$keyword);
+            $wechatObj->text("感谢您申请我们的试听课程！
+课程顾问会尽快联系您，给您安排外教上课。
+请您提前安装好skype软件，并注册账号，还有准备好耳机耳麦，以备上课使用。")->reply();
+        }elseif(strlen($keyword)<11 && (stripos($keyword,'13')!== false || stripos($keyword,'15')!== false || stripos($keyword,'18')!== false)) {
+            wx_comment('376',$keyword);
+            $wechatObj->text("系统检测到提供的手机号好像不对，请重新输入！")->reply();
+
+        }
         switch ($keyword) {
           case '给女儿的画':
           case '女儿的画':
             $Title = "给女儿的画";
             $Url ='http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NDQwOTc4MQ==&appmsgid=10000183&itemidx=1&sign=61c017b54de2e9f8a6e6a51a5608b122#wechat_redirect';
-            $Description = "感谢您的关注多恩佳wizbee英语，精彩内容天天与您分享！\n回复 1 获得公司和课程信息\n回复 姓名+手机+QQ 获得今日送出的真人外教一对一免费课程[微笑]\n-----新年快乐-----";
+            $Description = "感谢您的关注多恩佳wizbee英语，精彩内容天天与您分享！\n回复 1 获得公司和课程信息\n回复 姓名+手机+QQ 获得今日送出的真人外教一对一免费课程[微笑]";
             $img = array(
               'Title'=> $Title,
               'Description'=>$Description,
@@ -70,12 +72,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
             $news[] = $img;         
             $wechatObj->news($news)->reply();
             break;
-          case '13':
-          case '15':
-          case '18':
-            $wechatObj->text("感谢您的申请，我们会给您尽快安排！\n我们使用skype软件上课，请您提前安装，如果您有skype账号请留下，便于外教联系，谢谢！")->reply();
-            # 
-            break;
+          case '0':
           case '1':
             $wechatObj->text($default_text)->reply();
             break;
@@ -87,7 +84,11 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
           exit;
           break;
         case Wechat::MSGTYPE_EVENT:
-          $wechatObj->text("感谢您的关注<a href='weixin://contacts/profile/duoenjiawizbee'>多恩佳wizbee英语</a>，精彩内容天天与您分享！\n回复 1 获得公司和课程信息\n回复 姓名+手机+QQ 获得今日送出的真人外教一对一免费课程[微笑]\n-----新年快乐-----")->reply();
+          $wechatObj->text("感谢您的关注<a href='weixin://contacts/profile/duoenjiawizbee'>多恩佳wizbee英语</a>
+            精彩内容天天与您分享！ 
+回复 0 获得公司和课程信息
+回复 姓名+手机+QQ 
+获得今日送出的真人外教一对一免费课程[微笑]")->reply();
           break;
         case Wechat::MSGTYPE_IMAGE:
           $wechatObj->text("暂时不支持图片响应！")->reply();
@@ -105,8 +106,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
           $keyword =  trim($wechatObj->getRevContent());
           $FromUserName =  $wechatObj->getRev()->getRevFrom();
           $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
-    watchdog('keyword', $keyword, array(), WATCHDOG_NOTICE, 'link');
-    watchdog('FromUserName', $FromUserName, array(), WATCHDOG_NOTICE, 'link');
+        watchdog('FromUserName-keyword', $FromUserName.' - '.$keyword, array(), WATCHDOG_NOTICE, 'link');
           if ($check_keyword == '天气') {
               $reply = wx_node_create($keyword);
               $wechatObj->text($reply)->reply();
@@ -140,26 +140,25 @@ function mp_service_response($wx_mp_id = 'gh_b945c807e7ec') {
     'password'=>'mjk5nj'
   );
   $wechatObj = new Wechat($options);
-  $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
+  // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
 
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
-      $FromUserName =  $wechatObj->getRev()->getRevFrom();
-      watchdog('$keyword',  $keyword, array(), WATCHDOG_NOTICE, 'link');
-      watchdog('$FromUserName',  $FromUserName, array(), WATCHDOG_NOTICE, 'link');
-      if($keyword == '366') {
-        $news = _mp_get_mp_node($type = 'grace365', $counts = 1);
-        watchdog('news', '<pre>'.print_r($news,true), array(), WATCHDOG_NOTICE, 'link');
-        $wechatObj->news($news)->reply();        
-      }
+      $FromUserName = $wechatObj->getRev()->getRevFrom();
 
       if(!mp_service_get_record($FromUserName)) {
         mp_service_add_user($FromUserName,$last_cmd='old_user');
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
-watchdog('$uid',  $uid, array(), WATCHDOG_NOTICE, 'link');
+      watchdog('$FromUserName-$uid-$keyword', "$FromUserName - $uid - $keyword", array(), WATCHDOG_NOTICE, 'link');
+
+      if($keyword == '366') {
+        $news = _mp_get_mp_node($type = 'grace365', $counts = 1);
+        $wechatObj->news($news)->reply();        
+      }
+      
       $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
       if ($check_keyword == '天气') {
           $reply = _mp_node_create($keyword);
@@ -1118,7 +1117,29 @@ $notice = "\n
           $desc = "love_yongbuzhixi公众号，每日更新";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;        
+        case '5210':
+        // 荒漠甘泉乐侣
+          $title = '牧者心声-圣经广播网';
+          $title = "$title";
+          // $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
+          $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C'.(date('N')-1).'PW.m4a';
+          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
+          $desc = "love_yongbuzhixi公众号，每日更新";
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;          
+        case '5211':
+        // 荒漠甘泉乐侣
+          $title = '牧者心声-圣经广播网';
+          $title = "$title";
+          // $musicurl = 'http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo'.date('ymd').'.mp3';
+          $musicurl = 'http://bbnradio.org.edgesuite.net/BBNOnDemand/chinese/C1PW.m4a';
+          // http://media.HaoMuRen.org/Devotion/SID_MC/Jul/Dvo130709.mp3
+          $desc = "love_yongbuzhixi公众号，每日更新";
+          $hgmusicurl = $musicurl;
+          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          break;           
         case '522':
         case '５２２':
           $title = '静夜亮光';

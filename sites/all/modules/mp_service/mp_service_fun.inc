@@ -78,6 +78,7 @@ LIMIT 10 OFFSET 0")->fetchAssoc();
 
 
 function _mp_get_mp_node($type = 'grace365', $counts = 1) {
+  
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));
   $query->condition('n.status', 1,'=');
@@ -103,13 +104,13 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
         $default_uri = $node->field_image[LANGUAGE_NONE][0]['uri'];
         $default_image = file_create_url($default_uri);
       }
-        $img = array(
-            'Title'=> $node->title,
-            'Description'=>$des,
-            'PicUrl'=>$default_image,
-            'Url'=> url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=').'node/'.$node->nid,
-          );
-        $news[] = $img;
+      $img = array(
+          'Title'=> $node->title,
+          'Description'=>$des,
+          'PicUrl'=>$default_image,
+          'Url'=> url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=').'node/'.$node->nid,
+        );
+      $news[] = $img;
       return $news;
     }
 }
