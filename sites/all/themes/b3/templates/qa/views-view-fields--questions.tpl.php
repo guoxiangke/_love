@@ -52,6 +52,7 @@
   }
 	$resolved = ($fields['field_mark_question_resolved']->content ==0)?'open':'closed';
 	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'已解决':'未解决';
+  dpm($resolved);
 ?>
     <div class="love-qa-list row">
         <div class="qa-list-l col-md-2 col-sm-2">            
@@ -83,11 +84,13 @@
 	            	<div class="qa-list-time">
 	            		时间:<span><?php echo $created;?></span>            
 	            	</div>
+
+                <div class="qa-list-tags">  
+                  <span class="glyphicon glyphicon-tags"></span>
+                  <?php echo $field_tags;?>
+                </div>
+                
             	</div>
-            </div>
-            <div class="qa-list-tags">	
-            	<span class="glyphicon glyphicon-tags"></span>
-							<?php echo $field_tags;?>
             </div>
             <div class="entry-status status-<?php echo $resolved;?>" title=""></div>
         </div>
