@@ -51,9 +51,11 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
     font-size: 90%;
     line-height: 1.4;
     padding-left: 25px;
-    margin-bottom: 7px;
+    /*margin-bottom: 7px;*/
+    margin: 6px 0;
     width: 85%;
     background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/time.png) no-repeat left top transparent;
+
 }
 .status-closed {
     background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/status_closed.png) no-repeat left top transparent;
@@ -71,8 +73,8 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 .qa-list-author-img {
 	float: left;
 }
-.qa-list-author-info ,.qa-list-tags{
-	margin-left: 60px;
+.qa-list-author-info {
+	margin-left: 85px;
 }
 .sbq-qa-flag {
 	padding-left: 5px;
@@ -100,5 +102,13 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 }
 
 .qa-list-l .rate-button {
+	display: none;
+}
+.qa-list-author-img img{
+	width: 75px;
+	height: 75px;
+}
+
+.qa-list-l .rate-info {
 	display: none;
 }
