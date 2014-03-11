@@ -114,3 +114,262 @@ function _mp_get_mp_node($type = 'grace365', $counts = 1) {
       return $news;
     }
 }
+
+
+function _mp_provide($keyword) {
+  // switch ($keyword) {
+    
+  //       case '1224':
+  //         $title = '耶稣全貌';
+  //         $desc = '序言-公众号:永不止息，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-00.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122501':
+  //         $title = '耶稣全貌-第一章 道成肉身';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-01.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122502':
+  //         $title = '耶稣全貌-第二章 圣婴降生';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-02.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122503':
+  //         $title = '耶稣全貌-第三章 预备道路';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-03.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122504':
+  //         $title = '耶稣全貌--第四章 传道之始';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-04.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122505':
+  //         $title = '耶稣全貌--第五章 知难而进';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-05.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122506':
+  //         $title = '耶稣全貌--第六章 登山宝训';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-06.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122507':
+  //         $title = '耶稣全貌--第七章  是非分明';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-07.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122508':
+  //         $title = '耶稣全貌--第八章  命令风浪';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-08.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122509':
+  //         $title = '耶稣全貌--第九章  五饼二鱼';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-09.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122510':
+  //         $title = '耶稣全貌--第十章  荣耀显现';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-10.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122511':
+  //         $title = '耶稣全貌--第11章';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-11.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '122512':
+  //         $title = '耶稣全貌--第12章';
+  //         $desc = '公众号:永不止息 ，每日更新';
+  //         $musicurl = 'http://s3.amazonaws.com/ysqm/ch-12.mp3';
+  //         $hgmusicurl = $musicurl;
+  //         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+  //         break;
+  //       case '1225':
+  //             $img = array(
+  //                 'Title'=> '良友串流广播【试听】',
+  //                 'Description'=>'点击查看全文收听！回复【11+您的建议反馈内容】，回复1225给love_yongbuzhixi获取本消息！永不止息，需要有你！',
+  //                 'PicUrl'=>'http://farm2.staticflickr.com/1275/4700591844_7010757842_b.jpg',
+  //                 'Url'=>'http://stream.liangyou.net/channel/65837e3587'
+  //               );
+  //               $news[] = $img; 
+  //           $wechatObj->news($news)->reply();
+  //            break;
+  //   default:
+  //     # code...
+  //     break;
+  // }
+  
+        // case '114':
+        // case '40':
+        //   // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+        //   $img = array(
+        //       'Title'=> '第18天 爱寻求理解',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/18'
+        //     );
+        //   $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第17天 爱提升亲密',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/17'
+        //     );
+        //   $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第16天 爱是为他祷告',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/16'
+        //     );
+        //   $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第15天 爱是敬重对方',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/15'
+        //     );
+        //   $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第14天 爱是公平地争吵',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/14'
+        //     );
+        //   $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第13天 爱是公平地争吵',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/13'
+        //     );
+        //   // $news[] = $img;
+        //   // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
+        //   $img = array(
+        //       'Title'=> '第12天 爱是谦让',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/12'
+        //     );
+        //   // $news[] = $img;
+        //    $img = array(
+        //       'Title'=> '第11天 爱是珍惜',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/11'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第10天 爱是无条件的',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/10'
+        //     );
+        //   // $news[] = $img;
+        //    $img = array(
+        //       'Title'=> '第9天 爱是制造好印象',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/09'
+        //     );
+        //   // $news[] = $img;
+        //    $img = array(
+        //       'Title'=> '第8天 爱是不嫉妒',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/08'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第7天 爱相信最美好的',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/07'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第6天 爱是不轻易动怒',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/06'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第5天 爱是不粗鲁',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/05'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第4天 爱是恩慈',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/04'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第3天 爱是不自私',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/03'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第2天 爱是恩慈',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/02'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '第1天 爱是恒久忍耐',
+        //       'Description'=>'',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/love40/01'
+        //     );
+        //   // $news[] = $img;
+        //   $img = array(
+        //       'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
+        //       'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
+        //       'Url'=>'http://love.yongbuzhixi.org/node/15'
+        //     );
+        //     $news[] = $img;  
+
+        //   // $img = array(
+        //   //   'Title'=>'用手机，登录【永不止息】^_^',
+        //   //   'Description'=>'单图文 标题15字 摘要60字',
+        //   //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
+        //   //   'Url'=>'http://yongbuzhixi.com'
+        //   // );
+        //   //单图文 标题15字 摘要60字
+        //   //多图文 1标题16字 2标题15字
+        //   $wechatObj->news($news)->reply();
+        //   break;
+}

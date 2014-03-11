@@ -555,7 +555,7 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
           mp_service_update_user_info($wechatObj);
           break;
         case '7':
-          $title = 'FM 77.7-love_yongbuzhixi';
+          $title = 'FM 77.7-永不止息';
           $musicurl = 'http://fm77.u.qiniudn.com/fm11.mp3';
           $desc = "云上的爱";
           $hgmusicurl = $musicurl;
@@ -569,7 +569,7 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
         case '77':
-          $title = 'FM 77.7-love_yongbuzhixi';
+          $title = 'FM 77.7-永不止息';
           $musicurl = 'http://fm77.u.qiniudn.com/77/wodeaiybb.mp3';
           $desc = "我的爱不改变";
           $hgmusicurl = $musicurl;
@@ -637,153 +637,6 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
             'Url'=> $Url
           );
           $news[] = $img;         
-          $wechatObj->news($news)->reply();
-          break;
-        case '114':
-        case '40':
-          // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
-          $img = array(
-              'Title'=> '第18天 爱寻求理解',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/18'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第17天 爱提升亲密',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/17'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第16天 爱是为他祷告',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/16'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第15天 爱是敬重对方',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/15'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第14天 爱是公平地争吵',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/14'
-            );
-          $news[] = $img;
-          $img = array(
-              'Title'=> '第13天 爱是公平地争吵',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/13'
-            );
-          // $news[] = $img;
-          // $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n才可以得到今天的炼爱哦！\n回复【5】进入良友广播";
-          $img = array(
-              'Title'=> '第12天 爱是谦让',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/12'
-            );
-          // $news[] = $img;
-           $img = array(
-              'Title'=> '第11天 爱是珍惜',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/11'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第10天 爱是无条件的',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/10'
-            );
-          // $news[] = $img;
-           $img = array(
-              'Title'=> '第9天 爱是制造好印象',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/09'
-            );
-          // $news[] = $img;
-           $img = array(
-              'Title'=> '第8天 爱是不嫉妒',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/08'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第7天 爱相信最美好的',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/07'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第6天 爱是不轻易动怒',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/06'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第5天 爱是不粗鲁',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/05'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第4天 爱是恩慈',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/04'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第3天 爱是不自私',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/03'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第2天 爱是恩慈',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/02'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '第1天 爱是恒久忍耐',
-              'Description'=>'',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/love40/01'
-            );
-          // $news[] = $img;
-          $img = array(
-              'Title'=> '《炼爱》序言-我们的心灵渴望爱，就象我们的身体需要氧气',
-              'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-              'Url'=>'http://love.yongbuzhixi.org/node/15'
-            );
-            $news[] = $img;  
-
-          // $img = array(
-          //   'Title'=>'用手机，登录【永不止息】^_^',
-          //   'Description'=>'单图文 标题15字 摘要60字',
-          //   'PicUrl'=>'http://www.yongbuzhixi.com/sites/default/files/pictures/picture-172-1356487827.jpg',
-          //   'Url'=>'http://yongbuzhixi.com'
-          // );
-          //单图文 标题15字 摘要60字
-          //多图文 1标题16字 2标题15字
           $wechatObj->news($news)->reply();
           break;
         case '110':
@@ -1428,7 +1281,7 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
                 $title = $radio_name[$radio_cmd];
                 $title = "$title$desc";
                 $hgmusicurl = $musicurl;
-                $desc = "love_yongbuzhixi关注获取每日更新";
+                $desc = "公众号:永不止息";
                 $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
               }else{
                 $contentStr = 'error input!';
@@ -1436,7 +1289,7 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
 
             }else {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "如需高级服务，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n回复【0】进入主菜单\n回复【32】进入良友广播\n回复【11+问题】获得帮助\n回复【110】推荐给好友？\n".$notice;
+              $contentStr = "如需帮助，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n回复【0】进入主菜单\n回复【32】进入良友广播\n回复【11+问题】获得帮助\n回复【110】推荐给好友？\n".$notice;
             }
           break;
       }
@@ -1569,7 +1422,7 @@ function mp_service_update_user_info($wechatObj) {
   $options = array(
     'account'=>'love_yongbuzhixi',
     'password'=>'mjk5nj',
-    'datapath'=>'/home/wwwroot/love.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_',
+    'datapath'=>'/home/wwwroot/wx.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_',
       'debug'=>FALSE,
       'logcallback'=>'logdebug' 
   );
