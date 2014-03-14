@@ -41,20 +41,22 @@ foreach($program as $key=>$value){
 	$extend = '.mp3';
 	if(in_array($key, $mp3)) {
 		$extend = '.mp3';
+	//<span><a href='http://liangyou.nissigz.com/media/$key/$key".$date.$extend."'>线路一</a> </span>
+		// <span><a href='http://audio.liangyou.net/download.php?t=2&c=$key&f=$key".$date.$extend."'>线路4</a></span>
 	}
 	echo "<div class='program'>
 	<span> $value</span>
-	<span><a href='http://liangyou.nissigz.com/media/$key/$key".$date.$extend."'>线路一</a> </span>
+	
 	<span><a href='http://audio.liangyou.net/files/media/program_live/$key/$key".$date.$extend."'>线路二</a></span>
 	<span><a href='http://audio2.liangyou.net/files/media/program_live/$key/$key".$date.$extend."'>线路三</a></span>
-	<span><a href='http://audio.liangyou.net/download.php?t=2&c=$key&f=$key".$date.$extend."'>线路4</a></span>
+	
 	</div><br/>";
 }
 ?>
 <div><?php $yes=$get_date-3600*24;?><?php
 if( time()-$yes>3600*24*7){
 }else{
-echo '<a href="download_list.php?date='.$yes.'">前一天的节目</a>';
+echo '<a href="download.php?date='.$yes.'">前一天的节目</a>';
 }
 ?>
 
