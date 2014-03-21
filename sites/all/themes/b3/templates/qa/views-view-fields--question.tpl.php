@@ -61,9 +61,8 @@
 	            	<span class="counts"><?php echo $field_computed_answers;?></span>               </div>
 	            
 	        	<div class="meta-votes" title="Number of Votes">
-	        		<span class="glyphicon glyphicon-thumbs-up"></span>
-	            <?php echo $value_1;?>
-              <span class="glyphicon glyphicon-thumbs-down"></span>
+              <span class="glyphicon glyphicon-comment"></span>
+              <span class="counts"><?php echo $comment_count;?></span> 
             </div>
 	            
 	        	<div class="meta-views" title="Number of this Question views">
@@ -74,26 +73,29 @@
         </div>
         <div class="qa-list-c col-md-10 col-sm-10">
             <div class="qa-list-title"><?php echo $title;?></div>
-            <div class="qa-list-body-summary"><?php echo $body;?></div>
+            <div class="qa-list-body-summary"><?php echo $body;?>
+            <?php //echo $value_1;?></div>
             <div class="qa-list-contributes">
             	<div class="qa-list-author-img">
             		<?php echo $picture ;?>
             	</div>
             	<div class="qa-list-author-info">
             		<div class="qa-list-author-name">
-            		 	<?php echo $name;?>在<span class="qa-list-region">General</span>模块发布
+            		 	<?php echo $name;?>在<span class="qa-list-region">问答</span>模块发布
             		</div>
 	            	<div class="qa-list-time">
 	            		时间:<span><?php echo $created;?></span>            
 	            	</div>
+                <div class="qa-list-tags">  
+                  <span class="glyphicon glyphicon-tags"></span>
+                  <?php echo $field_tags;?>
+                </div>
             	</div>
-              <div class="qa-list-tags">  
-                <span class="glyphicon glyphicon-tags"></span>
-                <?php echo $field_tags;?>
-              </div>
             </div>
             <div class="entry-status status-<?php echo $resolved;?>" title=""></div>
-            <div class="links">
+              
+
+              <div class="links">
               <?php if(isset($accept_link)): ?>
               <span class="accept"><?php print $accept_link; ?></span>
               <?php endif;?>
@@ -105,28 +107,31 @@
               <?php endif;?>
             </div> 
 
+            <?php
+            foreach ( $view->result as $q_a_item) {//both for question & answers.
+             if(isset($q_a_item->comments) && isset($q_a_item->comments['#form']['nid']) && $row->nid==$q_a_item->comments['#form']['nid']['#value']){
+               ?>
+               <div class="row comments_<?php echo $q_a_item->_field_data['nid']['entity']->type;//question/answer?>">
+                 <?php print render($q_a_item->comments['#content']);?>
+                 <div class="clearfix">
+                  <div class="q-feedback">
+                    <a class="comment_button btn btn-xs" data-trigger="click" data-placement='bottom'>
+                      <button type="button" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-comment"></span><?php echo t('Comment');?>
+                      </button>
+                    </a>
+                  </div>
+                 </div>
+                 
+                <div class="comment_textarea">
+                  <a href="#" class="close"><i class="icon-remove-sign"></i></a>
+                  <?php print (render($q_a_item->comments['#form'])); ?>
+                </div>
+               </div>
+            <?php
+               }
+            }
+            ?>
+
         </div>        
     </div>
-
-
-      <?php
-foreach ( $view->result as $q_a_item) {//both for question & answers.
- if(isset($q_a_item->comments) && isset($q_a_item->comments['#form']['nid']) && $row->nid==$q_a_item->comments['#form']['nid']['#value']){
-   ?>
-   <div class="row comments_<?php echo $q_a_item->_field_data['nid']['entity']->type;//question/answer?>">
-     <?php print render($q_a_item->comments['#content']);?>
-     <div class="clearfix">
-      <div class="q-feedback">
-        <a class="comment_button btn btn-mini" data-trigger="click" data-placement='bottom'><i class="icon-comment icon-small"></i><?php echo t('comments');?></a>
-      </div>
-     </div>
-     
-    <div class="comment_textarea">
-      <a href="#" class="close"><i class="icon-remove-sign"></i></a>
-      <?php print (render($q_a_item->comments['#form'])); ?>
-    </div>
-   </div>
-   <?php
-   }
-}
-?>

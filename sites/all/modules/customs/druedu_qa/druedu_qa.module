@@ -336,6 +336,10 @@ function druedu_qa_preprocess_views_view(&$vars) {
     $query_parameters = drupal_get_query_parameters();
     drupal_set_title('Questions - ' . $query_parameters['field_tags_tid']);
   }
+  if ($view->name == 'question' && $view->current_display == 'single_question_page') {
+    $vars['view']->build_info['title'] = $view->result[0]->nid.'问:'.$view->result[0]->node_title.'问答社区，永不止息，需要有你！';
+  }
+
   //add css for QA
   if ($view->name == 'questions' || $view->name == 'question') {
     // drupal_add_css(drupal_get_path('module', 'druedu_qa') . '/css/druedu_qa.css');

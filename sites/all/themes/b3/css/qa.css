@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Cambo);
+/*@import url(http://fonts.googleapis.com/css?family=Cambo);*/
 .qa-list-l {
     display: inline;
 }
@@ -98,7 +98,7 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	padding: 1px 8px;
-	font-family: 'Cambo', serif,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: 'Georgia', serif,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .qa-list-l .rate-button {
@@ -111,4 +111,26 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 
 .qa-list-l .rate-info {
 	display: none;
+}
+
+#answer-node-form .filter-wrapper,.comment-form .filter-wrapper{
+	display: none;
+}
+.q-feedback a{
+	color: #FFF;
+}
+.q-feedback .glyphicon-comment{
+	margin-right: 5px;
+}
+
+
+.page-question h1.page-header{
+	display: none;
+}
+.qa-list-title h2{
+	font-size: 1em;
+}
+
+.sbq-qa-flag_wrap {
+	display: inline;
 }

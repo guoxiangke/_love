@@ -52,7 +52,7 @@
   }
 	$resolved = ($fields['field_mark_question_resolved']->content ==0)?'open':'closed';
 	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'已解决':'未解决';
-  dpm($resolved);
+  // dpm($resolved);
 ?>
     <div class="love-qa-list row">
         <div class="qa-list-l col-md-2 col-sm-2">            
