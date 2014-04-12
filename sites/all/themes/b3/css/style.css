@@ -133,14 +133,7 @@ h1, .h1 {
 	display: none; 
 }
 #sbq_gototop:hover { background-position: 0px -40px; }
-#navbar {
-	position: fixed;
-	z-index: 1599;
-	margin: 0;
-	top: 0;
-	text-align: center;
-	width: 100%;
-}
+
 #page-header {
 	margin-top: 40px;
 }
@@ -181,9 +174,67 @@ h1, .h1 {
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) { ... }
 
+#navbar {
+	position: fixed;
+	z-index: 1599;
+	margin: 0;
+	top: 0;
+	text-align: center;
+	width: 100%;
+	padding: 0;
+}
+
+
+
+
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+	header .navbar-collapse li {
+	display: inline-block;
+	float: left;
+	line-height: 16px;
+	text-align: center;
+	position: relative;
+	width: 25%;
+	overflow: hidden;
+	}
+
+	header .navbar-collapse ul li a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	line-height: 16px;
+	font-size: 15px;
+	padding: 10px 0;
+	}
+	.navbar-default .navbar-nav>li>a{color:#fff}
+	.navbar-default .navbar-nav>li>a:hover{color:#fff;font-weight: bolder;}
+	.navbar-nav {
+		margin: 0;
+	}
+	header .navbar-collapse ul li:before {
+	content: "|";
+	position: absolute;
+	right: 0;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 400;
+	top: 10px;
+	}
+	header .navbar-collapse ul li:nth-child(4n)::before {
+		content: "";
+	}
+
+	header .navbar-collapse {
+		padding: 0;
+		background-color: #0066cb;
+	}
+}
+.navbar-header {
+	padding: 0 15px;
+}
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) { ... }
 
