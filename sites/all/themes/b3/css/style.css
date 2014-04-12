@@ -191,6 +191,15 @@ h1, .h1 {
 
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 768px) {
+
+
+
+	.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+		color: #fff; 
+		font-weight: bolder;
+ 		background: none; 
+	}
+
 	header .navbar-collapse li {
 	display: inline-block;
 	float: left;
@@ -226,11 +235,14 @@ h1, .h1 {
 	header .navbar-collapse ul li:nth-child(4n)::before {
 		content: "";
 	}
-
 	header .navbar-collapse {
 		padding: 0;
 		background-color: #0066cb;
 	}
+}
+
+
+
 }
 .navbar-header {
 	padding: 0 15px;
