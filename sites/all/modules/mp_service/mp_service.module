@@ -54,12 +54,12 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
         $FromUserName =  $wechatObj->getRev()->getRevFrom();
         watchdog('FromUserName-keyword', $FromUserName.' - '.$keyword, array(), WATCHDOG_NOTICE, 'link');
         if(strlen($keyword)>=11 && (stripos($keyword,'13')!== false || stripos($keyword,'15')!== false || stripos($keyword,'18')!== false)) {
-            wx_comment('376',$keyword);
+            wx_comment('376',$keyword,array());
             $wechatObj->text("感谢您申请我们的试听课程！
 课程顾问会尽快联系您，给您安排外教上课。
 请您提前安装好skype软件，并注册账号，还有准备好耳机耳麦，以备上课使用。")->reply();
         }elseif(strlen($keyword)<11 && (stripos($keyword,'13')!== false || stripos($keyword,'15')!== false || stripos($keyword,'18')!== false)) {
-            wx_comment('376',$keyword);
+            wx_comment('376',$keyword,array());
             $wechatObj->text("系统检测到提供的手机号好像不对，请重新输入！")->reply();
 
         }
@@ -150,6 +150,11 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
   // $wechatObj->valid(); //注意, 应用验证通过后,可将此句注释掉, 但会降低网站安全性
   $type = $wechatObj->getRev()->getRevType();
   $wechat_user_info = mp_service_update_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
+  $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方主帐号\n-----需要有你-----</a>
+【366】恩典365文章版
+【5010】灵命日粮文字版
+【523】在天父怀中*new*
+【528】每日读经*new*\nhttp://yongbuzhixi.com";//回复【11+您的祝福与感恩或建议内容】
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
@@ -211,11 +216,6 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
                 '509' => 'gv',
                 '523' => 'gv',
                 );
-$notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方主帐号\n-----需要有你-----</a>
-【366】恩典365文章版
-【5010】灵命日粮文字版
-【523】在天父怀中*new*
-【528】每日读经*new*\nhttp://yongbuzhixi.com";//回复【11+您的祝福与感恩或建议内容】
 
 
       $radio_list_simple = array(
@@ -847,7 +847,6 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
           $title = "$title".date('md');
           // $y = data('y')-1;
           $str = date('md');
-          watchdog('$str', $str, array(), WATCHDOG_NOTICE, 'link');
           //http://audio1.liangyou.net/files/media/ly_daily/2013Daily_130114.mp3
           $musicurl = 'http://audio1.liangyou.net/files/media/ly_daily/2013Daily_13'.$str.'.mp3';
           $desc = "公众号:永不止息 每日更新【".$keyword."】";
@@ -1087,41 +1086,9 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【31】听听广播吧！";
                 }else{
                   mp_service_update_cmd('11',$FromUserName);
-                  ///////
-                  $comment = new stdClass();
-
-                  $comment->nid = 485; // nid of a node you want to attach a comment to
-                  $comment->cid = 0; // leave it as is
-                  $comment->pid = 0; // parent comment id, 0 if none 
-                  $comment->uid = 0; // user's id, who left the comment
-                  watchdog('mp_service123', '<pre>'.print_r($wechat_user_info,true), array(), WATCHDOG_NOTICE, 'link');
-                  $comment->mail = $wechat_user_info['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
-                  //a:10:{s:7:"fake_id";i:2553430760;s:9:"nick_name";s:6:"麦青";s:9:"user_name";s:10:"maiqing-py";s:9:"signature";s:31:"在心中修篱种菊..........";s:4:"city";s:6:"昆明";s:8:"province";s:6:"云南";s:7:"country";s:6:"中国";s:6:"gender";i:2;s:11:"remark_name";s:0:"";s:8:"group_id";i:108;}
-                  $comment->name = $wechat_user_info['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
-                  // $comment->thread = '01/'; // OPTIONAL. If you need comments to be threaded you can fill this value. Otherwise omit it.
-                  $comment->hostname = $_SERVER['REMOTE_ADDR'] ;// OPTIONAL. You can log poster's ip here
-                  $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
-                  $comment->is_anonymous = 0; // leave it as is
-                  $comment->homepage = ''; // you can add homepage URL here
-                  $comment->status = COMMENT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
-                  $comment->language = LANGUAGE_NONE; // The same as for a node
-                  $keyword = substr($keyword, 2);
-                  $subject = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
-                  $comment->subject = $subject.'【来自微信】'; 
-                  
-                  $comment->signature = $wechat_user_info['contact_info']['signature'] ;
-                  
-                  $comment->signature_format = 'filtered_html'; 
-                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
-                  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
-                  // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
-
-                   // saving a comment
-                  ///////////end
-                  if($comment = comment_submit($comment)) { // Prepare node for saving                      
-                      comment_save($comment);
-                      $contentStr = "恭喜，发布成功！\n".$notice;
-                  }
+                  $wechat_user_info = mp_service_get_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
+                  wx_comment('485',$keyword,$wechat_user_info);
+                  $contentStr ="如需帮助，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n[微笑]反馈已收到![调皮]\n".$notice;
                 }
               }
               # code...
@@ -1136,50 +1103,11 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【31】听听广播吧！";
                 }else{
                   mp_service_update_cmd(date('ymd'),$FromUserName);
-                  ///////
-                  $comment = new stdClass();
-
-                  $comment->nid = 486; // nid of a node you want to attach a comment to
-                  $comment->cid = 0; // leave it as is
-                  $comment->pid = 0; // parent comment id, 0 if none 
-                  $comment->uid = 0; // user's id, who left the comment
-                  watchdog('mp_service123', '<pre>'.print_r($wechat_user_info,true), array(), WATCHDOG_NOTICE, 'link');
-                  $comment->mail = $wechat_user_info['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
-                  //a:10:{s:7:"fake_id";i:2553430760;s:9:"nick_name";s:6:"麦青";s:9:"user_name";s:10:"maiqing-py";s:9:"signature";s:31:"在心中修篱种菊..........";s:4:"city";s:6:"昆明";s:8:"province";s:6:"云南";s:7:"country";s:6:"中国";s:6:"gender";i:2;s:11:"remark_name";s:0:"";s:8:"group_id";i:108;}
-                  $comment->name = $wechat_user_info['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
-                  // $comment->thread = '01/'; // OPTIONAL. If you need comments to be threaded you can fill this value. Otherwise omit it.
-                  $comment->hostname = $_SERVER['REMOTE_ADDR'] ;// OPTIONAL. You can log poster's ip here
-                  $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
-                  $comment->is_anonymous = 0; // leave it as is
-                  $comment->homepage = ''; // you can add homepage URL here
-                  $comment->status = COMMENT_PUBLISHED;//COMMENT_PUBLISHED; // We auto-publish this comment
-                  $comment->language = LANGUAGE_NONE; // The same as for a node
-                  $keyword = substr($keyword, 6);
-                  $subject = truncate_utf8($keyword, 15, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
-                  $comment->subject = $subject.'【来自微信】'; 
-                  
-                  $comment->signature = $wechat_user_info['contact_info']['signature'] ;
-                  
-                  $comment->signature_format = 'filtered_html'; 
-                  $comment->comment_body[$comment->language][0]['value'] = $keyword.'【来自微信】'; // Everything here is pretty much like with a node
-                  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html'; 
-                  // $comment->field_custom_field_name[LANGUAGE_NONE][0]['value'] = 'Some value'; // OPTIONAL. If your comment has a custom field attached it can added as simple as this // preparing a comment for a save
-
-                   // saving a comment
-                  ///////////end
-                  if($comment = comment_submit($comment)) { // Prepare node for saving                      
-                      comment_save($comment);
-                      $num = $comment->cid;
-                      $num = $num -106;
-                      $contentStr = "恭喜,您是第".$num."位发布者！\n<a href='http://love.dev.camplus.hk/node/3'>点击查看</a> \n永不止息，需要有你！";
-                  }
+                  //add comment on http://www.yongbuzhixi.com/node/486
                 }
               }
               # code...
             } elseif (substr($keyword, 0,3) == '911') {
-              // if(strlen($keyword)<6) {
-              //    $contentStr =  "必须回复911+至少一句感恩的话(5个字)\n回复【5】进入良友广播";
-              //  }else 
                {                
                 $wechatObj->setFuncFlag(TRUE);
 
@@ -1295,7 +1223,9 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
 
             }else {
               $wechatObj->setFuncFlag(TRUE);
-              $contentStr = "如需帮助，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n回复【0】进入主菜单\n回复【32】进入良友广播\n回复【11+问题】获得帮助\n回复【110】推荐给好友？\n".$notice;
+              $wechat_user_info = mp_service_get_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
+              wx_comment('453',$keyword,$wechat_user_info);
+              $contentStr = "您发的指令，暂无内容，反馈已发给小永!\n如需帮助，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n回复【0】进入主菜单\n回复【32】进入良友广播\n回复【11+问题】获得帮助\n回复【110】推荐给好友？\n".$notice;
             }
           break;
       }
@@ -1420,10 +1350,38 @@ $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止�
 
 }
 
-function mp_service_update_user_info($wechatObj,$account='1556797870@qq.com',$password='mjk5nj',$mp_uid=172) {
+function mp_service_get_user_info($wechatObj,$account='1',$password='2',$mp_uid='1') {
+  $FromUserName = $wechatObj->getRev()->getRevFrom();
+  module_load_include('inc', 'mp_service', 'config');  
+  $options = array(
+    'account'=>$account,
+    'password'=>$password,
+    'datapath'=>'/home/wwwroot/wx.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_',
+      'debug'=>FALSE,
+      'logcallback'=>'logdebug' 
+  );
+  $wechat = new Wechatext($options);
+  //$wechat
+  $data = array();
+  if ($wechat->checkValid()) {    
+    $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
+    if($getMsg)
+    foreach ($getMsg as $key => $Msg) {
+      if($Msg['content'] == $wechatObj->getRevContent()) {
+        $fakeId = $Msg['fakeid'];
+        $data = $wechat->getInfo($fakeId);
+
+        watchdog('get user:', $FromUserName.'  '.$fakeId.'  '.$data['contact_info']['user_name'].'  '.$data['contact_info']['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
+      }
+    }
+  }
+  return $data;
+}
+function mp_service_update_user_info($wechatObj,$account='1',$password='2',$mp_uid='1') {
   $FromUserName = $wechatObj->getRev()->getRevFrom();
   $res = mp_service_get_record($FromUserName);
-  // if($res['last_cmd'] == 'update_contact_info') return;
+  if($res['last_cmd'] == 'update_contact_info') return;
+
   module_load_include('inc', 'mp_service', 'config');  
   $options = array(
     'account'=>$account,
@@ -1434,32 +1392,35 @@ function mp_service_update_user_info($wechatObj,$account='1556797870@qq.com',$pa
   );
   // drupal_chmod('/home/wwwroot/love.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_yongbuzhixi');
   $wechat = new Wechatext($options);
-  //$wechat
   $data = array();
   if ($wechat->checkValid()) {    
     $getMsg = $wechat->getMsg($lastid=0,$offset=0,$perpage=5,$day=0,$today=0,$star=0) ;
+    if($getMsg)
     foreach ($getMsg as $key => $Msg) {
       if($Msg['content'] == $wechatObj->getRevContent()) {
         $fakeId = $Msg['fakeid'];
         $data = $wechat->getInfo($fakeId);
-
-        // watchdog('get user:', $FromUserName.'  '.$fakeId.'  '.$data['contact_info']['user_name'].'  '.$data['contact_info']['nick_name'].'  '.$wechatObj->getRevContent(), array(), WATCHDOG_NOTICE, 'link');
-        // if(isset($data['groups']))unset($data['groups']);
-        // if(isset($data['base_resp']))unset($data['base_resp']);        
-        // watchdog('mp_service_user_data', '<pre>'.print_r($data,true), array(), WATCHDOG_NOTICE, 'link');
-
-        db_update('mp_service')
-          ->fields(array(
-            'fakeid' => $fakeId,
-            'wxid' =>  $data['contact_info']['user_name'],
-            'wxnickname' => $data['contact_info']['nick_name'],
-            'contact_info' => serialize($data['contact_info']),
-            'last_cmd' => "update_contact_info",
-            'last_cmd_timestamp' => REQUEST_TIME,
-            'mp_uid' => $mp_uid,
-          ))
-          ->condition('fromusername', $FromUserName)
-          ->execute();               
+        if(isset($data['contact_info']['user_name'])) {
+          try {
+            db_update('mp_service')
+              ->fields(array(
+                'fakeid' => $fakeId,
+                'wxid' =>  $data['contact_info']['user_name'],
+                'wxnickname' => $data['contact_info']['nick_name'],
+                'contact_info' => serialize($data['contact_info']),
+                'last_cmd' => "update_contact_info",
+                'last_cmd_timestamp' => REQUEST_TIME,
+                'mp_uid' => $mp_uid,
+              ))
+              ->condition('fromusername', $FromUserName)
+              ->execute(); 
+            return $data;
+          } catch (Exception $e) {
+            watchdog('Exception-$fakeId', $fakeId, array(), WATCHDOG_NOTICE, 'link');
+            $wechat->send($fakeId,'小永提醒您，您的用户名或签名包含表情字符，去掉后响应速度更佳！'); 
+            return $data;
+          }
+        }             
       }
     }
   } else {
@@ -1726,8 +1687,9 @@ function mp_service_update_cmd($last_cmd,$FromUserName) {
 //http://www.jiduzhijia.com/yinpin/tllc/index.htm
 //http://www.jiduzhijia.com/book/madl.htm
 
-function wx_comment($nid,$keyword) {//,$wechat_user_info
+function wx_comment($nid,$keyword,$wechat_user_info=array()) {//,
   ///////
+  watchdog('wx_comment-wechat_user_info', '<pre>'.print_r($wechat_user_info,true), array(), WATCHDOG_NOTICE, 'link');
                   $comment = new stdClass();
 
                   $comment->nid = $nid; // nid of a node you want to attach a comment to
@@ -1735,9 +1697,9 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   $comment->pid = 0; // parent comment id, 0 if none 
                   $comment->uid = 0; // user's id, who left the comment
                   
-                  $comment->mail = 'anno@duoenjia.com';//$wechat_user_info['contact_info']['fake_id'].'@yongbuzhixi.com'; // user's email wechat_user_info
+                  $comment->mail = isset($wechat_user_info['contact_info']['fake_id'])?$wechat_user_info['contact_info']['fake_id'].'@yongbuzhixi.com':'anno@duoenjia.com';// // user's email wechat_user_info
                   //a:10:{s:7:"fake_id";i:2553430760;s:9:"nick_name";s:6:"麦青";s:9:"user_name";s:10:"maiqing-py";s:9:"signature";s:31:"在心中修篱种菊..........";s:4:"city";s:6:"昆明";s:8:"province";s:6:"云南";s:7:"country";s:6:"中国";s:6:"gender";i:2;s:11:"remark_name";s:0:"";s:8:"group_id";i:108;}
-                  $comment->name = 'weixin';//$wechat_user_info['contact_info']['nick_name']; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
+                  $comment->name = isset($wechat_user_info['contact_info']['nick_name'])?$wechat_user_info['contact_info']['nick_name']:'微信用户';//; // If user is authenticated you can omit this field, it will be auto-populated, if the user is anonymous and you want to name him somehow, input his name here
                   // $comment->thread = '01/'; // OPTIONAL. If you need comments to be threaded you can fill this value. Otherwise omit it.
                   $comment->hostname = $_SERVER['REMOTE_ADDR'] ;// OPTIONAL. You can log poster's ip here
                   $comment->created = time(); // OPTIONAL. You can set any time you want here. Useful for backdated comments creation.
@@ -1760,5 +1722,51 @@ function wx_comment($nid,$keyword) {//,$wechat_user_info
                   ///////////end
                   if($comment = comment_submit($comment)) { // Prepare node for saving                      
                       comment_save($comment);
+                      return $comment;
                   }
+}
+
+
+function mp_getAllUserlist($page=0,$pagesize=10,$service_uid=1) {
+  module_load_include('inc', 'mp_service', 'config'); 
+  
+  $mp_services_config = variable_get('mp_service_'.$service_uid, NULL);
+  $mp_services_config = explode('/', $mp_services_config);
+  // $mp_services_config['token'] = $mp_services_config[1]; //$wx_mp_id
+  $mp_services_config['account'] = $mp_services_config[2];
+  $mp_services_config['password'] = $mp_services_config[3];
+
+  $options = array(
+    'account'=>$mp_services_config['account'],
+    'password'=>$mp_services_config['password'],
+    'datapath'=>'./data/cookie_' ,
+      'debug'=>FALSE,
+      'logcallback'=>'logdebug' 
+  );
+  $wechat = new Wechatext($options);
+  if ($wechat->checkValid()) {
+    $friendlist = $wechat->getUserlist($page,$pagesize);
+    foreach ($friendlist['contacts'] as $key => $value) {
+      $data['fake_id'] = $value['id'];
+      $data['service_uid'] = $service_uid;
+      // foreach ($data as $key => $value) {
+      //   // $data[$key] = str_replace('🏃', '', $value);
+      //   // $data[$key] = str_replace('🌻', '', $value);
+
+      //     // if(preg_match('/\\x../', $value) !== FALSE) {
+      //     //   // $data[$key] = preg_replace('/\\x../', '', $value);
+      //     //   // $data[$key] = (string)$data[$key];
+      //     //   // $data[$key] = '****';
+      //     //   dpm($data[$key]);
+      //     // }
+      // }
+      // var_dump($data);
+      // $exits = db_query('SELECT fake_id FROM {mp_service_user} WHERE fake_id = :fake_id AND nick_name = :nick_name', array(':fake_id' => $data['fake_id'],':nick_name' => $data['nick_name']))->fetchField();
+      db_insert('mp_service_user') // Table name no longer needs {}
+          ->fields($data)
+          ->execute();
+    }
+  } else {
+    dpm("login error");
+  }
 }

@@ -89,23 +89,27 @@
                 <div class="qa-list-tags">  
                   <span class="glyphicon glyphicon-tags"></span>
                   <?php echo $field_tags;?>
+
+                  <span class="links pull-right">
+                    <?php if(isset($accept_link)): ?>
+                    <span class="accept"><?php print $accept_link; ?></span>
+                    <?php endif;?>
+                    <?php if(!empty($edit_node)): ?>
+                    <span class="edit"><?php print $edit_node; ?></span>
+                    <?php endif;?>
+                    <?php if(!empty($delete_node)): ?>
+                    <span class="delete"><?php print $delete_node; ?></span>
+                    <?php endif;?>
+                  </span>
+
                 </div>
+
             	</div>
             </div>
-            <div class="entry-status status-<?php echo $resolved;?>" title=""></div>
+            <span class="entry-status status-<?php echo $resolved;?> pull-right" title=""></div>
               
 
-              <div class="links">
-              <?php if(isset($accept_link)): ?>
-              <span class="accept"><?php print $accept_link; ?></span>
-              <?php endif;?>
-              <?php if(!empty($edit_node)): ?>
-              <span class="edit"><?php print $edit_node; ?></span>
-              <?php endif;?>
-              <?php if(!empty($delete_node)): ?>
-              <span class="delete"><?php print $delete_node; ?></span>
-              <?php endif;?>
-            </div> 
+
 
             <?php
             foreach ( $view->result as $q_a_item) {//both for question & answers.

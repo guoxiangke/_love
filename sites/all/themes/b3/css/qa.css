@@ -77,7 +77,7 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 	margin-left: 85px;
 }
 .sbq-qa-flag {
-	padding-left: 5px;
+	margin-left: 5px;
 }
 
 .view-questions .views-row {
@@ -133,4 +133,14 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 
 .sbq-qa-flag_wrap {
 	display: inline;
+}
+
+.sbq-qa-flag {
+	background-color: #428bca;
+}
+.sbq-qa-flag a{
+	color: #FFF;
+}
+.qa-list-tags .glyphicon-tags{
+	color: #2a6496;
 }

@@ -19,7 +19,8 @@ regions[footer]         = 'Footer'
 regions[page_top]       = 'Page top'
 regions[page_bottom]    = 'Page bottom'
 
-
+stylesheets[all][] = bootstrap-3.1.1-dist/css/bootstrap.min.css
+scripts[] = 'bootstrap-3.1.1-dist/js/bootstrap.min.js'
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
@@ -54,7 +55,7 @@ scripts[] = 'js/script.js'
 ; scripts[] = 'bootstrap/js/transition.js'
 ;
 ; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
-; settings[bootstrap_cdn] = ''
+settings[bootstrap_cdn] = ''
 
 
 ; ;-------------------------
