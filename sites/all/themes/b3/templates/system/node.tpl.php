@@ -118,10 +118,10 @@
           <div class="authorbio">
               <h4><?php echo $name;?></h4>
               <p><?php echo $signature;?></p>
-              <ul class="socialcircle">
+             <!--  <ul class="socialcircle">
                   <li id="asite"><i class="icon-forward"></i><a href="http://www.thepetedesign.com" title="Visit my Website" target="_blank">Visit my Website</a></li>
                   <li id="atwitter"><i class="icon-twitter"></i><a href="http://www.twitter.com/peachananr" rel="nofollow" title="Follow me on Twitter">Follow me on Twitter</a></li>
-              </ul>
+              </ul> -->
           </div>
       </div>
   </div>
