@@ -641,7 +641,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           //get title $('[code]').attr('code')
           $Title = trim($html->find('[code]', 0)->plaintext);
           $Title = str_replace('查看','',$Title);
-          $Url =' http://www.tudou.com/programs/view/'.$html->find('[code]', 0)->attr['code'];
+          $Url = $html->find('[auto="true"]', 0)->attr['url'];
           $Description = "温馨提醒：注意流量!!！\n欢迎分享转发到朋友圈。\n\n另招募恩典365义工团队，听写当日的内容，供那些没有流量的弟兄姊妹阅读，如果您有感动，请加小永微信：yongbuzhixi_love回复【366】了解详情\n每日回复【365】获取更新";
           $img = array(
             'Title'=> $Title,
