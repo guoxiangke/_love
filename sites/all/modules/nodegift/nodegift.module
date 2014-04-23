@@ -233,8 +233,9 @@ function nodegift_user_view($account, $view_mode, $langcode) {
 			return;
 		}
 		// Add our button form as a content item.
+    $form = drupal_get_form('nodegift_user_button_form', $account);
 		$account->content['nodegift_button_form'] = array(
-		  '#markup' => drupal_render(drupal_get_form('nodegift_user_button_form', $account)),
+		  '#markup' => drupal_render($form),
 		  '#weight' => 50
 		);
 	}
