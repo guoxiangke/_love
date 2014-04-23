@@ -1,3 +1,50 @@
+
+/***new***/
+@media all{
+	body {
+		background: url("../img/page-bg-tile.jpg") center;
+		-webkit-background-size: 50px 50px;
+		-moz-background-size: 50px 50px;
+		-o-background-size: 50px 50px;
+		background-size: 50px 50px;
+		font-size: 15px;
+	}
+	#head_wrapper,#main-wrapper {
+		background: url('http://statics.xiaoenai.com/v30/images/banner.jpg') top center no-repeat;	
+	}
+	#navbar{
+		background: url('http://statics.xiaoenai.com/v30/images/zh/bk.png');	
+	}
+	.breadcrumb {
+		background-color: #f0f0f0;
+		margin-bottom: 10px;
+	}
+
+	.navbar-default .navbar-nav > li > a,
+	.navbar-default .navbar-nav > .active > a {
+		color: #eeeeee;
+		background-color: transparent;
+	}
+	.navbar-default .navbar-nav > li > a:hover, 
+	.navbar-default .navbar-nav > li > a:focus, 
+	.navbar-default .navbar-nav > .active > a:hover, 
+	.navbar-default .navbar-nav > .active > a:focus {
+		color: #fff;
+	}
+
+
+	
+}
+/**only big**/
+@media (min-width: 768px) {
+	#navbar .secondary{
+		float: right;
+	}
+}
+
+@media (max-width: 768px) {
+
+}
 h1, .h1 {
 	font-size: 20px;
 }
@@ -83,14 +130,6 @@ h1, .h1 {
 
 /*global css */
 @media all{
-	body{
-		/*,#container-boundingbox*/
-		background: url("../img/page-bg-tile.jpg") center;
-		-webkit-background-size:50px 50px;
-		-moz-background-size:50px 50px;
-		-o-background-size:50px 50px;
-		background-size:50px 50px;
-	}
 	.main-container #block-system-main {
 		background-color: #ffffff;
 		border-style: hidden;
@@ -135,12 +174,14 @@ h1, .h1 {
 #sbq_gototop:hover { background-position: 0px -40px; }
 
 #page-header {
-	margin-top: 40px;
+	margin-top: 15px;
 }
-@media (max-width: 480px) { 
-	#page-header {
-		margin-top: 10px;
-	}
+@media (min-width: 768px){
+	.lead {
+		font-size: 16px;
+		color: #fff;
+		display: none;
+	}	
 }
 
 .field-name-body blockquote {
@@ -176,7 +217,6 @@ h1, .h1 {
 
 
 #navbar {
-	position: fixed;
 	z-index: 1599;
 	margin: 0;
 	top: 0;
@@ -185,11 +225,21 @@ h1, .h1 {
 	padding: 0;
 	border: none;
 	border-radius: 0; 
+ 	border-color: none; 	
 }
 
-
-
-
+.navbar-default .navbar-nav > li > a ,
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus ,
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-brand{
+		color: #fff;
+		background-color: transparent;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+	font-weight: bolder;
+	/*color: #d9534f*/
+}
 	.main-row {
 		padding-top: 0px;
 	}
@@ -201,8 +251,8 @@ h1, .h1 {
 
 
 	.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-		color: #fff; 
-		font-weight: bolder;
+		color: #e80677; 
+		/*font-weight: bolder;*/
  		background: none; 
 	}
 
@@ -224,8 +274,8 @@ h1, .h1 {
 	font-size: 15px;
 	padding: 10px 0;
 	}
-	.navbar-default .navbar-nav>li>a{color:#fff}
-	.navbar-default .navbar-nav>li>a:hover{color:#fff;font-weight: bolder;}
+	.navbar-default .navbar-nav>li>a{color:#777}
+	.navbar-default .navbar-nav>li>a:hover{color:#777;font-weight: bolder;}
 	.navbar-nav {
 		margin: 0;
 	}
@@ -243,10 +293,9 @@ h1, .h1 {
 	}
 	header .navbar-collapse {
 		padding: 0;
-		background-color: #0066cb;
 	}
 	.main-row {
-		padding-top: 60px;
+		padding-top: 10px;
 	}
 
 }
@@ -268,9 +317,28 @@ h1, .h1 {
 
 .page-header {
 	margin: 0;
+	border-bottom: 0px;
 }
 .love-tabs--secondary {
 	margin: 0;
+}
+
+@media (max-width: 768px) {	
+	.navbar-default .navbar-nav > li > a,
+	.navbar-default .navbar-nav > .active > a {
+		color: #eeeeee;
+		background-color: transparent;
+	}
+	.navbar-default .navbar-nav > li > a:hover, 
+	.navbar-default .navbar-nav > li > a:focus, 
+	.navbar-default .navbar-nav > .active > a:hover, 
+	.navbar-default .navbar-nav > .active > a:focus {
+		color: #fff;
+	}
+	body {
+		background: url('http://statics.xiaoenai.com/v30/images/banner.jpg') top center no-repeat;	
+	}
+	
 }
 
 /* Medium devices (desktops, 992px and up) */

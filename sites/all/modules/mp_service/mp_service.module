@@ -76,7 +76,7 @@ function wx_response($name, $wx_mp_id = 'gh_a1f2569abd7f') {
               'Url'=> $Url
             );
             $news[] = $img;         
-            $wechatObj->news($news)->reply();
+            $wechatObj->news($news)->reply(); return;
             break;
           case '0':
           case '1':
@@ -158,6 +158,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
   switch($type) {
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
+      $keyword = strtolower($keyword);
       $FromUserName = $wechatObj->getRev()->getRevFrom();
 
       if(!mp_service_get_record($FromUserName)) {
@@ -168,7 +169,13 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
 
       if($keyword == '366') {
         $news = _mp_get_mp_node($type = 'grace365', $counts = 1);
-        $wechatObj->news($news)->reply();        
+        $wechatObj->news($news)->reply(); return;
+      }
+
+      if($keyword == 'bv') {
+        $contentStr = "灵命日粮最近不能播放，小永请您耐心等候代祷\n请先<a href='http://stream.liangyou.net/program/1njcht-3b2ozm'>点击这里收听</a>\nIphone用户点击：http://stream.liangyou.net/program/1njcht-3b2ozm";
+          $wechatObj->text($contentStr)->reply();
+          exit;
       }
       
       $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
@@ -176,7 +183,6 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $reply = _mp_node_create($keyword);
           $wechatObj->text($reply)->reply();
       }
-      $keyword = strtolower($keyword);
       //http://betternewlife.u.qiniudn.com/newlife-01.mp3
       //default msg
       $contentStr = "【52】广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n以后再有什么问题，回复【11+您的祝福与感恩或建议内容】呼唤小永吧！";
@@ -644,7 +650,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
             'Url'=> $Url
           );
           $news[] = $img;         
-          $wechatObj->news($news)->reply();
+          $wechatObj->news($news)->reply(); return;
           break;
         case '110':
           // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
@@ -688,7 +694,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
           
-          $wechatObj->news($news)->reply();
+          $wechatObj->news($news)->reply(); return;
           break;
          case '9010':
           $img = array(
@@ -701,7 +707,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
           
-          $wechatObj->news($news)->reply();
+          $wechatObj->news($news)->reply(); return;
           break;
  
         case '5010':
@@ -725,7 +731,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
             'Url'=> 'http://simplified-odb.org'
           );
           $news[] = $img;
-          $wechatObj->news($news)->reply();
+          $wechatObj->news($news)->reply(); return;
           break;
 
         case '1':
@@ -961,7 +967,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
             );
             $news[] = $img; 
           } 
-          $wechatObj->news($news)->reply();
+          $wechatObj->news($news)->reply(); return;
           break;
         default:
             if(substr($keyword, 0,2) == '91' && substr($keyword, 0,3) != '911') {
@@ -1769,4 +1775,34 @@ function mp_getAllUserlist($page=0,$pagesize=10,$service_uid=1) {
   } else {
     dpm("login error");
   }
+}
+
+// 全角半角转． 
+function make_semiangle($str)    
+{    
+    $arr = array('０' => '0', '１' => '1', '２' => '2', '３' => '3', '４' => '4',    
+                 '５' => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9',    
+                 'Ａ' => 'A', 'Ｂ' => 'B', 'Ｃ' => 'C', 'Ｄ' => 'D', 'Ｅ' => 'E',    
+                 'Ｆ' => 'F', 'Ｇ' => 'G', 'Ｈ' => 'H', 'Ｉ' => 'I', 'Ｊ' => 'J',    
+                 'Ｋ' => 'K', 'Ｌ' => 'L', 'Ｍ' => 'M', 'Ｎ' => 'N', 'Ｏ' => 'O',    
+                 'Ｐ' => 'P', 'Ｑ' => 'Q', 'Ｒ' => 'R', 'Ｓ' => 'S', 'Ｔ' => 'T',    
+                 'Ｕ' => 'U', 'Ｖ' => 'V', 'Ｗ' => 'W', 'Ｘ' => 'X', 'Ｙ' => 'Y',    
+                 'Ｚ' => 'Z', 'ａ' => 'a', 'ｂ' => 'b', 'ｃ' => 'c', 'ｄ' => 'd',    
+                 'ｅ' => 'e', 'ｆ' => 'f', 'ｇ' => 'g', 'ｈ' => 'h', 'ｉ' => 'i',    
+                 'ｊ' => 'j', 'ｋ' => 'k', 'ｌ' => 'l', 'ｍ' => 'm', 'ｎ' => 'n',    
+                 'ｏ' => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's',    
+                 'ｔ' => 't', 'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x',    
+                 'ｙ' => 'y', 'ｚ' => 'z',    
+                 '（' => '(', '）' => ')', '〔' => '[', '〕' => ']', '【' => '[',    
+                 '】' => ']', '〖' => '[', '〗' => ']', '“' => '[', '”' => ']',    
+                 '‘' => '[', '’' => ']', '｛' => '{', '｝' => '}', '《' => '<',    
+                 '》' => '>',    
+                 '％' => '%', '＋' => '+', '—' => '-', '－' => '-', '～' => '-',    
+                 '：' => ':', '。' => '.', '、' => ',', '，' => '.', '、' => '.',    
+                 '；' => ',', '？' => '?', '！' => '!', '…' => '-', '‖' => '|',    
+                 '”' => '"', '’' => '`', '‘' => '`', '｜' => '|', '〃' => '"',    
+                 '　' => ' ','＄'=>'$','＠'=>'@','＃'=>'#','＾'=>'^','＆'=>'&','＊'=>'*', 
+                 '＂'=>'"'); 
+   
+    return strtr($str, $arr);    
 }

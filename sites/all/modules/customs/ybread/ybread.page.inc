@@ -1,5 +1,34 @@
 <?php
-
+function get_inhim() {
+	// get created node in_him.
+	$content_type = 'in_him';
+	$today = mktime(0, 0, 0, date('n'),date('j'), date('Y'));
+	$end = $today + 86400;
+	$query = "SELECT n.nid nid, n.created created FROM {node} n  WHERE n.type = :type AND  n.created >$today AND n.created <$end  order by n.created desc limit 0,1";
+	$result = db_query($query, array(':type' => $content_type))->fetch();
+	// dpm($result->nid);
+	if($result->nid) {
+		$node = node_load($result->nid);	
+		if(!strstr($node->title,'523')) {
+		// dpm(strstr($node->title,'523'));
+			return;
+		}
+	}else{
+		// created node
+	}
+	
+	$url = 'http://liangyou.net/Common/Reader/Channel/ShowPage.jsp?Cid=1484&Pid=45&Version=0&Charset=gb2312&page=0';
+	  $html = file_get_html($url);
+		// get title
+		$node->uid = '618';
+		//get title
+	  $node->title = str_replace('在天父怀中：', '', trim($html->find('h2', 0)->plaintext) );
+	  // get body
+	  $node->body[LANGUAGE_NONE][0]['value'] = trim($html->find('td[width="600"]',1)->innertext);
+	  $node->body[LANGUAGE_NONE][0]['format'] = 'filtered_html';
+	  $node->field_wechat_url[LANGUAGE_NONE][0]['value'] =   'http://liangyou.net'. $html->find('td[class="caltableToday"] a',0)->attr['href'];
+	  node_save($node);
+}
 function ybread_page(){
 	$content_type = 'ybread';
 	// get latest node.
@@ -11,7 +40,7 @@ function ybread_page(){
   $hour = date('G',time());
   $last = date('d',$result->created);
 
-  if($now - $last >= 1 && $hour >= 7) {dpm('tr');
+  if($now - $last >= 1 && $hour >= 7) {
 	  $html = file_get_html('http://simplified-odb.org/');
 		// get title
 		$node = new stdClass();

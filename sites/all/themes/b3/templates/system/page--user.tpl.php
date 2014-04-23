@@ -73,7 +73,7 @@
  * @ingroup themeable
  */
 ?>
-<div id="head_wrapper">
+<div id="head_wrapper" style="display:none;">
   <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
     <div class="container-nav">
       <div class="navbar-header">
@@ -122,7 +122,7 @@
         <p class="lead"><?php print $site_slogan; ?></p>
       <?php endif; ?>
 
-      <?php print render($page['header']); ?>
+      <?php //print render($page['header']); ?>
     </header> <!-- /#page-header -->
 
     <div class="row main-row">
@@ -137,7 +137,7 @@
         <?php if (!empty($page['highlighted'])): ?>
           <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
         <?php endif; ?>
-        <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
+        <?php if (0&&!empty($breadcrumb)): print $breadcrumb; endif;?>
         <a id="main-content"></a>
         <?php print render($title_prefix); ?>
         <?php if (!empty($title)): ?>
@@ -145,9 +145,6 @@
         <?php endif; ?>
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
-        <?php if (!empty($tabs)): ?>
-          <?php print render($tabs); ?>
-        <?php endif; ?>
         <?php if (!empty($page['help'])): ?>
           <?php print render($page['help']); ?>
         <?php endif; ?>
@@ -155,6 +152,9 @@
           <ul class="action-links"><?php print render($action_links); ?></ul>
         <?php endif; ?>
         <?php print render($page['content']); ?>
+        <?php if (!empty($tabs)): ?>
+          <?php print render($tabs); ?>
+        <?php endif; ?>
       </section>
 
       <?php if (!empty($page['sidebar_second'])): ?>
