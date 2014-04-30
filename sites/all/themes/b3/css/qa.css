@@ -14,7 +14,7 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/views.png) no-repeat left center transparent;
 }*/
 .meta-answers, .meta-votes, .meta-views { 
-	padding: 5px 0 5px 20px; 
+	padding: 5px 0 5px 10px; 
 	font-size: 116%;
 	cursor: default;
 	border-bottom: 1px dashed #333333;
@@ -33,11 +33,10 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 }
 
 .qa-list-title {
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #999999;
     font-weight: bold;
     line-height: 33px;
-    margin: 0 0 14px 0;
 }
 .qa-list-body-summary {
     line-height: 25px !important;
@@ -50,11 +49,8 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 .qa-list-time {
     font-size: 90%;
     line-height: 1.4;
-    padding-left: 25px;
-    /*margin-bottom: 7px;*/
     margin: 6px 0;
-    width: 85%;
-    background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/time.png) no-repeat left top transparent;
+    /*background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/time.png) no-repeat left top transparent;*/
 
 }
 .status-closed {
@@ -64,18 +60,13 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
     background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/status_open.png) no-repeat left top transparent;
 }
 .entry-status {
-	position: absolute;
-	bottom: 0;
-	right: 20px;
 	width: 31px;
 	height: 31px;
 }
 .qa-list-author-img {
 	float: left;
 }
-.qa-list-author-info {
-	margin-left: 85px;
-}
+
 .sbq-qa-flag {
 	margin-left: 5px;
 }
@@ -92,7 +83,7 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 	text-decoration:none;
 }
 .qa-list-l .counts ,.qa-list-l .rate-widget {
-	background: #dfeaf4;
+	/*background: #dfeaf4;*/
 	color: #538dc2;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -129,6 +120,8 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 }
 .qa-list-title h2{
 	font-size: 1em;
+	color: #000;
+	font-weight: bold;
 }
 
 .sbq-qa-flag_wrap {
@@ -141,6 +134,60 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 .sbq-qa-flag a{
 	color: #FFF;
 }
-.qa-list-tags .glyphicon-tags{
+.qa-list-tags .glyphicon-tags, .love-qa-list .glyphicon-time{
 	color: #2a6496;
+}
+.love-qa-list .glyphicon-time{
+ 	font-size: 100%;
+ }
+
+.comments_question, .comments_answer {
+	padding: 15px;
+}
+
+.ajax-comment-wrapper {
+	padding-top: 5px;
+	border-top: 2px dotted #3A87AD;
+}
+
+.view-display-id-answers_attachment {
+	border-top: 3px solid #3A87AD;
+}
+.qa-list-title h2:before {
+	content: 'Q：';
+}
+
+.page-questions .page-header,.page-questions .breadcrumb{
+	display: none;
+}
+.qa-list-title-closed {
+	background: #009a61;
+}
+.qa-list-title-closed a{
+	color: #FFF;
+}
+.qa-list-title-closed a:after{
+	content: ' √ 已解决';
+}
+.qa-list-title a:before {	
+	content: '※';
+}
+
+.page-question h2{
+	color: #FFF;
+	font-size: 18px;
+	padding: 5px;
+}
+.page-question .qa-list-title-closed h2{
+	background: #009a61;
+}
+.page-question .qa-list-title-open h2{
+	background: #9a4444;
+}
+
+.qa-list-title-closed h2:after {
+	content: ' √ 已解决';
+}
+.qa-list-title-open h2:before {
+	content: 'Q：';
 }

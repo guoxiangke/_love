@@ -50,7 +50,8 @@
     $picture = variable_get('user_picture_default', '');
     $picture = theme('image_style',array('style_name' => 'profile_small', 'path' => $picture));
   }
-	$resolved = ($fields['field_mark_question_resolved']->content ==0)?'open':'closed';
+  // dpm($fields['field_mark_question_resolved']);
+	$resolved = ($fields['field_mark_question_resolved']->content =='未解决')?'open':'closed';
 	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'已解决':'未解决';
 ?>
     <div class="love-qa-list row">
@@ -72,23 +73,25 @@
    
         </div>
         <div class="qa-list-c col-md-10 col-sm-10">
-            <div class="qa-list-title"><?php echo $title;?></div>
+            <div class="qa-list-title qa-list-title-<?php echo $resolved;?>"><?php echo $title;?></div>
             <div class="qa-list-body-summary"><?php echo $body;?>
             <?php //echo $value_1;?></div>
-            <div class="qa-list-contributes">
-            	<div class="qa-list-author-img">
+            <div class="qa-list-contributes row">
+            	<div class="qa-list-author-img col-md-2 col-sm-2">
             		<?php echo $picture ;?>
             	</div>
-            	<div class="qa-list-author-info">
+            	<div class="qa-list-author-info col-md-9 col-sm-9">
             		<div class="qa-list-author-name">
-            		 	<?php echo $name;?>在<span class="qa-list-region">问答</span>模块发布
+            		 	<?php echo $name;?>
+                  <!-- 在<span class="qa-list-region">问答</span>模块发布 -->
             		</div>
 	            	<div class="qa-list-time">
-	            		时间:<span><?php echo $created;?></span>            
+	            		<span class="glyphicon glyphicon-time"></span>
+                  时间:<span><?php echo $created;?></span>            
 	            	</div>
                 <div class="qa-list-tags">  
                   <span class="glyphicon glyphicon-tags"></span>
-                  <?php echo $field_tags;?>
+                  标签:<?php echo $field_tags;?>
 
                   <span class="links pull-right">
                     <?php if(isset($accept_link)): ?>
@@ -105,37 +108,42 @@
                 </div>
 
             	</div>
+              <div class="entry-status status-<?php echo $resolved;?> visible-lg col-md-1 col-sm-1" title=""></div>
+              <div class="clearfix"></div>
             </div>
-            <span class="entry-status status-<?php echo $resolved;?> pull-right" title=""></div>
+            
+
+              <?php
+                foreach ( $view->result as $q_a_item) {//both for question & answers.
+                 if(isset($q_a_item->comments) && isset($q_a_item->comments['#form']['nid']) && $row->nid==$q_a_item->comments['#form']['nid']['#value']){
+                   ?>
+                   <div class="row comments_<?php echo $q_a_item->_field_data['nid']['entity']->type;//question/answer?>">
+                     <?php print render($q_a_item->comments['#content']);?>
+                     <div class="clearfix">
+                      <div class="q-feedback">
+                        <a class="comment_button btn btn-xs" data-trigger="click" data-placement='bottom'>
+                          <button type="button" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-comment"></span><?php echo t('Comment');?>
+                          </button>
+                        </a>
+                      </div>
+                     </div>
+                     
+                    <div class="comment_textarea">
+                      <a href="#" class="close"><i class="icon-remove-sign"></i></a>
+                      <?php print (render($q_a_item->comments['#form'])); ?>
+                    </div>
+                   </div>
+                <?php
+                   }
+                }
+                ?>
+
+            </div>
               
 
 
 
-            <?php
-            foreach ( $view->result as $q_a_item) {//both for question & answers.
-             if(isset($q_a_item->comments) && isset($q_a_item->comments['#form']['nid']) && $row->nid==$q_a_item->comments['#form']['nid']['#value']){
-               ?>
-               <div class="row comments_<?php echo $q_a_item->_field_data['nid']['entity']->type;//question/answer?>">
-                 <?php print render($q_a_item->comments['#content']);?>
-                 <div class="clearfix">
-                  <div class="q-feedback">
-                    <a class="comment_button btn btn-xs" data-trigger="click" data-placement='bottom'>
-                      <button type="button" class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-comment"></span><?php echo t('Comment');?>
-                      </button>
-                    </a>
-                  </div>
-                 </div>
-                 
-                <div class="comment_textarea">
-                  <a href="#" class="close"><i class="icon-remove-sign"></i></a>
-                  <?php print (render($q_a_item->comments['#form'])); ?>
-                </div>
-               </div>
-            <?php
-               }
-            }
-            ?>
-
-        </div>        
+            
+      
     </div>

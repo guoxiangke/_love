@@ -50,8 +50,9 @@
     $picture = variable_get('user_picture_default', '');
     $picture = theme('image_style',array('style_name' => 'profile_small', 'path' => $picture));
   }
+  // dpm($fields['field_mark_question_resolved']);
 	$resolved = ($fields['field_mark_question_resolved']->content ==0)?'open':'closed';
-	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'已解决':'未解决';
+	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'未解决':'已解决';
   // dpm($resolved);
 ?>
     <div class="love-qa-list row">
@@ -71,13 +72,13 @@
           </a>
         </div>
         <div class="qa-list-c col-md-10 col-sm-10">
-            <div class="qa-list-title"><?php echo $title;?></div>
+            <div class="qa-list-title qa-list-title-<?php echo $resolved;?>"><?php echo $title;?></div>
             <div class="qa-list-body-summary"><?php echo $body;?></div>
-            <div class="qa-list-contributes">
-            	<div class="qa-list-author-img">
+            <div class="qa-list-contributes row">
+            	<div class="qa-list-author-img  col-md-2 col-sm-2">
             		<?php echo $picture ;?>
             	</div>
-            	<div class="qa-list-author-info">
+            	<div class="qa-list-author-info col-md-9 col-sm-9">
             		<div class="qa-list-author-name">
             		 	<?php echo $name;?>在<span class="qa-list-region">General</span>模块发布
             		</div>
@@ -91,7 +92,9 @@
                 </div>
                 
             	</div>
+              
+              <!-- <div class="entry-status status-<?php echo $resolved;?> col-md-1 col-sm-1" title="已解决"></div> -->
+              <div class="clearfix"></div>
             </div>
-            <div class="entry-status status-<?php echo $resolved;?>" title=""></div>
         </div>
     </div>
