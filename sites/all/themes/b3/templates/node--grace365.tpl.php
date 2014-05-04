@@ -79,10 +79,12 @@
  *
  * @ingroup themeable
  */
+
+$musicurl = 'http://w2.ysong.org/yage/60%E7%A6%8F%E9%9F%B3%E8%AF%81%E9%81%93/%E5%AF%87%E7%BB%8D%E6%81%A9/2014%E5%B9%B4%20'.urlencode(month2china()).'%E6%9C%88%E4%BB%BD/'.date('Ymd',$node->created).'.mp3';
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-  <?php print $user_picture; ?>
+  <?php //print $user_picture; ?>
 
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
@@ -97,40 +99,18 @@
   <?php endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
+  	<div class="audio">
+  		<audio height="32" controls="controls"><source src="<?php echo $musicurl;?>" type="audio/mpeg" /></audio>
+    </div>
     <?php
       // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
-      $day = date('d',$node->created);
-      // $full_week = date('l',$node->created);
-      // $short_week = date('D',$node->created);
-      $month = date('F',$node->created);
-      echo '<p class="love-calendar">'.$day.'<em>'.$month.'</em></p>';
       print render($content);
     ?>
   </div>
 
   <?php print render($content['links']); ?>
-  <?php
-    $account = user_load($uid);
-    $signature = $account->signature?$account->signature:"100字左右的个人介绍，签名或者心情～否则，显示这家伙很懒，还没有填写…….";
-  ?>
-  <div class="authorbox">
-      <div class="authorleft">
-          <div class="authorimg">
-            <?php print $user_picture; ?>
-          </div>           
-          <div class="authorbio">
-              <h4><?php echo $name;?></h4>
-              <p><?php echo $signature;?></p>
-             <!--  <ul class="socialcircle">
-                  <li id="asite"><i class="icon-forward"></i><a href="http://www.thepetedesign.com" title="Visit my Website" target="_blank">Visit my Website</a></li>
-                  <li id="atwitter"><i class="icon-twitter"></i><a href="http://www.twitter.com/peachananr" rel="nofollow" title="Follow me on Twitter">Follow me on Twitter</a></li>
-              </ul> -->
-          </div>
-      </div>
-  </div>
-
   <?php print render($content['comments']); ?>
 
 </div>

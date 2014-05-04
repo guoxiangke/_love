@@ -72,6 +72,7 @@ function bootstrap_form_element(&$variables) {
     if (theme_get_setting('bootstrap_tooltip_enabled') && theme_get_setting('bootstrap_tooltip_descriptions') && $description === strip_tags($description) && strlen($description) <= 200) {
       $tooltip = TRUE;
       $attributes['data-toggle'] = 'tooltip';
+      $attributes['data-placement'] = 'top';
       $attributes['title'] = $description;
     }
   }

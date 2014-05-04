@@ -106,25 +106,6 @@
   </div>
 
   <?php print render($content['links']); ?>
-  <?php
-    $account = user_load($uid);
-    $signature = $account->signature?$account->signature:"100字左右的个人介绍，签名或者心情～否则，显示这家伙很懒，还没有填写…….";
-  ?>
-  <div class="authorbox">
-      <div class="authorleft">
-          <div class="authorimg">
-            <?php print $user_picture; ?>
-          </div>           
-          <div class="authorbio">
-              <h4><?php echo $name;?></h4>
-              <p><?php echo $signature;?></p>
-             <!--  <ul class="socialcircle">
-                  <li id="asite"><i class="icon-forward"></i><a href="http://www.thepetedesign.com" title="Visit my Website" target="_blank">Visit my Website</a></li>
-                  <li id="atwitter"><i class="icon-twitter"></i><a href="http://www.twitter.com/peachananr" rel="nofollow" title="Follow me on Twitter">Follow me on Twitter</a></li>
-              </ul> -->
-          </div>
-      </div>
-  </div>
   <?php print render($content['comments']); ?>
 
 </div>

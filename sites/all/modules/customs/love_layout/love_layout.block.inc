@@ -295,8 +295,8 @@ function love_block_about_us() {
 }
 
 function love_block_weichat_qr() {
-  $web = "<div id='love_qr'>扫一扫，与主内佳人互动<br/><img src=".base_path()."/".drupal_get_path('module','love_layout')."/qrcode_for_gh_b945c807e7ec_430.jpg class='img-responsive' /></div>";
-   $mobile = "<div id='love_qr'>点击二维码,快速关注<br/><a href='weixin://contacts/profile/gh_b945c807e7ec'><img src=".base_path()."/".drupal_get_path('module','love_layout')."/fire.png  class='img-responsive' /></a></div>";
+  $web = "<div id='love_qr'>扫一扫，与主内佳人互动<br/><img src=/".drupal_get_path('module','love_layout')."/qrcode_for_gh_b945c807e7ec_430.jpg class='img-responsive' /></div>";
+   $mobile = "<div id='love_qr'>点击二维码,快速关注<br/><a href='weixin://contacts/profile/gh_b945c807e7ec'><img src=/".drupal_get_path('module','love_layout')."/fire.png  class='img-responsive' /></a></div>";
   drupal_add_js('document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
   (function ($) {$("#love_qr").replaceWith("'.$mobile.'"); }(jQuery));
 });', 'inline');

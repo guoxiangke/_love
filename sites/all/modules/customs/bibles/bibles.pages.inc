@@ -141,6 +141,8 @@ function bible_page($volume,$chapter='1',$version='CUV'){
 
 				<span class="Home chapter" id="toggle_index"><a name="index">'.$c_name.'</a>(折叠章目录↑)</span>
 				<div class="c-index" id="c_index">';
+				
+				$active_class='';
 				for($i=1;$i<=$v_total;$i++){
 					if($i==$chapter) $active_class = "current-chapter";
 					
@@ -154,21 +156,11 @@ function bible_page($volume,$chapter='1',$version='CUV'){
 				<div class="clear"></div>
 				<div class="b-nav_to-chapter">
 				';
-				$mp3_url = 'http://www.fuyin.com/audios/mp3/bbn/'.$volume.'_'.strtolower($e_name).($chapter>9?$chapter:('0'.$chapter)).'.mp3';
+				$mp3_ori_url = 'http://www.fuyin.com/audios/mp3/bbn/'.$volume.'_'.strtolower($e_name).($chapter>9?$chapter:('0'.$chapter)).'.mp3';
 				if($volume==19)
-				$mp3_url = 'http://www.fuyin.com/audios/mp3/bbn/'.$volume.'_psalms'.(str_pad($chapter,3,'0',STR_PAD_LEFT)).'.mp3';
-				$mp3_url = urlencode($mp3_url);
-				$output .= '<div id="audio_player"><embed type="application/x-shockwave-flash" width="290" height="24" 
-
-src="'.drupal_get_path('module','bibles').'/3.swf?
-
-soundFile='.$mp3_url.'&amp;bg=0xCDDFF3&amp;leftbg=0x357DCE&amp;lefticon=0xF2F2F2&amp;rightbg=0x357DCE&amp;righ
-
-tbghover=0x4499EE&amp;righticon=0xF2F2F2&amp;righticonhover=0xFFFFFF&amp;text=0x357DCE&amp;slider=
-
-0x357DCE&amp;track=0xFFFFFF&amp;border=0xFFFFFF&amp;loader=0x8EC2F4&amp;autostart=yes&amp;loop=no" 
-
-wmode="transparent" quality="high"></div>';
+				$mp3_ori_url = 'http://www.fuyin.com/audios/mp3/bbn/'.$volume.'_psalms'.(str_pad($chapter,3,'0',STR_PAD_LEFT)).'.mp3';
+				$mp3_url = urlencode($mp3_ori_url);
+				$output .= '<div id="audio_player"><audio height="32" controls="controls"><source src="'.$mp3_ori_url.'" type="audio/mpeg" /></audio></div>';
 				if($volume==1&&$chapter==1){
 					$output.='<span class="pre chapter">《上一章</span>';
 				}else{

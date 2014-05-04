@@ -14,13 +14,14 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_article/views.png) no-repeat left center transparent;
 }*/
 .meta-answers, .meta-votes, .meta-views { 
-	padding: 5px 0 5px 10px; 
+	padding: 5px 0 5px 15px; 
 	font-size: 116%;
 	cursor: default;
 	border-bottom: 1px dashed #333333;
 	line-height: 25px !important;
 }
-@media only screen and (max-width: 479px) {
+/*only small*/
+@media only screen and (max-width: 768px) {
 	.meta-answers, .meta-votes, .meta-views {
 		float: left;
 		padding-top: 0;
@@ -31,7 +32,6 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 		line-height: 1;
 	}
 }
-
 .qa-list-title {
     font-size: 1.2em;
     color: #999999;
@@ -160,34 +160,34 @@ background: url(http://qanda.wpshow.me/wp-content/themes/qanda/images/icons_arti
 .page-questions .page-header,.page-questions .breadcrumb{
 	display: none;
 }
-.qa-list-title-closed {
+/*.qa-list-title-closed {
 	background: #009a61;
 }
 .qa-list-title-closed a{
 	color: #FFF;
-}
-.qa-list-title-closed a:after{
-	content: ' √ 已解决';
-}
+}*/
 .qa-list-title a:before {	
 	content: '※';
 }
 
 .page-question h2{
-	color: #FFF;
+	/*color: #FFF;*/
 	font-size: 18px;
-	padding: 5px;
+	/*padding: 5px;*/
 }
-.page-question .qa-list-title-closed h2{
+/*.page-question .qa-list-title-closed h2{
 	background: #009a61;
 }
 .page-question .qa-list-title-open h2{
 	background: #9a4444;
-}
+}*/
 
-.qa-list-title-closed h2:after {
-	content: ' √ 已解决';
-}
 .qa-list-title-open h2:before {
 	content: 'Q：';
+}
+.qa-list-title-closed h2:before,.qa-list-title-closed a:before {
+	content: '√';
+}
+.qa-list-title-closed h2:after,.qa-list-title-closed a:after{
+	content: '【已解决】';
 }

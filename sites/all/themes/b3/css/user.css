@@ -1,0 +1,54 @@
+
+  .bbb-goback {
+    float: left;
+    position: fixed;
+  }
+ 
+  .bbb-page-user{ 
+    font-size: 16px;
+    color:#FFF;
+    text-align: center;
+    background: #79b9d9;
+  }
+  .status a {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFF;
+    display: block;
+    border-top: 6px #A59689 solid;
+    margin: -4px 0 0 0;
+    position: relative;
+    z-index: 3;
+    width: 20%;
+    float: left;
+  }
+  .status a.active {
+    border-top: 6px #FE9325 solid;
+    background-color: rgba(165, 150, 137, 0.1);
+    /*#887669*/
+  }
+  .status .count {
+    font-family: sans-serif;
+    font-size: larger;
+  }
+  .bbb-page-user .header{
+    font-size: 1.5em;
+  }
+  .bbb-page-user .header .bbb-goback a{
+    color: #FFF;
+    font-size: 0.8em;
+  }
+  .ops {
+    padding: 10px;
+  }
+  .usersignatures {
+    text-align: left;
+    padding: 0 15px;
+  }
+  .bbb-page-user a:hover {
+    text-decoration: none;
+  }
+
+  /*user register*/
+  .page-qa-register .page-header,.page-qa-register  .page-header{
+  	display: none;
+  }

@@ -55,7 +55,7 @@
 	$resolved_alt = ($fields['field_mark_question_resolved']->content ==0)?'已解决':'未解决';
 ?>
     <div class="love-qa-list row">
-        <div class="qa-list-l col-md-2 col-sm-2">            
+        <div class="qa-list-l col-md-2 col-sm-2 clearfix">            
           
 	        	<div class="meta-answers" title="Number of Answers">
 	        		<span class="glyphicon glyphicon-question-sign"></span>

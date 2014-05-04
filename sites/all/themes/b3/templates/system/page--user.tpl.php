@@ -72,7 +72,50 @@
  *
  * @ingroup themeable
  */
+$account = user_load(arg(1));
+global $user;
 ?>
+<?php if($logged_in):?>
+
+<div class="bbb-page-user clearfix">
+  <div class="header">
+    <div class="bbb-goback"><?php echo l('« 首页','')?></div>
+    <div class="username">@<?php echo $account->name?$account->name:'匿名^_^';?></div>
+  </div>
+  
+  <div class="bbb-user">
+    <div class="picture">
+      <a href="#" class="">
+        <img data-src="holder.js/140x140" class="img-circle" alt="140x140" src="https://avatars2.githubusercontent.com/u/1160703?s=460" style="width: 140px; height: 140px;">
+      </a>
+    </div>
+    <div class="username"> <h3><span>郭向科</span> <span>男</span> <span>27岁</span> <span>交往中...</span></h3></div>
+    <div class="usersignatures">
+      <p>天空依然蔚蓝，虽然有时你看不见  这家伙很懒， 这家伙很懒， 这家伙很懒， 这家伙很懒</p>
+    </div>
+    <div class="ops"><a href="#" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus"></span>关 注</a> </div>
+    <div class="status clearfix">
+      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表可信度">
+        <span class="item"><div class="count">3</div><div class="s-name">熟人</div></span>
+      </a>
+      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表努力度">
+        <span class="item"><div class="count">32</div><div class="s-name">关注</div></span>
+      </a>
+      <a href="#" class="tooltip-count active" data-toggle="tooltip" data-placement="bottom" title="代表真诚度">
+        <span class="item"><div class="count">12</div><div class="s-name">照片</div></span>
+      </a>
+      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表活跃度">
+        <span class="item"><div class="count">52</div><div class="s-name">心语</div></span>
+      </a>
+      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表受欢迎度">
+        <span class="item"><div class="count">33</div><div class="s-name">粉丝</div></span>
+      </a>
+      
+    </div>
+    <div class="demo" style="height:300px;"></div>
+  </div>
+</div>
+<?php endif;?>
 <div id="head_wrapper" style="display:none;">
   <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
     <div class="container-nav">

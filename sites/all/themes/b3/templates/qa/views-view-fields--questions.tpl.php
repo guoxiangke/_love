@@ -56,7 +56,7 @@
   // dpm($resolved);
 ?>
     <div class="love-qa-list row">
-        <div class="qa-list-l col-md-2 col-sm-2">            
+        <div class="qa-list-l col-md-2 col-sm-2 clearfix">            
         	<a href="node/<?php echo $nid;?>" title="查看详情">
 	        	<div class="meta-answers" title="Number of Answers">
 	        		<span class="glyphicon glyphicon-question-sign"></span>

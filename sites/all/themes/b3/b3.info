@@ -27,6 +27,7 @@ scripts[] = 'bootstrap-3.1.1-dist/js/bootstrap.js'
 
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/qa.css
+stylesheets[all][] = css/user.css
 scripts[] = 'js/script.js'
 
 ; For information on choosing the desired method, please read the Drupal

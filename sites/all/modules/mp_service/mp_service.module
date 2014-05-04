@@ -184,11 +184,11 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           exit;
       }
 
-      if($keyword == 'bv') {
-        $contentStr = "灵命日粮最近不能播放，小永请您耐心等候代祷\n请先<a href='http://stream.liangyou.net/program/1njcht-3b2ozm'>点击这里收听</a>\nIphone用户点击：http://stream.liangyou.net/program/1njcht-3b2ozm";
-          $wechatObj->text($contentStr)->reply();
-          exit;
-      }
+      // if($keyword == 'bv') {
+      //   $contentStr = "灵命日粮最近不能播放，小永请您耐心等候代祷\n请先<a href='http://stream.liangyou.net/program/1njcht-3b2ozm'>点击这里收听</a>\nIphone用户点击：http://stream.liangyou.net/program/1njcht-3b2ozm";
+      //     $wechatObj->text($contentStr)->reply();
+      //     exit;
+      // }
       
       $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
       if ($check_keyword == '天气') {
