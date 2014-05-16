@@ -189,7 +189,13 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
       //     $wechatObj->text($contentStr)->reply();
       //     exit;
       // }
-      
+       if($keyword == 'mama') {
+          $musicurl ='http://fm77.u.qiniudn.com/xiaomin/mama20140503.mp3';
+          $desc = "公众号:永不止息";
+          $hgmusicurl = $musicurl;
+          $wechatObj->music('小敏诗歌分享：我有一个好妈妈', $desc, $musicurl, $hgmusicurl)->reply();
+          exit;
+      }
       $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
       if ($check_keyword == '天气') {
           $reply = _mp_node_create($keyword);
