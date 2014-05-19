@@ -261,12 +261,12 @@ class DrupalPHPMailer extends PHPMailer implements MailSystemInterface {
           $this->AddAddress($address['mail'], $address['name']);
         }
         // Extract CCs and BCCs from headers.
-        if (isset($message['headers']['Cc'])) {
+        if (!empty($message['headers']['Cc'])) {
           foreach (phpmailer_parse_address($message['headers']['Cc']) as $address) {
             $this->AddCC($address['mail'], $address['name']);
           }
         }
-        if (isset($message['headers']['Bcc'])) {
+        if (!empty($message['headers']['Bcc'])) {
           foreach (phpmailer_parse_address($message['headers']['Bcc']) as $address) {
             $this->AddBCC($address['mail'], $address['name']);
           }
