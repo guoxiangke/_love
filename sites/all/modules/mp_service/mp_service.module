@@ -151,7 +151,6 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
   $type = $wechatObj->getRev()->getRevType();
   $wechat_user_info = mp_service_update_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
   $notice = "\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方主帐号\n-----需要有你-----</a>
-【366】恩典365文章版
 【5010】灵命日粮文字版
 【523】在天父怀中*new*
 【528】每日读经*new*\nhttp://yongbuzhixi.com";//回复【11+您的祝福与感恩或建议内容】
@@ -223,290 +222,45 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           exit;
         }
       }
-      $prefix_uri = 'http://audio2.liangyou.net/files/media/program_live/';
-      // $prefix_uri = 'http://liangyou.nissigz.com/media/';
-      // $prefix_uri = 'http://liangyou2.nissigz.com:15200/';
-      // http://liangyou2.nissigz.com:15200/gv/gv131218.mp3
-       $radio_list = array(
-                '500' => 'ws',
-                '501' => 'bv',
-                '502' => 'ee',
-                '503' => 'se',
-                '504' => 'bf',
-                '505' => 'up',
-                '506' => 'hg',
-                '507' => 'bc',
-                '508' => 'ds',
-                '509' => 'gv',
-                '523' => 'gv',
-                );
 
-
-      $radio_list_simple = array(
-        // 福音节目-适合所有人士
-        '31' => array(
-          'ir' => 'i-radio爱广播',//0
-          'eg' => '英语世界',//2
-          'gt' => '恩典与真理', //0
-          'wa' => '天路导向',//6,7
-          // 'cwa' => '天路导向（粤）',//6,7
-          'bg' => '普世佳音',//1
-          'yu' => '绝妙当家',//0
-          'gv' => '生活无国界',//0
-          'zz' => '零点零距离',//1-5
-          'se' => '恋爱季节',//1-5
-          'up' => '亲情不断电',//1-5
-          'bc' => '书香园地',//1-5
-          'gn' => '现代人的希望',//0
-          'hg' => '欢乐卡恰碰',//0
-          'yn' => '爱在人间（云南）',//0
-          'im' => 'i关怀心磁场',//1-5
-          'ib' => '无限飞行号',//0
-          'rt' => '今夜心未眠',//6,7
-          'em' => '听听90后',//6,7
-          'yr' => 'Yi-radio爱广播',//0
-          ),
-        '32' => array(
-          // 栽培节目-适合基督徒
-
-          'bv' => '灵命日粮',
-          'ee' => '拥抱每一天',
-          'bf' => '幸福满家园',
-          'ws' => '长夜的牵引',
-          'be' => '真道分解',
-          'tr' => '彩虹桥',
-          'ns' => '生命的四季',
-          'cw' => '齐来颂扬',
-          'wpb' => '圣乐天地',
-          // 
-          // 'bv' => '空中辅导',
-          // 'bv' => '无愧的工人',
-          // 'bv' => '有问必答',
-          // 'bv' => '生命指南针',
-          // 'bv' => '蓝天绿洲',
-          // 'bv' => '圣乐天地 ',
-          // 'bv' => '好牧人',
-          // 'bv' => '善牧良言',
-          // 'bv' => '经动人心',
-          // 'bv' => '信仰百宝箱',
-          // 'bv' => '生命的福音',
-          // 'bv' => '听听女人心',
-          // 'bv' => '生根建造',
-          // 'bv' => '聆听主道',
-          // 'bv' => '圣言盛宴',
-          // 'bv' => '真理之光',
-          // 
-          // 'bv' => '空中崇拜',
-          // 'bv' => '给力人生',
-          // 'bv' => '空中门训',
-          // 'bv' => '生活之光',
-          ),
-        // 'nissigz3' = array(
-        //  // 训练节目-适合事奉人员
-        //  // 接棒人
-        //  // 晨曦讲座
-        //  // 申命记
-        //  // 教牧辅导
-        //  // 事奉装备
-        //  // 基督教教义
-        //  // 基督教伦理学
-        //  // 圣诞节特辑
-        //  // 新约神学
-        //  ),
-
-        );
-
-
-
-      $prefix['31'] = 'http://liangyou2.nissigz.com:15200/';
-      $prefix['32'] = 'http://liangyou.nissigz.com:18100/';
-      $radios_list = array(
-        // 福音节目-适合所有人士
-        // '31' => array(//15200
-          'ir' => array('name' =>'i-radio爱广播', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'eg' => array('name' =>'英语世界', 'prefix'=>$prefix['31'],'day'=>2),//2
-          'gt' => array('name' =>'恩典与真理', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'wa' => array('name' =>'天路导向', 'prefix'=>$prefix['31'],'day'=>6),//6,7
-          'cwa' => array('name' =>'天路导向（粤）', 'prefix'=>$prefix['31'],'day'=>6),//6,7
-          'bg' => array('name' =>'普世佳音', 'prefix'=>$prefix['31'],'day'=>1),//1
-          'yu' => array('name' =>'绝妙当家', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'gv' => array('name' =>'生活无国界', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'zz' => array('name' =>'零点零距离', 'prefix'=>$prefix['31'],'day'=>5),//1-5
-          'se' => array('name' =>'恋爱季节', 'prefix'=>$prefix['31'],'day'=>5),//1-5
-          'up' => array('name' =>'亲情不断电', 'prefix'=>$prefix['31'],'day'=>5),//1-5
-          'bc' => array('name' =>'书香园地', 'prefix'=>$prefix['31'],'day'=>5),//1-5
-          'gn' => array('name' =>'现代人的希望', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'hg' => array('name' =>'欢乐卡恰碰', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'yn' => array('name' =>'爱在人间（云南）', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'im' => array('name' =>'i关怀心磁场', 'prefix'=>$prefix['31'],'day'=>5),//1-5
-          'ib' => array('name' =>'无限飞行号', 'prefix'=>$prefix['31'],'day'=>0),//0
-          'rt' => array('name' =>'今夜心未眠', 'prefix'=>$prefix['31'],'day'=>6),//6,7
-          'em' => array('name' =>'听听90后', 'prefix'=>$prefix['31'],'day'=>6),//6,7
-          'yr' => array('name' =>'Yi-radio爱广播', 'prefix'=>$prefix['31'],'day'=>0),//0
-          
-        // '32' => array(//18100
-          // 栽培节目-适合基督徒
-          'bv' => array('name' =>'灵命日粮', 'prefix'=>$prefix['32'],'day'=>0),//0
-          'ee' => array('name' =>'拥抱每一天', 'prefix'=>$prefix['32'],'day'=>0),//0
-          'bf' => array('name' =>'幸福满家园', 'prefix'=>$prefix['32'],'day'=>6),//6 7
-          'ws' => array('name' =>'长夜的牵引', 'prefix'=>$prefix['32'],'day'=>0),//0
-          'be' => array('name' =>'真道分解', 'prefix'=>$prefix['32'],'day'=>0),//0
-          'tr' => array('name' =>'彩虹桥', 'prefix'=>$prefix['32'],'day'=>0),//0
-          'ns' => array('name' =>'生命的四季', 'prefix'=>$prefix['32'],'day'=>5),
-          'cw' => array('name' =>'齐来颂扬', 'prefix'=>$prefix['32'],'day'=>5),
-          'wpb' => array('name' =>'圣乐天地', 'prefix'=>$prefix['32'],'day'=>6),
-
-          // '' => '',
-          // 'bv' => '',
-          // 'bv' => '空中辅导',
-          // 
-          // 
-          // 'bv' => '无愧的工人',
-          // 'bv' => '有问必答',
-          // 'bv' => '生命指南针',
-          // 'bv' => '蓝天绿洲',
-          // 'bv' => '圣乐天地 ',
-          // 'bv' => '好牧人',
-          // 'bv' => '善牧良言',
-          // 'bv' => '经动人心',
-          // 'bv' => '信仰百宝箱',
-          // 'bv' => '生命的福音',
-          // 'bv' => '听听女人心',
-          // 'bv' => '生根建造',
-          // 'bv' => '聆听主道',
-          // 'bv' => '圣言盛宴',
-          // 'bv' => '真理之光',
-          // 'wpb' => '圣乐天地 - 古典圣诗',http://liangyou.nissigz.com:18100/wpb/wpb140301.mp3
-          // 'bv' => '空中崇拜',
-          // 'bv' => '给力人生',
-          // 'bv' => '空中门训',
-          // 'bv' => '生活之光',
-
-          // 'nissigz3' = array(
-          //  // 训练节目-适合事奉人员
-          //  // 接棒人
-          //  // 晨曦讲座
-          //  // 申命记
-          //  // 教牧辅导
-          //  // 事奉装备
-          //  // 基督教教义
-          //  // 基督教伦理学
-          //  // 圣诞节特辑
-          //  // 新约神学
-          //  ),
-
-        );
-              $menu['31'] = "【i r】i-radio爱广播
-【eg】英语世界
-【g t】恩典与真理
-【wa】天路导向
-【bg】普世佳音
-【yu】绝妙当家
-【gv】生活无国界
-【zz】零点零距离
-【se】恋爱季节
-【up】亲情不断电
-【bc】书香园地
-【gn】现代人的希望
-【hg】欢乐卡恰碰
-【yn】爱在人间（云南）
-【im】i关怀心磁场
-【i b】无限飞行号
-【r t】今夜心未眠
-【em】听听90后
-【y r】Yi-radio爱广播".$notice ;
-        $menu['32'] = '【bv】灵命日粮
-【ee】拥抱每一天
-【b f】幸福满家园
-【ws】长夜的牵引'.$notice ;
-      
-      foreach ($radio_list_simple as $key => $programs) {
-
-        // foreach ($programs as $key2 => $value2) {
-        //   $menu["$key"] .= "\n【".$key2."】". $value2;
-        // }
+////////////////////////////////////////////////////////////////////////
+      $menu['31'] = "
+      【i r】i-radio爱广播
+      【eg】英语世界
+      【g t】恩典与真理
+      【wa】天路导向
+      【bg】普世佳音
+      【yu】绝妙当家
+      【gv】生活无国界
+      【zz】零点零距离
+      【se】恋爱季节
+      【up】亲情不断电
+      【bc】书香园地
+      【gn】现代人的希望
+      【hg】欢乐卡恰碰
+      【yn】爱在人间（云南）
+      【im】i关怀心磁场
+      【i b】无限飞行号
+      【r t】今夜心未眠
+      【em】听听90后
+      【y r】Yi-radio爱广播
+       ".$notice ;
+      $menu['32'] = '
+      【bv】灵命日粮
+      【ee】拥抱每一天
+      【b f】幸福满家园
+      【ws】长夜的牵引
+      '.$notice ;
+      foreach ($menu as $key => $programs) {
         if($keyword == $key) {
           $wechatObj->text($menu["$keyword"])->reply();
           return;
         }
       }
-      // bv-1;
-      // || in_array(substr($keyword, 0,2), array_keys($radios_list)) 
-      if(in_array($keyword, array_keys($radios_list))) {
-        $offset = 0;
-        // if(strlen($keyword)>2){
-        //   $offset = substr($keyword, 3,1);
-        //   $keyword = substr($keyword, 0,2);
-        //   watchdog('offset', $offset, array(), WATCHDOG_NOTICE, 'link');
-        // }
-        if($radios_list[$keyword]['day'] == 0) {//1-7
-          $title = $radios_list[$keyword]['name'];//'英语世界';
-          $week_day = date('N', time());
-          $title = "【".$keyword."】".$title;
-          $string = date('ymd',time()-$offset*24*60*60);
-          // $musicurl = // http://liangyou2.nissigz.com:15200/gv/gv131218.mp3
-          $musicurl = $radios_list[$keyword]['prefix'].$keyword."/".$keyword.$string.'.mp3';
-          $desc = "公众号:永不止息 ".date("n月d日-周").$week_day;
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          return;
-        }
-        if($radios_list[$keyword]['day'] == 5) {//1-5
-          $desc = '1-5';
-          $title = $radios_list[$keyword]['name'];//'英语世界';
-          $week_day = date('N', time()-$offset*24*60*60);
-          $title = "【".$keyword."】".$title;
-          $string = date('ymd',time());
-          $num = $radios_list[$keyword]['day'];
-          if($week_day>5) {
-            $week_day = date('N', time());
-            $tus = date('d')+($num - $week_day);
-            $string = date('ym',time()).$tus;
-          }
-          $musicurl = $radios_list[$keyword]['prefix'].$keyword."/".$keyword.$string.'.mp3';
-          $desc = "公众号:永不止息 ".date("n月d日-周一到周五播出");
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          return;
-        }
-        if($radios_list[$keyword]['day'] == 6) {//6 7
-          $desc = '6,7';
-          $title = $radios_list[$keyword]['name'];//'英语世界';
-          $week_day = date('N', time()-$offset*24*60*60);
-          $title = "【".$keyword."】".$title;
-          $string = date('ymd',time());
-          if($week_day/2) {
-            $week_day = date('N', time());
-            $tus = date('d')+(6 - $week_day);
-            $string = date('ym',time()).$tus;
-          }else{            
-            $week_day = date('N', time());
-            $tus = date('d')+(7 - $week_day);
-            $string = date('ym',time()).$tus;
-          }
-          $musicurl = $radios_list[$keyword]['prefix'].$keyword."/".$keyword.$string.'.mp3';
-          $desc = "公众号:永不止息 ".date("n月d日-周6周日播出");
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          return;
-        }
-        if($radios_list[$keyword]['day'] == 1 || $radios_list[$keyword]['day'] == 2) {
-          $title = $radios_list[$keyword]['name'];//'英语世界';
-          $week_day = date('N', time()-$offset*24*60*60);
-          $title = "【".$keyword."】".$title;
-          $week_day = date('N', time());
-          $num = $radios_list[$keyword]['day'];
-          $tus = date('d')+($num - $week_day);
-          $string = date('ym',time()).$tus;
-          // $musicurl = // http://liangyou2.nissigz.com:15200/gv/gv131218.mp3
-          $musicurl = $radios_list[$keyword]['prefix'].$keyword."/".$keyword.$string.'.mp3';
-          $desc = "公众号:永不止息 ".date("n月d日-周$num 播出");
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          return;
-        }
-
-      }
+      module_load_include('inc', 'mp_service', 'liangyou');
+      $radio_list = liangyou_audio_list();
+      liangyou_audio_respond($wechatObj,$keyword,$radio_list);
+////////////////////////////////////////////////////////////////////////
 
       switch ($keyword) {
         case '0':     
@@ -609,14 +363,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
         case '5': 
         case '51':
         case '53':
-          $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节*new*\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】ds晨曦讲座\n 【509】生活无国界\n注意：广播指令为纯数字\n【528】每日读经\n【9010】推荐给好友\n【52】进入下一页\n".$notice;//【501-1】昨日节目/调皮
-          // break;    
-          // $contentStr =  "【500】长夜的牵引\n【501】灵命日粮\n【502】拥抱每一天\n【503】恋爱季节*new*\n【504】幸福满家园^\n【505】亲情不断电*\n【506】欢乐卡洽碰\n【507】书香园地*\n【508】ds晨曦讲座\n 【509】生活无国界\n注意：广播指令为纯数字\n【528】每日读经\n【9010】推荐给好友\n【52】进入下一页";//【501-1】昨日节目/调皮
-          // break; 
-          // // $contentStr =  $notice;//【510】无限飞行号\n 【511】i-radio爱广播^\n【512】i关怀心磁场\n【513】真理之光\n回复【5】进入上一页\n回复【00】进入主菜单\n带*节目为周一到周五\n带^节目为15分钟\n回复【110】推荐给好友\n【365】恩典365*new*\n
-          // break;
-
-          // $contentStr =  $notice;//【530】绝妙当家\n【531】彩虹桥\n【532】现代人的希望\n回复【00】进入主菜单\n回复【5】返回上级菜单\n回复【110】推荐给好友\n【365】恩典365*new*\n
+          $contentStr =  "亲爱的主内佳人，因线路故障，50开头的广播即将废弃，请回复31获取新菜单。\n注意：广播指令为纯数字\n【528】每日读经\n【32】进入下一页\n".$notice;//【501-1】昨日节目/调皮
           break;
         case '52':
           $contentStr =  "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【5010】灵命日粮\n【525】真道分解\n【526】祷告良辰*new*\n【527】每周一歌*new*\n【528】每日读经*new*\n".$notice;//回复【5】返回上级菜单\n【365】恩典365*new*\n【524】灵命日粮\n
@@ -662,52 +409,40 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-          // $html = file_get_html('http://v.tudou.com/_114352882/');
-          // //get title $('[code]').attr('code')
-          // $Title = trim($html->find('[code]', 0)->plaintext);
-          // $Title = str_replace('查看','',$Title);
-          // $Url = $html->find('[auto="true"]', 0)->attr['url'];
-          // $Description = "温馨提醒：注意流量!!！\n欢迎分享转发到朋友圈。\n\n另招募恩典365义工团队，听写当日的内容，供那些没有流量的弟兄姊妹阅读，如果您有感动，请加小永微信：yongbuzhixi_love回复【366】了解详情\n每日回复【365】获取更新";
-          // $img = array(
-          //   'Title'=> $Title,
-          //   'Description'=>$Description,
-          //   'PicUrl'=>"http://t1.baidu.com/it/u=2408335515,2522544091&fm=23&gp=0.jpg",
-          //   'Url'=> $Url
-          // );
-          // $news[] = $img;         
-          // $wechatObj->news($news)->reply(); return;
-          break;
         case '110':
-          // $html = file_get_html('http://pp2717153.weixin.pp.cc/18817_mini.html');
-          // $items = $html->find('#links', 0);
-          // foreach ($items->children as $key => $html) {
-          //   $link = $html->find('a', 0);
-          //   $Url = $link->attr['href'];
-          //   $Title = trim($html->find('h2', 0)->plaintext);
-          //   $Description = trim($html->find('p', 0)->plaintext);
-
-          //   $picture = $html->find('img', 0);
-          //   $PicUrl = $picture->attr['src'];
-          //   $img = array(
-          //     'Title'=> $Title,
-          //     'Description'=>$Description,
-          //     'PicUrl'=>$PicUrl,
-          //     'Url'=>$Url
-          //   );
-          //   $news[] = $img; 
-          // }
+        case '9010':
           $img = array(
-              'Title'=> '关于永不止息',
+              'Title'=> '▼永不止息-部分广播目录(v01版)▼',
               'Description'=>'你良友的啥关系？',
               'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/themes/love/family_1.png',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000220&itemidx=2&sign=62a8888bdb56bc268f255c020e024434'
+              'Url'=>'http://wx.dev.camplus.hk/about'
             );
           $news[] = $img;
+          
+
           $img = array(
-              'Title'=> '▌如何推荐给好友？',
-              'Description'=>'转给你的好友吧',
+              'Title'=> "【520】喜乐的心\n【521】荒漠甘泉乐侣\n【522】静夜亮光\n【523】在天父怀中\n【525】真道分解\n【526】祷告良辰*new*\n【527】每周一歌*new*\n【528】每日读经*new*\n【5010】灵命日粮*文字版*",//▌◤▲▼如何推荐给好友？http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000220&itemidx=2&sign=62a8888bdb56bc268f255c020e024434
               'PicUrl'=>'',//http://www.yongbuzhixi.com/sites/all/themes/love/family_2.png
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000220&itemidx=2&sign=62a8888bdb56bc268f255c020e024434'
+              'Url'=>'http://stream.liangyou.net/program/1njci4-3b2p08'//http://www.wxhow.com/wxapi/?WX_GH=gh_ebdb3a74fdf6&plugin=bible&action=biblecenter&urlidx=lyradio-nissigz&WX_GH_USER=ojC2PjnIwbEjowjfo20uhwsNRfvY
+            );
+            $news[] = $img;
+          $img = array(
+              'Title'=> '玩转永不止息,良友一起来！',
+              'Description'=>'永不止息时光机，会员尊贵待遇！',
+              'PicUrl'=>'http://mmsns.qpic.cn/mmsns/0fV5QBhibUJh4BDj8puTVpBPibdMnlp7YYX5ibib87W7KACey1qpTmN0Rw/0.jpg',
+              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000352&itemidx=1&sign=f99612d4cfd626d8649dbe6a59faff75#wechat_redirect'
+            );
+          // $news[] = $img;
+          $img = array(
+              'Title'=> "▶微信问答板块(暂时开放)\n ●广播指令为纯数字，请勿带【】号",
+              'PicUrl'=>'',
+              'Url'=>'http://wx.dev.camplus.hk/questions'
+            );
+            $news[] = $img; 
+          $img = array(
+              'Title'=> "▶微信灵修网站(暂缓开放)\n ●注意流量30M流量可以听30天【523】",
+              'PicUrl'=>'',
+              'Url'=>'http://wx.dev.camplus.hk'
             );
             $news[] = $img;
           // $img = array(
@@ -721,19 +456,8 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           
           $wechatObj->news($news)->reply(); return;
           break;
-         case '9010':
-          $img = array(
-              'Title'=> '玩转永不止息,良友一起来！',
-              'Description'=>'永不止息时光机，会员尊贵待遇！',
-              'PicUrl'=>'http://mmsns.qpic.cn/mmsns/0fV5QBhibUJh4BDj8puTVpBPibdMnlp7YYX5ibib87W7KACey1qpTmN0Rw/0.jpg',
-              'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5ODQ4NjU4MA==&appmsgid=10000352&itemidx=1&sign=f99612d4cfd626d8649dbe6a59faff75#wechat_redirect'
-            );
-            $news[] = $img; 
           //单图文 标题15字 摘要60字
           //多图文 1标题16字 2标题15字
-          
-          $wechatObj->news($news)->reply(); return;
-          break;
  
         case '5010':
         case '５０１０':
@@ -757,119 +481,30 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           );
           $news[] = $img;
           $wechatObj->news($news)->reply(); return;
-          break;
-
-        case '1':
-          $title = "线路1测试";
-          $musicurl = 'http://audio2.liangyou.net/files/media/program_live/gv/gv131218.mp3';
-          //http://audio.liangyou.net/download.php?t=1&c=vmf&f=vmf131101.mp3
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
-        case '2':
-          $title = "线路2测试";
-          $musicurl = 'http://liangyou2.nissigz.com:15200/gv/gv131218.mp3';
-          //http://audio.liangyou.net/download.php?t=1&c=vmf&f=vmf131101.mp3
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
+          break; 
         case '500':
         case '５００':
-          $title = "长夜的牵引";
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '524':
         case '501':
         case '５２４':
         case '５０１':
-          $keyword = '501';
-          $title = '灵命日粮';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '502':
         case '５０２':
-          $keyword = '502';
-          $title = '拥抱每一天';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '503':
         case '５０３':
-          $keyword = '503';
-          $title = '恋爱季节';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '504':
         case '５０４':
-          $keyword = '504';
-          $title = '幸福满家园';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;    
         case '505':
         case '５０５':
-          $keyword = '505';
-          $title = '亲情不断电';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 周1-5";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '506':
         case '５０６':
-          $title = '欢乐卡洽碰';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 周1-5";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '507':
         case '５０７':
-          $title = '书香园地';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 周1-5";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '508':
         case '５０８':
-          $title = '晨曦讲座';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-          break;
         case '509':
         case '５０９':
-          $title = '生活无国界';
-          $title = "$title-".date('n月j日');
-          $musicurl = $prefix_uri."$radio_list[$keyword]/$radio_list[$keyword]".date('ymd').'.mp3';
-          $desc = "公众号:永不止息 每日更新【".$keyword."】";
-          $hgmusicurl = $musicurl;
-          $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+          $contentStr =  "[抓狂]亲爱的主内佳人，因线路故障，50开头的广播即将废弃，请回复31获取新菜单。\n注意：广播指令为纯数字\n【528】每日读经\n【32】进入下一页\n".$notice;
           break;
 
         case '523':
